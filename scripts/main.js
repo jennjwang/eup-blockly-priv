@@ -3,20 +3,19 @@
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
- (function() {
-
+(function () {
   let currentButton;
 
   function handlePlay(event) {
     // Add code for playing sound.
     loadWorkspace(event.target);
     let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-    code += 'MusicMaker.play();';
-    try {
-      eval(code);
-    } catch (error) {
-      console.log(error);
-    }
+    code += "MusicMaker.play();";
+    // try {
+    //   eval(code);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   // function save(button) {
@@ -65,9 +64,61 @@
 
   // enableMakerMode();
 
-  Blockly.inject('blocklyDiv', {
-    toolbox: document.getElementById('toolbox'),
-    scrollbars: false
+  var workspace = Blockly.inject("blocklyDiv", {
+    toolbox: document.getElementById("toolbox"),
+    scrollbars: false,
   });
 
+  // var workspace = Blockly.inject("blocklyDiv", { toolbox: toolbox });
+
+  function myUpdateFunction(event) {
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    // code = findMoveRoomBlocks(code);
+    code = "async function run() {\n" + code + "};\nrun();";
+    console.log(code);
+    reset();
+    try {
+      eval(code);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function reset() {
+    const robot = document.getElementById("robot");
+    robot.style.left = "120px";
+    robot.style.bottom = "200px";
+  }
+
+  // function findMoveRoomBlocks(code) {
+  //   var edittedCode = code.split(" {");
+  //   let steps = 0;
+  //   console.log(edittedCode);
+  //   edittedCode[0] = editMoveRoomInBlock(edittedCode[0], steps);
+  //   const toChange = edittedCode.slice(1, -1);
+  //   toChange.map((c) => editMoveRoomInBlock(c, 0));
+  //   return edittedCode.splice(1, -1, toChange).join(" {");
+  // }
+
+  // function editMoveRoomInBlock(code, steps) {
+  //   console.log(code);
+  //   var edittedCode = code.split("\n");
+  //   for (let i = 0; i < edittedCode.length; i++) {
+  //     // console.log(edittedCode[i]);
+  //     const match = edittedCode[i].match(/moveRobotToRoom(.*);/);
+  //     if (match) {
+  //       console.log(match.index);
+  //       const newLine =
+  //         "setTimeout( () => {" + match[0] + "}, " + steps * 4000 + ");";
+  //       edittedCode[i] = edittedCode[i].substr(0, match.index) + newLine;
+  //       console.log(edittedCode[i]);
+  //       steps++;
+  //     }
+  //   }
+  //   return edittedCode.join("\n");
+  // }
+
+  document
+    .querySelector("#runButton")
+    .addEventListener("click", myUpdateFunction);
 })();
