@@ -1,31 +1,3 @@
-// Blockly.defineBlocksWithJsonArray([
-//     {
-//       "type": "play_sound",
-//       "message0": "Play %1",
-//       "args0": [
-//         {
-//           "type": "field_dropdown",
-//           "name": "VALUE",
-//           "options": [
-//             ["C4", "sounds/c4.m4a"],
-//             ["D4", "sounds/d4.m4a"],
-//             ["E4", "sounds/e4.m4a"],
-//             ["F4", "sounds/f4.m4a"],
-//             ["G4", "sounds/g4.m4a"]
-//           ]
-//         }
-//       ],
-//       "previousStatement": null,
-//       "nextStatement": null,
-//       "colour": 355
-//     }
-//   ]);
-
-// Blockly.JavaScript['play_sound'] = function(block) {
-//     let value = '\'' + block.getFieldValue('VALUE') + '\'';
-//     return 'MusicMaker.queueSound(' + value + ');\n';
-// };
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
@@ -35,6 +7,10 @@ Blockly.defineBlocksWithJsonArray([
     colour: 330,
   },
 ]);
+
+Blockly.JavaScript["drop_toy"] = function (block) {
+  return "drop_toy();\n";
+};
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -55,6 +31,10 @@ Blockly.defineBlocksWithJsonArray([
     colour: 330,
   },
 ]);
+
+Blockly.JavaScript["pick_up_toy"] = function (block) {
+  return "pick_up_toy();\n";
+};
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -116,6 +96,12 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["toy_in_room"] = function (block) {
+  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+};
+
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
@@ -156,6 +142,10 @@ Blockly.defineBlocksWithJsonArray([
     colour: 260,
   },
 ]);
+
+Blockly.JavaScript["hands_free"] = function (block) {
+  return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
+};
 
 Blockly.defineBlocksWithJsonArray([
   {

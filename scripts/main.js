@@ -88,6 +88,11 @@
     const robot = document.getElementById("robot");
     robot.style.left = "120px";
     robot.style.bottom = "200px";
+    robot_c = new Robot();
+    const toy_elt = document.getElementById("toy");
+    toy_elt.style.left = "450px";
+    toy_elt.style.bottom = "200px";
+    toy = new Toy();
   }
 
   // function findMoveRoomBlocks(code) {
