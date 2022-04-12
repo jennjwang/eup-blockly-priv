@@ -14,8 +14,10 @@ class Robot {
 }
 
 class Toy {
-  constructor() {
+  constructor(width, height) {
     this.room = "playroom";
+    this.width = width;
+    this.height = height;
   }
   setRoom(room) {
     this.room = room;
@@ -23,7 +25,7 @@ class Toy {
 }
 
 let robot_c = new Robot();
-let toy = new Toy();
+let toy = new Toy(450, 200);
 
 const KITCHEN = [120, 200];
 const PLAYROOM = [450, 200];

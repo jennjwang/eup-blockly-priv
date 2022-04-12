@@ -92,7 +92,7 @@
     const toy_elt = document.getElementById("toy");
     toy_elt.style.left = "450px";
     toy_elt.style.bottom = "200px";
-    toy = new Toy();
+    toy = new Toy(450, 200);
   }
 
   // function findMoveRoomBlocks(code) {
