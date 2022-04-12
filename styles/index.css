@@ -93,11 +93,29 @@ h1 {
   height: auto;
 }
 
-#toy{
+#bear{
   z-index: 2;
   left: 450px;
   bottom: 200px;
   width: 50px;
+  height: auto;
+  position: absolute;
+}
+
+#car{
+  z-index: 2;
+  left: 500px;
+  bottom: 200px;
+  width: 70px;
+  height: auto;
+  position: absolute;
+}
+
+#duck{
+  z-index: 2;
+  left: 570px;
+  bottom: 200px;
+  width: 70px;
   height: auto;
   position: absolute;
 }

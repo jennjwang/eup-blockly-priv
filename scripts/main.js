@@ -89,10 +89,19 @@
     robot.style.left = "120px";
     robot.style.bottom = "200px";
     robot_c = new Robot();
-    const toy_elt = document.getElementById("toy");
-    toy_elt.style.left = "450px";
-    toy_elt.style.bottom = "200px";
-    toy = new Toy(450, 200);
+    const bear_elt = document.getElementById("bear");
+    bear_elt.style.left = "450px";
+    bear_elt.style.bottom = "200px";
+    bear = new Toy(450, 200, "bear");
+    const car_elt = document.getElementById("car");
+    car_elt.style.left = "500px";
+    car_elt.style.bottom = "200px";
+    car = new Toy(500, 200, "car");
+    const duck_elt = document.getElementById("duck");
+    duck_elt.style.left = "570px";
+    duck_elt.style.bottom = "200px";
+    duck = new Toy(570, 200, "duck");
+    toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
   }
 
   // function findMoveRoomBlocks(code) {
