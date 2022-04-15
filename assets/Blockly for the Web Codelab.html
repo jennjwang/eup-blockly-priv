@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///Users/jenniferwang/Projects/EUP/eup-blockly/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="blockly-renderer-style-geras-classic">.geras-renderer.classic-theme .blocklyText, 
+.geras-renderer.classic-theme .blocklyFlyoutLabelText {
+font: normal 11pt sans-serif;
+}
+.geras-renderer.classic-theme .blocklyText {
+fill: #fff;
+}
+.geras-renderer.classic-theme .blocklyNonEditableText>rect,
+.geras-renderer.classic-theme .blocklyEditableText>rect {
+fill: #fff;
+fill-opacity: .6;
+stroke: none;
+}
+.geras-renderer.classic-theme .blocklyNonEditableText>text,
+.geras-renderer.classic-theme .blocklyEditableText>text {
+fill: #000;
+}
+.geras-renderer.classic-theme .blocklyFlyoutLabelText {
+fill: #000;
+}
+.geras-renderer.classic-theme .blocklyText.blocklyBubbleText {
+fill: #000;
+}
+.geras-renderer.classic-theme .blocklyEditableText:not(.editing):hover>rect {
+stroke: #fff;
+stroke-width: 2;
+}
+.geras-renderer.classic-theme .blocklyHtmlInput {
+font-family: sans-serif;
+font-weight: normal;
+}
+.geras-renderer.classic-theme .blocklySelected>.blocklyPath {
+stroke: #fc3;
+stroke-width: 3px;
+}
+.geras-renderer.classic-theme .blocklyHighlightedConnectionPath {
+stroke: #fc3;
+}
+.geras-renderer.classic-theme .blocklyReplaceable .blocklyPath {
+fill-opacity: .5;
+}
+.geras-renderer.classic-theme .blocklyReplaceable .blocklyPathLight,
+.geras-renderer.classic-theme .blocklyReplaceable .blocklyPathDark {
+display: none;
+}
+.geras-renderer.classic-theme .blocklyInsertionMarker>.blocklyPath {
+fill-opacity: 0.2;
+stroke: none;
+}
+.geras-renderer.classic-theme .blocklyInsertionMarker>.blocklyPathLight,
+.geras-renderer.classic-theme .blocklyInsertionMarker>.blocklyPathDark {
+fill-opacity: 0.2;
+stroke: none;
+}</style><style id="blockly-common-style">
+.blocklySvg {
+  background-color: #fff;
+  outline: none;
+  overflow: hidden;  /* IE overflows by default. */
+  position: absolute;
+  display: block;
+}
+
+.blocklyWidgetDiv {
+  display: none;
+  position: absolute;
+  z-index: 99999;  /* big value for bootstrap3 compatibility */
+}
+
+.injectionDiv {
+  height: 100%;
+  position: relative;
+  overflow: hidden;  /* So blocks in drag surface disappear at edges */
+  touch-action: none;
+}
+
+.blocklyNonSelectable {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+}
+
+.blocklyWsDragSurface {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Added as a separate rule with multiple classes to make it more specific
+   than a bootstrap rule that selects svg:root. See issue #1275 for context.
+*/
+.blocklyWsDragSurface.blocklyOverflowVisible {
+  overflow: visible;
+}
+
+.blocklyBlockDragSurface {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: visible !important;
+  z-index: 50;  /* Display below toolbox, but above everything else. */
+}
+
+.blocklyBlockCanvas.blocklyCanvasTransitioning,
+.blocklyBubbleCanvas.blocklyCanvasTransitioning {
+  transition: transform .5s;
+}
+
+.blocklyTooltipDiv {
+  background-color: #ffffc7;
+  border: 1px solid #ddc;
+  box-shadow: 4px 4px 20px 1px rgba(0,0,0,.15);
+  color: #000;
+  display: none;
+  font: 9pt sans-serif;
+  opacity: .9;
+  padding: 2px;
+  position: absolute;
+  z-index: 100000;  /* big value for bootstrap3 compatibility */
+}
+
+.blocklyDropDownDiv {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  display: none;
+  border: 1px solid;
+  border-color: #dadce0;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 4px;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownDiv.blocklyFocused {
+  box-shadow: 0 0 6px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownContent {
+  max-height: 300px;  // @todo: spec for maximum height.
+  overflow: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.blocklyDropDownArrow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  z-index: -1;
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.blocklyDropDownButton {
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 4px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid;
+  transition: box-shadow .1s;
+  cursor: pointer;
+}
+
+.blocklyArrowTop {
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-top-left-radius: 4px;
+  border-color: inherit;
+}
+
+.blocklyArrowBottom {
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-bottom-right-radius: 4px;
+  border-color: inherit;
+}
+
+.blocklyResizeSE {
+  cursor: se-resize;
+  fill: #aaa;
+}
+
+.blocklyResizeSW {
+  cursor: sw-resize;
+  fill: #aaa;
+}
+
+.blocklyResizeLine {
+  stroke: #515A5A;
+  stroke-width: 1;
+}
+
+.blocklyHighlightedConnectionPath {
+  fill: none;
+  stroke: #fc3;
+  stroke-width: 4px;
+}
+
+.blocklyPathLight {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 1;
+}
+
+.blocklySelected>.blocklyPathLight {
+  display: none;
+}
+
+.blocklyDraggable {
+  /* backup for browsers (e.g. IE11) that don't support grab */
+  cursor: url("https://blockly-demo.appspot.com/static/media/handopen.cur"), auto;
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+  /* backup for browsers (e.g. IE11) that don't support grabbing */
+.blocklyDragging {
+  /* backup for browsers (e.g. IE11) that don't support grabbing */
+  cursor: url("https://blockly-demo.appspot.com/static/media/handclosed.cur"), auto;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+  /* Changes cursor on mouse down. Not effective in Firefox because of
+     https://bugzilla.mozilla.org/show_bug.cgi?id=771241 */
+.blocklyDraggable:active {
+  /* backup for browsers (e.g. IE11) that don't support grabbing */
+  cursor: url("https://blockly-demo.appspot.com/static/media/handclosed.cur"), auto;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Change the cursor on the whole drag surface in case the mouse gets
+   ahead of block during a drag. This way the cursor is still a closed hand.
+  */
+.blocklyBlockDragSurface .blocklyDraggable {
+  /* backup for browsers (e.g. IE11) that don't support grabbing */
+  cursor: url("https://blockly-demo.appspot.com/static/media/handclosed.cur"), auto;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.blocklyDragging.blocklyDraggingDelete {
+  cursor: url("https://blockly-demo.appspot.com/static/media/handdelete.cur"), auto;
+}
+
+.blocklyDragging>.blocklyPath,
+.blocklyDragging>.blocklyPathLight {
+  fill-opacity: .8;
+  stroke-opacity: .8;
+}
+
+.blocklyDragging>.blocklyPathDark {
+  display: none;
+}
+
+.blocklyDisabled>.blocklyPath {
+  fill-opacity: .5;
+  stroke-opacity: .5;
+}
+
+.blocklyDisabled>.blocklyPathLight,
+.blocklyDisabled>.blocklyPathDark {
+  display: none;
+}
+
+.blocklyInsertionMarker>.blocklyPath,
+.blocklyInsertionMarker>.blocklyPathLight,
+.blocklyInsertionMarker>.blocklyPathDark {
+  fill-opacity: .2;
+  stroke: none;
+}
+
+.blocklyMultilineText {
+  font-family: monospace;
+}
+
+.blocklyNonEditableText>text {
+  pointer-events: none;
+}
+
+.blocklyFlyout {
+  position: absolute;
+  z-index: 20;
+}
+
+.blocklyText text {
+  cursor: default;
+}
+
+/*
+  Don't allow users to select text.  It gets annoying when trying to
+  drag a block and selected text moves instead.
+*/
+.blocklySvg text,
+.blocklyBlockDragSurface text {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  cursor: inherit;
+}
+
+.blocklyHidden {
+  display: none;
+}
+
+.blocklyFieldDropdown:not(.blocklyHidden) {
+  display: block;
+}
+
+.blocklyIconGroup {
+  cursor: default;
+}
+
+.blocklyIconGroup:not(:hover),
+.blocklyIconGroupReadonly {
+  opacity: .6;
+}
+
+.blocklyIconShape {
+  fill: #00f;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.blocklyIconSymbol {
+  fill: #fff;
+}
+
+.blocklyMinimalBody {
+  margin: 0;
+  padding: 0;
+}
+
+.blocklyHtmlInput {
+  border: none;
+  border-radius: 4px;
+  height: 100%;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Edge and IE introduce a close icon when the input value is longer than a
+   certain length. This affects our sizing calculations of the text input.
+   Hiding the close icon to avoid that. */
+.blocklyHtmlInput::-ms-clear {
+  display: none;
+}
+
+.blocklyMainBackground {
+  stroke-width: 1;
+  stroke: #c6c6c6;  /* Equates to #ddd due to border being off-pixel. */
+}
+
+.blocklyMutatorBackground {
+  fill: #fff;
+  stroke: #ddd;
+  stroke-width: 1;
+}
+
+.blocklyFlyoutBackground {
+  fill: #ddd;
+  fill-opacity: .8;
+}
+
+.blocklyMainWorkspaceScrollbar {
+  z-index: 20;
+}
+
+.blocklyFlyoutScrollbar {
+  z-index: 30;
+}
+
+.blocklyScrollbarHorizontal,
+.blocklyScrollbarVertical {
+  position: absolute;
+  outline: none;
+}
+
+.blocklyScrollbarBackground {
+  opacity: 0;
+}
+
+.blocklyScrollbarHandle {
+  fill: #ccc;
+}
+
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyScrollbarHandle:hover {
+  fill: #bbb;
+}
+
+/* Darken flyout scrollbars due to being on a grey background. */
+/* By contrast, workspace scrollbars are on a white background. */
+.blocklyFlyout .blocklyScrollbarHandle {
+  fill: #bbb;
+}
+
+.blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyFlyout .blocklyScrollbarHandle:hover {
+  fill: #aaa;
+}
+
+.blocklyInvalidInput {
+  background: #faa;
+}
+
+.blocklyVerticalMarker {
+  stroke-width: 3px;
+  fill: rgba(255,255,255,.5);
+  pointer-events: none;
+}
+
+.blocklyComputeCanvas {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.blocklyNoPointerEvents {
+  pointer-events: none;
+}
+
+.blocklyContextMenu {
+  border-radius: 4px;
+  max-height: 100%;
+}
+
+.blocklyDropdownMenu {
+  border-radius: 2px;
+  padding: 0 !important;
+}
+
+.blocklyDropdownMenu .blocklyMenuItem {
+  /* 28px on the left for icon or checkbox. */
+  padding-left: 28px;
+}
+
+/* BiDi override for the resting state. */
+.blocklyDropdownMenu .blocklyMenuItemRtl {
+  /* Flip left/right padding for BiDi. */
+  padding-left: 5px;
+  padding-right: 28px;
+}
+
+.blocklyWidgetDiv .blocklyMenu {
+  background: #fff;
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.3);
+  font: normal 13px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 4px 0;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  z-index: 20000;  /* Arbitrary, but some apps depend on it... */
+}
+
+.blocklyWidgetDiv .blocklyMenu.blocklyFocused {
+  box-shadow: 0 0 6px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownDiv .blocklyMenu {
+  background: inherit;  /* Compatibility with gapi, reset from goog-menu */
+  border: inherit;  /* Compatibility with gapi, reset from goog-menu */
+  font: normal 13px "Helvetica Neue", Helvetica, sans-serif;
+  outline: none;
+  position: relative;  /* Compatibility with gapi, reset from goog-menu */
+  z-index: 20000;  /* Arbitrary, but some apps depend on it... */
+}
+
+/* State: resting. */
+.blocklyMenuItem {
+  border: none;
+  color: #000;
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  /* 7em on the right for shortcut. */
+  min-width: 7em;
+  padding: 6px 15px;
+  white-space: nowrap;
+}
+
+/* State: disabled. */
+.blocklyMenuItemDisabled {
+  color: #ccc;
+  cursor: inherit;
+}
+
+/* State: hover. */
+.blocklyMenuItemHighlight {
+  background-color: rgba(0,0,0,.1);
+}
+
+/* State: selected/checked. */
+.blocklyMenuItemCheckbox {
+  height: 16px;
+  position: absolute;
+  width: 16px;
+}
+
+.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+  background: url(https://blockly-demo.appspot.com/static/media/sprites.png) no-repeat -48px -16px;
+  float: left;
+  margin-left: -24px;
+  position: static;  /* Scroll with the menu. */
+}
+
+.blocklyMenuItemRtl .blocklyMenuItemCheckbox {
+  float: right;
+  margin-right: -24px;
+}
+
+
+.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+  background-color: rgba(255, 255, 255, .2);
+}
+
+.blocklyToolboxDiv[layout="h"] .blocklyToolboxCategory {
+  margin: 1px 5px 1px 0;
+}
+
+.blocklyToolboxDiv[dir="RTL"][layout="h"] .blocklyToolboxCategory {
+  margin: 1px 0 1px 5px;
+}
+
+.blocklyTreeRow {
+  height: 22px;
+  line-height: 22px;
+  margin-bottom: 3px;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+
+.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {
+  margin-left: 8px;
+  padding-right: 0;
+}
+
+.blocklyTreeIcon {
+  background-image: url(https://blockly-demo.appspot.com/static/media/sprites.png);
+  height: 16px;
+  vertical-align: middle;
+  visibility: hidden;
+  width: 16px;
+}
+
+.blocklyTreeIconClosed {
+  background-position: -32px -1px;
+}
+
+.blocklyToolboxDiv[dir="RTL"] .blocklyTreeIconClosed {
+  background-position: 0 -1px;
+}
+
+.blocklyTreeSelected>.blocklyTreeIconClosed {
+  background-position: -32px -17px;
+}
+
+.blocklyToolboxDiv[dir="RTL"] .blocklyTreeSelected>.blocklyTreeIconClosed {
+  background-position: 0 -17px;
+}
+
+.blocklyTreeIconOpen {
+  background-position: -16px -1px;
+}
+
+.blocklyTreeSelected>.blocklyTreeIconOpen {
+  background-position: -16px -17px;
+}
+
+.blocklyTreeLabel {
+  cursor: default;
+  font: 16px sans-serif;
+  padding: 0 3px;
+  vertical-align: middle;
+}
+
+.blocklyToolboxDelete .blocklyTreeLabel {
+  cursor: url("https://blockly-demo.appspot.com/static/media/handdelete.cur"), auto;
+}
+
+.blocklyTreeSelected .blocklyTreeLabel {
+  color: #fff;
+}
+
+
+.blocklyTreeSeparator {
+  border-bottom: solid #e5e5e5 1px;
+  height: 0;
+  margin: 5px 0;
+}
+
+.blocklyToolboxDiv[layout="h"] .blocklyTreeSeparator {
+  border-right: solid #e5e5e5 1px;
+  border-bottom: none;
+  height: auto;
+  margin: 0 5px 0 5px;
+  padding: 5px 0;
+  width: 0;
+}
+
+
+.blocklyToolboxDelete {
+  cursor: url("https://blockly-demo.appspot.com/static/media/handdelete.cur"), auto;
+}
+
+.blocklyToolboxGrab {
+  cursor: url("https://blockly-demo.appspot.com/static/media/handclosed.cur"), auto;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Category tree in Toolbox. */
+.blocklyToolboxDiv {
+  background-color: #ddd;
+  overflow-x: visible;
+  overflow-y: auto;
+  padding: 4px 0 4px 0;
+  position: absolute;
+  z-index: 70;  /* so blocks go under toolbox when dragging */
+  -webkit-tap-highlight-color: transparent;  /* issue #1345 */
+}
+
+.blocklyToolboxContents {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.blocklyToolboxContents:focus {
+  outline: none;
+}
+
+
+.blocklyHtmlTextAreaInput {
+  font-family: monospace;
+  resize: none;
+  overflow: hidden;
+  height: 100%;
+  text-align: left;
+}
+
+.blocklyHtmlTextAreaInputOverflowedY {
+  overflow-y: scroll;
+}
+
+
+.blocklyColourTable {
+  border-collapse: collapse;
+  display: block;
+  outline: none;
+  padding: 1px;
+}
+
+.blocklyColourTable>tr>td {
+  border: .5px solid #888;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  padding: 0;
+  width: 20px;
+}
+
+.blocklyColourTable>tr>td.blocklyColourHighlighted {
+  border-color: #eee;
+  box-shadow: 2px 2px 7px 2px rgba(0,0,0,.3);
+  position: relative;
+}
+
+.blocklyColourSelected, .blocklyColourSelected:hover {
+  border-color: #eee !important;
+  outline: 1px solid #333;
+  position: relative;
+}
+
+
+.blocklyAngleCircle {
+  stroke: #444;
+  stroke-width: 1;
+  fill: #ddd;
+  fill-opacity: .8;
+}
+
+.blocklyAngleMarks {
+  stroke: #444;
+  stroke-width: 1;
+}
+
+.blocklyAngleGauge {
+  fill: #f88;
+  fill-opacity: .8;
+  pointer-events: none;
+}
+
+.blocklyAngleLine {
+  stroke: #f00;
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+
+.blocklyCommentTextarea {
+  background-color: #fef49c;
+  border: 0;
+  display: block;
+  margin: 0;
+  outline: 0;
+  padding: 3px;
+  resize: none;
+  text-overflow: hidden;
+}
+
+
+.blocklyZoom>image, .blocklyZoom>svg>image {
+  opacity: .4;
+}
+
+.blocklyZoom>image:hover, .blocklyZoom>svg>image:hover {
+  opacity: .6;
+}
+
+.blocklyZoom>image:active, .blocklyZoom>svg>image:active {
+  opacity: .8;
+}
+
+
+.blocklyCommentForeignObject {
+  position: relative;
+  z-index: 0;
+}
+
+.blocklyCommentRect {
+  fill: #E7DE8E;
+  stroke: #bcA903;
+  stroke-width: 1px;
+}
+
+.blocklyCommentTarget {
+  fill: transparent;
+  stroke: #bcA903;
+}
+
+.blocklyCommentTargetFocused {
+  fill: none;
+}
+
+.blocklyCommentHandleTarget {
+  fill: none;
+}
+
+.blocklyCommentHandleTargetFocused {
+  fill: transparent;
+}
+
+.blocklyFocused>.blocklyCommentRect {
+  fill: #B9B272;
+  stroke: #B9B272;
+}
+
+.blocklySelected>.blocklyCommentTarget {
+  stroke: #fc3;
+  stroke-width: 3px;
+}
+
+.blocklyCommentDeleteIcon {
+  cursor: pointer;
+  fill: #000;
+  display: none;
+}
+
+.blocklySelected > .blocklyCommentDeleteIcon {
+  display: block;
+}
+
+.blocklyDeleteIconShape {
+  fill: #000;
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.blocklyDeleteIconShape.blocklyDeleteIconHighlighted {
+  stroke: #fc3;
+}
+
+
+.blocklyFlyoutButton {
+  fill: #888;
+  cursor: default;
+}
+
+.blocklyFlyoutButtonShadow {
+  fill: #666;
+}
+
+.blocklyFlyoutButton:hover {
+  fill: #aaa;
+}
+
+.blocklyFlyoutLabel {
+  cursor: default;
+}
+
+.blocklyFlyoutLabelBackground {
+  opacity: 0;
+}
+</style>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blockly for the Web Codelab</title>
+
+  <link rel="stylesheet" href="./Blockly for the Web Codelab_files/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="./Blockly for the Web Codelab_files/index.css">
+</head>
+
+<body>
+  <!-- <header class="mdl-color--cyan-500">
+    <h1>EUP</h1>
+  </header> -->
+
+  <div class="wrapper">
+
+    <div class="simulation">
+        <div id="bedroom">
+        <p id="room-txt"> bedroom </p>
+      </div>
+        <div id="kitchen">
+        <p id="room-txt"> kitchen</p>
+      </div>
+        <div id="playroom">
+          <p id="room-txt"> playroom</p>
+      </div>
+
+      <div id="robot" style="left: 120px; bottom: 200px;">
+        <img id="robot-img" src="./Blockly for the Web Codelab_files/robot.png">
+      </div>
+      <div id="bear" style="left: 120px; bottom: 200px;">
+        <img id="toy-img" src="./Blockly for the Web Codelab_files/toy1.png">
+      </div>
+      <div id="duck" style="left: 120px; bottom: 200px;">
+        <img id="toy-img" src="./Blockly for the Web Codelab_files/toy5.png">
+      </div>
+      <div id="car" style="left: 70px; bottom: 200px;">
+        <img id="toy-img" src="./Blockly for the Web Codelab_files/toy2.png">
+      </div>
+    </div>
+
+
+    <div class="blockly-editor">
+      <button id="runButton" title="Makes the player do what the blocks say.">
+        Run Program
+      </button>
+      <div id="blocklyDiv">
+      <xml id="toolbox" style="display: none;">
+        <category name="Generic" categorystyle="logic_category">
+          <block type="controls_if"></block>
+          <block type="controls_ifelse"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_negate"></block>
+          <block type="controls_whileUntil"></block>
+          <block type="controls_repeat_ext">
+            <value name="TIMES">
+              <shadow type="math_number">
+                <field name="NUM">5</field>
+              </shadow>
+            </value>
+          </block>
+      </category>
+      <category name="Commands" categorystyle="variable_category">
+        <block type="drop_toy"></block>
+        <block type="pick_up_toy"></block>
+        <block type="to_room"></block>
+        <block type="to_random_room"></block>
+      </category>
+      <category name="Conditional" categorystyle="list_category">
+        <block type="out_of"></block>
+        <block type="toy_in_room"></block>
+        <block type="in_the"></block>
+        <block type="hands_free"></block>
+        <block type="person_in_room"></block>
+      </category>
+      </xml>
+    <div class="injectionDiv geras-renderer classic-theme" tabindex="0" aria-label="Blockly Workspace" dir="LTR"><div layout="v" class="blocklyToolboxDiv blocklyNonSelectable" dir="LTR" style="display: block; left: 0px; height: 100%;"><div class="blocklyToolboxContents" tabindex="0" role="tree" aria-activedescendant=""><div class="blocklyToolboxCategory" role="treeitem" aria-selected="false" aria-level="0" aria-labelledby="blockly-0.label"><div class="blocklyTreeRow" id="blockly-0" style="padding-left: 0px; pointer-events: auto; border-left: 8px solid rgb(91, 128, 165);"><div class="blocklyTreeRowContentContainer" style="pointer-events: none;"><span class="blocklyTreeIcon" role="presentation" style="display: inline-block;"></span><span id="blockly-0.label" class="blocklyTreeLabel">Generic</span></div></div></div><div class="blocklyToolboxCategory" role="treeitem" aria-selected="false" aria-level="0" aria-labelledby="blockly-1.label"><div class="blocklyTreeRow" id="blockly-1" style="padding-left: 0px; pointer-events: auto; border-left: 8px solid rgb(165, 91, 128);"><div class="blocklyTreeRowContentContainer" style="pointer-events: none;"><span class="blocklyTreeIcon" role="presentation" style="display: inline-block;"></span><span id="blockly-1.label" class="blocklyTreeLabel">Commands</span></div></div></div><div class="blocklyToolboxCategory" role="treeitem" aria-selected="false" aria-level="0" aria-labelledby="blockly-2.label"><div class="blocklyTreeRow" id="blockly-2" style="padding-left: 0px; pointer-events: auto; border-left: 8px solid rgb(116, 91, 165);"><div class="blocklyTreeRowContentContainer" style="pointer-events: none;"><span class="blocklyTreeIcon" role="presentation" style="display: inline-block;"></span><span id="blockly-2.label" class="blocklyTreeLabel">Conditional</span></div></div></div></div></div><svg xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="blocklySvg" tabindex="0" width="800px" height="800px"><defs><pattern id="blocklyGridPattern7211215401619879" patternUnits="userSpaceOnUse" width="100" height="100" x="120" y="0"><line stroke-width="1" x1="0" y1="0.5" x2="1" y2="0.5"></line></pattern></defs><g class="blocklyWorkspace"><rect height="100%" width="100%" class="blocklyMainBackground" style="fill: url(&quot;#blocklyGridPattern7211215401619879&quot;);"></rect><g class="blocklyTrash" style="opacity: 0.44;" transform="translate(733,720)"><clippath id="blocklyTrashBodyClipPath518145803538157"><rect width="47" height="44" y="16"></rect></clippath><image width="96" x="0" height="124" y="-32" clip-path="url(#blocklyTrashBodyClipPath518145803538157)" xlink:href="https://blockly-demo.appspot.com/static/media/sprites.png"></image><clippath id="blocklyTrashLidClipPath518145803538157"><rect width="47" height="16"></rect></clippath><image width="96" x="0" height="124" y="-32" clip-path="url(#blocklyTrashLidClipPath518145803538157)" xlink:href="https://blockly-demo.appspot.com/static/media/sprites.png" transform="rotate(4.5,43,14)"></image></g><g class="blocklyBlockCanvas" transform="translate(120,0) scale(1)"><g class="blocklyCursor"><g width="100" height="5"><rect width="100" height="5" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></rect><rect class="blocklyVerticalMarker" rx="10" ry="10" style="display: none"></rect><path transform="" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path><path transform="" style="display: none" fill="none" stroke-width="4"><animate attributeType="XML" attributeName="stroke" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path></g></g><g data-id="hmH@tt$v$n_qtI.T2Gt9" class="blocklyDraggable" transform="translate(238.03515625,211.18359375)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#498449" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 122.745849609375  v 5  H 152.745849609375  V 5  H 152.745849609375  V 34  H 152.745849609375  V 38  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 99 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 153  V 163  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+ M 67.567626953125,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 9  h 30.153182983398438  v -29 z"></path><path class="blocklyPath" stroke="none" fill="#5ba55b" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 122.745849609375  v 5  H 152.745849609375  V 5  H 152.745849609375  V 34  H 152.745849609375  V 38  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 99 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 153  V 163  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+ M 67.567626953125,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 9  h 30.153182983398438  v -29 z"></path><path class="blocklyPathLight" stroke="#8cc08c" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 152.245849609375  H 152.245849609375  M 36.306365966796875,153  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 21.5,0  H 65.80636596679688  M 0,163  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 8 
+ M 98.22080993652344,5.5  v 29  h -30.153182983398438  M 67.567626953125,10  m -5,14.3  l 3.68,-2.1 "></path><g data-id=";?Tqq8l41T*eDX[4UEsg" transform="translate(60.567626953125,6)" style="display: block;"><path class="blocklyPathDark" transform="translate(1,1)" fill="#bdc2db" d=" m 8,0  h 28.153182983398438  v 5  H 36.15318298339844  V 5  H 36.15318298339844  V 23  H 36.15318298339844  V 23  V 27  h -28.153182983398438  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPath" stroke="none" fill="#bdc2db" d=" m 8,0  h 28.153182983398438  v 5  H 36.15318298339844  V 5  H 36.15318298339844  V 23  H 36.15318298339844  V 23  V 27  h -28.153182983398438  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPathLight" stroke="#8c95c0" d=" m 8,0  m 0.5,0.5  H 35.65318298339844  H 35.65318298339844  M 8.5,26.5  M 8.5,26.5  V 20  v -1.5  m -7.36,-0.5  q -1.52,-5.5  0,-11  m 7.36,1  V 0.5 
+" style="display: none;"></path><g class="blocklyEditableText" transform="translate(13,5)" style="cursor: text;"><rect rx="4" ry="4" x="0" y="0" height="18" width="18.153182983398438" class="blocklyFieldRect"></rect><text class="blocklyText" x="5" y="14">3</text></g></g><g transform="translate(10,10)"><text class="blocklyText" x="0" y="14">repeat</text></g><g transform="translate(107.72080993652344,10)"><text class="blocklyText" x="0" y="14">times</text></g><g transform="translate(10,43)"><text class="blocklyText" x="0" y="14">do</text></g><g data-id="*;y-!su.-5GpN_tU0_f~" class="blocklyDraggable" style="display: block;" transform="translate(37.306365966796875,39)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#844984" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 130.787353515625  v 5  H 160.787353515625  V 5  H 160.787353515625  V 23  H 160.787353515625  V 23  V 27  h -131.287353515625  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPath" stroke="none" fill="#a55ba5" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 130.787353515625  v 5  H 160.787353515625  V 5  H 160.787353515625  V 23  H 160.787353515625  V 23  V 27  h -131.287353515625  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPathLight" stroke="#c08cc0" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 160.287353515625  H 160.287353515625  M 0.5,26.5  V 8 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">go&nbsp;to&nbsp;the</text></g><g class="blocklyEditableText" transform="translate(72.05796813964844,5)" style="cursor: default;"><rect rx="4" ry="4" x="0" y="0" height="18" width="83.72938537597656" class="blocklyFieldRect blocklyDropdownRect" stroke="#c08cc0" fill="transparent"></rect><text class="blocklyText blocklyDropdownText" text-anchor="start" x="5" y="14">playroom<tspan style="fill: rgb(165, 91, 165);"> ▾</tspan></text><image style="display: none;"></image></g><g data-id="_EN*;n;?vW@ow34T=l,l" class="blocklyDraggable" style="display: block;" transform="translate(0,28)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#844966" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 84.53109741210938  v 5  H 114.53109741210938  V 5  H 114.53109741210938  V 23  H 114.53109741210938  V 23  V 27  h -85.03109741210938  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPath" stroke="none" fill="#a55b80" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 84.53109741210938  v 5  H 114.53109741210938  V 5  H 114.53109741210938  V 23  H 114.53109741210938  V 23  V 27  h -85.03109741210938  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPathLight" stroke="#c08ca6" d=" m 0,0  m 0.5,0.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 114.03109741210938  H 114.03109741210938  M 0.5,26.5  V 0.5 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">pick&nbsp;up&nbsp;the&nbsp;toy</text></g><g data-id="2@IITWhj,ZGhbPM9%c;j" class="blocklyDraggable" transform="translate(0,28)" style="display: block;"><path class="blocklyPathDark" transform="translate(1,1)" fill="#844984" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 116.94340515136719  v 5  H 146.9434051513672  V 5  H 146.9434051513672  V 23  H 146.9434051513672  V 23  V 27  h -117.44340515136719  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPath" stroke="none" fill="#a55ba5" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 116.94340515136719  v 5  H 146.9434051513672  V 5  H 146.9434051513672  V 23  H 146.9434051513672  V 23  V 27  h -117.44340515136719  l -6,4  -3,0  -6,-4  h -14.5  H 0 z
+"></path><path class="blocklyPathLight" stroke="#c08cc0" d=" m 0,0  m 0.5,0.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 146.4434051513672  H 146.4434051513672  M 0.5,26.5  V 0.5 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">go&nbsp;to&nbsp;the</text></g><g class="blocklyEditableText" transform="translate(72.05796813964844,5)" style="cursor: default;"><rect rx="4" ry="4" x="0" y="0" height="18" width="69.88543701171875" class="blocklyFieldRect blocklyDropdownRect" stroke="#c08cc0" fill="transparent"></rect><text class="blocklyText blocklyDropdownText" text-anchor="start" x="5" y="14">kitchen<tspan style="fill: rgb(165, 91, 165);"> ▾</tspan></text><image style="display: none;"></image></g><g data-id="Uk@YkljL%*R6Z)c:H+?7" class="blocklyDraggable" transform="translate(0,28)" style="display: block;"><path class="blocklyPathDark" transform="translate(1,1)" fill="#844966" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 97.58050537109375  v 5  H 127.58050537109375  V 5  H 127.58050537109375  V 23  H 127.58050537109375  V 23  V 27  h -98.08050537109375  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPath" stroke="none" fill="#a55b80" d=" m 0,0  h 15  l 6,4  3,0  6,-4  h 97.58050537109375  v 5  H 127.58050537109375  V 5  H 127.58050537109375  V 23  H 127.58050537109375  V 23  V 27  h -98.08050537109375  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPathLight" stroke="#c08ca6" d=" m 0,0  m 0.5,0.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 127.08050537109375  H 127.08050537109375  M 0,27  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 0.5 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">put&nbsp;down&nbsp;the&nbsp;toy</text></g></g></g></g></g></g></g><g class="blocklyBubbleCanvas" transform="translate(120,0) scale(1)"></g><defs><filter id="blocklyEmbossFilter06665736332749872"><fegaussianblur in="SourceAlpha" stdDeviation="1" result="blur"></fegaussianblur><fespecularlighting in="blur" surfaceScale="1" specularConstant="0.5" specularExponent="10" lighting-color="white" result="specOut"><fepointlight x="-5000" y="-10000" z="20000"></fepointlight></fespecularlighting><fecomposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"></fecomposite><fecomposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></fecomposite></filter><pattern id="blocklyDisabledPattern06665736332749872" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#aaa"></rect><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0"></path></pattern><filter id="blocklyDebugFilter06665736332749872" height="160%" width="180%" y="-30%" x="-40%"><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#ff0000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs></g></svg><svg class="blocklyFlyout" style="display: none"><path class="blocklyFlyoutBackground"></path><g class="blocklyWorkspace"><g class="blocklyBlockCanvas"><g class="blocklyCursor"><g width="100" height="5"><rect width="100" height="5" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></rect><rect class="blocklyVerticalMarker" rx="10" ry="10" style="display: none"></rect><path transform="" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path><path transform="" style="display: none" fill="none" stroke-width="4"><animate attributeType="XML" attributeName="stroke" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path></g></g></g><g class="blocklyBubbleCanvas"></g><defs><filter id="blocklyEmbossFilter06142314008090888"><fegaussianblur in="SourceAlpha" stdDeviation="1" result="blur"></fegaussianblur><fespecularlighting in="blur" surfaceScale="1" specularConstant="0.5" specularExponent="10" lighting-color="white" result="specOut"><fepointlight x="-5000" y="-10000" z="20000"></fepointlight></fespecularlighting><fecomposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"></fecomposite><fecomposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></fecomposite></filter><pattern id="blocklyDisabledPattern06142314008090888" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#aaa"></rect><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0"></path></pattern><filter id="blocklyDebugFilter06142314008090888" height="160%" width="180%" y="-30%" x="-40%"><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#ff0000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs></g></svg><svg class="blocklyScrollbarVertical blocklyFlyoutScrollbar" width="15"><g><rect class="blocklyScrollbarBackground" width="15"></rect><rect class="blocklyScrollbarHandle" rx="5" ry="5" width="10" x="2.5"></rect></g></svg><svg class="blocklyFlyout" style="display: none; transform: translate(120px, 0px);" width="188.745849609375" height="800"><path class="blocklyFlyoutBackground" d="M 0,0 h 180.745849609375 a 8 8 0 0 1 8 8 v 784 a 8 8 0 0 1 -8 8 h -180.745849609375 z"></path><g class="blocklyWorkspace"><g class="blocklyBlockCanvas" transform="translate(0,0) scale(1)"><g class="blocklyCursor"><g width="100" height="5"><rect width="100" height="5" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></rect><rect class="blocklyVerticalMarker" rx="10" ry="10" style="display: none"></rect><path transform="" style="display: none"><animate attributeType="XML" attributeName="fill" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path><path transform="" style="display: none" fill="none" stroke-width="4"><animate attributeType="XML" attributeName="stroke" dur="1s" values="#cc0a0a;transparent;transparent;" repeatCount="indefinite"></animate></path></g></g><rect fill-opacity="0" x="16" y="8" height="66" width="67.30636596679688"></rect><g data-id="eu~M3jNv;#5TyY_JOyD]" class="blocklyDraggable" transform="translate(16,8)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#496684" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 36.306365966796875  v 5  H 66.30636596679688  V 5  H 66.30636596679688  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 66.30636596679688  V 27  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 51  V 61  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPath" stroke="none" fill="#5b80a5" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 36.306365966796875  v 5  H 66.30636596679688  V 5  H 66.30636596679688  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 66.30636596679688  V 27  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 51  V 61  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPathLight" stroke="#8ca6c0" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 65.80636596679688  H 65.80636596679688  M 66.30636596679688,5  m -5,14.3  l 3.68,-2.1  M 36.306365966796875,51  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 21.5,0  H 65.80636596679688  M 0,61  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 8 
+"></path><g class="blocklyIconGroup blocklyIconGroupReadonly" display="block" transform="translate(10,5)"><rect class="blocklyIconShape" rx="4" ry="4" height="16" width="16"></rect><path class="blocklyIconSymbol" d="m4.203,7.296 0,1.368 -0.92,0.677 -0.11,0.41 0.9,1.559 0.41,0.11 1.043,-0.457 1.187,0.683 0.127,1.134 0.3,0.3 1.8,0 0.3,-0.299 0.127,-1.138 1.185,-0.682 1.046,0.458 0.409,-0.11 0.9,-1.559 -0.11,-0.41 -0.92,-0.677 0,-1.366 0.92,-0.677 0.11,-0.41 -0.9,-1.559 -0.409,-0.109 -1.046,0.458 -1.185,-0.682 -0.127,-1.138 -0.3,-0.299 -1.8,0 -0.3,0.3 -0.126,1.135 -1.187,0.682 -1.043,-0.457 -0.41,0.11 -0.899,1.559 0.108,0.409z"></path><circle class="blocklyIconShape" r="2.7" cx="8" cy="8"></circle></g><g transform="translate(37,5)"><text class="blocklyText" x="0" y="14">if</text></g><g transform="translate(10,32)"><text class="blocklyText" x="0" y="14">do</text></g></g><rect fill-opacity="0" x="16" y="98" height="100" width="77.89332580566406"></rect><g data-id="0QEQ#hJ9%7Qo*I^w|u}P" class="blocklyDraggable" transform="translate(16,98)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#496684" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 46.89332580566406  v 5  H 76.89332580566406  V 5  H 76.89332580566406  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 76.89332580566406  V 27  H 76.89332580566406  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 76.89332580566406  H 76.89332580566406  V 61  H 76.89332580566406  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 76.89332580566406  H 76.89332580566406  V 85  V 95  h -47.39332580566406  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPath" stroke="none" fill="#5b80a5" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 46.89332580566406  v 5  H 76.89332580566406  V 5  H 76.89332580566406  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 76.89332580566406  V 27  H 76.89332580566406  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 76.89332580566406  H 76.89332580566406  V 61  H 76.89332580566406  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 76.89332580566406  H 76.89332580566406  V 85  V 95  h -47.39332580566406  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPathLight" stroke="#8ca6c0" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 76.39332580566406  H 76.39332580566406  M 76.89332580566406,5  m -5,14.3  l 3.68,-2.1  M 46.89332580566406,51  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 21.5,0  H 76.39332580566406  M 46.89332580566406,85  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 21.5,0  H 76.39332580566406  M 0,95  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 8 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">if</text></g><g transform="translate(10,32)"><text class="blocklyText" x="0" y="14">do</text></g><g transform="translate(10,66)"><text class="blocklyText" x="0" y="14">else</text></g></g><rect fill-opacity="0" x="8" y="222" height="36" width="127.89547729492188"></rect><g data-id="~`G:mzX)]d1/xycPlD%J" class="blocklyDraggable" transform="translate(8,222)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#496684" d=" m 8,0  h 118.89547729492188  v 5  H 126.89547729492188  V 5  H 126.89547729492188  V 31  H 126.89547729492188  V 31  V 35  h -118.89547729492188  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+ M 24,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 6  h 14.5  v -26 z M 102.39547729492188,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 6  h 14.5  v -26 z"></path><path class="blocklyPath" stroke="none" fill="#5b80a5" d=" m 8,0  h 118.89547729492188  v 5  H 126.89547729492188  V 5  H 126.89547729492188  V 31  H 126.89547729492188  V 31  V 35  h -118.89547729492188  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+ M 24,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 6  h 14.5  v -26 z M 102.39547729492188,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 6  h 14.5  v -26 z"></path><path class="blocklyPathLight" stroke="#8ca6c0" d=" m 8,0  m 0.5,0.5  H 126.39547729492188  H 126.39547729492188  M 8.5,34.5  M 8.5,34.5  V 20  v -1.5  m -7.36,-0.5  q -1.52,-5.5  0,-11  m 7.36,1  V 0.5 
+ M 39,5.5  v 26  h -14.5  M 24,10  m -5,14.3  l 3.68,-2.1  M 117.39547729492188,5.5  v 26  h -14.5  M 102.39547729492188,10  m -5,14.3  l 3.68,-2.1 "></path><g class="blocklyEditableText" transform="translate(43.5,10)" style="cursor: default;"><rect rx="4" ry="4" x="0" y="0" height="18" width="47.895477294921875" class="blocklyFieldRect blocklyDropdownRect" stroke="#8ca6c0" fill="transparent"></rect><text class="blocklyText blocklyDropdownText" text-anchor="start" x="5" y="14">and<tspan style="fill: rgb(91, 128, 165);"> ▾</tspan></text><image style="display: none;"></image></g></g><rect fill-opacity="0" x="8" y="282" height="28" width="57.37937927246094"></rect><g data-id="G^`W7.VxwQMJQBRY|PpW" class="blocklyDraggable" transform="translate(8,282)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#496684" d=" m 8,0  h 48.37937927246094  v 5  H 56.37937927246094  V 5  H 56.37937927246094  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 56.37937927246094  V 23  V 27  h -48.37937927246094  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPath" stroke="none" fill="#5b80a5" d=" m 8,0  h 48.37937927246094  v 5  H 56.37937927246094  V 5  H 56.37937927246094  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 56.37937927246094  V 23  V 27  h -48.37937927246094  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPathLight" stroke="#8ca6c0" d=" m 8,0  m 0.5,0.5  H 55.87937927246094  H 55.87937927246094  M 56.37937927246094,5  m -5,14.3  l 3.68,-2.1  M 8.5,26.5  M 8.5,26.5  V 20  v -1.5  m -7.36,-0.5  q -1.52,-5.5  0,-11  m 7.36,1  V 0.5 
+"></path><g transform="translate(18,5)"><text class="blocklyText" x="0" y="14">not</text></g></g><rect fill-opacity="0" x="16" y="334" height="66" width="127.41084289550781"></rect><g data-id="/xfdU8o6Y69GOq_Lk/VK" class="blocklyDraggable" transform="translate(16,334)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#498449" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 96.41084289550781  v 5  H 126.41084289550781  V 5  H 126.41084289550781  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 126.41084289550781  V 27  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 126.41084289550781  H 126.41084289550781  V 51  V 61  h -96.91084289550781  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPath" stroke="none" fill="#5ba55b" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 96.41084289550781  v 5  H 126.41084289550781  V 5  H 126.41084289550781  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 3  H 126.41084289550781  V 27  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 126.41084289550781  H 126.41084289550781  V 51  V 61  h -96.91084289550781  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+"></path><path class="blocklyPathLight" stroke="#8cc08c" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 125.91084289550781  H 125.91084289550781  M 126.41084289550781,5  m -5,14.3  l 3.68,-2.1  M 36.306365966796875,51  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 81.60447692871094,0  H 125.91084289550781  M 0,61  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 8 
+"></path><g transform="translate(10,5)"><text class="blocklyText" x="0" y="14">repeat</text></g><g class="blocklyEditableText" transform="translate(56.567626953125,5)" style="cursor: default;"><rect rx="4" ry="4" x="0" y="0" height="18" width="56.84321594238281" class="blocklyFieldRect blocklyDropdownRect" stroke="#8cc08c" fill="transparent"></rect><text class="blocklyText blocklyDropdownText" text-anchor="start" x="5" y="14">while<tspan style="fill: rgb(91, 165, 91);"> ▾</tspan></text><image style="display: none;"></image></g><g transform="translate(10,32)"><text class="blocklyText" x="0" y="14">do</text></g></g><rect fill-opacity="0" x="16" y="424" height="77" width="153.745849609375"></rect><g data-id="hmH@tt$v$n_qtI.T2Gt9" class="blocklyDraggable" transform="translate(16,424)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#498449" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 122.745849609375  v 5  H 152.745849609375  V 5  H 152.745849609375  V 34  H 152.745849609375  V 38  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 62  V 72  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+ M 67.567626953125,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 9  h 30.153182983398438  v -29 z"></path><path class="blocklyPath" stroke="none" fill="#5ba55b" d=" m 0,0  m 0,8 a 8 8 0 0,1 8,-8  h 7  l 6,4  3,0  6,-4  h 122.745849609375  v 5  H 152.745849609375  V 5  H 152.745849609375  V 34  H 152.745849609375  V 38  H 66.30636596679688  l -6,4  -3,0  -6,-4  h -7 a 8 8 0 0,0 -8,8  v 8 a 8 8 0 0,0 8,8  H 66.30636596679688  H 66.30636596679688  V 62  V 72  h -36.806365966796875  l -6,4  -3,0  -6,-4  h -6.5 a 8 8 0 0,1 -8,-8 z
+ M 67.567626953125,5  v 5  c 0,10  -8,-8  -8,7.5  s 8,-2.5  8,7.5  v 9  h 30.153182983398438  v -29 z"></path><path class="blocklyPathLight" stroke="#8cc08c" d=" m 0,0  m 0.5,8 a 7.5 7.5 0 0,1 8,-7.5  H 14.5  h 0.5  l 6,4  3,0  6,-4  H 152.245849609375  H 152.245849609375  M 36.306365966796875,62  m 1.9895923599143455,-1.9895923599143455 a 8.5 8.5 0 0,0 6.0104076400856545,2.4895923599143455  l 21.5,0  H 65.80636596679688  M 0,72  m 2.6966991411008934,-2.6966991411008934 a 7.5 7.5 0 0,1 -2.1966991411008934,-5.303300858899107  V 8 
+ M 98.22080993652344,5.5  v 29  h -30.153182983398438  M 67.567626953125,10  m -5,14.3  l 3.68,-2.1 "></path><g data-id=";?Tqq8l41T*eDX[4UEsg" style="display: block;" transform="translate(60.567626953125,6)"><path class="blocklyPathDark" transform="translate(1,1)" fill="#bdc2db" d=" m 8,0  h 28.153182983398438  v 5  H 36.15318298339844  V 5  H 36.15318298339844  V 23  H 36.15318298339844  V 23  V 27  h -28.153182983398438  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPath" stroke="none" fill="#bdc2db" d=" m 8,0  h 28.153182983398438  v 5  H 36.15318298339844  V 5  H 36.15318298339844  V 23  H 36.15318298339844  V 23  V 27  h -28.153182983398438  H 8  V 20  c 0,-10  -8,8  -8,-7.5  s 8,2.5  8,-7.5 z
+"></path><path class="blocklyPathLight" stroke="#8c95c0" d=" m 8,0  m 0.5,0.5  H 35.65318298339844  H 35.65318298339844  M 8.5,26.5  M 8.5,26.5  V 20  v -1.5  m -7.36,-0.5  q -1.52,-5.5  0,-11  m 7.36,1  V 0.5 
+" style="display: none;"></path><g class="blocklyEditableText" transform="translate(13,5)" style="cursor: text;"><rect rx="4" ry="4" x="0" y="0" height="18" width="18.153182983398438" class="blocklyFieldRect"></rect><text class="blocklyText" x="5" y="14">5</text></g></g><g transform="translate(10,10)"><text class="blocklyText" x="0" y="14">repeat</text></g><g transform="translate(107.72080993652344,10)"><text class="blocklyText" x="0" y="14">times</text></g><g transform="translate(10,43)"><text class="blocklyText" x="0" y="14">do</text></g></g></g><g class="blocklyBubbleCanvas" transform="translate(0,0) scale(1)"></g><defs><filter id="blocklyEmbossFilter4080549115017609"><fegaussianblur in="SourceAlpha" stdDeviation="1" result="blur"></fegaussianblur><fespecularlighting in="blur" surfaceScale="1" specularConstant="0.5" specularExponent="10" lighting-color="white" result="specOut"><fepointlight x="-5000" y="-10000" z="20000"></fepointlight></fespecularlighting><fecomposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"></fecomposite><fecomposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></fecomposite></filter><pattern id="blocklyDisabledPattern4080549115017609" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#aaa"></rect><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0"></path></pattern><filter id="blocklyDebugFilter4080549115017609" height="160%" width="180%" y="-30%" x="-40%"><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#ff0000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs></g></svg><svg class="blocklyScrollbarVertical blocklyFlyoutScrollbar" width="15" height="795" style="transform: translate(291.246px, 2.5px);" display="none"><g><rect class="blocklyScrollbarBackground" width="15" height="795"></rect><rect class="blocklyScrollbarHandle" rx="5" ry="5" width="10" x="2.5" height="795" y="0"></rect></g></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="blocklyBlockDragSurface" style="display: none; transform: translate3d(238px, 211px, 0px);"><g transform="translate(120,0) scale(1)"></g></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="blocklyWsDragSurface blocklyOverflowVisible"></svg></div></div>
+    </div>
+
+
+  </div>
+
+  <script src="./Blockly for the Web Codelab_files/blockly"></script>
+  <script src="./Blockly for the Web Codelab_files/blocks.js"></script>
+  <script src="./Blockly for the Web Codelab_files/main.js"></script><div class="blocklyWidgetDiv" style="direction: ltr; display: none; height: auto; width: auto;"></div><div class="blocklyDropDownDiv" style="opacity: 0; transition: transform 0.25s ease 0s, opacity 0.25s ease 0s; direction: ltr; display: none;"><div class="blocklyDropDownContent"></div><div class="blocklyDropDownArrow blocklyArrowTop" style="transform: translate(64px, -9px) rotate(45deg);"></div></div><div class="blocklyTooltipDiv"></div>
+  <script src="./Blockly for the Web Codelab_files/simulation.js"></script>
+
+
+
+<canvas class="blocklyComputeCanvas"></canvas></body></html>

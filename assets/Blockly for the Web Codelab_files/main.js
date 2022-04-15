@@ -4,6 +4,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 (function () {
+  let currentButton;
+
+  function handlePlay(event) {
+    // Add code for playing sound.
+    loadWorkspace(event.target);
+    let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+    code += "MusicMaker.play();";
+    // try {
+    //   eval(code);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }
+
   // function save(button) {
   //   // Add code for saving the behavior of a button.
   //   button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
@@ -76,7 +90,7 @@
     robot.style.bottom = "200px";
     robot_c = new Robot();
     const bear_elt = document.getElementById("bear");
-    bear_elt.style.left = "500px";
+    bear_elt.style.left = "450px";
     bear_elt.style.bottom = "200px";
     bear = new Toy(450, 200, "bear");
     const car_elt = document.getElementById("car");
@@ -84,7 +98,7 @@
     car_elt.style.bottom = "200px";
     car = new Toy(500, 200, "car");
     const duck_elt = document.getElementById("duck");
-    duck_elt.style.left = "500px";
+    duck_elt.style.left = "570px";
     duck_elt.style.bottom = "200px";
     duck = new Toy(570, 200, "duck");
     toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
