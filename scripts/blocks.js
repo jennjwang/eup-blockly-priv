@@ -59,13 +59,13 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["to_room"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "await resolveAfter3Seconds();\nmoveRobotToRoom(" + value + ");\n";
+  return "moveRobotToRoom(" + value + ");\n";
 };
 
-//TODO: go to random room that robot is not currently in?
-Blockly.JavaScript["to_random_room"] = function (block) {
-  return "await resolveAfter3Seconds();\nmoveRobotToRandomRoom();\n";
-};
+// //TODO: go to random room that robot is not currently in?
+// Blockly.JavaScript["to_random_room"] = function (block) {
+//   return "moveRobotToRandomRoom();\n";
+// };
 
 Blockly.defineBlocksWithJsonArray([
   {

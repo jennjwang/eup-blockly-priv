@@ -14,10 +14,6 @@ class Robot {
   }
 }
 
-// class Person {
-
-// }
-
 class Toy {
   constructor(width, height, id) {
     this.room = "playroom";
@@ -30,6 +26,7 @@ class Toy {
   }
 }
 
+let pidList = [];
 let robot_c = new Robot();
 let bear = new Toy(450, 200, "bear");
 let duck = new Toy(570, 200, "duck");
@@ -107,11 +104,13 @@ function moveRobotTo(id, coor) {
 
   clearInterval(id);
   id = setInterval(moveX, 0);
+  // id = setTimeout(moveX, 1000);
 
   function moveX() {
     if (robot_x == goal_x) {
       // console.log("y");
-      moveY();
+      clearInterval(id);
+      id = setInterval(moveY, 0);
     } else if (goal_x > robot_x) {
       robot_x++;
       robot.style.left = robot_x + "px";
@@ -147,14 +146,6 @@ function toy_in_room() {
   return toys_in_room[robot_c.room].length != 0;
 }
 
-function resolveAfter3Seconds() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(1 + 4);
-    }, 3000);
-  });
-}
-
 // function moveRobotToRandomRoom() {
 //   rooms = ["kitchen", "bedroom", "playroom"];
 //   i = Math.floor(Math.random() * 3);
@@ -172,6 +163,15 @@ function isRobotOutOf(room) {
 }
 
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+
+function resolveAfter3Seconds() {
+  // var abortSignal = false;;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(1 + 4);
+    }, 3000);
+  });
+}
 
 function moveRobotToRoom(room) {
   dst = rooms[room];
@@ -193,6 +193,7 @@ function moveRobotToRoom(room) {
   // console.log(robot_c.room);
 
   moveRobotTo("robot", dst);
+
   if (!robot_c.handsFree) {
     moveRobotTo(robot_c.holding.id, dst);
   }

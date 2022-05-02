@@ -9,6 +9,14 @@
 
   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
   <link rel="stylesheet" href="styles/index.css">
+  <script src="interpreter/acorn_interpreter.js"></script>
+  <script src="js/blockly/blockly_compressed.js"></script>
+<script src="js/blockly/blocks_compressed.js"></script>
+<script src="js/blockly/javascript_compressed.js"></script>
+<script src="js/blockly/en.js"></script>
+
+
+<script src="js/gamepad.min.js"></script>
 </head>
 
 <body>
@@ -45,9 +53,14 @@
 
 
     <div class="blockly-editor">
+      <div id="controls">
       <button id="runButton" title="Makes the player do what the blocks say.">
         Run Program
       </button>
+      <button id="stopButton" title="Makes the player do what the blocks say.">
+        Stop Program
+      </button>
+    </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
         <category name="Generic" categorystyle="logic_category">

@@ -4,51 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 (function () {
-  // function save(button) {
-  //   // Add code for saving the behavior of a button.
-  //   button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-  // }
-
-  // function handleSave() {
-  //   document.body.setAttribute('mode', 'edit');
-  //   save(currentButton);
-  // }
-
   function loadWorkspace(button) {
     let workspace = Blockly.getMainWorkspace();
     workspace.clear();
-    // if (button.blocklyXml) {
-    //   Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
-    // }
   }
-
-  // function enableEditMode() {
-  //   document.body.setAttribute('mode', 'edit');
-  //   document.querySelectorAll('.button').forEach(btn => {
-  //     btn.removeEventListener('click', handlePlay);
-  //     btn.addEventListener('click', enableBlocklyMode);
-  //   });
-  // }
-
-  // function enableMakerMode() {
-  //   document.body.setAttribute('mode', 'maker');
-  //   document.querySelectorAll('.button').forEach(btn => {
-  //     btn.addEventListener('click', handlePlay);
-  //     btn.removeEventListener('click', enableBlocklyMode);
-  //   });
-  // }
-
-  // function enableBlocklyMode(e) {
-  //   document.body.setAttribute('mode', 'blockly');
-  //   currentButton = e.target;
-  //   loadWorkspace(currentButton);
-  // }
-
-  // document.querySelector('#edit').addEventListener('click', enableEditMode);
-  // document.querySelector('#done').addEventListener('click', enableMakerMode);
-  // document.querySelector('#save').addEventListener('click', handleSave);
-
-  // enableMakerMode();
 
   var workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox"),
@@ -57,20 +16,121 @@
 
   // var workspace = Blockly.inject("blocklyDiv", { toolbox: toolbox });
 
+  var pid = 0;
   function myUpdateFunction(event) {
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     // code = findMoveRoomBlocks(code);
-    code = "async function run() {\n" + code + "};\nrun();";
+    // code = "(async() => {\n" + code + "})();";
     console.log(code);
     reset();
-    try {
-      eval(code);
-    } catch (error) {
-      console.log(error);
+    // try {
+    //   eval(code);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    var myInterpreter = new Interpreter(code, initApi);
+
+    function nextStep() {
+      if (myInterpreter.step()) {
+        // console.log(myInterpreter.step());
+        pid = setTimeout(nextStep, 10);
+      }
     }
+    nextStep();
   }
 
+  function initApi(interpreter, globalObject) {
+    // Add an API function for the alert() block.
+    var wrapper;
+    wrapper = function () {
+      resolveAfter3Seconds();
+    };
+    interpreter.setProperty(
+      globalObject,
+      "resolveAfter3Seconds",
+      interpreter.createAsyncFunction(wrapper)
+    );
+    var wrapper = function (id) {
+      return workspace.highlightBlock(id);
+    };
+    interpreter.setProperty(
+      globalObject,
+      "highlightBlock",
+      interpreter.createNativeFunction(wrapper)
+    );
+
+    wrapper = function (room, callback) {
+      resolveAfter3Seconds().then(() => {
+        moveRobotToRoom(room);
+        callback();
+      });
+    };
+    interpreter.setProperty(
+      globalObject,
+      "moveRobotToRoom",
+      interpreter.createAsyncFunction(wrapper)
+    );
+
+    // Add an API function for the prompt() block.
+    wrapper = function () {
+      drop_toy();
+    };
+    interpreter.setProperty(
+      globalObject,
+      "drop_toy",
+      interpreter.createNativeFunction(wrapper)
+    );
+
+    wrapper = function () {
+      pick_up_toy();
+    };
+    interpreter.setProperty(
+      globalObject,
+      "pick_up_toy",
+      interpreter.createNativeFunction(wrapper)
+    );
+
+    wrapper = function (room) {
+      isRobotOutOf(room);
+    };
+    interpreter.setProperty(
+      globalObject,
+      "isRobotOutOf",
+      interpreter.createNativeFunction(wrapper)
+    );
+
+    wrapper = function (room) {
+      isRobotinRoom(room);
+    };
+    interpreter.setProperty(
+      globalObject,
+      "isRobotinRoom",
+      interpreter.createNativeFunction(wrapper)
+    );
+
+    wrapper = function () {
+      handsFree();
+    };
+    interpreter.setProperty(
+      globalObject,
+      "handsFree",
+      interpreter.createNativeFunction(wrapper)
+    );
+  }
+
+  // let controller = new AbortController();
+
   function reset() {
+    // controller.abort();
+    window.clearTimeout(pid);
+
+    // for (var i = 0; i < pidList.length; i++) {
+    //   clearTimeout(pidList[i]);
+    // }
+    // pidList = [];
+
     const robot = document.getElementById("robot");
     robot.style.left = "120px";
     robot.style.bottom = "200px";
@@ -90,35 +150,9 @@
     toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
   }
 
-  // function findMoveRoomBlocks(code) {
-  //   var edittedCode = code.split(" {");
-  //   let steps = 0;
-  //   console.log(edittedCode);
-  //   edittedCode[0] = editMoveRoomInBlock(edittedCode[0], steps);
-  //   const toChange = edittedCode.slice(1, -1);
-  //   toChange.map((c) => editMoveRoomInBlock(c, 0));
-  //   return edittedCode.splice(1, -1, toChange).join(" {");
-  // }
-
-  // function editMoveRoomInBlock(code, steps) {
-  //   console.log(code);
-  //   var edittedCode = code.split("\n");
-  //   for (let i = 0; i < edittedCode.length; i++) {
-  //     // console.log(edittedCode[i]);
-  //     const match = edittedCode[i].match(/moveRobotToRoom(.*);/);
-  //     if (match) {
-  //       console.log(match.index);
-  //       const newLine =
-  //         "setTimeout( () => {" + match[0] + "}, " + steps * 4000 + ");";
-  //       edittedCode[i] = edittedCode[i].substr(0, match.index) + newLine;
-  //       console.log(edittedCode[i]);
-  //       steps++;
-  //     }
-  //   }
-  //   return edittedCode.join("\n");
-  // }
-
   document
     .querySelector("#runButton")
     .addEventListener("click", myUpdateFunction);
+
+  document.querySelector("#stopButton").addEventListener("click", reset);
 })();
