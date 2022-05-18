@@ -12,15 +12,15 @@ Blockly.JavaScript["drop_toy"] = function (block) {
   return "drop_toy();\n";
 };
 
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "to_random_room",
-    message0: "go to a random room",
-    previousStatement: null,
-    nextStatement: null,
-    colour: 300,
-  },
-]);
+// Blockly.defineBlocksWithJsonArray([
+//   {
+//     type: "to_random_room",
+//     message0: "go to a random room",
+//     previousStatement: null,
+//     nextStatement: null,
+//     colour: 300,
+//   },
+// ]);
 
 Blockly.defineBlocksWithJsonArray([
   {
