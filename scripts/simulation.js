@@ -156,7 +156,7 @@ function toy_in_room() {
 // }
 
 function isRobotinRoom(room) {
-  // console.log(robot_c.room);
+  console.log(robot_c.room);
   return robot_c.isRobotinRoom(room);
 }
 

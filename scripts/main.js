@@ -98,7 +98,7 @@
     );
 
     wrapper = function (room) {
-      isRobotOutOf(room);
+      return isRobotOutOf(room);
     };
     interpreter.setProperty(
       globalObject,
@@ -107,7 +107,7 @@
     );
 
     wrapper = function (room) {
-      isRobotinRoom(room);
+      return isRobotinRoom(room);
     };
     interpreter.setProperty(
       globalObject,
@@ -115,8 +115,17 @@
       interpreter.createNativeFunction(wrapper)
     );
 
+    wrapper = function (room) {
+      return toy_in_room();
+    };
+    interpreter.setProperty(
+      globalObject,
+      "toy_in_room",
+      interpreter.createNativeFunction(wrapper)
+    );
+
     wrapper = function () {
-      handsFree();
+      return handsFree();
     };
     interpreter.setProperty(
       globalObject,
