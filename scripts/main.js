@@ -16,7 +16,11 @@
 
   // var workspace = Blockly.inject("blocklyDiv", { toolbox: toolbox });
 
-  var pid = 0;
+  let pids = [];
+
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  var myInterpreter = new Interpreter(code, initApi);
+
   function myUpdateFunction(event) {
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     // code = findMoveRoomBlocks(code);
@@ -29,13 +33,14 @@
     //   console.log(error);
     // }
 
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    var myInterpreter = new Interpreter(code, initApi);
+    code = Blockly.JavaScript.workspaceToCode(workspace);
+    myInterpreter = new Interpreter(code, initApi);
 
     function nextStep() {
       if (myInterpreter.step()) {
         // console.log(myInterpreter.step());
-        pid = setTimeout(nextStep, 10);
+        const pid = setTimeout(nextStep, 10);
+        pids.push(pid);
       }
     }
     nextStep();
@@ -124,12 +129,21 @@
 
   function reset() {
     // controller.abort();
-    window.clearTimeout(pid);
 
-    // for (var i = 0; i < pidList.length; i++) {
-    //   clearTimeout(pidList[i]);
-    // }
-    // pidList = [];
+    myInterpreter.paused_ = true;
+
+    for (var i = 0; i < pids.length; i++) {
+      window.clearTimeout(pids[i]);
+      window.clearInterval(pids[i]);
+    }
+
+    pids = [];
+
+    for (var i = 0; i < pidList.length; i++) {
+      clearTimeout(pidList[i]);
+      window.clearInterval(pidList[i]);
+    }
+    pidList = [];
 
     const robot = document.getElementById("robot");
     robot.style.left = "120px";

@@ -104,6 +104,7 @@ function moveRobotTo(id, coor) {
 
   clearInterval(id);
   id = setInterval(moveX, 0);
+  pidList.push(id);
   // id = setTimeout(moveX, 1000);
 
   function moveX() {
@@ -111,6 +112,7 @@ function moveRobotTo(id, coor) {
       // console.log("y");
       clearInterval(id);
       id = setInterval(moveY, 0);
+      pidList.push(id);
     } else if (goal_x > robot_x) {
       robot_x++;
       robot.style.left = robot_x + "px";
@@ -167,9 +169,10 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 function resolveAfter3Seconds() {
   // var abortSignal = false;;
   return new Promise((resolve) => {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       resolve(1 + 4);
-    }, 3000);
+    }, 2500);
+    pidList.push(id);
   });
 }
 
