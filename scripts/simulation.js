@@ -26,6 +26,7 @@ class Toy {
   }
 }
 
+//settings
 let pidList = [];
 let robot_c = new Robot();
 let bear = new Toy(450, 200, "bear");
@@ -56,17 +57,8 @@ function pick_up_toy() {
 function drop_toy() {
   if (!robot_c.handsFree) {
     room = robot_c.room;
-    // offset = toys_in_room[room].length;
-    // x = robot_c.holding.width - offset * 70;
-    // y = robot_c.holding.height;
-    // console.log("going to", [x, y]);
-    // moveRobotTo("robot", [x, y]);
-    // moveRobotTo(robot_c.holding.id, [x, y]);
     robot_c.handsFree = true;
     toys_in_room[room].push(robot_c.holding);
-    // console.log(offset);
-    // robot_c.holding.width = x;
-    // robot_c.holding.height = y;
     robot_c.holding.room = room;
     robot_c.holding = null;
   }
@@ -96,16 +88,11 @@ function moveRobotTo(id, coor) {
     robot_y += parseInt(robot.style.bottom);
   }
 
-  // console.log("x", robot_x);
-  // console.log("y", robot_y);
-
-  // console.log("goal", coor);
   var id = null;
 
   clearInterval(id);
   id = setInterval(moveX, 0);
   pidList.push(id);
-  // id = setTimeout(moveX, 1000);
 
   function moveX() {
     if (robot_x == goal_x) {
@@ -193,7 +180,6 @@ function moveRobotToRoom(room) {
   if (!robot_c.handsFree) {
     robot_c.holding.room = room;
   }
-  // console.log(robot_c.room);
 
   moveRobotTo("robot", dst);
 
@@ -201,16 +187,3 @@ function moveRobotToRoom(room) {
     moveRobotTo(robot_c.holding.id, dst);
   }
 }
-
-// async function run() {
-//   while (robot_c.handsFree) {
-//     await resolveAfter3Seconds();
-//     moveRobotToRandomRoom();
-//     console.log(robot_c.isRobotinRoom(toy.room));
-//     console.log("toy", toy.room);
-//     console.log("robot", robot_c.room);
-//     console.log(handsFree());
-//     pick_up_toy();
-//   }
-// }
-// run();
