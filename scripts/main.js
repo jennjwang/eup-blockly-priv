@@ -9,8 +9,6 @@
     workspace.clear();
   }
 
-  console.log("changed");
-
   var workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox"),
     scrollbars: false,
