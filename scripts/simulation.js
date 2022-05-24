@@ -118,6 +118,15 @@ function resolveAfter3Seconds() {
     }, 3000);
   });
 }
+function isPersoninRoom(room) {
+  console.log(person.room);
+  return person.isPersoninRoom(room);
+}
+function isPersoninRoomwithRobot(room) {
+  console.log(person.room);
+  console.log(robot_c.room);
+  return person.isPersoninRoomwithRobot(room);
+}
 
 function moveRobotToRandomRoom() {
   rooms = ["kitchen", "bedroom", "playroom"];
@@ -162,6 +171,7 @@ function moveRobotToRoom(room) {
       break;
   }
 }
+
 
 // async function run() {
 //   while (robot_c.handsFree) {
