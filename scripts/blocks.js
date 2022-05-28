@@ -142,12 +142,6 @@ Blockly.JavaScript["hands_free"] = function (block) {
   return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
 };
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["person_in_room"] = function (block) {
-  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
-};
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "person_in_room",
@@ -156,3 +150,9 @@ Blockly.defineBlocksWithJsonArray([
     colour: 260,
   },
 ]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["person_in_room"] = function (block) {
+  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
+};
