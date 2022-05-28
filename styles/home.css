@@ -187,3 +187,7 @@ h1 {
   height: auto;
   position: absolute;
 }
+
+#code {
+  display: none;
+}

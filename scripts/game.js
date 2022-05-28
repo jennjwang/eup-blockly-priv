@@ -42,6 +42,7 @@ class Toy {
 }
 
 //settings
+
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Toy(BEAR_ROOM, 450, 200, "bear");

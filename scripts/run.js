@@ -14,12 +14,13 @@ let pids = [];
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 var myInterpreter = new Interpreter(code, initApi);
 
-function myUpdateFunction(event) {
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  console.log(code);
+function update(event) {
   reset();
 
   code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  document.getElementById("code").innerHTML = code;
+
   myInterpreter = new Interpreter(code, initApi);
 
   function nextStep() {
@@ -152,8 +153,6 @@ function reset() {
   toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
 }
 
-document
-  .querySelector("#runButton")
-  .addEventListener("click", myUpdateFunction);
+document.querySelector("#runButton").addEventListener("click", update);
 
 document.querySelector("#stopButton").addEventListener("click", reset);
