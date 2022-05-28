@@ -152,7 +152,6 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["person_in_room"] = function (block) {
   return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
 };
