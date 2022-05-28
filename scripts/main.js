@@ -24,7 +24,6 @@ function myUpdateFunction(event) {
 
   function nextStep() {
     if (myInterpreter.step()) {
-      // console.log(myInterpreter.step());
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     }
