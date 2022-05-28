@@ -12,15 +12,15 @@ Blockly.JavaScript["drop_toy"] = function (block) {
   return "drop_toy();\n";
 };
 
-// Blockly.defineBlocksWithJsonArray([
-//   {
-//     type: "to_random_room",
-//     message0: "go to a random room",
-//     previousStatement: null,
-//     nextStatement: null,
-//     colour: 300,
-//   },
-// ]);
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "to_random_room",
+    message0: "go to a random room",
+    previousStatement: null,
+    nextStatement: null,
+    colour: 300,
+  },
+]);
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -59,13 +59,13 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["to_room"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "moveRobotToRoom(" + value + ");\n";
+  return "await resolveAfter3Seconds();\nmoveRobotToRoom(" + value + ");\n";
 };
 
-// //TODO: go to random room that robot is not currently in?
-// Blockly.JavaScript["to_random_room"] = function (block) {
-//   return "moveRobotToRandomRoom();\n";
-// };
+//TODO: go to random room that robot is not currently in?
+Blockly.JavaScript["to_random_room"] = function (block) {
+  return "await resolveAfter3Seconds();\nmoveRobotToRandomRoom();\n";
+};
 
 Blockly.defineBlocksWithJsonArray([
   {

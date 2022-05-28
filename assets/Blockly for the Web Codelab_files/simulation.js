@@ -14,6 +14,10 @@ class Robot {
   }
 }
 
+// class Person {
+
+// }
+
 class Toy {
   constructor(width, height, id) {
     this.room = "playroom";
@@ -26,8 +30,6 @@ class Toy {
   }
 }
 
-//settings
-let pidList = [];
 let robot_c = new Robot();
 let bear = new Toy(450, 200, "bear");
 let duck = new Toy(570, 200, "duck");
@@ -35,7 +37,7 @@ let car = new Toy(500, 200, "car");
 
 const KITCHEN = [120, 200];
 const PLAYROOM = [450, 200];
-const BEDROOM = [220, 600];
+const BEDROOM = [200, 600];
 
 let toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
 
@@ -48,7 +50,7 @@ function pick_up_toy() {
     y = holding.height;
     robot_c.holding = holding;
     console.log("going to", [x, y]);
-    // moveRobotTo("robot", [x, y]);
+    moveRobotTo("robot", [x, y]);
     console.log("picked up", robot_c.holding.id);
     robot_c.handsFree = false;
   }
@@ -56,9 +58,14 @@ function pick_up_toy() {
 
 function drop_toy() {
   if (!robot_c.handsFree) {
-    room = robot_c.room;
     robot_c.handsFree = true;
+    room = robot_c.room;
     toys_in_room[room].push(robot_c.holding);
+    offset = toys_in_room[room].length - 1;
+    x = robot_c.holding.width + offset * 50;
+    y = robot_c.holding.height;
+    moveRobotTo("robot", [x, y]);
+    moveRobotTo(robot_c.holding.id, [x, y]);
     robot_c.holding.room = room;
     robot_c.holding = null;
   }
@@ -88,18 +95,19 @@ function moveRobotTo(id, coor) {
     robot_y += parseInt(robot.style.bottom);
   }
 
+  // console.log("x", robot_x);
+  // console.log("y", robot_y);
+
+  // console.log("goal", coor);
   var id = null;
 
   clearInterval(id);
-  id = setInterval(moveX, 0);
-  pidList.push(id);
+  id = setInterval(moveX, 1);
 
   function moveX() {
     if (robot_x == goal_x) {
       // console.log("y");
-      clearInterval(id);
-      id = setInterval(moveY, 0);
-      pidList.push(id);
+      moveY();
     } else if (goal_x > robot_x) {
       robot_x++;
       robot.style.left = robot_x + "px";
@@ -142,22 +150,7 @@ function resolveAfter3Seconds() {
     }, 3000);
   });
 }
-function isPersoninRoom(room) {
-  console.log(person.room);
-  return person.isPersoninRoom(room);
-}
-function isPersoninRoomwithRobot(room) {
-  console.log(person.room);
-  console.log(robot_c.room);
-  return person.isPersoninRoomwithRobot(room);
-}
 
-function moveRobotToRandomRoom() {
-  rooms = ["kitchen", "bedroom", "playroom"];
-  i = Math.floor(Math.random() * 3);
-  moveRobotToRoom(rooms[i]);
-  robot_c.setRoom(rooms[i]);
-}
 // function moveRobotToRandomRoom() {
 //   rooms = ["kitchen", "bedroom", "playroom"];
 //   i = Math.floor(Math.random() * 3);
@@ -166,7 +159,7 @@ function moveRobotToRandomRoom() {
 // }
 
 function isRobotinRoom(room) {
-  console.log(robot_c.room);
+  // console.log(robot_c.room);
   return robot_c.isRobotinRoom(room);
 }
 
@@ -174,16 +167,43 @@ function isRobotOutOf(room) {
   return !robot_c.isRobotinRoom(room);
 }
 
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+function moveRobotToRoom(room) {
+  if (robot_c.room == room) {
+    return;
+  }
+  robot_c.setRoom(room);
+  console.log("holding", robot_c.holding);
 
-function resolveAfter3Seconds() {
-  // var abortSignal = false;;
-  return new Promise((resolve) => {
-    const id = setTimeout(() => {
-      resolve(1 + 4);
-    }, 2500);
-    pidList.push(id);
-  });
+  if (!robot_c.handsFree) {
+    robot_c.holding.room = room;
+  }
+  // console.log(robot_c.room);
+  switch (room) {
+    case "kitchen":
+      moveRobotTo("robot", KITCHEN);
+      if (!robot_c.handsFree) {
+        moveRobotTo(robot_c.holding.id, KITCHEN);
+        robot_c.holding.width = KITCHEN[0];
+        robot_c.holding.height = KITCHEN[1];
+      }
+      break;
+    case "bedroom":
+      moveRobotTo("robot", BEDROOM);
+      if (!robot_c.handsFree) {
+        moveRobotTo(robot_c.holding.id, BEDROOM);
+        robot_c.holding.width = BEDROOM[0];
+        robot_c.holding.height = BEDROOM[1];
+      }
+      break;
+    case "playroom":
+      moveRobotTo("robot", PLAYROOM);
+      if (!robot_c.handsFree) {
+        moveRobotTo(robot_c.holding.id, PLAYROOM);
+        robot_c.holding.width = PLAYROOM[0];
+        robot_c.holding.height = PLAYROOM[1];
+      }
+      break;
+  }
 }
 
 // async function run() {
@@ -198,27 +218,3 @@ function resolveAfter3Seconds() {
 //   }
 // }
 // run();
-function moveRobotToRoom(room) {
-  dst = rooms[room];
-
-  if (robot_c.room == room) {
-    x = dst[0];
-    y = dst[1];
-    moveRobotTo("robot", [x, y + 20]);
-    setTimeout(() => {
-      moveRobotTo("robot", dst);
-    }, 400);
-  }
-  robot_c.setRoom(room);
-  console.log("holding", robot_c.holding);
-
-  if (!robot_c.handsFree) {
-    robot_c.holding.room = room;
-  }
-
-  moveRobotTo("robot", dst);
-
-  if (!robot_c.handsFree) {
-    moveRobotTo(robot_c.holding.id, dst);
-  }
-}

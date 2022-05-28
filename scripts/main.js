@@ -1,129 +1,152 @@
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-(function () {
-  let currentButton;
+var workspace = Blockly.inject("blocklyDiv", {
+  toolbox: document.getElementById("toolbox"),
+  scrollbars: false,
+});
 
-  function handlePlay(event) {
-    // Add code for playing sound.
-    loadWorkspace(event.target);
-    let code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-    code += "MusicMaker.play();";
-    // try {
-    //   eval(code);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }
+let pids = [];
 
-  // function save(button) {
-  //   // Add code for saving the behavior of a button.
-  //   button.blocklyXml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-  // }
+var code = Blockly.JavaScript.workspaceToCode(workspace);
+var myInterpreter = new Interpreter(code, initApi);
 
-  // function handleSave() {
-  //   document.body.setAttribute('mode', 'edit');
-  //   save(currentButton);
-  // }
+function myUpdateFunction(event) {
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  console.log(code);
+  reset();
 
-  function loadWorkspace(button) {
-    let workspace = Blockly.getMainWorkspace();
-    workspace.clear();
-    // if (button.blocklyXml) {
-    //   Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
-    // }
-  }
+  code = Blockly.JavaScript.workspaceToCode(workspace);
+  myInterpreter = new Interpreter(code, initApi);
 
-  // function enableEditMode() {
-  //   document.body.setAttribute('mode', 'edit');
-  //   document.querySelectorAll('.button').forEach(btn => {
-  //     btn.removeEventListener('click', handlePlay);
-  //     btn.addEventListener('click', enableBlocklyMode);
-  //   });
-  // }
-
-  // function enableMakerMode() {
-  //   document.body.setAttribute('mode', 'maker');
-  //   document.querySelectorAll('.button').forEach(btn => {
-  //     btn.addEventListener('click', handlePlay);
-  //     btn.removeEventListener('click', enableBlocklyMode);
-  //   });
-  // }
-
-  // function enableBlocklyMode(e) {
-  //   document.body.setAttribute('mode', 'blockly');
-  //   currentButton = e.target;
-  //   loadWorkspace(currentButton);
-  // }
-
-  // document.querySelector('#edit').addEventListener('click', enableEditMode);
-  // document.querySelector('#done').addEventListener('click', enableMakerMode);
-  // document.querySelector('#save').addEventListener('click', handleSave);
-
-  // enableMakerMode();
-
-  var workspace = Blockly.inject("blocklyDiv", {
-    toolbox: document.getElementById("toolbox"),
-    scrollbars: false,
-  });
-
-  // var workspace = Blockly.inject("blocklyDiv", { toolbox: toolbox });
-
-  function myUpdateFunction(event) {
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    // code = findMoveRoomBlocks(code);
-    code = "async function run() {\n" + code + "};\nrun();";
-    console.log(code);
-    reset();
-    try {
-      eval(code);
-    } catch (error) {
-      console.log(error);
+  function nextStep() {
+    if (myInterpreter.step()) {
+      // console.log(myInterpreter.step());
+      const pid = setTimeout(nextStep, 10);
+      pids.push(pid);
     }
   }
+  nextStep();
+}
 
-  function reset() {
-    const robot = document.getElementById("robot");
-    robot.style.left = "120px";
-    robot.style.bottom = "200px";
-    robot_c = new Robot();
-    const toy_elt = document.getElementById("toy");
-    toy_elt.style.left = "450px";
-    toy_elt.style.bottom = "200px";
-    toy = new Toy();
+function initApi(interpreter, globalObject) {
+  var wrapper;
+  wrapper = function () {
+    resolveAfter3Seconds();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "resolveAfter3Seconds",
+    interpreter.createAsyncFunction(wrapper)
+  );
+  var wrapper = function (id) {
+    return workspace.highlightBlock(id);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "highlightBlock",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room, callback) {
+    resolveAfter3Seconds().then(() => {
+      moveRobotToRoom(room);
+      callback();
+    });
+  };
+  interpreter.setProperty(
+    globalObject,
+    "moveRobotToRoom",
+    interpreter.createAsyncFunction(wrapper)
+  );
+
+  wrapper = function () {
+    drop_toy();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "drop_toy",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    pick_up_toy();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "pick_up_toy",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return isRobotOutOf(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotOutOf",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return isRobotinRoom(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotinRoom",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return toy_in_room();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "toy_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return handsFree();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "handsFree",
+    interpreter.createNativeFunction(wrapper)
+  );
+}
+
+function reset() {
+  for (var i = 0; i < pids.length; i++) {
+    window.clearTimeout(pids[i]);
+    window.clearInterval(pids[i]);
   }
 
-  // function findMoveRoomBlocks(code) {
-  //   var edittedCode = code.split(" {");
-  //   let steps = 0;
-  //   console.log(edittedCode);
-  //   edittedCode[0] = editMoveRoomInBlock(edittedCode[0], steps);
-  //   const toChange = edittedCode.slice(1, -1);
-  //   toChange.map((c) => editMoveRoomInBlock(c, 0));
-  //   return edittedCode.splice(1, -1, toChange).join(" {");
-  // }
+  pids = [];
 
-  // function editMoveRoomInBlock(code, steps) {
-  //   console.log(code);
-  //   var edittedCode = code.split("\n");
-  //   for (let i = 0; i < edittedCode.length; i++) {
-  //     // console.log(edittedCode[i]);
-  //     const match = edittedCode[i].match(/moveRobotToRoom(.*);/);
-  //     if (match) {
-  //       console.log(match.index);
-  //       const newLine =
-  //         "setTimeout( () => {" + match[0] + "}, " + steps * 4000 + ");";
-  //       edittedCode[i] = edittedCode[i].substr(0, match.index) + newLine;
-  //       console.log(edittedCode[i]);
-  //       steps++;
-  //     }
-  //   }
-  //   return edittedCode.join("\n");
-  // }
+  for (var i = 0; i < pidList.length; i++) {
+    clearTimeout(pidList[i]);
+    window.clearInterval(pidList[i]);
+  }
+  pidList = [];
 
-  document
-    .querySelector("#runButton")
-    .addEventListener("click", myUpdateFunction);
-})();
+  const robot = document.getElementById("robot");
+  robot.style.left = "120px";
+  robot.style.bottom = "200px";
+  robot_c = new Robot();
+  const bear_elt = document.getElementById("bear");
+  bear_elt.style.left = "500px";
+  bear_elt.style.bottom = "200px";
+  bear = new Toy(450, 200, "bear");
+  const car_elt = document.getElementById("car");
+  car_elt.style.left = "500px";
+  car_elt.style.bottom = "200px";
+  car = new Toy(500, 200, "car");
+  const duck_elt = document.getElementById("duck");
+  duck_elt.style.left = "500px";
+  duck_elt.style.bottom = "200px";
+  duck = new Toy(570, 200, "duck");
+  toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
+}
+
+document
+  .querySelector("#runButton")
+  .addEventListener("click", myUpdateFunction);
+
+document.querySelector("#stopButton").addEventListener("click", reset);
