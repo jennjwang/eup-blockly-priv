@@ -174,7 +174,16 @@ h1 {
   opacity: 1;
 }
 
-/* #play {
-  width: 50px;
+#person-img{
+  width: auto;
+  height: 120px;
+}
+
+#person {
+  z-index: 2;
+  left: 500px;
+  bottom: 600px;
+  width: 70px;
   height: auto;
-} */
+  position: absolute;
+}

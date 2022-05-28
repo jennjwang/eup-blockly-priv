@@ -62,11 +62,6 @@ Blockly.JavaScript["to_room"] = function (block) {
   return "moveRobotToRoom(" + value + ");\n";
 };
 
-// //TODO: go to random room that robot is not currently in?
-// Blockly.JavaScript["to_random_room"] = function (block) {
-//   return "moveRobotToRandomRoom();\n";
-// };
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "out_of",
@@ -158,6 +153,6 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript.PRECEDENCE = 0;
 
-// Blockly.JavaScript["person_in_room"] = function (block) {
-//   return ["person_in_room()", Blockly.JavaScript.PRECEDENCE];
-// };
+Blockly.JavaScript["person_in_room"] = function (block) {
+  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
+};

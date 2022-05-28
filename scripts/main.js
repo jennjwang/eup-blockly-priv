@@ -1,3 +1,9 @@
+const ROBOT_ROOM = "kitchen";
+const PERSON_ROOM = "bedroom";
+const DUCK_ROOM = "playroom";
+const BEAR_ROOM = "playroom";
+const CAR_ROOM = "playroom";
+
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
   scrollbars: false,
@@ -35,14 +41,6 @@ function initApi(interpreter, globalObject) {
     globalObject,
     "resolveAfter3Seconds",
     interpreter.createAsyncFunction(wrapper)
-  );
-  var wrapper = function (id) {
-    return workspace.highlightBlock(id);
-  };
-  interpreter.setProperty(
-    globalObject,
-    "highlightBlock",
-    interpreter.createNativeFunction(wrapper)
   );
 
   wrapper = function (room, callback) {
@@ -93,6 +91,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function () {
+    return isPersoninRoom();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isPersonInRoom",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function (room) {
     return toy_in_room();
   };
@@ -129,19 +136,20 @@ function reset() {
   const robot = document.getElementById("robot");
   robot.style.left = "120px";
   robot.style.bottom = "200px";
-  robot_c = new Robot();
+  robot_c = new Robot(ROBOT_ROOM);
   const bear_elt = document.getElementById("bear");
   bear_elt.style.left = "500px";
   bear_elt.style.bottom = "200px";
-  bear = new Toy(450, 200, "bear");
+  bear = new Toy(BEAR_ROOM, 450, 200, "bear");
   const car_elt = document.getElementById("car");
   car_elt.style.left = "500px";
   car_elt.style.bottom = "200px";
-  car = new Toy(500, 200, "car");
+  car = new Toy(CAR_ROOM, 500, 200, "car");
   const duck_elt = document.getElementById("duck");
   duck_elt.style.left = "500px";
   duck_elt.style.bottom = "200px";
-  duck = new Toy(570, 200, "duck");
+  duck = new Toy(DUCK_ROOM, 570, 200, "duck");
+  person = new Person(PERSON_ROOM);
   toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
 }
 

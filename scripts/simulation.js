@@ -1,6 +1,7 @@
+//classes
 class Robot {
-  constructor() {
-    this.room = "kitchen";
+  constructor(room) {
+    this.room = room;
     this.handsFree = true;
     this.holding = null;
   }
@@ -14,9 +15,23 @@ class Robot {
   }
 }
 
+class Person {
+  constructor(room) {
+    this.room = room;
+  }
+
+  setRoom(room) {
+    this.room = room;
+  }
+
+  isPersoninRoom(room) {
+    return this.room == room;
+  }
+}
+
 class Toy {
-  constructor(width, height, id) {
-    this.room = "playroom";
+  constructor(room, width, height, id) {
+    this.room = room;
     this.width = width;
     this.height = height;
     this.id = id;
@@ -28,21 +43,23 @@ class Toy {
 
 //settings
 let pidList = [];
-let robot_c = new Robot();
-let bear = new Toy(450, 200, "bear");
-let duck = new Toy(570, 200, "duck");
-let car = new Toy(500, 200, "car");
+let robot_c = new Robot(ROBOT_ROOM);
+let bear = new Toy(BEAR_ROOM, 450, 200, "bear");
+let duck = new Toy(DUCK_ROOM, 570, 200, "duck");
+let car = new Toy(CAR_ROOM, 500, 200, "car");
+let person = new Person(PERSON_ROOM);
 
 const KITCHEN = [120, 200];
 const PLAYROOM = [450, 200];
 const BEDROOM = [220, 600];
+const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
 
 function pick_up_toy() {
-  room = robot_c.room;
+  let room = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
-    toys = toys_in_room[room];
+    let toys = toys_in_room[room];
     holding = toys.pop();
     x = holding.width;
     y = holding.height;
@@ -56,7 +73,7 @@ function pick_up_toy() {
 
 function drop_toy() {
   if (!robot_c.handsFree) {
-    room = robot_c.room;
+    let room = robot_c.room;
     robot_c.handsFree = true;
     toys_in_room[room].push(robot_c.holding);
     robot_c.holding.room = room;
@@ -142,14 +159,9 @@ function resolveAfter3Seconds() {
     }, 3000);
   });
 }
-function isPersoninRoom(room) {
-  console.log(person.room);
-  return person.isPersoninRoom(room);
-}
-function isPersoninRoomwithRobot(room) {
-  console.log(person.room);
-  console.log(robot_c.room);
-  return person.isPersoninRoomwithRobot(room);
+
+function isPersoninRoom() {
+  return person.isPersoninRoom(robot_c.room);
 }
 
 function moveRobotToRandomRoom() {
@@ -174,10 +186,7 @@ function isRobotOutOf(room) {
   return !robot_c.isRobotinRoom(room);
 }
 
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
-
 function resolveAfter3Seconds() {
-  // var abortSignal = false;;
   return new Promise((resolve) => {
     const id = setTimeout(() => {
       resolve(1 + 4);
@@ -186,18 +195,6 @@ function resolveAfter3Seconds() {
   });
 }
 
-// async function run() {
-//   while (robot_c.handsFree) {
-//     await resolveAfter3Seconds();
-//     moveRobotToRandomRoom();
-//     console.log(robot_c.isRobotinRoom(toy.room));
-//     console.log("toy", toy.room);
-//     console.log("robot", robot_c.room);
-//     console.log(handsFree());
-//     pick_up_toy();
-//   }
-// }
-// run();
 function moveRobotToRoom(room) {
   dst = rooms[room];
 
