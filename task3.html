@@ -94,12 +94,12 @@
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDiIxREdUezYv-Pxt2Z0uEJeZkyWYmAxw4",
+      apiKey: "%API_KEY%",
       authDomain: "eup-blockly.firebaseapp.com",
       projectId: "eup-blockly",
       storageBucket: "eup-blockly.appspot.com",
       messagingSenderId: "217753483766",
-      appId: "1:217753483766:web:e70dc79808942eddd1afd7",
+      appId: "%APP_ID%",
       measurementId: "G-9CXK0MCT41",
     };
 
@@ -119,7 +119,7 @@
         try {
           const timeElapsed = Date.now();
           const today = new Date(timeElapsed);
-          const docRef = await addDoc(collection(db, "experiments"), {
+          const docRef = await addDoc(collection(db, "task3"), {
             study_id: url.searchParams.get('STUDY_ID'),
             prolific_pid: url.searchParams.get('PROLIFIC_PID'),
             session_id: url.searchParams.get('SESSION_ID'),
