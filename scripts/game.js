@@ -31,6 +31,10 @@ function moveRobotTo(id, coor) {
 
   let robot_x = robot.style.width;
 
+  if (robot.style.width == "") {
+    robot_x = 0;
+  }
+
   if (robot.style.right != "") {
     robot_x -= parseInt(robot.style.right);
   }
@@ -55,7 +59,7 @@ function moveRobotTo(id, coor) {
 
   function moveX() {
     if (robot_x == goal_x) {
-      // console.log("y");
+      console.log("y");
       clearInterval(id);
       id = setInterval(moveY, 0);
       pidList.push(id);
@@ -155,3 +159,18 @@ function moveRobotToRoom(room) {
     moveRobotTo(robot_c.holding.id, dst);
   }
 }
+
+function movePerson() {
+  interval = setInterval(function () {
+    let temp_rooms = ["kitchen", "bedroom", "playroom"];
+    i = Math.floor(Math.random() * 3);
+    moveRobotTo("robot", "playroom");
+    person.setRoom("playroom");
+  }, 3000);
+}
+
+// document.querySelector("#runButton").addEventListener("click", movePerson);
+
+document.querySelector("#stopButton").addEventListener("click", () => {
+  clearInterval(interval);
+});
