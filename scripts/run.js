@@ -1,8 +1,8 @@
-const ROBOT_ROOM = "kitchen";
-const PERSON_ROOM = "bedroom";
-const DUCK_ROOM = "playroom";
-const BEAR_ROOM = "playroom";
-const CAR_ROOM = "playroom";
+let ROBOT_ROOM = "kitchen";
+let PERSON_ROOM = "bedroom";
+let DUCK_ROOM = randomRoom();
+let BEAR_ROOM = randomRoom();
+let CAR_ROOM = randomRoom();
 
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
@@ -119,6 +119,12 @@ function initApi(interpreter, globalObject) {
   );
 }
 
+function randomRoom() {
+  let rooms = ["kitchen", "bedroom", "playroom"];
+  i = Math.floor(Math.random() * 3);
+  return rooms[i];
+}
+
 function reset() {
   for (var i = 0; i < pids.length; i++) {
     window.clearTimeout(pids[i]);
@@ -134,8 +140,10 @@ function reset() {
   pidList = [];
 
   const robot = document.getElementById("robot");
-  robot.style.left = "120px";
-  robot.style.bottom = "200px";
+  ROBOT_ROOM = randomRoom();
+  dst = rooms[ROBOT_ROOM];
+  robot.style.left = dst[0] + "px";
+  robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
   const bear_elt = document.getElementById("bear");
   bear_elt.style.left = "500px";
@@ -149,7 +157,15 @@ function reset() {
   duck_elt.style.left = "500px";
   duck_elt.style.bottom = "200px";
   duck = new Toy(DUCK_ROOM, 570, 200, "duck");
+
+  const person_a = document.getElementById("person");
+  PERSON_ROOM = randomRoom();
+  dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
+  let x = dst[0] + 100;
+  person_a.style.left = x + "px";
+  person_a.style.bottom = dst[1] + "px";
+
   toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
 }
 

@@ -165,12 +165,6 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
-function moveRobotToRandomRoom() {
-  rooms = ["kitchen", "bedroom", "playroom"];
-  i = Math.floor(Math.random() * 3);
-  moveRobotToRoom(rooms[i]);
-  robot_c.setRoom(rooms[i]);
-}
 // function moveRobotToRandomRoom() {
 //   rooms = ["kitchen", "bedroom", "playroom"];
 //   i = Math.floor(Math.random() * 3);
