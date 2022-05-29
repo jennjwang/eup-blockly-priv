@@ -16,6 +16,13 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [bear, car, duck], playroom: [], bedroom: [] };
 
+function randomizeToys() {
+  let toys = [bear, car, duck];
+  i = Math.floor(Math.random() * 3) + 1;
+  console.log(i);
+  return toys.slice(0, i);
+}
+
 function resetLocs() {
   const robot = document.getElementById("robot");
   ROBOT_ROOM = randomRoom();
@@ -24,20 +31,38 @@ function resetLocs() {
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
 
+  let toys = randomizeToys();
+
   const bear_elt = document.getElementById("bear");
-  bear_elt.style.left = "120px";
-  bear_elt.style.bottom = "200px";
-  bear = new Toy(BEAR_ROOM, 120, 200, "bear");
-
   const car_elt = document.getElementById("car");
-  car_elt.style.left = "120px";
-  car_elt.style.bottom = "200px";
-  car = new Toy(CAR_ROOM, 140, 200, "car");
-
   const duck_elt = document.getElementById("duck");
-  duck_elt.style.left = "160px";
-  duck_elt.style.bottom = "200px";
-  duck = new Toy(DUCK_ROOM, 160, 200, "duck");
 
-  toys_in_room = { kitchen: [bear, duck, car], playroom: [], bedroom: [] };
+  if (toys.includes(bear)) {
+    bear_elt.style.display = "block";
+    bear_elt.style.left = "120px";
+    bear_elt.style.bottom = "200px";
+    bear = new Toy(BEAR_ROOM, 120, 200, "bear");
+  } else {
+    bear_elt.style.display = "none";
+  }
+
+  if (toys.includes(car)) {
+    car_elt.style.display = "block";
+    car_elt.style.left = "120px";
+    car_elt.style.bottom = "200px";
+    car = new Toy(CAR_ROOM, 140, 200, "car");
+  } else {
+    car_elt.style.display = "none";
+  }
+
+  if (toys.includes(duck)) {
+    duck_elt.style.display = "block";
+    duck_elt.style.left = "160px";
+    duck_elt.style.bottom = "200px";
+    duck = new Toy(DUCK_ROOM, 160, 200, "duck");
+  } else {
+    duck_elt.style.display = "none";
+  }
+
+  toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
 }
