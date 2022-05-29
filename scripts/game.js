@@ -160,17 +160,17 @@ function moveRobotToRoom(room) {
   }
 }
 
-function movePerson() {
-  interval = setInterval(function () {
-    let temp_rooms = ["kitchen", "bedroom", "playroom"];
-    i = Math.floor(Math.random() * 3);
-    moveRobotTo("robot", "playroom");
-    person.setRoom("playroom");
-  }, 3000);
-}
+// function movePerson() {
+//   interval = setInterval(function () {
+//     let temp_rooms = ["kitchen", "bedroom", "playroom"];
+//     i = Math.floor(Math.random() * 3);
+//     moveRobotTo("robot", "playroom");
+//     person.setRoom("playroom");
+//   }, 3000);
+// }
 
 // document.querySelector("#runButton").addEventListener("click", movePerson);
 
-document.querySelector("#stopButton").addEventListener("click", () => {
-  clearInterval(interval);
-});
+// document.querySelector("#stopButton").addEventListener("click", () => {
+//   clearInterval(interval);
+// });
