@@ -105,18 +105,23 @@
       appId: "1:217753483766:web:e70dc79808942eddd1afd7",
       measurementId: "G-9CXK0MCT41",
     };
-    
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
 
     // Initialize Cloud Firestore and get a reference to the service
     const db = getFirestore(app);
 
+    console.log(window.location.href);
+    const url = new URL(window.location.href);
+    console.log(url.searchParams.get('id'));
+
     document.querySelector("#runButton").addEventListener("click", record);
 
     async function record(){
         try {
           const docRef = await addDoc(collection(db, "experiments"), {
+            id: url.searchParams.get('id'),
             code: document.getElementById("code").innerHTML
           });
           console.log("Document written with ID: ", docRef.id);
