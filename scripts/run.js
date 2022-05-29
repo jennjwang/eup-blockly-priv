@@ -1,9 +1,3 @@
-let ROBOT_ROOM = "kitchen";
-let PERSON_ROOM = "bedroom";
-let DUCK_ROOM = randomRoom();
-let BEAR_ROOM = randomRoom();
-let CAR_ROOM = randomRoom();
-
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
   scrollbars: false,
@@ -139,34 +133,7 @@ function reset() {
   }
   pidList = [];
 
-  const robot = document.getElementById("robot");
-  ROBOT_ROOM = randomRoom();
-  dst = rooms[ROBOT_ROOM];
-  robot.style.left = dst[0] + "px";
-  robot.style.bottom = dst[1] + "px";
-  robot_c = new Robot(ROBOT_ROOM);
-  const bear_elt = document.getElementById("bear");
-  bear_elt.style.left = "500px";
-  bear_elt.style.bottom = "200px";
-  bear = new Toy(BEAR_ROOM, 450, 200, "bear");
-  const car_elt = document.getElementById("car");
-  car_elt.style.left = "500px";
-  car_elt.style.bottom = "200px";
-  car = new Toy(CAR_ROOM, 500, 200, "car");
-  const duck_elt = document.getElementById("duck");
-  duck_elt.style.left = "500px";
-  duck_elt.style.bottom = "200px";
-  duck = new Toy(DUCK_ROOM, 570, 200, "duck");
-
-  const person_a = document.getElementById("person");
-  PERSON_ROOM = randomRoom();
-  dst = rooms[PERSON_ROOM];
-  person = new Person(PERSON_ROOM);
-  let x = dst[0] + 100;
-  person_a.style.left = x + "px";
-  person_a.style.bottom = dst[1] + "px";
-
-  toys_in_room = { kitchen: [], playroom: [bear, duck, car], bedroom: [] };
+  resetLocs();
 }
 
 document.querySelector("#runButton").addEventListener("click", update);

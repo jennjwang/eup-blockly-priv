@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blockly for EUP</title>
+
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="styles/task2.css">
+  <script src="interpreter/acorn_interpreter.js"></script>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <p id="code"></p>
+
+    <div class="simulation">
+        <div id="bedroom">
+        <p id="room-txt"> bedroom </p>
+      </div>
+        <div id="kitchen">
+        <p id="room-txt"> kitchen</p>
+      </div>
+        <div id="playroom">
+          <p id="room-txt"> playroom</p>
+      </div>
+
+      <div id="robot">
+        <img id="robot-img" src="assets/robot.png">
+      </div>
+      <div id="bear">
+        <img id="toy-img" src="assets/toy1.png">
+      </div>
+    </div>
+
+
+    <div class="blockly-editor">
+      <div id="controls">
+      <button id="runButton" title="Makes the player do what the blocks say.">
+        Run Program
+      </button>
+      <button id="stopButton" title="Makes the player do what the blocks say.">
+        Stop Program
+      </button>
+    </div>
+      <div id="blocklyDiv">
+      <xml id="toolbox" style="display: none;">
+        <category name="Generic" categorystyle="logic_category">
+          <block type="controls_if"></block>
+          <block type="controls_ifelse"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_negate"></block>
+          <block type="logic_boolean"></block>
+          <block type="controls_whileUntil"></block>
+          <block type="controls_repeat_ext">
+            <value name="TIMES">
+              <shadow type="math_number">
+                <field name="NUM">5</field>
+              </shadow>
+            </value>
+          </block>
+      </category>
+      <category name="Commands" categorystyle="variable_category">
+        <block type="drop_toy"></block>
+        <block type="pick_up_toy"></block>
+        <block type="to_room"></block>
+        <!-- <block type="to_random_room"></block> -->
+      </category>
+      <category name="Conditional" categorystyle="list_category">
+        <block type="out_of"></block>
+        <block type="toy_in_room"></block>
+        <block type="in_the"></block>
+        <block type="hands_free"></block>
+        <block type="person_in_room"></block>
+      </category>
+      </xml>
+    </div>
+    </div>
+
+
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDiIxREdUezYv-Pxt2Z0uEJeZkyWYmAxw4",
+      authDomain: "eup-blockly.firebaseapp.com",
+      projectId: "eup-blockly",
+      storageBucket: "eup-blockly.appspot.com",
+      messagingSenderId: "217753483766",
+      appId: "1:217753483766:web:e70dc79808942eddd1afd7",
+      measurementId: "G-9CXK0MCT41",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Initialize Cloud Firestore and get a reference to the service
+    const db = getFirestore(app);
+
+    console.log(window.location.href);
+    const url = new URL(window.location.href);
+    // console.log(url.searchParams.get('STUDY_ID'));
+
+    document.querySelector("#runButton").addEventListener("click", record);
+
+    async function record(){
+        try {
+          const timeElapsed = Date.now();
+          const today = new Date(timeElapsed);
+          const docRef = await addDoc(collection(db, "experiments"), {
+            task: 2,
+            study_id: url.searchParams.get('STUDY_ID'),
+            prolific_pid: url.searchParams.get('PROLIFIC_PID'),
+            session_id: url.searchParams.get('SESSION_ID'),
+            timestamp: today.toISOString(),
+            code: document.getElementById("code").innerHTML
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+    }
+
+  </script>
+  <script src="https://unpkg.com/blockly"></script>
+  <script src="scripts/obj.js"></script>
+  <script src="scripts/settings/task2.js"></script>
+  <script src="scripts/blockly.js"></script>
+  <script src="scripts/run.js"></script>
+  <script src="scripts/game.js"></script>
+
+</body>
+</html>
