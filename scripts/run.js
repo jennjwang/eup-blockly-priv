@@ -153,3 +153,20 @@ function reset() {
 document.querySelector("#runButton").addEventListener("click", update);
 
 document.querySelector("#stopButton").addEventListener("click", reset);
+
+function runButton() {
+  console.log(document.getElementById("stopButton").classList);
+  document.getElementById("stopButton").classList.remove("stop");
+  console.log(document.getElementById("stopButton").classList);
+  document.getElementById("runButton").classList.add("run");
+  console.log(document.getElementById("runButton").classList);
+}
+
+function stopButton() {
+  document.getElementById("stopButton").classList.add("stop");
+  document.getElementById("runButton").classList.remove("run");
+}
+
+document.querySelector("#runButton").addEventListener("click", runButton);
+
+document.querySelector("#stopButton").addEventListener("click", stopButton);

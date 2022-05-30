@@ -1,0 +1,50 @@
+#runButton {
+    border: 2px solid green;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: medium;
+    position: absolute;
+    opacity: 0.8;
+  }
+
+  #stopButton:hover {
+    opacity: 1;
+    background:lightcoral;
+    color: white
+  }
+
+  .run{
+    opacity: 1 !important;
+    background:green !important;
+    color: white !important
+  }
+
+  .stop{
+    opacity: 1 !important;
+    background:lightcoral !important;
+    color: white !important
+  }
+  
+  #runButton:hover {
+    opacity: 1;
+    background:green;
+    color: white
+  }
+  
+  #stopButton {
+    border: 2px solid lightcoral;
+    background: white;
+    padding:9px;
+    width: 140px;
+    /* margin-top: -40px; */
+    margin-left: -160px;
+    border-radius: 4px;
+    color: black;
+    font-size: medium;
+    position: absolute;
+    opacity: 0.8;
+  }
+  

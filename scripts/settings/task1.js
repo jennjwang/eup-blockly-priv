@@ -63,7 +63,6 @@ function movePersonHelper() {
 
 function movePerson() {
   clearInterval(interval);
-  clearTimeout(timerId);
   interval = setInterval(function () {
     if (person.room != robot_c.room) {
       movePersonHelper();
