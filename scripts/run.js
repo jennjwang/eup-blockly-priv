@@ -15,6 +15,10 @@ function update(event) {
 
   document.getElementById("code").innerHTML = code;
 
+  if (code != "") {
+    runButton();
+  }
+
   console.log(code);
 
   myInterpreter = new Interpreter(code, initApi);
@@ -23,6 +27,8 @@ function update(event) {
     if (myInterpreter.step()) {
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
+    } else {
+      document.getElementById("runButton").classList.remove("run");
     }
   }
   nextStep();
@@ -155,11 +161,8 @@ document.querySelector("#runButton").addEventListener("click", update);
 document.querySelector("#stopButton").addEventListener("click", reset);
 
 function runButton() {
-  console.log(document.getElementById("stopButton").classList);
   document.getElementById("stopButton").classList.remove("stop");
-  console.log(document.getElementById("stopButton").classList);
   document.getElementById("runButton").classList.add("run");
-  console.log(document.getElementById("runButton").classList);
 }
 
 function stopButton() {
@@ -167,6 +170,6 @@ function stopButton() {
   document.getElementById("runButton").classList.remove("run");
 }
 
-document.querySelector("#runButton").addEventListener("click", runButton);
+// document.querySelector("#runButton").addEventListener("click", runButton);
 
 document.querySelector("#stopButton").addEventListener("click", stopButton);
