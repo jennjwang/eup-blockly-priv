@@ -110,8 +110,16 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function moveRobotToRandomRoom() {
   let temp_rooms = ["kitchen", "bedroom", "playroom"];
+  shuffleArray(temp_rooms);
   let i = Math.floor(Math.random() * 3);
   moveRobotToRoom(temp_rooms[i]);
 }

@@ -15,6 +15,8 @@ function update(event) {
 
   document.getElementById("code").innerHTML = code;
 
+  console.log(code);
+
   myInterpreter = new Interpreter(code, initApi);
 
   function nextStep() {

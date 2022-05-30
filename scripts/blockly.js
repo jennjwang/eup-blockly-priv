@@ -160,3 +160,33 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["person_in_room"] = function (block) {
   return ["isPersonInRoom()\n", Blockly.JavaScript.PRECEDENCE];
 };
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "forever",
+    message0: "repeat forever %1 do %2",
+    args0: [
+      {
+        type: "input_dummy",
+      },
+      {
+        type: "input_statement",
+        name: "STATEMENT",
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 120,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["forever"] = function (block) {
+  return `
+      while (true) {
+        ${Blockly.JavaScript.statementToCode(block, "STATEMENT")}
+      }
+  `;
+};

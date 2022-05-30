@@ -31,26 +31,38 @@ function resetLocs() {
   // console.log(person_elt.style.width);
 }
 
+// function shuffleArray(array) {
+//   for (let i = array.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [array[i], array[j]] = [array[j], array[i]];
+//   }
+// }
+
 let interval;
 
 function movePerson() {
+  clearInterval(interval);
   interval = setInterval(function () {
     let temp_rooms = ["kitchen", "bedroom", "playroom"];
-    i = Math.floor(Math.random() * 3);
+    const index = temp_rooms.indexOf(person.room);
+    if (index > -1) {
+      temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    shuffleArray(temp_rooms);
+    i = Math.floor(Math.random() * 2);
     dst = rooms[temp_rooms[i]];
     x = dst[0];
     y = dst[1];
-    if (person.room == temp_rooms[i]) {
-      moveRobotTo("person", [x + 50, y + 20]);
-      setTimeout(() => {
-        moveRobotTo("person", [x + 50, y]);
-      }, 400);
-    } else {
-      moveRobotTo("person", [x + 50, y]);
+    if (person.room == "playroom" && temp_rooms[i] == "bedroom") {
+      x += 100;
     }
+    if (person.room == "kitchen" && temp_rooms[i] == "bedroom") {
+      x -= 170;
+    }
+    moveRobotTo("person", [x + 70, y]);
     person.setRoom(temp_rooms[i]);
     // moveRobotToRoom(temp_rooms[i]);
-  }, 5000);
+  }, 4000);
 }
 
 document.querySelector("#runButton").addEventListener("click", movePerson);

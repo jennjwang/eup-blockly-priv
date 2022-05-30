@@ -24,8 +24,8 @@ class Person {
   }
 
   isPersoninRoom(room) {
-    console.log("robot", room);
-    console.log("person", this.room);
+    // console.log("robot", room);
+    // console.log("person", this.room);
     return this.room == room;
   }
 }
