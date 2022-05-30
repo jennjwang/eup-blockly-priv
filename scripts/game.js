@@ -110,12 +110,11 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
-// function moveRobotToRandomRoom() {
-//   rooms = ["kitchen", "bedroom", "playroom"];
-//   i = Math.floor(Math.random() * 3);
-//   moveRobotToRoom(rooms[i]);
-//   robot_c.setRoom(rooms[i]);
-// }
+function moveRobotToRandomRoom() {
+  let temp_rooms = ["kitchen", "bedroom", "playroom"];
+  let i = Math.floor(Math.random() * 3);
+  moveRobotToRoom(temp_rooms[i]);
+}
 
 function isRobotinRoom(room) {
   console.log(robot_c.room);
@@ -159,18 +158,3 @@ function moveRobotToRoom(room) {
     moveRobotTo(robot_c.holding.id, dst);
   }
 }
-
-// function movePerson() {
-//   interval = setInterval(function () {
-//     let temp_rooms = ["kitchen", "bedroom", "playroom"];
-//     i = Math.floor(Math.random() * 3);
-//     moveRobotTo("robot", "playroom");
-//     person.setRoom("playroom");
-//   }, 3000);
-// }
-
-// document.querySelector("#runButton").addEventListener("click", movePerson);
-
-// document.querySelector("#stopButton").addEventListener("click", () => {
-//   clearInterval(interval);
-// });

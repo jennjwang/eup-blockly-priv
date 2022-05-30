@@ -111,6 +111,18 @@ function initApi(interpreter, globalObject) {
     "handsFree",
     interpreter.createNativeFunction(wrapper)
   );
+
+  wrapper = function (callback) {
+    resolveAfter3Seconds().then(() => {
+      moveRobotToRandomRoom();
+      callback();
+    });
+  };
+  interpreter.setProperty(
+    globalObject,
+    "moveRobotToRandomRoom",
+    interpreter.createAsyncFunction(wrapper)
+  );
 }
 
 function randomRoom() {

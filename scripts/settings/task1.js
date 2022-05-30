@@ -31,20 +31,30 @@ function resetLocs() {
   // console.log(person_elt.style.width);
 }
 
-// let interval;
+let interval;
 
-// function movePerson() {
-//   interval = setInterval(function () {
-//     let temp_rooms = ["kitchen", "bedroom", "playroom"];
-//     i = Math.floor(Math.random() * 3);
-//     console.log(temp_rooms[i]);
-//     moveRobotTo("person", temp_rooms[i]);
-//     person.setRoom(temp_rooms[i]);
-//   }, 3000);
-// }
+function movePerson() {
+  interval = setInterval(function () {
+    let temp_rooms = ["kitchen", "bedroom", "playroom"];
+    i = Math.floor(Math.random() * 3);
+    dst = rooms[temp_rooms[i]];
+    x = dst[0];
+    y = dst[1];
+    if (person.room == temp_rooms[i]) {
+      moveRobotTo("person", [x + 50, y + 20]);
+      setTimeout(() => {
+        moveRobotTo("person", [x + 50, y]);
+      }, 400);
+    } else {
+      moveRobotTo("person", [x + 50, y]);
+    }
+    person.setRoom(temp_rooms[i]);
+    // moveRobotToRoom(temp_rooms[i]);
+  }, 5000);
+}
 
-// document.querySelector("#runButton").addEventListener("click", movePerson);
+document.querySelector("#runButton").addEventListener("click", movePerson);
 
-// document.querySelector("#stopButton").addEventListener("click", () => {
-//   clearInterval(interval);
-// });
+document.querySelector("#stopButton").addEventListener("click", () => {
+  clearInterval(interval);
+});
