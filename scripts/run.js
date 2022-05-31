@@ -19,8 +19,6 @@ function update(event) {
     runButton();
   }
 
-  console.log(code);
-
   myInterpreter = new Interpreter(code, initApi);
 
   function nextStep() {
@@ -28,7 +26,7 @@ function update(event) {
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {
-      document.getElementById("runButton").classList.remove("run");
+      stopButton();
     }
   }
   nextStep();
