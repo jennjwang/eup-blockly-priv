@@ -197,16 +197,16 @@ if (url.searchParams.get("format") == "RL") {
   xml = Blockly.Xml.textToDom(
     `
   <xml>
-  <block type="actions" x="100" y="50"></block>
-  <block type="goals" x="100" y="200"></block>
-  <block type="triggers" x="100" y="350"></block>
+  <block type="actions" deletable="false" x="100" y="50"></block>
+  <block type="goals" deletable="false" x="100" y="200"></block>
+  <block type="triggers" deletable="false" x="100" y="350"></block>
   </xml>`
   );
 } else {
   xml = Blockly.Xml.textToDom(
     `
   <xml>
-  <block type="forever" x="100" y="50"></block>
+  <block type="forever" deletable="false" x="100" y="50"></block>
   </xml>`
   );
 }
