@@ -5,24 +5,14 @@ var workspace = Blockly.inject("blocklyDiv", {
 
 let pids = [];
 
+var code = "";
 var myInterpreter = new Interpreter("", initApi);
 
 function update(event) {
   reset();
 
-  var blocks = workspace.getTopBlocks(true);
-  Blockly.JavaScript.init(workspace);
-
-  // var blocks = Blockly.mainWorkspace.getTopBlocks();
-
-  for (var b = 0; b < blocks.length; b++) {
-    var block = blocks[b];
-    if (block.type == "forever") {
-      code = Blockly.JavaScript.blockToCode(block);
-    }
-  }
-
-  myInterpreter = new Interpreter(code, initApi);
+  code = Blockly.JavaScript.workspaceToCode(workspace);
+  console.log(code);
 
   document.getElementById("code").innerHTML = code;
 
@@ -204,3 +194,5 @@ if (url.searchParams.get("format") == "RL") {
   );
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
+
+workspace.addChangeListener(Blockly.Events.disableOrphans);
