@@ -8,6 +8,12 @@ let pids = [];
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 var myInterpreter = new Interpreter(code, initApi);
 
+var isEnding = false;
+
+function end() {
+  isEnding = true;
+}
+
 function update(event) {
   reset();
 
@@ -21,11 +27,14 @@ function update(event) {
 
   myInterpreter = new Interpreter(code, initApi);
 
+  console.log(code);
+
   function nextStep() {
     if (myInterpreter.step()) {
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {
+      console.log("ended");
       stopButton();
     }
   }
@@ -42,6 +51,15 @@ function initApi(interpreter, globalObject) {
     "resolveAfter3Seconds",
     interpreter.createAsyncFunction(wrapper)
   );
+
+  // wrapper = function () {
+  //   isEnding = true;
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "end",
+  //   interpreter.createAsyncFunction(wrapper)
+  // );
 
   wrapper = function (room, callback) {
     resolveAfter3Seconds().then(() => {
@@ -171,3 +189,25 @@ function stopButton() {
 // document.querySelector("#runButton").addEventListener("click", runButton);
 
 document.querySelector("#stopButton").addEventListener("click", stopButton);
+
+const url = new URL(window.location.href);
+console.log(url.searchParams.get("format"));
+var xml;
+if (url.searchParams.get("format") == "RL") {
+  xml = Blockly.Xml.textToDom(
+    `
+  <xml>
+  <block type="actions" x="100" y="50"></block>
+  <block type="goals" x="100" y="200"></block>
+  <block type="triggers" x="100" y="350"></block>
+  </xml>`
+  );
+} else {
+  xml = Blockly.Xml.textToDom(
+    `
+  <xml>
+  <block type="forever" x="100" y="50"></block>
+  </xml>`
+  );
+}
+Blockly.Xml.domToWorkspace(xml, workspace);
