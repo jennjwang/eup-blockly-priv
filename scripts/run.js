@@ -5,13 +5,24 @@ var workspace = Blockly.inject("blocklyDiv", {
 
 let pids = [];
 
-var code = Blockly.JavaScript.workspaceToCode(workspace);
-var myInterpreter = new Interpreter(code, initApi);
+var myInterpreter = new Interpreter("", initApi);
 
 function update(event) {
   reset();
 
-  code = Blockly.JavaScript.workspaceToCode(workspace);
+  var blocks = workspace.getTopBlocks(true);
+  Blockly.JavaScript.init(workspace);
+
+  // var blocks = Blockly.mainWorkspace.getTopBlocks();
+
+  for (var b = 0; b < blocks.length; b++) {
+    var block = blocks[b];
+    if (block.type == "forever") {
+      code = Blockly.JavaScript.blockToCode(block);
+    }
+  }
+
+  myInterpreter = new Interpreter(code, initApi);
 
   document.getElementById("code").innerHTML = code;
 
