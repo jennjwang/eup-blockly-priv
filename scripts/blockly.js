@@ -164,15 +164,20 @@ Blockly.JavaScript["person_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "forever",
-    message0: "Rules %1",
+    message0: "repeat forever %1 do %2",
     args0: [
       {
+        type: "input_dummy",
+      },
+      {
         type: "input_statement",
-        name: "input",
-        check: "if %1 do %2",
+        name: "STATEMENT",
       },
     ],
-    colour: 225,
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 120,
     tooltip: "",
     helpUrl: "",
   },
@@ -181,128 +186,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript["forever"] = function (block) {
   return `
       while (true) {
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      }\n
+        ${Blockly.JavaScript.statementToCode(block, "STATEMENT")}
+      }
   `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "actions",
-    message0: "actions %1 %2",
-    args0: [
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
-        name: "input",
-        check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
-      },
-    ],
-    colour: 230,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["actions"] = function (block) {
-  return `
-      actions(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "goals",
-    message0: "goals %1 %2",
-    args0: [
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
-        name: "input",
-        check: [""],
-      },
-    ],
-    colour: 180,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["goals"] = function (block) {
-  return `
-      goals(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "triggers",
-    message0: "triggers %1 %2",
-    args0: [
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
-        name: "input",
-      },
-    ],
-    colour: 120,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["triggers"] = function (block) {
-  return `
-      triggers(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "if_do",
-    message0: "if %1 do %2",
-    args0: [
-      {
-        type: "input_value",
-        name: "condition",
-        check: "Boolean",
-      },
-      {
-        type: "input_statement",
-        name: "execute",
-      },
-    ],
-    previousStatement: "if %1 do %2",
-    nextStatement: "if %1 do %2",
-    colour: 210,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["if_do"] = function (block) {
-  var value_condition = Blockly.JavaScript.valueToCode(
-    block,
-    "condition",
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
-  var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
-  var code = `if (${value_condition}) \n
-  {
-    ${statements_execute}\n
-    break;\n
-  }\n`;
-  return code;
 };

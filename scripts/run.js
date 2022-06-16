@@ -8,12 +8,6 @@ let pids = [];
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 var myInterpreter = new Interpreter(code, initApi);
 
-var isEnding = false;
-
-function end() {
-  isEnding = true;
-}
-
 function update(event) {
   reset();
 
@@ -27,14 +21,11 @@ function update(event) {
 
   myInterpreter = new Interpreter(code, initApi);
 
-  console.log(code);
-
   function nextStep() {
     if (myInterpreter.step()) {
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {
-      console.log("ended");
       stopButton();
     }
   }
@@ -51,15 +42,6 @@ function initApi(interpreter, globalObject) {
     "resolveAfter3Seconds",
     interpreter.createAsyncFunction(wrapper)
   );
-
-  // wrapper = function () {
-  //   isEnding = true;
-  // };
-  // interpreter.setProperty(
-  //   globalObject,
-  //   "end",
-  //   interpreter.createAsyncFunction(wrapper)
-  // );
 
   wrapper = function (room, callback) {
     resolveAfter3Seconds().then(() => {
