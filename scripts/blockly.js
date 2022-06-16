@@ -190,3 +190,44 @@ Blockly.JavaScript["forever"] = function (block) {
       }
   `;
 };
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "if_do",
+    message0: "if %1 do %2",
+    args0: [
+      {
+        type: "input_value",
+        name: "condition",
+        check: "Boolean",
+      },
+      {
+        type: "input_statement",
+        name: "execute",
+      },
+    ],
+    previousStatement: "if %1 do %2",
+    nextStatement: "if %1 do %2",
+    colour: 210,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["if_do"] = function (block) {
+  var value_condition = Blockly.JavaScript.valueToCode(
+    block,
+    "condition",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+  if (value_condition == "") {
+    value_condition = false;
+  }
+  var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
+  var code = `if (${value_condition}) \n
+  {
+    ${statements_execute}\n
+    break;\n
+  }\n`;
+  return code;
+};
