@@ -189,7 +189,7 @@ Blockly.JavaScript["forever"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "actions",
-    message0: "actions %1 %2",
+    message0: "Actions %1 %2",
     args0: [
       {
         type: "input_dummy",
@@ -217,15 +217,12 @@ Blockly.JavaScript["actions"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "goals",
-    message0: "goals %1 %2",
+    message0: "Goal %1",
     args0: [
       {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
+        type: "input_value",
         name: "input",
-        check: [""],
+        check: "Boolean",
       },
     ],
     colour: 180,
@@ -245,7 +242,7 @@ Blockly.JavaScript["goals"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "triggers",
-    message0: "triggers %1 %2",
+    message0: "Triggers %1 %2",
     args0: [
       {
         type: "input_dummy",

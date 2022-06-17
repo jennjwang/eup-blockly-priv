@@ -180,11 +180,13 @@ if (url.searchParams.get("format") == "RL") {
   xml = Blockly.Xml.textToDom(
     `
   <xml>
-  <block type="actions" deletable="false" x="100" y="50"></block>
+  <block type="actions" deletable="false" x="100" y="80"></block>
   <block type="goals" deletable="false" x="100" y="200"></block>
-  <block type="triggers" deletable="false" x="100" y="350"></block>
+  <block type="triggers" deletable="false" x="100" y="300"></block>
   </xml>`
   );
+
+  document.getElementById("blockly-0").style.display = "none";
 } else {
   xml = Blockly.Xml.textToDom(
     `
@@ -192,6 +194,8 @@ if (url.searchParams.get("format") == "RL") {
   <block type="forever" deletable="false" x="100" y="50"></block>
   </xml>`
   );
+
+  document.getElementById("blockly-0").style.display = "";
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 

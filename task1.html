@@ -49,12 +49,11 @@
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
-        <category name="Controls" categorystyle="logic_category">
+        <category name="Controls" style="display: none;" categorystyle="logic_category">
           <block type="if_do"></block>
           <block type="logic_operation"></block>
           <block type="logic_negate"></block>
           <block type="logic_boolean"></block>
-          <!-- <block type="forever"></block> -->
       </category>
       <category name="Commands" categorystyle="variable_category">
         <block type="to_room"></block>
@@ -94,7 +93,6 @@
 
     console.log(window.location.href);
     const url = new URL(window.location.href);
-    // console.log(url.searchParams.get('STUDY_ID'));
 
     document.querySelector("#runButton").addEventListener("click", record);
 
