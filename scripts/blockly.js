@@ -2,8 +2,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
     message0: "put down the toy",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: "if_do",
     colour: 330,
   },
 ]);
@@ -29,7 +28,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "pick_up_toy",
     message0: "pick up the toy",
-    previousStatement: null,
+    previousStatement: "if_do",
     colour: 330,
   },
 ]);
