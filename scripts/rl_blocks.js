@@ -2,7 +2,8 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
     message0: "put down the toy",
-    previousStatement: "if_do",
+    previousStatement: null,
+    nextStatement: null,
     colour: 330,
   },
 ]);
@@ -15,7 +16,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "to_random_room",
     message0: "go to a random room",
-    previousStatement: "if_do",
+    previousStatement: null,
     colour: 300,
   },
 ]);
@@ -28,7 +29,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "pick_up_toy",
     message0: "pick up the toy",
-    previousStatement: "if_do",
+    previousStatement: null,
     colour: 330,
   },
 ]);
@@ -52,7 +53,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    previousStatement: "if_do",
+    previousStatement: null,
     colour: 300,
   },
 ]);

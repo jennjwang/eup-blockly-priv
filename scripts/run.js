@@ -187,10 +187,6 @@ if (url.searchParams.get("format") == "RL") {
   );
 
   document.getElementById("blockly-0").style.display = "none";
-
-  var block_script = document.createElement("script");
-  block_script.setAttribute("src", "scripts/rl_blocks.js");
-  document.head.appendChild(block_script);
 } else {
   xml = Blockly.Xml.textToDom(
     `
@@ -200,10 +196,20 @@ if (url.searchParams.get("format") == "RL") {
   );
 
   document.getElementById("blockly-0").style.display = "";
-  var block_script = document.createElement("script");
-  block_script.setAttribute("src", "scripts/tap_blocks.js");
-  document.head.appendChild(block_script);
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
+
+if (url.searchParams.get("format") == "RL") {
+  const scriptList = document.querySelectorAll(
+    "script[type='text/javascript']"
+  );
+  const convertedNodeList = Array.from(scriptList);
+  const testScript = convertedNodeList.find((script) => script.id === "tap");
+  testScript.parentNode.removeChild(testScript);
+} else {
+  var block_script = document.createElement("script");
+  block_script.setAttribute("src", "scripts/tap_blocks.js");
+  document.body.appendChild(block_script);
+}
 
 workspace.addChangeListener(Blockly.Events.disableOrphans);

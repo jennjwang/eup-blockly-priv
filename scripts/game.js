@@ -27,6 +27,8 @@ function moveRobotTo(id, coor) {
   let goal_x = coor[0];
   let goal_y = coor[1];
 
+  console.log("moving");
+
   let robot = document.getElementById(id);
 
   let robot_x = robot.style.width;
