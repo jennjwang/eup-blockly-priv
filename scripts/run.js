@@ -173,6 +173,7 @@ function stopButton() {
 
 document.querySelector("#stopButton").addEventListener("click", stopButton);
 
+// adds blocks to the workspace
 const url = new URL(window.location.href);
 console.log(url.searchParams.get("format"));
 var xml;
@@ -187,6 +188,8 @@ if (url.searchParams.get("format") == "RL") {
   );
 
   document.getElementById("blockly-0").style.display = "none";
+  document.getElementById("blockly-1").style.display = "none";
+  document.getElementById("blockly-2").style.display = "none";
 } else {
   xml = Blockly.Xml.textToDom(
     `
@@ -196,9 +199,15 @@ if (url.searchParams.get("format") == "RL") {
   );
 
   document.getElementById("blockly-0").style.display = "";
+  document.getElementById("blockly-1").style.display = "";
+  document.getElementById("blockly-2").style.display = "";
+  document.getElementById("blockly-3").style.display = "none";
+  document.getElementById("blockly-4").style.display = "none";
+  document.getElementById("blockly-5").style.display = "none";
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 
+// updates script dynamically
 if (url.searchParams.get("format") == "RL") {
   const scriptList = document.querySelectorAll(
     "script[type='text/javascript']"

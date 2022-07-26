@@ -16,7 +16,7 @@ Blockly.defineBlocksWithJsonArray([
     type: "to_random_room",
     message0: "go to a random room",
     previousStatement: "if_do",
-    colour: 300,
+    colour: 330,
   },
 ]);
 
@@ -53,7 +53,7 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: "if_do",
-    colour: 300,
+    colour: 330,
   },
 ]);
 
@@ -202,66 +202,6 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript["actions"] = function (block) {
-  return `
-      actions(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "goals",
-    message0: "Goal %1",
-    args0: [
-      {
-        type: "input_value",
-        name: "input",
-        check: "Boolean",
-      },
-    ],
-    colour: 180,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["goals"] = function (block) {
-  return `
-      goals(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "triggers",
-    message0: "Triggers %1 %2",
-    args0: [
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
-        name: "input",
-      },
-    ],
-    colour: 120,
-    tooltip: "",
-    helpUrl: "",
-  },
-]);
-
-Blockly.JavaScript["triggers"] = function (block) {
-  return `
-      triggers(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
-  `;
-};
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "if_do",
@@ -300,7 +240,7 @@ Blockly.JavaScript["if_do"] = function (block) {
   var code = `if (${value_condition}) \n
   {
     ${statements_execute}\n
-    break;\n
+    continue;\n
   }\n`;
   return code;
 };
