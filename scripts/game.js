@@ -23,6 +23,7 @@ function drop_toy() {
   }
 }
 
+// HELPER id - robot, bear, car, duck
 function moveRobotTo(id, coor) {
   let goal_x = coor[0];
   let goal_y = coor[1];
@@ -112,6 +113,7 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
+// HELPER
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -131,10 +133,12 @@ function isRobotinRoom(room) {
   return robot_c.isRobotinRoom(room);
 }
 
+// condition - isRobotOut
 function isRobotOutOf(room) {
   return !robot_c.isRobotinRoom(room);
 }
 
+// HELPER
 function resolveAfter3Seconds() {
   return new Promise((resolve) => {
     const id = setTimeout(() => {
@@ -144,6 +148,7 @@ function resolveAfter3Seconds() {
   });
 }
 
+// room - kitchen, bedroom, playroom
 function moveRobotToRoom(room) {
   dst = rooms[room];
 
@@ -165,6 +170,7 @@ function moveRobotToRoom(room) {
   moveRobotTo("robot", dst);
 
   if (!robot_c.handsFree) {
+    s;
     moveRobotTo(robot_c.holding.id, dst);
   }
 }
