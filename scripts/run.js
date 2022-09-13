@@ -146,6 +146,7 @@ function reset() {
 
   pids = [];
 
+  // clears all the upcoming actions if reset is initiated in the middle of execution
   for (var i = 0; i < pidList.length; i++) {
     clearTimeout(pidList[i]);
     window.clearInterval(pidList[i]);
@@ -173,10 +174,12 @@ function stopButton() {
 
 document.querySelector("#stopButton").addEventListener("click", stopButton);
 
-// adds blocks to the workspace
+// add blocks to the workspace
 const url = new URL(window.location.href);
 console.log(url.searchParams.get("format"));
 var xml;
+
+// categories of action, goals, trigger for RL format
 if (url.searchParams.get("format") == "RL") {
   xml = Blockly.Xml.textToDom(
     `
@@ -187,10 +190,12 @@ if (url.searchParams.get("format") == "RL") {
   </xml>`
   );
 
+  // hiding the original categories of controls, commands, and conditions
   document.getElementById("blockly-0").style.display = "none";
   document.getElementById("blockly-1").style.display = "none";
   document.getElementById("blockly-2").style.display = "none";
 } else {
+  // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
     `
   <xml>
@@ -198,6 +203,7 @@ if (url.searchParams.get("format") == "RL") {
   </xml>`
   );
 
+  // reversing the hidden display from RL format to show categories of controls, commands, and conditions
   document.getElementById("blockly-0").style.display = "";
   document.getElementById("blockly-1").style.display = "";
   document.getElementById("blockly-2").style.display = "";
@@ -207,7 +213,7 @@ if (url.searchParams.get("format") == "RL") {
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 
-// updates script dynamically
+// updates script dynamically depending on format
 if (url.searchParams.get("format") == "RL") {
   const scriptList = document.querySelectorAll(
     "script[type='text/javascript']"
