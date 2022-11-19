@@ -13,6 +13,8 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
 function resetLocs() {
+  prev_room = null;
+  counter = 0;
   const robot = document.getElementById("robot");
   ROBOT_ROOM = randomRoom();
   dst = rooms[ROBOT_ROOM];
@@ -28,7 +30,6 @@ function resetLocs() {
   let x = dst[0] + 100;
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
-  // console.log(person_elt.style.width);
 }
 
 function shuffleArray(array) {

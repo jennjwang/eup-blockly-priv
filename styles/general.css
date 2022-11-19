@@ -16,6 +16,11 @@
     color: white
   }
 
+  .done{
+    color: black !important;
+    background-color: white !important;
+  }
+
   .run{
     opacity: 1 !important;
     background:green !important;

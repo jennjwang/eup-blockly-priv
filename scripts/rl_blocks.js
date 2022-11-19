@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["drop_toy"] = function (block) {
-  return "drop_toy();\n";
+  return "drop_toy();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -23,7 +23,10 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["to_random_room"] = function (block) {
-  return "moveRobotToRandomRoom();\n";
+  this.setTooltip(function () {
+    return "Add a number to variable";
+  });
+  return "moveRobotToRandomRoom();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -37,7 +40,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["pick_up_toy"] = function (block) {
-  return "pick_up_toy();\n";
+  return "pick_up_toy();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -63,7 +66,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["to_room"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "moveRobotToRoom(" + value + ");\n";
+  return "moveRobotToRoom(" + value + ");";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -98,7 +101,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["toy_in_room"] = function (block) {
-  return ["toy_in_room()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -125,12 +128,12 @@ Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoom(" + value + ")\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.JavaScript["out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotOutOf(" + value + ")\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -143,7 +146,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["hands_free"] = function (block) {
-  return ["handsFree()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -158,7 +161,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["person_in_room"] = function (block) {
-  return ["isPersonInRoom()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -201,7 +204,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
-  return ["toy_in_room()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -227,7 +230,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["trigger_out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotOutOf(" + value + ")\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -255,7 +258,7 @@ Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["trigger_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoom(" + value + ")\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -269,7 +272,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_hands_free"] = function (block) {
-  return ["handsFree()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -285,7 +288,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["trigger_person_in_room"] = function (block) {
-  return ["isPersonInRoom()\n", Blockly.JavaScript.PRECEDENCE];
+  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
 };
 
 // workspace blocks

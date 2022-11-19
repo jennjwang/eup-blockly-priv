@@ -12,21 +12,31 @@ function update(event) {
   reset();
 
   code = Blockly.JavaScript.workspaceToCode(workspace);
-  console.log(code);
+  // console.log(code);
 
-  document.getElementById("code").innerHTML = code;
+  let check = document.getElementById("code").innerHTML;
 
-  if (code != "") {
+  // document.getElementById("code").innerHTML = code;
+  console.log(check == "");
+
+  if (check != "") {
     runButton();
+  } else {
+    return;
   }
 
   myInterpreter = new Interpreter(code, initApi);
 
+  var counter = 0;
   function nextStep() {
-    if (myInterpreter.step()) {
+    if (myInterpreter.step() && counter != 3000) {
+      counter += 1;
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {
+      alert(
+        "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
+      );
       stopButton();
     }
   }
@@ -35,14 +45,14 @@ function update(event) {
 
 function initApi(interpreter, globalObject) {
   var wrapper;
-  wrapper = function () {
-    resolveAfter3Seconds();
-  };
-  interpreter.setProperty(
-    globalObject,
-    "resolveAfter3Seconds",
-    interpreter.createAsyncFunction(wrapper)
-  );
+  // wrapper = function () {
+  //   resolveAfter3Seconds();
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "resolveAfter3Seconds",
+  //   interpreter.createAsyncFunction(wrapper)
+  // );
 
   wrapper = function (room, callback) {
     resolveAfter3Seconds().then(() => {
@@ -62,6 +72,15 @@ function initApi(interpreter, globalObject) {
   interpreter.setProperty(
     globalObject,
     "drop_toy",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return inSameRoom();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "inSameRoom",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -166,8 +185,9 @@ function runButton() {
 }
 
 function stopButton() {
-  document.getElementById("stopButton").classList.add("stop");
   document.getElementById("runButton").classList.remove("run");
+  document.getElementById("stopButton").classList.add("stop");
+  document.getElementById("runButton").classList.add("done");
 }
 
 // document.querySelector("#runButton").addEventListener("click", runButton);
@@ -176,7 +196,10 @@ document.querySelector("#stopButton").addEventListener("click", stopButton);
 
 // add blocks to the workspace
 const url = new URL(window.location.href);
-console.log(url.searchParams.get("format"));
+// console.log(url.searchParams.get("format"));
+// console.log(url.searchParams.get("STUDY_ID"));
+// console.log(url.searchParams.get("PROLIFIC_PID"));
+// console.log(url.searchParams.get("SESSION_ID"));
 var xml;
 
 // categories of action, goals, trigger for RL format

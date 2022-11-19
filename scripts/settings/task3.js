@@ -24,6 +24,8 @@ function randomizeToys() {
 }
 
 function resetLocs() {
+  prev_room = null;
+  counter = 0;
   const robot = document.getElementById("robot");
   ROBOT_ROOM = randomRoom();
   dst = rooms[ROBOT_ROOM];

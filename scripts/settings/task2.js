@@ -13,6 +13,8 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
 
 function resetLocs() {
+  prev_room = null;
+  counter = 0;
   const robot = document.getElementById("robot");
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
@@ -23,4 +25,8 @@ function resetLocs() {
   bear_elt.style.bottom = "200px";
   bear = new Toy(BEAR_ROOM, 450, 200, "bear");
   toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
+}
+
+function isSameRoom(room) {
+  return robot_c.room == room;
 }

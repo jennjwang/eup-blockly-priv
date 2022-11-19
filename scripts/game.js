@@ -170,7 +170,19 @@ function moveRobotToRoom(room) {
   moveRobotTo("robot", dst);
 
   if (!robot_c.handsFree) {
-    s;
     moveRobotTo(robot_c.holding.id, dst);
   }
+}
+
+let prev_room = null;
+let counter = 0;
+
+function inSameRoom() {
+  room = robot_c.room;
+  if (prev_room != room) {
+    prev_room = room;
+    counter = 0;
+  }
+  counter += 1;
+  return counter > 3;
 }
