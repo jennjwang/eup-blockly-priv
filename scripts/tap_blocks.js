@@ -250,6 +250,6 @@ Blockly.JavaScript["if_do"] = function (block) {
   var code = `if (${value_condition}) {
     ${statements_execute}
       continue;
-  }`;
+    }`;
   return code;
 };

@@ -12,12 +12,16 @@ function update(event) {
   reset();
 
   code = Blockly.JavaScript.workspaceToCode(workspace);
-  // console.log(code);
+  console.log(code);
 
   let check = document.getElementById("code").innerHTML;
 
   // document.getElementById("code").innerHTML = code;
-  console.log(check == "");
+  // console.log(check == "");
+
+  if (url.searchParams.get("format") == "RL") {
+    return;
+  }
 
   if (check != "") {
     runButton();
@@ -236,18 +240,23 @@ if (url.searchParams.get("format") == "RL") {
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 
-// updates script dynamically depending on format
-if (url.searchParams.get("format") == "RL") {
-  const scriptList = document.querySelectorAll(
-    "script[type='text/javascript']"
-  );
-  const convertedNodeList = Array.from(scriptList);
-  const testScript = convertedNodeList.find((script) => script.id === "tap");
-  testScript.parentNode.removeChild(testScript);
-} else {
-  var block_script = document.createElement("script");
-  block_script.setAttribute("src", "scripts/tap_blocks.js");
-  document.body.appendChild(block_script);
-}
+window.onload = function () {
+  // updates script dynamically depending on format
+  if (url.searchParams.get("format") == "RL") {
+    const scriptList = document.querySelectorAll(
+      "script[type='text/javascript']"
+    );
+    console.log(scriptList);
+    const convertedNodeList = Array.from(scriptList);
+    const testScript = convertedNodeList.find((script) => script.id === "tap");
+    console.log(testScript);
+    //testScript.remove();
+    //testScript.parentNode.removeChild(testScript);
+  } else {
+    var block_script = document.createElement("script");
+    block_script.setAttribute("src", "scripts/tap_blocks.js");
+    document.body.appendChild(block_script);
+  }
+};
 
 workspace.addChangeListener(Blockly.Events.disableOrphans);

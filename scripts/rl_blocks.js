@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["drop_toy"] = function (block) {
-  return "drop_toy();";
+  return "drop_toy();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -26,7 +26,7 @@ Blockly.JavaScript["to_random_room"] = function (block) {
   this.setTooltip(function () {
     return "Add a number to variable";
   });
-  return "moveRobotToRandomRoom();";
+  return "moveRobotToRandomRoom();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -40,7 +40,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["pick_up_toy"] = function (block) {
-  return "pick_up_toy();";
+  return "pick_up_toy();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -66,7 +66,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["to_room"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "moveRobotToRoom(" + value + ");";
+  return "moveRobotToRoom(" + value + ");\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -101,7 +101,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["toy_in_room"] = function (block) {
-  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+  return "toy_in_room();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -124,16 +124,16 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
+// Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "isRobotinRoom(" + value + ");";
 };
 
 Blockly.JavaScript["out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "isRobotOutOf(" + value + ");";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -146,7 +146,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["hands_free"] = function (block) {
-  return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
+  return "handsFree();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -158,10 +158,8 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["person_in_room"] = function (block) {
-  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
+  return "isPersonInRoom();";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -204,7 +202,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
-  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+  return "toy_in_room();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -224,13 +222,14 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
+    output: "Boolean",
     colour: 210,
   },
 ]);
 
 Blockly.JavaScript["trigger_out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "isRobotOutOf(" + value + ");\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -254,11 +253,9 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["trigger_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "isRobotinRoom(" + value + ");\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -272,7 +269,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_hands_free"] = function (block) {
-  return ["handsFree()", Blockly.JavaScript.PRECEDENCE];
+  return "handsFree();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -285,10 +282,8 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["trigger_person_in_room"] = function (block) {
-  return ["isPersonInRoom()", Blockly.JavaScript.PRECEDENCE];
+  return "isPersonInRoom();\n\t";
 };
 
 // workspace blocks
@@ -315,9 +310,9 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["actions"] = function (block) {
   return `
-      actions(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
+actions(
+  ${Blockly.JavaScript.statementToCode(block, "input")}
+)
   `;
 };
 
@@ -339,10 +334,11 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["goals"] = function (block) {
+  console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
-      goals(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
+goals(
+  ${Blockly.JavaScript.statementToCode(block, "input")}
+)
   `;
 };
 
@@ -374,8 +370,8 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["triggers"] = function (block) {
   return `
-      triggers(
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-      )
+triggers(
+  ${Blockly.JavaScript.statementToCode(block, "input")}
+)
   `;
 };
