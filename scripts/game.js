@@ -23,7 +23,12 @@ function drop_toy() {
   }
 }
 
-// HELPER id - robot, bear, car, duck
+// HELPER id - robot, bear, car, duck, person
+/**
+ * move any object to a goal coordinate
+ * @param {*} id - possible id (robot, bear, car, duck, person)
+ * @param {*} coor
+ */
 function moveRobotTo(id, coor) {
   let goal_x = coor[0];
   let goal_y = coor[1];
