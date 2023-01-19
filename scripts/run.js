@@ -31,10 +31,8 @@ function update(event) {
 
   myInterpreter = new Interpreter(code, initApi);
 
-  var counter = 0;
   function nextStep() {
     if (myInterpreter.step()) {
-      counter += 1;
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {

@@ -188,6 +188,7 @@ Blockly.JavaScript["forever"] = function (block) {
   return `
       while (true) {
       ${Blockly.JavaScript.statementToCode(block, "input")}
+      break;
       }\n
   `;
 };
