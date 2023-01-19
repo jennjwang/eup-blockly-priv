@@ -1,3 +1,6 @@
+Blockly.JavaScript.STATEMENT_PREFIX = "highlightBlock(%1);\n";
+Blockly.JavaScript.addReservedWords("highlightBlock");
+
 Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
@@ -184,9 +187,6 @@ Blockly.JavaScript["forever"] = function (block) {
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
       while (true) {
-        if (inSameRoom()){
-          break;
-        }
       ${Blockly.JavaScript.statementToCode(block, "input")}
       }\n
   `;

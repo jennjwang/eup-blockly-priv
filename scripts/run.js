@@ -33,14 +33,14 @@ function update(event) {
 
   var counter = 0;
   function nextStep() {
-    if (myInterpreter.step() && counter != 3000) {
+    if (myInterpreter.step()) {
       counter += 1;
       const pid = setTimeout(nextStep, 10);
       pids.push(pid);
     } else {
-      alert(
-        "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
-      );
+      // alert(
+      //   "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
+      // );
       stopButton();
     }
   }
@@ -49,14 +49,28 @@ function update(event) {
 
 function initApi(interpreter, globalObject) {
   var wrapper;
-  // wrapper = function () {
-  //   resolveAfter3Seconds();
-  // };
-  // interpreter.setProperty(
-  //   globalObject,
-  //   "resolveAfter3Seconds",
-  //   interpreter.createAsyncFunction(wrapper)
-  // );
+
+  const wrapperHighlight = function (id) {
+    id = String(id || "");
+    // console.log(id);
+    return highlightBlock(id);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "highlightBlock",
+    interpreter.createNativeFunction(wrapperHighlight)
+  );
+
+  // Each step will run the interpreter until the highlightPause is true.
+  // let highlightPause = false;
+
+  function highlightBlock(id) {
+    resolveAfter3Seconds().then(() => {
+      workspace.highlightBlock(id);
+      // highlightPause = true;
+      console.log("highlight");
+    });
+  }
 
   wrapper = function (room, callback) {
     resolveAfter3Seconds().then(() => {
