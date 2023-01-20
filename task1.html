@@ -16,6 +16,26 @@
 
   <div class="wrapper">
 
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Modal Header</h2>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the Modal Body</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Modal Footer</h3>
+        </div>
+      </div>
+    
+    </div>
+    
+
     <p id="code"></p>
 
     <div class="simulation">
@@ -40,6 +60,7 @@
 
     <div class="blockly-editor">
       <div id="controls">
+      <div id="clock"></div>
       <button id="runButton" title="Makes the player do what the blocks say.">
         Run Program
       </button>
@@ -129,6 +150,7 @@
     }
 
   </script>
+  <script src="scripts/clock.js"></script>
   <script src="https://unpkg.com/blockly"></script>
   <script src="scripts/obj.js"></script>
   <script src="scripts/game.js"></script>
