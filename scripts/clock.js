@@ -1,4 +1,4 @@
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 20;
 let timerInterval = null;
 
 // Initially, no time has passed, but this will count up
@@ -30,6 +30,7 @@ function startTimer() {
 
     if (timeLeft == 0) {
       clearInterval(timerInterval);
+      document.getElementById("modal").style.display = "block";
     }
 
     // The time left label is updated
