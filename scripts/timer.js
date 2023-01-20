@@ -24,7 +24,6 @@ function formatTime(time) {
 
 function startTimer() {
   timerInterval = setInterval(() => {
-    // The amount of time passed increments by one
     timePassed = timePassed += 1;
     timeLeft = TIME_LIMIT - timePassed;
 
