@@ -98,7 +98,7 @@ function generate_triggers(triggers){
     return function (state) {
         output = []
         if(triggers.includes("am I in the kitchen")) {
-            if(state.robot_position == 'bedroom') {
+            if(state.robot_position == 'kitchen') {
                 output.push(1)
             } else {
                 output.push(0)
@@ -125,7 +125,7 @@ function generate_triggers(triggers){
         }
 
         if(triggers.includes("am I holding a toy")) {
-            if(state.holding == true) {
+            if(state.holding) {
                 output.push(1)
             } else {
                 output.push(0)
@@ -190,5 +190,5 @@ function run_rl(triggers, actions, goal) {
         
     }
 
-    return false
+    return []
 }
