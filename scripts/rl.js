@@ -13,18 +13,18 @@ function simulator(state, action) {
 
     } if (action == "put down toy") {
         if (copied.State.holding == false){
-            return False
+            return false
         } else {
-            copiedState.holding = False
+            copiedState.holding = false
             copiedState.blocks.push(copiedState.robot_position)
         }
         
     } if (action == "pick up toy") {
         if (copied.State.holding == true || !(copiedState.blocks.includes(copiedState.robot_position))){
-            return False
+            return false
         } else {
             ind = copiedState.blocks.findIndex(copiedState.robot_position)
-            copiedState.holding = True
+            copiedState.holding = true
             copiedState.blocks.splice(1, ind)
         }
         
@@ -147,9 +147,11 @@ function generate_triggers(triggers){
 
 }
 
-let init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
+// let init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
 
-// let init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
+let init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
+// let init_state2 = {robot_position: "kitchen", blocks: [], holding: false, person: "bedroom"}
+// let init_state3 = {robot_position: "kitchen", blocks: [], holding: false, person: "playroom"}
 // let init_state = {robot_position:"bedroom", blocks: Array(Math.floor(Math.random()*5+1)).fill("kitchen"), holding:false, person:null}
 
 function run_rl(triggers, actions, goal) {
