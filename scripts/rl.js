@@ -96,6 +96,7 @@ function generate_goal_func(goal) {
 function generate_triggers(triggers){
 
     return function (state) {
+
         output = []
         if(triggers.includes("am I in the kitchen")) {
             if(state.robot_position == 'kitchen') {
@@ -148,12 +149,14 @@ function generate_triggers(triggers){
 
 let init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
 
+// let init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
+// let init_state = {robot_position:"bedroom", blocks: Array(Math.floor(Math.random()*5+1)).fill("kitchen"), holding:false, person:null}
+
 function run_rl(triggers, actions, goal) {
     is_done = generate_goal_func(goal)
     trigger_func = generate_triggers(triggers)
-    initial_representation = state(init_state)
     max_depth = 5
-    pairs = [(init_state, [], 0)]
+    pairs = [(init_state, {}, 0)]
 
 
     while (!pairs.length==0) {
