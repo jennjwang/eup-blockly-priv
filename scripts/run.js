@@ -11,15 +11,19 @@ var myInterpreter = new Interpreter("", initApi);
 function update(event) {
   reset();
 
+  taskNum = url.toString().split("task")[1][0];
+
   code = Blockly.JavaScript.workspaceToCode(workspace);
-  console.log(code);
+  // console.log(code);
 
   let check = document.getElementById("code").innerHTML;
 
-  // document.getElementById("code").innerHTML = code;
+  document.getElementById("code").innerHTML = code;
   // console.log(check == "");
 
   if (url.searchParams.get("format") == "RL") {
+    check = taskNum + "\n" + code;
+    console.log(check);
     return;
   }
 
