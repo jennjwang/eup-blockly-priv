@@ -1,5 +1,5 @@
-Blockly.JavaScript.STATEMENT_PREFIX = "highlightBlock(%1);\n";
-Blockly.JavaScript.addReservedWords("highlightBlock");
+// Blockly.JavaScript.STATEMENT_PREFIX = "highlightBlock(%1);\n";
+// Blockly.JavaScript.addReservedWords("highlightBlock");
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -187,7 +187,12 @@ Blockly.JavaScript["forever"] = function (block) {
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
       while (true) {
+      var randNum = Math.floor(Math.random() * 10);
+      var trigs = [];
       ${Blockly.JavaScript.statementToCode(block, "input")}
+      if (trigs.length >= 1) {
+        trigs[randNum % trigs.length]();
+      };
       break;
       }\n
   `;
@@ -249,8 +254,10 @@ Blockly.JavaScript["if_do"] = function (block) {
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
   var code = `if (${value_condition}) {
-    ${statements_execute}
-      continue;
-    }`;
+    trigs.push(
+      function(){
+        ${statements_execute}
+      });
+    };`;
   return code;
 };

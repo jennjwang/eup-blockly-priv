@@ -14,7 +14,11 @@ function update(event) {
   taskNum = url.toString().split("task")[1][0];
 
   code = Blockly.JavaScript.workspaceToCode(workspace);
-  // console.log(code);
+  // code =
+  //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
+  // code =
+  //   "while (true) {var trigs = [];if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('kitchen');});};if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('bedroom')});};trigs[1]();break;}";
+  console.log(code);
 
   let check = document.getElementById("code").innerHTML;
 
