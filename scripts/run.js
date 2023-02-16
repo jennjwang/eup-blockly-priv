@@ -56,16 +56,16 @@ function update(event) {
 function initApi(interpreter, globalObject) {
   var wrapper;
 
-  const wrapperHighlight = function (id) {
-    id = String(id || "");
-    // console.log(id);
-    return highlightBlock(id);
-  };
-  interpreter.setProperty(
-    globalObject,
-    "highlightBlock",
-    interpreter.createNativeFunction(wrapperHighlight)
-  );
+  // const wrapperHighlight = function (id) {
+  //   id = String(id || "");
+  //   // console.log(id);
+  //   return highlightBlock(id);
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "highlightBlock",
+  //   interpreter.createNativeFunction(wrapperHighlight)
+  // );
 
   // Each step will run the interpreter until the highlightPause is true.
   // let highlightPause = false;
