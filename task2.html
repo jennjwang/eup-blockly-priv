@@ -16,6 +16,24 @@
 
   <div class="wrapper">
 
+    <div id="modal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thank you for completing the study</h2>
+        </div>
+        <div class="modal-body">
+          <p>Please return to Qualtrics and enter the following code: <mark>61948336</mark></p>
+          <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p>
+        </div>
+        <button onclick="window.close()">
+          Exit
+        </button>
+      </div>
+    
+    </div>
+
     <p id="code"></p>
 
     <div class="simulation">
@@ -40,6 +58,9 @@
 
     <div class="blockly-editor">
       <div id="controls">
+        <!-- <div id="clock"> -->
+
+        <!-- </div> -->
       <button id="runButton" title="Makes the player do what the blocks say.">
         Run Program
       </button>
@@ -137,6 +158,7 @@
 
   </script>
   <script src="https://unpkg.com/blockly"></script>
+  <!-- <script src="scripts/timer.js"></script> -->
   <script src="scripts/obj.js"></script>
   <script src="scripts/settings/task2.js"></script>
   <!-- <script id="tap" src="scripts/tap_blocks.js"></script> -->

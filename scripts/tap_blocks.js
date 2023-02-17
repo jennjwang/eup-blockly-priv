@@ -68,7 +68,7 @@ Blockly.JavaScript["to_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "out_of",
-    message0: "I am out of the %1",
+    message0: "I have left the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -85,10 +85,12 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
+// TODO: if toy is in current room and robot enters, does that fire this trigger?
+
 Blockly.defineBlocksWithJsonArray([
   {
     type: "toy_in_room",
-    message0: "there is a toy in the current room",
+    message0: "a toy has appeared in the current room",
     output: "Boolean",
     colour: 260,
   },
@@ -103,7 +105,7 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
-    message0: "I am in the %1",
+    message0: "I have arrived at the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -135,7 +137,7 @@ Blockly.JavaScript["out_of"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "my hands are free",
+    message0: "my hands have become free",
     output: "Boolean",
     colour: 260,
   },
@@ -148,7 +150,7 @@ Blockly.JavaScript["hands_free"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "person_in_room",
-    message0: "there is a person in the current room",
+    message0: "a person has entered the current room",
     output: "Boolean",
     colour: 260,
   },
@@ -193,7 +195,6 @@ Blockly.JavaScript["forever"] = function (block) {
       if (trigs.length >= 1) {
         trigs[randNum % trigs.length]();
       };
-      break;
       }\n
   `;
 };

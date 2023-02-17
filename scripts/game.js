@@ -115,6 +115,17 @@ function resolveAfter3Seconds() {
 }
 
 function isPersoninRoom() {
+  // console.log("person: " + person.prev == person.room);
+  // console.log(person.prev);
+  // console.log(person.room);
+
+  if (person.prev == person.room) {
+    // console.log("not in room");
+    return false; // robot entered person's room
+  }
+
+  // console.log(robot_c.room);
+  console.log(person.isPersoninRoom(robot_c.room));
   return person.isPersoninRoom(robot_c.room);
 }
 

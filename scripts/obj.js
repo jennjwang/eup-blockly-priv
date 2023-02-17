@@ -17,9 +17,11 @@ class Robot {
 class Person {
   constructor(room) {
     this.room = room;
+    this.prev = room;
   }
 
   setRoom(room) {
+    this.prev = this.room;
     this.room = room;
   }
 
