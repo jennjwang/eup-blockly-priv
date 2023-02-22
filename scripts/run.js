@@ -20,11 +20,15 @@ function update(event) {
 
   document.getElementById("code").innerHTML = code;
   // console.log(check == "");
+  console.log(code);
+
+   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
+   //Can debug by running with url params == RL
 
   if (url.searchParams.get("format") == "RL") {
     check = taskNum + "\n" + code;
     console.log(check);
-    return;
+    code = run_rl(code, taskNum)
   }
 
   if (check != "") {
@@ -32,6 +36,8 @@ function update(event) {
   } else {
     return;
   }
+
+
 
   myInterpreter = new Interpreter(code, initApi);
 
