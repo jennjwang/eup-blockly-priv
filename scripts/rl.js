@@ -30,8 +30,8 @@ function simulator(state, action) {
 
     } if (action == "moveRobotToRandomRoom();") {
         room = Math.floor(Math.random()*5+1)
-        rooms = ['bedroom', 'kitchen', 'playroom']
-        copiedState.robot_position = rooms[room]
+        test = ['bedroom', 'kitchen', 'playroom'][room]
+        copiedState.robot_position = test
         
     } 
     return copiedState
@@ -80,10 +80,10 @@ function generate_goal_func(goal, state) {
 }
 
 function generate_triggers(triggers, state){
+    output = []
     for(ind in triggers) {
         trigger = triggers[ind]
 
-        output = []
         if(trigger == "isRobotinRoom(\'kitchen\');") {
             if(state.robot_position == 'kitchen') {
                 output.push(1)
@@ -93,26 +93,26 @@ function generate_triggers(triggers, state){
 
         }
         if(trigger =="isRobotOutOf(\'kitchen\');") {
-            if(!(state.robot_position == 'kitchen')) {
-                output.push(1)
-            } else {
+            if(state.robot_position == 'kitchen') {
                 output.push(0)
+            } else {
+                output.push(1)
             }
 
         }
         if(trigger == "isRobotOutOf(\'bedroom\');") {
-            if(!(state.robot_position == 'bedroom')) {
-                output.push(1)
-            } else {
+            if(state.robot_position == 'bedroom') {
                 output.push(0)
+            } else {
+                output.push(1)
             }
 
         }
         if(trigger == "isRobotOutOf(\'playroom\');") {
-            if(!(state.robot_position == 'playroom')) {
-                output.push(1)
-            } else {
+            if(state.robot_position == 'playroom') {
                 output.push(0)
+            } else {
+                output.push(1)
             }
 
         }
@@ -162,7 +162,6 @@ function parser(code){
     triggers = []
     goals = []
     actions = []
-    debugger
     for(let line in lines){
         if(lines[line] != '' && !(lines[line].includes('highlightBlock'))){
             if(lines[line] == ')'){
@@ -244,28 +243,32 @@ function get_policy(code, taskNum) {
         
     }
 
-    return [[], triggers, goal]
+    return [{}, triggers, goal]
 }
 
 
 function run_rl(code, taskNum){
+    start = Date.now();
     [policy, triggers, goal] = get_policy(code, taskNum)
     out = "while (!" + goal[0].slice(0,-1) + ") {\n"
 
     for(key in policy){
         out += '\tif('
         for(ind in triggers){
-            if(key[ind] == 1){
-                out+=triggers[ind].slice(0,-1) + '&&'
+            if(key.split(',')[ind] == 1){
+                out+= "(" + triggers[ind].slice(0,-1) + ') && '
             } else{
-                out+='!' + triggers[ind].slice(0,-1) + '&&'
+                out+='!(' + triggers[ind].slice(0,-1) + ') && '
             }
         }
-        out = out.slice(0, -2)
+        out = out.slice(0, -4)
         out += '){\n\t\t' + policy[key] + '\n\t}\n'
     }
     
     
     out += "}\n"
+    end = Date.now();
+    timer = (end-start)/100
+    debugger
     return out
 }
