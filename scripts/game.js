@@ -9,6 +9,7 @@ function pick_up_toy() {
     console.log("going to", [x, y]);
     // moveRobotTo("robot", [x, y]);
     console.log("picked up", robot_c.holding.id);
+    robot_c.handsPrev = robot_c.handsFree;
     robot_c.handsFree = false;
   }
 }
@@ -16,6 +17,7 @@ function pick_up_toy() {
 function drop_toy() {
   if (!robot_c.handsFree) {
     let room = robot_c.room;
+    robot_c.handsPrev = robot_c.handsFree;
     robot_c.handsFree = true;
     toys_in_room[room].push(robot_c.holding);
     robot_c.holding.room = room;
@@ -96,7 +98,20 @@ function moveRobotTo(id, coor) {
   }
 }
 
+function handsFull() {
+  if (robot_c.handsFree == robot_c.handsPrev) {
+    return false;
+  }
+  robot_c.handsPrev = robot_c.handsFree;
+  console.log(robot_c.handsFree);
+  return robot_c.handsFree == false;
+}
+
 function handsFree() {
+  if (robot_c.handsFree == robot_c.handsPrev) {
+    return false;
+  }
+  robot_c.handsPrev = robot_c.handsFree;
   return robot_c.handsFree;
 }
 
@@ -146,12 +161,18 @@ function moveRobotToRandomRoom() {
 
 function isRobotinRoom(room) {
   console.log(robot_c.room);
-  return robot_c.isRobotinRoom(room);
+  if (robot_c.prev == robot_c.room) {
+    return false;
+  }
+  return robot_c.room == room;
 }
 
 // condition - isRobotOut
 function isRobotOutOf(room) {
-  return !robot_c.isRobotinRoom(room);
+  if (robot_c.prev == robot_c.room) {
+    return false;
+  }
+  return robot_c.prev == room;
 }
 
 // HELPER

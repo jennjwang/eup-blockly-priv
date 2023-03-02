@@ -162,6 +162,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function () {
+    return handsFull();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "handsFull",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function (callback) {
     resolveAfter3Seconds().then(() => {
       moveRobotToRandomRoom();

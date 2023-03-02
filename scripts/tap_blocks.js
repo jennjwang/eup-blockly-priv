@@ -136,6 +136,19 @@ Blockly.JavaScript["out_of"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "hands_full",
+    message0: "my hands have become full",
+    output: "Boolean",
+    colour: 260,
+  },
+]);
+
+Blockly.JavaScript["hands_full"] = function () {
+  return ["handsFull()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "hands_free",
     message0: "my hands have become free",
     output: "Boolean",
