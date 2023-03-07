@@ -1,6 +1,16 @@
+const categoryStyles = {
+  event_category: {
+    colour: 160,
+  },
+};
+
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
   scrollbars: false,
+  theme: Blockly.Theme.defineTheme("themeName", {
+    base: Blockly.Themes.Classic,
+    categoryStyles: categoryStyles,
+  }),
 });
 
 let pids = [];
@@ -135,6 +145,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (room) {
+    return isRobotinRoomEvent(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotinRoomEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     return isPersoninRoom();
   };
@@ -250,6 +269,7 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-0").style.display = "none";
   document.getElementById("blockly-1").style.display = "none";
   document.getElementById("blockly-2").style.display = "none";
+  document.getElementById("blockly-3").style.display = "none";
 } else {
   // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
@@ -263,9 +283,10 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-0").style.display = "";
   document.getElementById("blockly-1").style.display = "";
   document.getElementById("blockly-2").style.display = "";
-  document.getElementById("blockly-3").style.display = "none";
+  document.getElementById("blockly-3").style.display = "";
   document.getElementById("blockly-4").style.display = "none";
   document.getElementById("blockly-5").style.display = "none";
+  document.getElementById("blockly-6").style.display = "none";
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 

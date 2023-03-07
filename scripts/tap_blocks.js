@@ -5,7 +5,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
     message0: "put down the toy",
-    previousStatement: "if_do",
+    previousStatement: "if_then",
     colour: 330,
   },
 ]);
@@ -18,7 +18,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "to_random_room",
     message0: "go to a random room",
-    previousStatement: "if_do",
+    previousStatement: "if_then",
     colour: 330,
   },
 ]);
@@ -31,7 +31,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "pick_up_toy",
     message0: "pick up the toy",
-    previousStatement: "if_do",
+    previousStatement: "if_then",
     colour: 330,
   },
 ]);
@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    previousStatement: "if_do",
+    previousStatement: "if_then",
     colour: 330,
   },
 ]);
@@ -68,7 +68,7 @@ Blockly.JavaScript["to_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "out_of",
-    message0: "I have left the %1",
+    message0: "I left the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -85,12 +85,52 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_out_of",
+    message0: "I am out of the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+        ],
+      },
+    ],
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_in_the",
+    message0: "I am in the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+        ],
+      },
+    ],
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
 // TODO: if toy is in current room and robot enters, does that fire this trigger?
 
 Blockly.defineBlocksWithJsonArray([
   {
     type: "toy_in_room",
-    message0: "a toy has appeared in the current room",
+    message0: "a toy is in the room",
     output: "Boolean",
     colour: 260,
   },
@@ -105,7 +145,7 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
-    message0: "I have arrived at the %1",
+    message0: "I arrived at the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -134,10 +174,33 @@ Blockly.JavaScript["out_of"] = function (block) {
   return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
+Blockly.JavaScript["e_in_the"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return ["isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.JavaScript["e_out_of"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return ["!isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_person_in_room",
+    message0: "a person is in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_person_in_room"] = function () {
+  return ["isPersonInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+};
+
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
-    message0: "my hands have become full",
+    message0: "my hands became full",
     output: "Boolean",
     colour: 260,
   },
@@ -150,7 +213,7 @@ Blockly.JavaScript["hands_full"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "my hands have become free",
+    message0: "my hands became free",
     output: "Boolean",
     colour: 260,
   },
@@ -163,7 +226,7 @@ Blockly.JavaScript["hands_free"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "person_in_room",
-    message0: "a person has entered the current room",
+    message0: "a person entered the room",
     output: "Boolean",
     colour: 260,
   },
@@ -187,7 +250,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "input_statement",
         name: "input",
-        check: "if %1 do %2",
+        check: ["if %1 do %2", "if %1 while %2 do %3"],
       },
     ],
     colour: 225,
@@ -234,8 +297,8 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "if_do",
-    message0: "if %1 do %2",
+    type: "if_then",
+    message0: "if %1 then %2",
     args0: [
       {
         type: "input_value",
@@ -248,7 +311,7 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: "if %1 do %2",
-    nextStatement: "if %1 do %2",
+    nextStatement: ["if %1 do %2", "if %1 while %2 do %3"],
     colour: 210,
     tooltip: "",
     helpUrl: "",
@@ -268,6 +331,65 @@ Blockly.JavaScript["if_do"] = function (block) {
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
   var code = `if (${value_condition}) {
+    trigs.push(
+      function(){
+        ${statements_execute}
+      });
+    };`;
+  return code;
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "if_while_then",
+    message0: "if %1 while %2 then %3",
+    args0: [
+      {
+        type: "input_value",
+        name: "condition",
+        check: "Boolean",
+      },
+      {
+        type: "input_value",
+        name: "event",
+        check: "Boolean",
+      },
+      {
+        type: "input_statement",
+        name: "execute",
+      },
+    ],
+    previousStatement: "if %1 do %2",
+    nextStatement: ["if %1 do %2", "if %1 while %2 do %3"],
+    colour: 210,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["if_while_then"] = function (block) {
+  var value_condition = Blockly.JavaScript.valueToCode(
+    block,
+    "condition",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+
+  if (value_condition == "") {
+    value_condition = true;
+  }
+
+  var value_event = Blockly.JavaScript.valueToCode(
+    block,
+    "event",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+
+  if (value_event == "") {
+    value_event = true;
+  }
+
+  var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
+  var code = `if (${value_condition} && ${value_event}) {
     trigs.push(
       function(){
         ${statements_execute}

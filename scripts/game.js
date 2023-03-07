@@ -144,6 +144,10 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
+function isPersoninRoomEvent() {
+  return person.isPersoninRoom(robot_c.room);
+}
+
 // HELPER
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -164,6 +168,10 @@ function isRobotinRoom(room) {
   if (robot_c.prev == robot_c.room) {
     return false;
   }
+  return robot_c.room == room;
+}
+
+function isRobotinRoomEvent(room) {
   return robot_c.room == room;
 }
 
