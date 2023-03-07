@@ -80,7 +80,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    output: "out_of",
     colour: 260,
   },
 ]);
@@ -100,7 +100,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    output: "e_out_of",
     colour: 160,
   },
 ]);
@@ -120,7 +120,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    output: "e_in_the",
     colour: 160,
   },
 ]);
@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "toy_in_room",
     message0: "a toy is in the room",
-    output: "Boolean",
+    output: "toy_in_room",
     colour: 260,
   },
 ]);
@@ -157,7 +157,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    output: "in_the",
     colour: 260,
   },
 ]);
@@ -188,7 +188,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_in_room",
     message0: "a person is in the room",
-    output: "Boolean",
+    output: "e_person_in_room",
     colour: 160,
   },
 ]);
@@ -201,7 +201,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
     message0: "my hands became full",
-    output: "Boolean",
+    output: "hands_full",
     colour: 260,
   },
 ]);
@@ -214,7 +214,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
     message0: "my hands became free",
-    output: "Boolean",
+    output: "hands_free",
     colour: 260,
   },
 ]);
@@ -227,7 +227,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "person_in_room",
     message0: "a person entered the room",
-    output: "Boolean",
+    output: "person_in_room",
     colour: 260,
   },
 ]);
@@ -303,7 +303,13 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "input_value",
         name: "condition",
-        check: "Boolean",
+        check: [
+          "out_of",
+          "in_the",
+          "person_in_room",
+          "hands_free",
+          "hands_full",
+        ],
       },
       {
         type: "input_statement",
@@ -348,12 +354,24 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "input_value",
         name: "condition",
-        check: "Boolean",
+        check: [
+          "out_of",
+          "in_the",
+          "person_in_room",
+          "hands_free",
+          "hands_full",
+        ],
       },
       {
         type: "input_value",
         name: "event",
-        check: "Boolean",
+        check: [
+          "e_out_of",
+          "e_in_the",
+          "e_person_in_room",
+          "e_hands_free",
+          "e_hands_full",
+        ],
       },
       {
         type: "input_statement",
