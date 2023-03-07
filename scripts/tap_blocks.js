@@ -129,16 +129,16 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "toy_in_room",
+    type: "e_toy_in_room",
     message0: "a toy is in the room",
-    output: "toy_in_room",
-    colour: 260,
+    output: "e_toy_in_room",
+    colour: 160,
   },
 ]);
 
 Blockly.JavaScript.PRECEDENCE = 0;
 
-Blockly.JavaScript["toy_in_room"] = function (block) {
+Blockly.JavaScript["e_toy_in_room"] = function (block) {
   return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
 };
 
@@ -297,6 +297,19 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_hands_free",
+    message0: "my hands are free",
+    output: "e_hands_free",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_hands_free"] = function (block) {
+  return ["ehandsFree()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "if_then",
     message0: "if %1 then %2",
     args0: [
@@ -309,6 +322,7 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
+          "Boolean",
         ],
       },
       {
@@ -325,7 +339,7 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript["if_do"] = function (block) {
+Blockly.JavaScript["if_then"] = function (block) {
   var value_condition = Blockly.JavaScript.valueToCode(
     block,
     "condition",
@@ -360,6 +374,7 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
+          "Boolean",
         ],
       },
       {
@@ -370,7 +385,8 @@ Blockly.defineBlocksWithJsonArray([
           "e_in_the",
           "e_person_in_room",
           "e_hands_free",
-          "e_hands_full",
+          "e_toy_in_room",
+          "Boolean",
         ],
       },
       {

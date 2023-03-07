@@ -115,6 +115,10 @@ function handsFree() {
   return robot_c.handsFree;
 }
 
+function eHandsFree() {
+  return robot_c.handsFree;
+}
+
 function toy_in_room() {
   console.log("robot is in", robot_c.room);
   console.log("toy in room", toys_in_room[robot_c.room].length != 0);
