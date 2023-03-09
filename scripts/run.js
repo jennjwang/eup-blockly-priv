@@ -163,6 +163,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function () {
+    return eHandsFree();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "eHandsFree",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function (room) {
     return toy_in_room();
   };

@@ -270,7 +270,9 @@ Blockly.JavaScript["forever"] = function (block) {
       ${Blockly.JavaScript.statementToCode(block, "input")}
       if (trigs.length >= 1) {
         trigs[randNum % trigs.length]();
-      };
+      } else if (trigs.length == 1){
+        trigs[0]();
+      }
       }\n
   `;
 };

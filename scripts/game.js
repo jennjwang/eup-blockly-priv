@@ -9,7 +9,7 @@ function pick_up_toy() {
     console.log("going to", [x, y]);
     // moveRobotTo("robot", [x, y]);
     console.log("picked up", robot_c.holding.id);
-    robot_c.handsPrev = robot_c.handsFree;
+    robot_c.handsPrev = true;
     robot_c.handsFree = false;
   }
 }
@@ -17,7 +17,8 @@ function pick_up_toy() {
 function drop_toy() {
   if (!robot_c.handsFree) {
     let room = robot_c.room;
-    robot_c.handsPrev = robot_c.handsFree;
+    console.log("dropped toy");
+    robot_c.handsPrev = false;
     robot_c.handsFree = true;
     toys_in_room[room].push(robot_c.holding);
     robot_c.holding.room = room;
@@ -99,19 +100,28 @@ function moveRobotTo(id, coor) {
 }
 
 function handsFull() {
+  console.log("handsPrev", robot_c.handsPrev);
+  console.log("handsFree", robot_c.handsFree);
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
   }
-  robot_c.handsPrev = robot_c.handsFree;
-  console.log(robot_c.handsFree);
-  return robot_c.handsFree == false;
+  if (robot_c.handsPrev) {
+    robot_c.handsPrev = robot_c.handsFree;
+    return true;
+  }
+  return false;
 }
 
 function handsFree() {
+  console.log("handsPrev", robot_c.handsPrev);
+  console.log("handsFree", robot_c.handsFree);
   if (robot_c.handsFree == robot_c.handsPrev) {
+    console.log("hand not free");
     return false;
   }
-  robot_c.handsPrev = robot_c.handsFree;
+  if (robot_c.handsFree) {
+    robot_c.handsPrev = robot_c.handsFree;
+  }
   return robot_c.handsFree;
 }
 
@@ -121,6 +131,7 @@ function eHandsFree() {
 
 function toy_in_room() {
   console.log("robot is in", robot_c.room);
+  console.log(toys_in_room);
   console.log("toy in room", toys_in_room[robot_c.room].length != 0);
   return toys_in_room[robot_c.room].length != 0;
 }
@@ -168,9 +179,18 @@ function moveRobotToRandomRoom() {
 }
 
 function isRobotinRoom(room) {
-  console.log(robot_c.room);
-  if (robot_c.prev == robot_c.room) {
+  console.log("curr", robot_c.room);
+  console.log("prev", robot_c.prev);
+  console.log("room", room);
+  // console.log("prev==room", robot_c.room === robot_c.prev);
+  // console.log(robot_c.room === room);
+  if (robot_c.prev === robot_c.room) {
+    console.log("robot has not arrived at room", room);
     return false;
+  }
+  if (robot_c.room == room) {
+    console.log("robot has arrived at room", room);
+    robot_c.prev = robot_c.room;
   }
   return robot_c.room == room;
 }
@@ -209,7 +229,9 @@ function moveRobotToRoom(room) {
       moveRobotTo("robot", dst);
     }, 400);
   }
+
   robot_c.setRoom(room);
+
   console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
