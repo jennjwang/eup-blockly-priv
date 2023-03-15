@@ -2,13 +2,13 @@
 function simulator(state, action) {
     copiedState = JSON.parse(JSON.stringify(state))
 
-    if (action == "moveRobotToRoom('bedroom');") {
+    if (action == "moveRobotToRoom(\'bedroom\');") {
         copiedState.robot_position = 'bedroom'
 
-    } if (action == "moveRobotToRoom('playroom');") {
+    } if (action == "moveRobotToRoom(\'playroom\');") {
         copiedState.robot_position = 'playroom'
 
-    } if (action == "moveRobotToRoom('kitchen');") {
+    } if (action == "moveRobotToRoom(\'kitchen\');") {
         copiedState.robot_position = 'kitchen'
 
     } if (action == "drop_toy();") {
@@ -193,59 +193,149 @@ function parser(code){
 
 
 
-function get_policy(code, taskNum) {
-    if (taskNum == 1){
-        init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
-    }
-    if (taskNum == 2){
-        init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
-    }
-    if (taskNum == 3){
-        init_state = {robot_position:"bedroom", blocks: Array(Math.floor(Math.random()*5+1)).fill("kitchen"), holding:false, person:null}
-    }
+// function get_policy(code, taskNum) {
+//     if (taskNum == 1){
+//         init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
+//     }
+//     if (taskNum == 2){
+//         init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
+//     }
+//     if (taskNum == 3){
+//         init_state = {robot_position:"bedroom", blocks: Array(Math.floor(Math.random()*5+1)).fill("kitchen"), holding:false, person:null}
+//     }
 
+//     [triggers, actions, goal] = parser(code)
+//     max_depth = 5
+//     pairs = [[init_state, {}, 0]]
+
+
+//     while (!pairs.length==0) {
+
+//         [state, policy, depth] = pairs.shift()
+
+//         if(generate_goal_func(goal, state)) {
+//             return [policy, triggers, goal]
+//         }
+
+//         representation = generate_triggers(triggers, state)
+
+//         if(representation in policy) {
+
+//             newState = simulator(state, policy[representation])
+
+//             if ((!(newState == false)) && depth+1 < max_depth){
+//                 pairs.push([newState, policy, depth+1])
+//             }
+//         }
+
+//         for (ind in actions){
+//             action = actions[ind]
+//             newState = simulator(state, action)
+//             copiedPolicy = JSON.parse(JSON.stringify(policy))
+
+//             if ((!(newState == false)) && depth+1 < max_depth){
+
+//                 copiedPolicy[representation] = action
+//                 pairs.push([newState, copiedPolicy, depth+1])
+//             }
+
+//         }
+        
+//     }
+
+//     return [{}, triggers, goal]
+// }
+
+
+function get_policy(code, taskNum){
     [triggers, actions, goal] = parser(code)
-    max_depth = 5
-    pairs = [[init_state, {}, 0]]
+    debugger
+    triggers = ["isRobotinRoom(\'kitchen\');", "isRobotinRoom(\'bedroom\');", "isRobotinRoom(\'playroom\');", "handsFree();", "toy_in_room();"]
+    actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
+    values_table = {}
 
+    if(taskNum == 1){
+        persons_locs = ['kitchen', 'bedroom', 'playroom', null]
+        block_list = [[]]
+    }
+    if(taskNum == 2){
+        block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
+        person_locs = [null]
+    }
+    if(taskNum == 3){
+        block_list = [[], ['kitchen'], ['bedroom'], ['kitchen', 'kitchen'], ['kitchen', 'bedroom'], ['bedroom', 'bedroom'],
+                        ['kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'bedroom'], ['kitchen', 'bedroom', 'bedroom'],
+                        ['bedroom', 'bedroom', 'bedroom']]
+        person_locs = [null]
+    }
 
-    while (!pairs.length==0) {
+    //Populate values table
+    for(room in ['kitchen', 'bedroom', 'playroom']){
+        for(held in [false, true]){
+            for(person_loc in person_locs){
+                for (block in block_list){
 
-        [state, policy, depth] = pairs.shift()
-
-        if(generate_goal_func(goal, state)) {
-            return [policy, triggers, goal]
-        }
-
-        representation = generate_triggers(triggers, state)
-
-        if(representation in policy) {
-
-            newState = simulator(state, policy[representation])
-
-            if ((!(newState == false)) && depth+1 < max_depth){
-                pairs.push([newState, policy, depth+1])
+                    state = {robot_position: room, blocks: block, holding: held, person: person_loc}
+                    if(generate_goal_func(goal, state)){
+                        values_table[state] = 1
+                    } else {
+                        values_table[state] = 0
+                        }
+                }
             }
         }
+    }
 
-        for (ind in actions){
-            action = actions[ind]
-            newState = simulator(state, action)
-            copiedPolicy = JSON.parse(JSON.stringify(policy))
+    //Train
+    num_epochs = 100
+    gamma = 0.99
+    for(i=0; i<num_epochs; i++){
+        for(state in values_table){
 
-            if ((!(newState == false)) && depth+1 < max_depth){
-
-                copiedPolicy[representation] = action
-                pairs.push([newState, copiedPolicy, depth+1])
+            if(!(generate_goal_func(goal, state))){
+                max_val = 0
+                for(action in actions){
+                    next = simulator(state, action)
+                    if(!(next == false) && (next in values_table)){
+                        val = values_table[next]
+                        if(val > max_val){
+                            max_val = val
+                        }
+                }
+                values_table[state] = gamma*max_val
+                }
             }
 
+        }
+
+    }
+    //Generate policy
+    policy = {}
+    for(state in values_table){
+
+        if(!(generate_goal_func(goal, state))){
+            max_val = 0
+            max_act = "moveRobotToRoom(\'bedroom\');"
+
+            for(action in actions){
+
+                next = simulator(state, action)
+                if(!(next == false) && (next in values_table)){
+                    val = values_table[next]
+                    if(val > max_val){
+                        max_val = val
+                        max_act = action
+                    }
+                }
+            }
+            policy[generate_triggers(triggers, state)] = max_act
         }
         
     }
+    
 
-    return [{}, triggers, goal]
-}
-
+    return policy
+    }
 
 function run_rl(code, taskNum){
     start = Date.now();
