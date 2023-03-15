@@ -3,9 +3,12 @@ class Robot {
     this.room = room;
     this.handsFree = true;
     this.holding = null;
+    this.handsPrev = false;
+    this.prev = room;
   }
 
   setRoom(room) {
+    this.prev = this.room;
     this.room = room;
   }
 
@@ -17,9 +20,11 @@ class Robot {
 class Person {
   constructor(room) {
     this.room = room;
+    this.prev = room;
   }
 
   setRoom(room) {
+    this.prev = this.room;
     this.room = room;
   }
 
