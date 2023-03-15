@@ -1,4 +1,4 @@
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 20;
 let timerInterval = null;
 
 // Initially, no time has passed, but this will count up

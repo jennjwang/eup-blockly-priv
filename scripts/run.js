@@ -1,16 +1,6 @@
-const categoryStyles = {
-  event_category: {
-    colour: 160,
-  },
-};
-
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
   scrollbars: false,
-  theme: Blockly.Theme.defineTheme("themeName", {
-    base: Blockly.Themes.Classic,
-    categoryStyles: categoryStyles,
-  }),
 });
 
 let pids = [];
@@ -24,11 +14,7 @@ function update(event) {
   taskNum = url.toString().split("task")[1][0];
 
   code = Blockly.JavaScript.workspaceToCode(workspace);
-  // code =
-  //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
-  // code =
-  //   "while (true) {var trigs = [];if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('kitchen');});};if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('bedroom')});};trigs[1]();break;}";
-  console.log(code);
+  // console.log(code);
 
   let check = document.getElementById("code").innerHTML;
 
@@ -72,16 +58,16 @@ function update(event) {
 function initApi(interpreter, globalObject) {
   var wrapper;
 
-  // const wrapperHighlight = function (id) {
-  //   id = String(id || "");
-  //   // console.log(id);
-  //   return highlightBlock(id);
-  // };
-  // interpreter.setProperty(
-  //   globalObject,
-  //   "highlightBlock",
-  //   interpreter.createNativeFunction(wrapperHighlight)
-  // );
+  const wrapperHighlight = function (id) {
+    id = String(id || "");
+    // console.log(id);
+    return highlightBlock(id);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "highlightBlock",
+    interpreter.createNativeFunction(wrapperHighlight)
+  );
 
   // Each step will run the interpreter until the highlightPause is true.
   // let highlightPause = false;
@@ -151,30 +137,12 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
-  wrapper = function (room) {
-    return isRobotinRoomEvent(room);
-  };
-  interpreter.setProperty(
-    globalObject,
-    "isRobotinRoomEvent",
-    interpreter.createNativeFunction(wrapper)
-  );
-
   wrapper = function () {
     return isPersoninRoom();
   };
   interpreter.setProperty(
     globalObject,
     "isPersonInRoom",
-    interpreter.createNativeFunction(wrapper)
-  );
-
-  wrapper = function () {
-    return eHandsFree();
-  };
-  interpreter.setProperty(
-    globalObject,
-    "eHandsFree",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -193,15 +161,6 @@ function initApi(interpreter, globalObject) {
   interpreter.setProperty(
     globalObject,
     "handsFree",
-    interpreter.createNativeFunction(wrapper)
-  );
-
-  wrapper = function () {
-    return handsFull();
-  };
-  interpreter.setProperty(
-    globalObject,
-    "handsFull",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -284,7 +243,6 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-0").style.display = "none";
   document.getElementById("blockly-1").style.display = "none";
   document.getElementById("blockly-2").style.display = "none";
-  document.getElementById("blockly-3").style.display = "none";
 } else {
   // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
@@ -298,10 +256,9 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-0").style.display = "";
   document.getElementById("blockly-1").style.display = "";
   document.getElementById("blockly-2").style.display = "";
-  document.getElementById("blockly-3").style.display = "";
+  document.getElementById("blockly-3").style.display = "none";
   document.getElementById("blockly-4").style.display = "none";
   document.getElementById("blockly-5").style.display = "none";
-  document.getElementById("blockly-6").style.display = "none";
 }
 Blockly.Xml.domToWorkspace(xml, workspace);
 

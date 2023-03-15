@@ -23,8 +23,7 @@ function resetLocs() {
   robot_c = new Robot(ROBOT_ROOM);
 
   const person_elt = document.getElementById("person");
-  // PERSON_ROOM = randomRoom();
-  PERSON_ROOM = "kitchen";
+  PERSON_ROOM = randomRoom();
   dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
   person.setRoom(PERSON_ROOM);
@@ -66,9 +65,9 @@ function movePersonHelper() {
 function movePerson() {
   clearInterval(interval);
   interval = setInterval(function () {
-    // if (person.room != robot_c.room) {
-    movePersonHelper();
-    // }
+    if (person.room != robot_c.room) {
+      movePersonHelper();
+    }
   }, 4000);
 }
 
