@@ -72,7 +72,7 @@ Blockly.JavaScript["to_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "out_of",
-    message0: "I am out of the %1",
+    message0: "I left the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -92,7 +92,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.defineBlocksWithJsonArray([
   {
     type: "toy_in_room",
-    message0: "there is a toy in the current room",
+    message0: "a toy is in the current room",
     output: "Boolean",
     colour: 260,
   },
@@ -107,7 +107,7 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
-    message0: "I am in the %1",
+    message0: "I arrived at the %1",
     args0: [
       {
         type: "field_dropdown",
@@ -139,7 +139,7 @@ Blockly.JavaScript["out_of"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "my hands are free",
+    message0: "my hands became free",
     output: "Boolean",
     colour: 260,
   },
@@ -151,8 +151,21 @@ Blockly.JavaScript["hands_free"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "hands_full",
+    message0: "my hands became full",
+    output: "Boolean",
+    colour: 260,
+  },
+]);
+
+Blockly.JavaScript["hands_full"] = function (block) {
+  return "handsFull();";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "person_in_room",
-    message0: "there is a person in the current room",
+    message0: "a person has entered the current room",
     output: "Boolean",
     colour: 260,
   },
@@ -261,7 +274,7 @@ Blockly.JavaScript["trigger_in_the"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_hands_free",
-    message0: "Are my hands are free?",
+    message0: "Are my hands free?",
     previousStatement: null,
     nextStatement: null,
     colour: 210,
@@ -270,6 +283,20 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["trigger_hands_free"] = function (block) {
   return "handsFree();\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "trigger_hands_full",
+    message0: "Are my hands full?",
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript["trigger_hands_full"] = function (block) {
+  return "handsFull();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([

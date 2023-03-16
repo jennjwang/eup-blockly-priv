@@ -16,6 +16,24 @@
 
   <div class="wrapper">
 
+    <div id="modal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thank you for completing the study</h2>
+        </div>
+        <div class="modal-body">
+          <p>Please return to Qualtrics and enter the following code: <mark>61948336</mark></p>
+          <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p>
+        </div>
+        <button onclick="window.close()">
+          Exit
+        </button>
+      </div>
+    
+    </div>
+
     <p id="code"></p>
 
     <div class="simulation">
@@ -40,6 +58,9 @@
 
     <div class="blockly-editor">
       <div id="controls">
+        <!-- <div id="clock"> -->
+
+        <!-- </div> -->
       <button id="runButton" title="Makes the player do what the blocks say.">
         Run Program
       </button>
@@ -49,8 +70,9 @@
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
-        <category name="Controls" categorystyle="logic_category">
-          <block type="if_do"></block>
+        <category name="Controls" style="display: none;" categorystyle="logic_category">
+          <block type="if_then"></block>
+          <block type="if_while_then"></block>
           <block type="logic_operation"></block>
           <block type="logic_negate"></block>
           <block type="logic_boolean"></block>
@@ -63,9 +85,15 @@
       </category>
       <category name="Conditions" categorystyle="list_category">
         <block type="out_of"></block>
-        <block type="toy_in_room"></block>
         <block type="in_the"></block>
         <block type="hands_free"></block>
+        <block type="hands_full"></block>
+      </category>
+      <category name="Events" categorystyle="event_category">
+        <block type="e_out_of"></block>
+        <block type="e_in_the"></block>
+        <block type="e_toy_in_room"></block>
+        <block type="e_hands_free"></block>
       </category>
       <category name="Actions" categorystyle="variable_category">
         <block type="drop_toy"></block>
@@ -78,11 +106,14 @@
         <block type="toy_in_room"></block>
         <block type="in_the"></block>
         <block type="hands_free"></block>
+        <block type="hands_full"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_operation"></block>
       </category>
       <category name="Triggers" categorystyle="logic_category">
         <block type="trigger_out_of"></block>
         <block type="trigger_in_the"></block>
-        <block type="trigger_toy_in_room"></block>
+        <block type="trigger_hands_full"></block>
         <block type="trigger_hands_free"></block>
       </category>
       </xml>
@@ -137,6 +168,7 @@
 
   </script>
   <script src="https://unpkg.com/blockly"></script>
+  <!-- <script src="scripts/timer.js"></script> -->
   <script src="scripts/obj.js"></script>
   <script src="scripts/settings/task2.js"></script>
   <!-- <script id="tap" src="scripts/tap_blocks.js"></script> -->
