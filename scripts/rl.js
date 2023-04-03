@@ -40,39 +40,39 @@ function simulator(state, action) {
 function generate_goal_func(goal, state) {
     val = true
 
-    if(goal.includes('isPersonInRoom();')){
+    if(goal.includes('isPersonInRoom()')){
         val = val && (state.person == state.robot_position)
     }
 
-    if(goal.includes('isRobotinRoom(\'kitchen\');')){
+    if(goal.includes('isRobotinRoom(\'kitchen\')')){
         val = val && (state.robot_position == 'kitchen')
     }
 
-    if(goal.includes('isRobotOutOf(\'kitchen\');')){
+    if(goal.includes('isRobotOutOf(\'kitchen\')')){
         val = val && (state.robot_position != 'kitchen')
     }
 
-    if(goal.includes('isRobotinRoom(\'bedroom\');')){
+    if(goal.includes('isRobotinRoom(\'bedroom\')')){
         val = val && (state.robot_position == 'bedroom')
     }
 
-    if(goal.includes('isRobotOutOf(\'bedroom\');')){
+    if(goal.includes('isRobotOutOf(\'bedroom\')')){
         val = val && (state.robot_position != 'bedroom')
     }
 
-    if(goal.includes('isRobotinRoom(\'playroom\');')){
+    if(goal.includes('isRobotinRoom(\'playroom\')')){
         val = val && (state.robot_position == 'playroom')
     }
 
-    if(goal.includes('isRobotOutOf(\'playroom\');')){
+    if(goal.includes('isRobotOutOf(\'playroom\')')){
         val = val && (state.robot_position != 'playroom')
     }
 
-    if(goal.includes('handsFree();')){
+    if(goal.includes('handsFree()')){
         val = val && (!state.holding)
     }
 
-    if(goal.includes('toy_in_room();')){
+    if(goal.includes('toy_in_room()')){
         val = val && (state.blocks.includes(state.robot_position))
     }
 
