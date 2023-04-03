@@ -365,7 +365,7 @@ function get_policy(code, taskNum){
 function run_rl(code, taskNum){
     start = Date.now();
     [policy, triggers, goal] = get_policy(code, taskNum)
-    out = "while (!" + goal[0].slice(0,-1) + ") {\n"
+    out = "while (!" + goal[0] + ") {\n"
 
     for(key in policy){
         out += '\tif('
