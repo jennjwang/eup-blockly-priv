@@ -130,9 +130,9 @@ function eHandsFree() {
 }
 
 function toy_in_room() {
-  console.log("robot is in", robot_c.room);
-  console.log(toys_in_room);
-  console.log("toy in room", toys_in_room[robot_c.room].length != 0);
+  // console.log("robot is in", robot_c.room);
+  // console.log(toys_in_room);
+  // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
   return toys_in_room[robot_c.room].length != 0;
 }
 
