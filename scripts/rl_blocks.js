@@ -200,6 +200,112 @@ Blockly.JavaScript["forever"] = function (block) {
   `;
 };
 
+// goals
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_out_of",
+    message0: "I am out of the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+        ],
+      },
+    ],
+    output: "e_out_of",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_out_of"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return ["!isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_toy_in_room",
+    message0: "a toy is in the room",
+    output: "e_toy_in_room",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_toy_in_room"] = function (block) {
+  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_in_the",
+    message0: "I am in the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+        ],
+      },
+    ],
+    output: "e_in_the",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_in_the"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return ["isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_person_in_room",
+    message0: "a person is in the room",
+    output: "e_person_in_room",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_person_in_room"] = function () {
+  return ["isPersonInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_hands_free",
+    message0: "my hands are free",
+    output: "e_hands_free",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_hands_free"] = function (block) {
+  return ["ehandsFree()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_hands_full",
+    message0: "my hands are full",
+    output: "e_hands_full",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_hands_full"] = function (block) {
+  return ["ehandsFull()", Blockly.JavaScript.PRECEDENCE];
+};
+
 // triggers:
 
 Blockly.defineBlocksWithJsonArray([
@@ -354,7 +460,7 @@ Blockly.defineBlocksWithJsonArray([
         check: "Boolean",
       },
     ],
-    colour: 260,
+    colour: 160,
     tooltip: "",
     helpUrl: "",
   },

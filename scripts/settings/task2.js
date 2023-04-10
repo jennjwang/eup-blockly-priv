@@ -15,6 +15,7 @@ let toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
 function resetLocs() {
   prev_room = null;
   counter = 0;
+
   const robot = document.getElementById("robot");
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
