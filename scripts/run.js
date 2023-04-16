@@ -217,6 +217,12 @@ function randomRoom() {
   return rooms[i];
 }
 
+function randomRoomWithoutKitchen() {
+  let rooms = ["bedroom", "playroom"];
+  i = Math.floor(Math.random() * 3);
+  return rooms[i];
+}
+
 function reset() {
   for (var i = 0; i < pids.length; i++) {
     window.clearTimeout(pids[i]);
