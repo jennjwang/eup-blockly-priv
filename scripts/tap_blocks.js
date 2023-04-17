@@ -245,12 +245,12 @@ Blockly.JavaScript["inSameRoom"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "forever",
-    message0: "Rules %1",
+    message0: "Rules",
     args0: [
       {
         type: "input_statement",
         name: "input",
-        check: ["if %1 do %2", "if %1 while %2 do %3"],
+        check: ["if_then", "if_while_then"],
       },
     ],
     colour: 225,
@@ -264,6 +264,7 @@ Blockly.JavaScript["forever"] = function (block) {
     Blockly.JavaScript.statementToCode(block, "input");
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
+      var started = true;
       while (true) {
       var randNum = Math.floor(Math.random() * 10);
       var trigs = [];
@@ -312,6 +313,19 @@ Blockly.JavaScript["e_hands_free"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_hands_full",
+    message0: "my hands are full",
+    output: "e_hands_full",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_hands_full"] = function (block) {
+  return ["ehandsFull()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "if_then",
     message0: "if %1 then %2",
     args0: [
@@ -324,7 +338,6 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
-          "Boolean",
         ],
       },
       {
@@ -333,13 +346,44 @@ Blockly.defineBlocksWithJsonArray([
         check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
       },
     ],
-    previousStatement: "if %1 do %2",
-    nextStatement: ["if %1 do %2", "if %1 while %2 do %3"],
+    previousStatement: "",
+    nextStatement: ["if_then", "if_while_then", "if_start"],
     colour: 210,
     tooltip: "",
     helpUrl: "",
   },
 ]);
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "if_start",
+    message0: "if program starts %1 %2",
+    args0: [
+      {
+        type: "input_dummy",
+      },
+      {
+        type: "input_statement",
+        name: "execute",
+        check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
+      },
+    ],
+    previousStatement: "",
+    nextStatement: ["if_then", "if_while_then", "if_start"],
+    colour: 210,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["if_start"] = function (block) {
+  var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
+  var code = `if (started) {
+      ${statements_execute}
+        started = false;
+    };`;
+  return code;
+};
 
 Blockly.JavaScript["if_then"] = function (block) {
   var value_condition = Blockly.JavaScript.valueToCode(
@@ -365,7 +409,7 @@ Blockly.JavaScript["if_then"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "if_while_then",
-    message0: "if %1 while %2 then %3",
+    message0: "if %1 and %2 then %3",
     args0: [
       {
         type: "input_value",
@@ -376,7 +420,6 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
-          "Boolean",
         ],
       },
       {
@@ -397,8 +440,8 @@ Blockly.defineBlocksWithJsonArray([
         check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
       },
     ],
-    previousStatement: "if %1 do %2",
-    nextStatement: ["if %1 do %2", "if %1 while %2 do %3"],
+    previousStatement: "",
+    nextStatement: ["if_then", "if_while_then", "if_start"],
     colour: 210,
     tooltip: "",
     helpUrl: "",
@@ -434,4 +477,80 @@ Blockly.JavaScript["if_while_then"] = function (block) {
       });
     };`;
   return code;
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "and",
+    message0: "%1 %2 %3 %4",
+    args0: [
+      {
+        type: "input_value",
+        name: "s1",
+        check: [
+          "e_out_of",
+          "e_in_the",
+          "e_person_in_room",
+          "e_hands_free",
+          "e_toy_in_room",
+          "Boolean",
+        ],
+        align: "CENTRE",
+      },
+      {
+        type: "field_dropdown",
+        name: "connector",
+        options: [
+          ["and", "and"],
+          ["or", "or"],
+        ],
+      },
+      {
+        type: "input_dummy",
+        align: "CENTRE",
+      },
+      {
+        type: "input_value",
+        name: "s2",
+        check: [
+          "e_out_of",
+          "e_in_the",
+          "e_person_in_room",
+          "e_hands_free",
+          "e_toy_in_room",
+          "Boolean",
+        ],
+        align: "CENTRE",
+      },
+    ],
+    output: "Boolean",
+    colour: 160,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["and"] = function (block) {
+  var s1 = Blockly.JavaScript.valueToCode(
+    block,
+    "s1",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+  var connector = block.getFieldValue("connector");
+  var s2 = Blockly.JavaScript.valueToCode(
+    block,
+    "s2",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+
+  connector_val = " && ";
+
+  if (connector == "or") {
+    connector_val = " || ";
+  }
+  // TODO: Assemble JavaScript into code variable.
+  var code = "(" + s1 + connector_val + s2 + ")";
+  console.log("hi", code);
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
 };

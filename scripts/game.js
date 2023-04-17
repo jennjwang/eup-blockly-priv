@@ -129,6 +129,10 @@ function eHandsFree() {
   return robot_c.handsFree;
 }
 
+function eHandsFull() {
+  return !robot_c.handsFree;
+}
+
 function toy_in_room() {
   // console.log("robot is in", robot_c.room);
   // console.log(toys_in_room);

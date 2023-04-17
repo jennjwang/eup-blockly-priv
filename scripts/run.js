@@ -123,7 +123,6 @@ function initApi(interpreter, globalObject) {
     "inSameRoom",
     interpreter.createNativeFunction(wrapper)
   );
-
   wrapper = function () {
     pick_up_toy();
   };

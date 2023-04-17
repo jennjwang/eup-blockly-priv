@@ -72,34 +72,32 @@
         <category name="Controls" style="display: none;" categorystyle="logic_category">
           <block type="if_then"></block>
           <block type="if_while_then"></block>
-          <block type="logic_operation"></block>
-          <block type="logic_negate"></block>
-          <block type="logic_boolean"></block>
+          <block type="if_start"></block>
       </category>
         <category name="Commands" categorystyle="variable_category">
           <block type="to_room"></block>
           <block type="to_random_room"></block>
         </category>
-        <category name="Conditions" categorystyle="list_category">
+        <category name="Events" categorystyle="list_category">
           <block type="out_of"></block>
           <block type="in_the"></block>
           <block type="person_in_room"></block>
         </category>
-        <category name="Events" categorystyle="event_category">
+        <category name="States" categorystyle="event_category">
           <block type="e_out_of"></block>
           <block type="e_in_the"></block>
           <block type="e_person_in_room"></block>
+          <block type="and"></block>
         </category>
         <category name="Actions" categorystyle="variable_category">
           <block type="to_room"></block>
           <block type="to_random_room"></block>
         </category>
-        <category name="Goal" categorystyle="list_category">
-          <block type="out_of"></block>
-          <block type="in_the"></block>
-          <block type="person_in_room"></block>
-          <block type="logic_negate"></block>
-          <block type="logic_operation"></block>
+        <category name="Goal" categorystyle="event_category">
+          <block type="e_out_of"></block>
+          <block type="e_in_the"></block>
+          <block type="e_person_in_room"></block>
+          <block type="and"></block>
         </category>
         <category name="Triggers" categorystyle="logic_category">
           <block type="trigger_out_of"></block>
