@@ -510,3 +510,79 @@ triggers(
 )
   `;
 };
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "and",
+    message0: "%1 %2 %3 %4",
+    args0: [
+      {
+        type: "input_value",
+        name: "s1",
+        check: [
+          "e_out_of",
+          "e_in_the",
+          "e_person_in_room",
+          "e_hands_free",
+          "e_toy_in_room",
+          "Boolean",
+        ],
+        align: "CENTRE",
+      },
+      {
+        type: "field_dropdown",
+        name: "connector",
+        options: [
+          ["and", "and"],
+          ["or", "or"],
+        ],
+      },
+      {
+        type: "input_dummy",
+        align: "CENTRE",
+      },
+      {
+        type: "input_value",
+        name: "s2",
+        check: [
+          "e_out_of",
+          "e_in_the",
+          "e_person_in_room",
+          "e_hands_free",
+          "e_toy_in_room",
+          "Boolean",
+        ],
+        align: "CENTRE",
+      },
+    ],
+    output: "Boolean",
+    colour: 160,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
+
+Blockly.JavaScript["and"] = function (block) {
+  var s1 = Blockly.JavaScript.valueToCode(
+    block,
+    "s1",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+  var connector = block.getFieldValue("connector");
+  var s2 = Blockly.JavaScript.valueToCode(
+    block,
+    "s2",
+    Blockly.JavaScript.ORDER_ATOMIC
+  );
+
+  connector_val = " && ";
+
+  if (connector == "or") {
+    connector_val = " || ";
+  }
+  // TODO: Assemble JavaScript into code variable.
+  var code = "(" + s1 + connector_val + s2 + ")";
+  console.log("hi", code);
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
