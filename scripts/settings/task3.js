@@ -27,7 +27,8 @@ function resetLocs() {
   prev_room = null;
   counter = 0;
   const robot = document.getElementById("robot");
-  ROBOT_ROOM = randomRoom();
+  ROBOT_ROOM = randomRoomWithoutKitchen();
+
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";

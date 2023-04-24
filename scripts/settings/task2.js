@@ -1,5 +1,13 @@
+function randomRoom() {
+  let rooms = ["kitchen", "bedroom", "playroom"];
+  i = Math.floor(Math.random() * 3);
+  return rooms[i];
+}
+
 let ROBOT_ROOM = "bedroom";
-let BEAR_ROOM = "playroom";
+let BEAR_ROOM = randomRoom();
+
+console.log(BEAR_ROOM);
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
@@ -22,9 +30,11 @@ function resetLocs() {
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
   const bear_elt = document.getElementById("bear");
-  bear_elt.style.left = "500px";
-  bear_elt.style.bottom = "200px";
-  bear = new Toy(BEAR_ROOM, 450, 200, "bear");
+  let BEAR_ROOM = randomRoom();
+  let toy_dst = rooms[BEAR_ROOM];
+  bear_elt.style.left = toy_dst[0] + 50 + "px";
+  bear_elt.style.bottom = toy_dst[1] + "px";
+  bear = new Toy(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
   toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
 }
 
