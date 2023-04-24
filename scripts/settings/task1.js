@@ -13,6 +13,7 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
 function resetLocs() {
+  robot_c.start = true;
   prev_room = null;
   counter = 0;
   const robot = document.getElementById("robot");
