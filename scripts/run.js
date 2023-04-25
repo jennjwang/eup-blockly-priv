@@ -173,6 +173,24 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function () {
+    return isPersoninRoomEvent();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isPersonInRoomEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return isPersonNotinRoomEvent();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isPersonNotInRoomEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
     return eHandsFree();
   };
   interpreter.setProperty(

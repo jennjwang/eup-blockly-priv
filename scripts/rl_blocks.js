@@ -204,6 +204,21 @@ Blockly.JavaScript["forever"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_toy_not_in_room",
+    message0: "a toy is not in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
+  return ["toy_not_in_room()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "e_out_of",
     message0: "I am out of the %1",
     args0: [
@@ -217,7 +232,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "e_out_of",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -231,7 +246,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_in_room",
     message0: "a toy is in the room",
-    output: "e_toy_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -257,7 +272,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "e_in_the",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -271,7 +286,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_in_room",
     message0: "a person is in the room",
-    output: "e_person_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -284,7 +299,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_free",
     message0: "my hands are free",
-    output: "e_hands_free",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -297,7 +312,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_full",
     message0: "my hands are full",
-    output: "e_hands_full",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -525,6 +540,8 @@ Blockly.defineBlocksWithJsonArray([
           "e_person_in_room",
           "e_hands_free",
           "e_toy_in_room",
+          "e_person_not_in_room",
+          "e_toy_not_in_room",
           "Boolean",
         ],
         align: "CENTRE",

@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_in_room",
     message0: "a toy is in the room",
-    output: "e_toy_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -146,7 +146,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_not_in_room",
     message0: "a toy is not in the room",
-    output: "e_toy_not_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -203,7 +203,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_in_room",
     message0: "a person is in the room",
-    output: "e_person_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -212,6 +212,18 @@ Blockly.JavaScript["e_person_in_room"] = function () {
   return ["isPersonInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
 };
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_person_not_in_room",
+    message0: "a person is not in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_person_not_in_room"] = function () {
+  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+};
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
@@ -464,6 +476,7 @@ Blockly.defineBlocksWithJsonArray([
           "e_toy_in_room",
           "Boolean",
           "e_toy_not_in_room",
+          "e_person_not_in_room",
         ],
       },
       {

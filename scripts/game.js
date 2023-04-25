@@ -187,6 +187,10 @@ function isPersoninRoomEvent() {
   return person.isPersoninRoom(robot_c.room);
 }
 
+function isPersonNotinRoomEvent() {
+  return !person.isPersoninRoom(robot_c.room);
+}
+
 // HELPER
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
