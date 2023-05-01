@@ -31,6 +31,7 @@ function resetLocs() {
   ROBOT_ROOM = randomRoomWithoutKitchen();
 
   dst = rooms[ROBOT_ROOM];
+  console.log("room", ROBOT_ROOM);
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
@@ -69,4 +70,12 @@ function resetLocs() {
   }
 
   toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
+
+  let starter_code = `
+  // robot started in ${robot_c.room}
+  // toys in kitchen include ${toys.toString()}\n\n`;
+
+  return starter_code;
+
+  return starter_code;
 }

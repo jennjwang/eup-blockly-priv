@@ -46,4 +46,8 @@ class Toy {
   setRoom(room) {
     this.room = room;
   }
+
+  toString() {
+    return this.id;
+  }
 }

@@ -15,7 +15,10 @@ var workspace = Blockly.inject("blocklyDiv", {
 
 let pids = [];
 
-// var code = "// add starting state of robot / toy / person \n";
+var starter_code = `
+// robot started in ${robot_c.room}
+// toy started in  \n\n`;
+
 var myInterpreter = new Interpreter("", initApi);
 
 function update(event) {
@@ -23,7 +26,7 @@ function update(event) {
 
   taskNum = url.toString().split("task")[1][0];
 
-  code = Blockly.JavaScript.workspaceToCode(workspace);
+  code += Blockly.JavaScript.workspaceToCode(workspace);
   // code =
   //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
   // code =
@@ -256,7 +259,7 @@ function randomRoom() {
 
 function randomRoomWithoutKitchen() {
   let rooms = ["bedroom", "playroom"];
-  i = Math.floor(Math.random() * 3);
+  i = Math.floor(Math.random() * 2);
   return rooms[i];
 }
 
@@ -275,7 +278,7 @@ function reset() {
   }
   pidList = [];
 
-  resetLocs();
+  code = resetLocs();
 }
 
 document.querySelector("#runButton").addEventListener("click", update);

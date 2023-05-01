@@ -32,6 +32,12 @@ function resetLocs() {
   let x = dst[0] + 100;
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
+
+  let starter_code = `
+  // robot started in ${robot_c.room}
+  // person started in ${PERSON_ROOM}\n\n`;
+
+  return starter_code;
 }
 
 function shuffleArray(array) {
