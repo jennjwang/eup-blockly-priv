@@ -15,10 +15,6 @@ var workspace = Blockly.inject("blocklyDiv", {
 
 let pids = [];
 
-var starter_code = `
-// robot started in ${robot_c.room}
-// toy started in  \n\n`;
-
 var myInterpreter = new Interpreter("", initApi);
 
 function update(event) {
@@ -324,6 +320,15 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-1").style.display = "none";
   document.getElementById("blockly-2").style.display = "none";
   document.getElementById("blockly-3").style.display = "none";
+  document.getElementById("blockly-7").style.display = "none";
+} else if (url.searchParams.get("format") == "SEQ") {
+  document.getElementById("blockly-0").style.display = "none";
+  document.getElementById("blockly-1").style.display = "";
+  document.getElementById("blockly-2").style.display = "";
+  document.getElementById("blockly-3").style.display = "";
+  document.getElementById("blockly-4").style.display = "none";
+  document.getElementById("blockly-5").style.display = "none";
+  document.getElementById("blockly-6").style.display = "none";
 } else {
   // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
@@ -341,7 +346,9 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-4").style.display = "none";
   document.getElementById("blockly-5").style.display = "none";
   document.getElementById("blockly-6").style.display = "none";
+  document.getElementById("blockly-7").style.display = "none";
 }
+
 Blockly.Xml.domToWorkspace(xml, workspace);
 
 window.onload = function () {
