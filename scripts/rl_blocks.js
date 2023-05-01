@@ -495,7 +495,7 @@ goals(
 Blockly.defineBlocksWithJsonArray([
   {
     type: "triggers",
-    message0: "Triggers %1 %2",
+    message0: "States %1 %2",
     args0: [
       {
         type: "input_dummy",

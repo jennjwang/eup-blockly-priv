@@ -1,5 +1,5 @@
 function randomRoom() {
-  let rooms = ["kitchen", "bedroom", "playroom"];
+  let rooms = ["kitchen", "bedroom"];
   i = Math.floor(Math.random() * 3);
   return rooms[i];
 }
