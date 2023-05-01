@@ -291,12 +291,12 @@ Blockly.JavaScript["forever"] = function (block) {
     Blockly.JavaScript.statementToCode(block, "input");
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
-      while (true) {
-        var randNum = Math.floor(Math.random() * 10);
-        var trigs = [];
-        ${Blockly.JavaScript.statementToCode(block, "input")}
-        trigs[randNum % trigs.length]();
-      }\n
+  while (true) {
+    var randNum = Math.floor(Math.random() * 10);
+    var trigs = [];
+    ${Blockly.JavaScript.statementToCode(block, "input")}
+    trigs[randNum % trigs.length]();
+  }\n
   `;
 };
 
@@ -439,12 +439,13 @@ Blockly.JavaScript["if_then"] = function (block) {
   }
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
-  var code = `if (${value_condition}) {
+  var code = `
+  if (${value_condition}) {
     trigs.push(
       function(){
         ${statements_execute}
       });
-    };`;
+    };\n`;
   return code;
 };
 
@@ -515,12 +516,13 @@ Blockly.JavaScript["if_while_then"] = function (block) {
   }
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
-  var code = `if (${value_condition} && ${value_event}) {
+  var code = `
+  if (${value_condition} && ${value_event}) {
     trigs.push(
       function(){
         ${statements_execute}
       });
-    };`;
+    };\n`;
   return code;
 };
 

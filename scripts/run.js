@@ -15,7 +15,7 @@ var workspace = Blockly.inject("blocklyDiv", {
 
 let pids = [];
 
-var code = "// add starting state of robot / toy / person \n";
+// var code = "// add starting state of robot / toy / person \n";
 var myInterpreter = new Interpreter("", initApi);
 
 function update(event) {
@@ -23,7 +23,7 @@ function update(event) {
 
   taskNum = url.toString().split("task")[1][0];
 
-  code += Blockly.JavaScript.workspaceToCode(workspace);
+  code = Blockly.JavaScript.workspaceToCode(workspace);
   // code =
   //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
   // code =
