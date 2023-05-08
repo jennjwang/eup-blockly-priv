@@ -27,7 +27,6 @@ function update(event) {
   //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
   // code =
   //   "while (true) {var trigs = [];if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('kitchen');});};if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('bedroom')});};trigs[1]();break;}";
-  console.log(code);
 
   let check = document.getElementById("code").innerHTML;
 
@@ -40,10 +39,16 @@ function update(event) {
     return;
   }
 
-  if (check != "") {
+  if (url.searchParams.get("format") == "TAP") {
+    if (check != "") {
+      runButton();
+    } else {
+      return;
+    }
+  }
+
+  if (url.searchParams.get("format") == "SEQ") {
     runButton();
-  } else {
-    return;
   }
 
   myInterpreter = new Interpreter(code, initApi);

@@ -13,6 +13,14 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
 function resetLocs() {
+  const end_states = `
+  robot ended in ${robot_c.room}
+  person ended in ${person.room}`;
+
+  console.log("end", end_states);
+
+  document.getElementById("end").innerHTML = end_states;
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
@@ -34,10 +42,14 @@ function resetLocs() {
   person_elt.style.bottom = dst[1] + "px";
 
   let starter_code = `
-  // robot started in ${robot_c.room}
-  // person started in ${PERSON_ROOM}\n\n`;
+  robot started in ${robot_c.room}
+  person started in ${PERSON_ROOM}`;
 
-  return starter_code;
+  console.log(starter_code);
+
+  document.getElementById("start").innerHTML = starter_code;
+
+  return "";
 }
 
 function shuffleArray(array) {
