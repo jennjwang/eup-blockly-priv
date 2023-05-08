@@ -5,6 +5,7 @@ class Robot {
     this.holding = null;
     this.handsPrev = true;
     this.prev = room;
+    this.start = true;
   }
 
   setRoom(room) {

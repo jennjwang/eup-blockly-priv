@@ -123,12 +123,22 @@ function initApi(interpreter, globalObject) {
     "inSameRoom",
     interpreter.createNativeFunction(wrapper)
   );
+
   wrapper = function () {
     pick_up_toy();
   };
   interpreter.setProperty(
     globalObject,
     "pick_up_toy",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return start();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "start",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -169,6 +179,24 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function () {
+    return isPersoninRoomEvent();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isPersonInRoomEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return isPersonNotinRoomEvent();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isPersonNotInRoomEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
     return eHandsFree();
   };
   interpreter.setProperty(
@@ -183,6 +211,15 @@ function initApi(interpreter, globalObject) {
   interpreter.setProperty(
     globalObject,
     "toy_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return toy_not_in_room();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "toy_not_in_room",
     interpreter.createNativeFunction(wrapper)
   );
 

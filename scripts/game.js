@@ -1,4 +1,7 @@
 function pick_up_toy() {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
   let room = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
     let toys = toys_in_room[room];
@@ -11,10 +14,14 @@ function pick_up_toy() {
     console.log("picked up", robot_c.holding.id);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
+    console.log("hands are free?", robot_c.handsFree);
   }
 }
 
 function drop_toy() {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
   if (!robot_c.handsFree) {
     let room = robot_c.room;
     console.log("dropped toy");
@@ -33,6 +40,10 @@ function drop_toy() {
  * @param {*} coor
  */
 function moveRobotTo(id, coor) {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
+
   let goal_x = coor[0];
   let goal_y = coor[1];
 
@@ -129,6 +140,10 @@ function eHandsFree() {
   return robot_c.handsFree;
 }
 
+function start() {
+  return robot_c.start;
+}
+
 function eHandsFull() {
   return !robot_c.handsFree;
 }
@@ -138,6 +153,11 @@ function toy_in_room() {
   // console.log(toys_in_room);
   // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
   return toys_in_room[robot_c.room].length != 0;
+}
+
+function toy_not_in_room() {
+  console.log("# of toys in room", toys_in_room[robot_c.room].length);
+  return toys_in_room[robot_c.room].length == 0;
 }
 
 function resolveAfter3Seconds() {
@@ -167,6 +187,10 @@ function isPersoninRoomEvent() {
   return person.isPersoninRoom(robot_c.room);
 }
 
+function isPersonNotinRoomEvent() {
+  return !person.isPersoninRoom(robot_c.room);
+}
+
 // HELPER
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -176,6 +200,9 @@ function shuffleArray(array) {
 }
 
 function moveRobotToRandomRoom() {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
   let temp_rooms = ["kitchen", "bedroom", "playroom"];
   shuffleArray(temp_rooms);
   let i = Math.floor(Math.random() * 3);

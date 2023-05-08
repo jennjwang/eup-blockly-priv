@@ -58,7 +58,6 @@
           <category name="Controls" style="display: none;" categorystyle="logic_category">
             <block type="if_then"></block>
             <block type="if_while_then"></block>
-            <block type="if_start"></block>
         </category>
         <category name="Commands" categorystyle="variable_category">
           <block type="drop_toy"></block>
@@ -71,11 +70,13 @@
           <block type="in_the"></block>
           <block type="hands_free"></block>
           <block type="hands_full"></block>
+          <block type="start"></block>
         </category>
         <category name="States" categorystyle="event_category">
           <block type="e_out_of"></block>
           <block type="e_in_the"></block>
           <block type="e_toy_in_room"></block>
+          <block type="e_toy_not_in_room"></block>
           <block type="e_hands_free"></block>
           <block type="e_hands_full"></block>
           <block type="and"></block>
@@ -89,6 +90,7 @@
         <category name="Goal" categorystyle="event_category">
           <block type="e_out_of"></block>
           <block type="e_toy_in_room"></block>
+          <block type="e_toy_not_in_room"></block>
           <block type="e_in_the"></block>
           <block type="e_hands_free"></block>
           <block type="e_hands_full"></block>

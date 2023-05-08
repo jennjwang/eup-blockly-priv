@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_in_room",
     message0: "a toy is in the room",
-    output: "e_toy_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -140,6 +140,21 @@ Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_toy_in_room"] = function (block) {
   return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_toy_not_in_room",
+    message0: "a toy is not in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
+  return ["toy_not_in_room()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -188,7 +203,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_in_room",
     message0: "a person is in the room",
-    output: "e_person_in_room",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -197,6 +212,18 @@ Blockly.JavaScript["e_person_in_room"] = function () {
   return ["isPersonInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
 };
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_person_not_in_room",
+    message0: "a person is not in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_person_not_in_room"] = function () {
+  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+};
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
@@ -245,7 +272,7 @@ Blockly.JavaScript["inSameRoom"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "forever",
-    message0: "Rules",
+    message0: "Rules %1",
     args0: [
       {
         type: "input_statement",
@@ -264,19 +291,20 @@ Blockly.JavaScript["forever"] = function (block) {
     Blockly.JavaScript.statementToCode(block, "input");
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
-      var started = true;
       while (true) {
-      var randNum = Math.floor(Math.random() * 10);
-      var trigs = [];
-      ${Blockly.JavaScript.statementToCode(block, "input")}
-      if (trigs.length >= 1) {
+        var randNum = Math.floor(Math.random() * 10);
+        var trigs = [];
+        ${Blockly.JavaScript.statementToCode(block, "input")}
         trigs[randNum % trigs.length]();
-      } else if (trigs.length == 1){
-        trigs[0]();
-      }
       }\n
   `;
 };
+
+// if (trigs.length > 1) {
+//   trigs[randNum % trigs.length]();
+// } else if (trigs.length == 1){
+//   trigs[0]();
+// }
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -308,7 +336,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_free"] = function (block) {
-  return ["ehandsFree()", Blockly.JavaScript.PRECEDENCE];
+  return ["eHandsFree()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -338,6 +366,7 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
+          "start",
         ],
       },
       {
@@ -347,42 +376,55 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: "",
-    nextStatement: ["if_then", "if_while_then", "if_start"],
+    nextStatement: ["if_then", "if_while_then"],
     colour: 210,
     tooltip: "",
     helpUrl: "",
   },
 ]);
+
+// Blockly.defineBlocksWithJsonArray([
+//   {
+//     type: "if_start",
+//     message0: "if program starts %1 %2",
+//     args0: [
+//       {
+//         type: "input_dummy",
+//       },
+//       {
+//         type: "input_statement",
+//         name: "execute",
+//         check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
+//       },
+//     ],
+//     previousStatement: "",
+//     nextStatement: ["if_then", "if_while_then", "if_start"],
+//     colour: 210,
+//     tooltip: "",
+//     helpUrl: "",
+//   },
+// ]);
+
+// Blockly.JavaScript["if_start"] = function (block) {
+//   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
+//   var code = `if (started) {
+//       ${statements_execute}
+//         started = false;
+//     };`;
+//   return code;
+// };
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "if_start",
-    message0: "if program starts %1 %2",
-    args0: [
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "input_statement",
-        name: "execute",
-        check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
-      },
-    ],
-    previousStatement: "",
-    nextStatement: ["if_then", "if_while_then", "if_start"],
-    colour: 210,
-    tooltip: "",
-    helpUrl: "",
+    type: "start",
+    message0: "the program started",
+    output: "start",
+    colour: 260,
   },
 ]);
 
-Blockly.JavaScript["if_start"] = function (block) {
-  var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
-  var code = `if (started) {
-      ${statements_execute}
-        started = false;
-    };`;
-  return code;
+Blockly.JavaScript["start"] = function (block) {
+  return ["start()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.JavaScript["if_then"] = function (block) {
@@ -420,6 +462,7 @@ Blockly.defineBlocksWithJsonArray([
           "person_in_room",
           "hands_free",
           "hands_full",
+          "start",
         ],
       },
       {
@@ -432,6 +475,8 @@ Blockly.defineBlocksWithJsonArray([
           "e_hands_free",
           "e_toy_in_room",
           "Boolean",
+          "e_toy_not_in_room",
+          "e_person_not_in_room",
         ],
       },
       {
