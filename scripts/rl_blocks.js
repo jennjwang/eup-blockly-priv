@@ -124,6 +124,19 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_person_not_in_room",
+    message0: "a person is not in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_person_not_in_room"] = function () {
+  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+};
+
 // Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["in_the"] = function (block) {

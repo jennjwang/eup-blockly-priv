@@ -152,6 +152,23 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function (room) {
+    return isRobotOutOfEvent(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotOutOfEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+  wrapper = function (room) {
+    return is_toy_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_toy_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
     return isRobotinRoom(room);
   };
   interpreter.setProperty(

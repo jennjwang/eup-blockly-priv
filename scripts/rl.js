@@ -25,7 +25,7 @@ function simulator(state, action) {
         } else {
             ind = copiedState.blocks.indexOf(copiedState.robot_position)
             copiedState.holding = true
-            copiedState.blocks.splice(1, ind)
+            copiedState.blocks.splice(ind, 1)
         }
 
     } if (action == "moveRobotToRandomRoom();") {
@@ -40,40 +40,47 @@ function simulator(state, action) {
 function generate_goal_func(goal, state) {
     val = true
 
-    if(goal.includes('isPersonInRoom()')){
+    if(goal.includes('isPersonInRoomEvent()')){
         val = val && (state.person == state.robot_position)
     }
+    if(goal.includes('isPersonNotInRoomEvent()')){
+        val = val && !(state.person == state.robot_position)
+    }
 
-    if(goal.includes('isRobotinRoom(\'kitchen\')')){
+    if(goal.includes('isRobotinRoomEvent(\'kitchen\')')){
         val = val && (state.robot_position == 'kitchen')
     }
 
-    if(goal.includes('isRobotOutOf(\'kitchen\')')){
+    if(goal.includes('isRobotOutOfEvent(\'kitchen\')')){
         val = val && (state.robot_position != 'kitchen')
     }
 
-    if(goal.includes('isRobotinRoom(\'bedroom\')')){
+    if(goal.includes('isRobotinRoomEvent(\'bedroom\')')){
         val = val && (state.robot_position == 'bedroom')
     }
 
-    if(goal.includes('isRobotOutOf(\'bedroom\')')){
+    if(goal.includes('isRobotOutOfEvent(\'bedroom\')')){
         val = val && (state.robot_position != 'bedroom')
     }
 
-    if(goal.includes('isRobotinRoom(\'playroom\')')){
+    if(goal.includes('isRobotinRoomEvent(\'playroom\')')){
         val = val && (state.robot_position == 'playroom')
     }
 
-    if(goal.includes('isRobotOutOf(\'playroom\')')){
+    if(goal.includes('isRobotOutOfEvent(\'playroom\')')){
         val = val && (state.robot_position != 'playroom')
     }
 
-    if(goal.includes('handsFree()')){
+    if(goal.includes('eHandsFree()')){
         val = val && (!state.holding)
     }
 
     if(goal.includes('toy_in_room()')){
         val = val && (state.blocks.includes(state.robot_position))
+    }
+    
+    if(goal.includes('toy_not_in_room()')){
+        val = val && !(state.blocks.includes(state.robot_position))
     }
 
     return val
@@ -84,7 +91,7 @@ function generate_triggers(triggers, state){
     for(ind in triggers) {
         trigger = triggers[ind]
 
-        if(trigger == "isRobotinRoom(\'kitchen\');") {
+        if(trigger == "isRobotinRoomEvent(\'kitchen\');") {
             if(state.robot_position == 'kitchen') {
                 output.push(1)
             } else {
@@ -92,7 +99,7 @@ function generate_triggers(triggers, state){
             }
 
         }
-        if(trigger =="isRobotOutOf(\'kitchen\');") {
+        if(trigger =="isRobotOutOfEvent(\'kitchen\');") {
             if(state.robot_position == 'kitchen') {
                 output.push(0)
             } else {
@@ -100,7 +107,7 @@ function generate_triggers(triggers, state){
             }
 
         }
-        if(trigger == "isRobotOutOf(\'bedroom\');") {
+        if(trigger == "isRobotOutOfEvent(\'bedroom\');") {
             if(state.robot_position == 'bedroom') {
                 output.push(0)
             } else {
@@ -108,7 +115,7 @@ function generate_triggers(triggers, state){
             }
 
         }
-        if(trigger == "isRobotOutOf(\'playroom\');") {
+        if(trigger == "isRobotOutOfEvent(\'playroom\');") {
             if(state.robot_position == 'playroom') {
                 output.push(0)
             } else {
@@ -117,7 +124,7 @@ function generate_triggers(triggers, state){
 
         }
 
-        if(trigger == "isRobotinRoom(\'bedroom\');") {
+        if(trigger == "isRobotinRoomEvent(\'bedroom\');") {
             if(state.robot_position == 'bedroom') {
                 output.push(1)
             } else {
@@ -126,7 +133,7 @@ function generate_triggers(triggers, state){
 
         }
 
-        if(trigger == "isRobotinRoom(\'playroom\');") {
+        if(trigger == "isRobotinRoomEvent(\'playroom\');") {
             if(state.robot_position == "playroom") {
                 output.push(1)
             } else {
@@ -135,7 +142,7 @@ function generate_triggers(triggers, state){
 
         }
 
-        if(trigger == "handsFree();") {
+        if(trigger == "eHandsFree();") {
             if(!(state.holding)) {
                 output.push(1)
             } else {
@@ -146,6 +153,42 @@ function generate_triggers(triggers, state){
         
         if(trigger == "toy_in_room();") {
             if(state.blocks.includes(state.robot_position)) {
+                output.push(1)
+            } else {
+                output.push(0)
+            }
+        }
+
+        if(trigger == "isPersonNotInRoomEvent();") {
+            if(!(state.person == state.robot_position)) {
+                output.push(1)
+            } else {
+                output.push(0)
+            }
+        }
+        if(trigger == "is_toy_in_room(\'bedroom\');") {
+            if(state.blocks.includes('bedroom')) {
+                output.push(1)
+            } else {
+                output.push(0)
+            }
+        }
+        if(trigger == "is_toy_in_room(\'kitchen\');") {
+            if(state.blocks.includes('kitchen')) {
+                output.push(1)
+            } else {
+                output.push(0)
+            }
+        }
+        if(trigger == "is_toy_in_room(\'playroom\');") {
+            if(state.blocks.includes('playroom')) {
+                output.push(1)
+            } else {
+                output.push(0)
+            }
+        }
+        if(trigger == "toy_not_in_room();") {
+            if(!(state.blocks.includes(state.robot_position))) {
                 output.push(1)
             } else {
                 output.push(0)
@@ -171,7 +214,25 @@ function parser(code){
                 actions.push(lines[line].trim())
             }
             if(state == 2){
-                goals.push(lines[line].trim())
+                goalsarr = lines[line].trim().split(' && ')
+                goalfinal = lines[line].trim()
+
+                if(goalsarr.length > 1){
+                    for(goal in goalsarr){
+                        if (goal == 0){
+                            goals.push(goalsarr[goal].slice(1, goalsarr[goal].length))
+                        }
+                        else if (goal == goalsarr.length-1){
+                            goals.push(goalsarr[goal].slice(0, -1))
+                        }
+                        else {
+                            goals.push(goalsarr[goal].slice(0, goalsarr[goal].length))
+                        }
+                    }
+                }
+                else {
+                    goals.push(goalsarr[0])
+                }
             }
             if(state == 3){
                 triggers.push(lines[line].trim())
@@ -188,7 +249,7 @@ function parser(code){
         }
 
     }
-    return [triggers, actions, goals]
+    return [triggers, actions, goals, goalfinal]
 }
 
 
@@ -249,7 +310,7 @@ function parser(code){
 function find_id(state, map){
     for(ourKey in map){
         thisstate = map[ourKey]
-        if((thisstate.robot_position == state.robot_position) && (thisstate.blocks.toString() == state.blocks.toString()) && (thisstate.holding == state.holding) && (thisstate.person_locs == state.person_locs)){
+        if((thisstate.robot_position == state.robot_position) && (thisstate.blocks.toString() == state.blocks.toString()) && (thisstate.holding == state.holding) && (thisstate.person == state.person)){
             return ourKey
         }
     }
@@ -258,25 +319,28 @@ function find_id(state, map){
 
 
 function get_policy(code, taskNum){
-    [triggers, actions, goal] = parser(code)
-    triggers = ["isRobotinRoom(\'kitchen\');", "isRobotinRoom(\'bedroom\');", "isRobotinRoom(\'playroom\');", "handsFree();", "toy_in_room();"]
+    [triggers, actions, goal, goalfinal] = parser(code)
     actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
     values_table = {}
     state_ids = {}
 
     if(taskNum == 1){
-        persons_locs = ['kitchen', 'bedroom', 'playroom', null]
+        person_locs = ['kitchen', 'bedroom', 'playroom', null]
         block_list = [[]]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotInRoomEvent();"]
     }
     if(taskNum == 2){
         block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
         person_locs = [null]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
     if(taskNum == 3){
         block_list = [[], ['kitchen'], ['bedroom'], ['kitchen', 'kitchen'], ['kitchen', 'bedroom'], ['bedroom', 'bedroom'],
                         ['kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'bedroom'], ['kitchen', 'bedroom', 'bedroom'],
-                        ['bedroom', 'bedroom', 'bedroom']]
+                        ['bedroom', 'bedroom', 'bedroom'], ['kitchen', 'kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'kitchen', 'bedroom'],
+                        ['kitchen', 'kitchen', 'bedroom', 'bedroom'], ['kitchen', 'bedroom', 'bedroom', 'bedroom'], ['bedroom', 'bedroom', 'bedroom', 'bedroom']]
         person_locs = [null]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
     id = 0
     //Populate values table
@@ -301,10 +365,14 @@ function get_policy(code, taskNum){
     }
 
     //Train
-    num_epochs = 100
+    num_epochs =20
     gamma = 0.99
     for(i=0; i<num_epochs; i++){
         for(key in values_table){
+
+            // if(key == 36){
+            //     debugger
+            // }
             state = state_ids[key]
             if(!(generate_goal_func(goal, state))){
                 max_val = 0
@@ -353,19 +421,39 @@ function get_policy(code, taskNum){
                         }
                 }
             }
-            policy[generate_triggers(triggers, state)] = max_act
+
+            test = true
+            triggerz = generate_triggers(triggers,state)
+            test = [0, 1, 0, 0, 0, 0, 1, 0, 1]
+            for(i in [1, 2, 3, 4, 5, 6, 7, 8, 9]){
+                if(!(triggerz[i] == test[i])){
+                    test = false
+                    break
+                }
+            }
+            if(test){
+                debugger
+            }
+            if(!(state.blocks.length == 4 && state.holding)){
+                policy[generate_triggers(triggers, state)] = max_act
+            }
         }
         
     }
     
 
-    return [policy, triggers, goal]
+    return [policy, triggers, goal, goalfinal]
     }
 
+function count_blocks(state){
+
+}
+
 function run_rl(code, taskNum){
+    debugger
     start = Date.now();
-    [policy, triggers, goal] = get_policy(code, taskNum)
-    out = "while (!" + goal[0] + ") {\n"
+    [policy, triggers, goal, goalfinal] = get_policy(code, taskNum)
+    out = "while (!(" + goalfinal + ")) {\n"
 
     for(key in policy){
         out += '\tif('
