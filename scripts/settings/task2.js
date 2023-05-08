@@ -1,6 +1,7 @@
 function brandomRoom(rooms) {
   // let rooms = ["kitchen", "bedroom"];
   i = Math.floor(Math.random() * rooms.length);
+  console.log(rooms[i]);
   return rooms[i];
 }
 
@@ -24,6 +25,14 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 var toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
 function resetLocs() {
+  const end_states = `
+  robot ended in ${robot_c.room}
+  toy ended in ${bear.room}`;
+
+  console.log("end", end_states);
+
+  document.getElementById("end").innerHTML = end_states;
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
@@ -51,10 +60,14 @@ function resetLocs() {
   // toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
 
   let starter_code = `
-  // robot started in ${robot_c.room}
-  // toy started in ${BEAR_ROOM}\n\n`;
+  robot started in ${robot_c.room}
+  toy started in ${BEAR_ROOM}`;
 
-  return starter_code;
+  console.log("start", starter_code);
+
+  document.getElementById("start").innerHTML = starter_code;
+
+  return "";
 }
 
 function isSameRoom(room) {
