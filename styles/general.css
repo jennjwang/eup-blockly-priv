@@ -92,3 +92,16 @@
     opacity: 0.8;
   }
   
+    
+  #nextButton {
+    border: 2px solid blue;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: medium;
+    position: absolute;
+    opacity: 0.8;
+  }
+  
