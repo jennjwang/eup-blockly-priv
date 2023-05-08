@@ -453,6 +453,9 @@ function run_rl(code, taskNum){
     debugger
     start = Date.now();
     [policy, triggers, goal, goalfinal] = get_policy(code, taskNum)
+    if(taskNum == 1){
+        goalfinal = false
+    }
     out = "while (!(" + goalfinal + ")) {\n"
 
     for(key in policy){
