@@ -318,7 +318,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_free"] = function (block) {
-  return ["ehandsFree()", Blockly.JavaScript.PRECEDENCE];
+  return ["eHandsFree()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([

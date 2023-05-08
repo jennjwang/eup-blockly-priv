@@ -217,7 +217,7 @@ function parser(code){
                 goalsarr = lines[line].trim().split(' && ')
                 goalfinal = lines[line].trim()
 
-                if(goalsarr.length > 1){
+                if(goalsarr.length == 2){
                     for(goal in goalsarr){
                         if (goal == 0){
                             goals.push(goalsarr[goal].slice(1, goalsarr[goal].length))
@@ -230,6 +230,30 @@ function parser(code){
                         }
                     }
                 }
+                if(goalsarr.length == 3){
+                    for(goal in goalsarr){
+                        prefix = true
+                        while (prefix){
+                            if(goalsarr[goal][0] == '('){
+                                goalsarr[goal] = goalsarr[goal].slice(1, goalsarr[goal].length)
+                            }
+                            else{
+                                prefix = false
+                            }
+                        }
+                        suffix = true
+                        while (suffix){
+                            if(goalsarr[goal][goalsarr[goal].length-1] == ')' && goalsarr[goal][goalsarr[goal].length-2] == ')'){
+                                goalsarr[goal] = goalsarr[goal].slice(0, -1)
+                            }
+                            else{
+                                suffix = false
+                            }
+                        }
+                        goals.push(goalsarr[goal])
+                    }
+                }
+
                 else {
                     goals.push(goalsarr[0])
                 }
