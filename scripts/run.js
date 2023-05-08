@@ -324,7 +324,7 @@ if (url.searchParams.get("format") == "RL") {
 } else if (url.searchParams.get("format") == "SEQ") {
   document.getElementById("blockly-0").style.display = "none";
   document.getElementById("blockly-1").style.display = "";
-  document.getElementById("blockly-2").style.display = "";
+  document.getElementById("blockly-2").style.display = "none";
   document.getElementById("blockly-3").style.display = "";
   document.getElementById("blockly-4").style.display = "none";
   document.getElementById("blockly-5").style.display = "none";
