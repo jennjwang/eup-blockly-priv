@@ -402,7 +402,10 @@ Blockly.Xml.domToWorkspace(xml, workspace);
 
 window.onload = function () {
   // updates script dynamically depending on format
-  if (url.searchParams.get("format") == "RL") {
+  if (
+    url.searchParams.get("format") == "RL" ||
+    url.searchParams.get("format") == "MDP"
+  ) {
     const scriptList = document.querySelectorAll(
       "script[type='text/javascript']"
     );
