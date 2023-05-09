@@ -62,12 +62,10 @@
     <div class="blockly-editor">
       <div id="controls">
       <!-- <div id="clock"></div> -->
-      <button id="runButton" title="Makes the player do what the blocks say.">
-        Run Program
-      </button>
-      <button id="stopButton" class="stop">
+      <button class="run" id="runButton" onclick="toggleButton()" title="Makes the player do what the blocks say.">Run Program</button>
+      <!-- <button id="stopButton" class="stop">
         Stop Program
-      </button>
+      </button> -->
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">

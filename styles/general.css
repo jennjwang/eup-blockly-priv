@@ -27,7 +27,7 @@
 }
 
 #runButton {
-    border: 2px solid green;
+    /* border: 2px solid green; */
     background: white;
     padding: 9px;
     width: 140px;
@@ -39,10 +39,11 @@
     margin-left: -60px;
   }
 
-  #stopButton:hover {
-    opacity: 1;
-    background:lightcoral;
-    color: white
+  #runButton:hover {
+    /* opacity: 1;
+    background:lightcoral !important;
+    color: white !important; */
+    cursor: pointer
   }
 
   .done{
@@ -72,18 +73,17 @@
     color: white !important
   }
   
-  #runButton:hover {
+  /* #runButton:hover {
     opacity: 1;
     background:green;
     color: white
-  }
+  } */
   
-  #stopButton {
+  /* #stopButton {
     border: 2px solid lightcoral;
     background: white;
     padding:9px;
     width: 140px;
-    /* margin-top: -40px; */
     margin-left: -210px;
     border-radius: 4px;
     color: black;
@@ -91,6 +91,7 @@
     position: absolute;
     opacity: 0.8;
   }
+  */
   
     
   #nextButton {
