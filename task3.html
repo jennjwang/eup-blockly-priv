@@ -16,7 +16,29 @@
 
   <div class="wrapper">
 
-    <p id="code"></p>
+
+    <div id="modal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thank you for completing the study</h2>
+        </div>
+        <div class="modal-body">
+          <p>Please return to Qualtrics and enter the following code: <mark>61948336</mark></p>
+          <!-- <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p> -->
+        </div>
+        <!-- <button onclick="window.close()">
+          Exit
+        </button> -->
+      </div>
+    
+    </div>
+
+    <p style="display: none;", id="code"></p>
+    <p style="display: none;", id="start"></p>
+    <p style="display: none;", id="end"></p>
+
 
     <div class="simulation">
         <div id="bedroom">
@@ -46,12 +68,8 @@
 
     <div class="blockly-editor">
       <div id="controls">
-      <button id="runButton" title="Makes the player do what the blocks say.">
-        Run Program
-      </button>
-      <button id="stopButton" class="stop">
-        Stop Program
-      </button>
+        <button class="run" id="runButton" onclick="toggleButton()" title="Makes the player do what the blocks say.">Run Program</button>
+        <button id="doneButton">I'm Done</button>
     </div>
       <div id="blocklyDiv">
         <xml id="toolbox" style="display: none;">

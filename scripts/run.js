@@ -40,16 +40,16 @@ function update(event) {
   }
 
   if (url.searchParams.get("format") == "TAP") {
-    if (check != "") {
-      runButton();
-    } else {
+    if (check == "") {
+      //   runButton();
+      // } else {
       return;
     }
   }
 
-  if (url.searchParams.get("format") == "SEQ") {
-    runButton();
-  }
+  // if (url.searchParams.get("format") == "SEQ") {
+  //   runButton();
+  // }
 
   myInterpreter = new Interpreter(code, initApi);
 
@@ -61,7 +61,7 @@ function update(event) {
       // alert(
       //   "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
       // );
-      stopButton();
+      // stopButton();
     }
   }
   nextStep();
@@ -282,24 +282,44 @@ function reset() {
   code = resetLocs();
 }
 
-document.querySelector("#runButton").addEventListener("click", update);
+// document.querySelector("#runButton").addEventListener("click", update);
 
-document.querySelector("#stopButton").addEventListener("click", reset);
+// document.querySelector("#runButton").addEventListener("click", toggleButton);
 
-function runButton() {
-  document.getElementById("stopButton").classList.remove("stop");
-  document.getElementById("runButton").classList.add("run");
+function toggleButton() {
+  var button = document.getElementById("runButton");
+
+  if (button.innerHTML === "Run Program") {
+    button.innerHTML = "Stop Program";
+    button.classList.remove("run");
+    button.classList.add("stop");
+    update();
+  } else {
+    button.innerHTML = "Run Program";
+    button.classList.add("run");
+    button.classList.remove("stop");
+    reset();
+  }
 }
 
-function stopButton() {
-  document.getElementById("runButton").classList.remove("run");
-  document.getElementById("stopButton").classList.add("stop");
-  document.getElementById("runButton").classList.add("done");
-}
+document.querySelector("#doneButton").addEventListener("click", () => {
+  document.getElementById("modal").style.display = "block";
+});
+
+// function runButton() {
+//   // document.getElementById("stopButton").classList.remove("stop");
+//   document.getElementById("runButton").classList.remove("run");
+//   document.getElementById("runButton").classList.add("stop");
+// }
+
+// function stopButton() {
+//   document.getElementById("stopButton").classList.add("stop");
+//   document.getElementById("runButton").classList.add("done");
+// }
 
 // document.querySelector("#runButton").addEventListener("click", runButton);
 
-document.querySelector("#stopButton").addEventListener("click", stopButton);
+// document.querySelector("#stopButton").addEventListener("click", stopButton);
 
 // add blocks to the workspace
 const url = new URL(window.location.href);

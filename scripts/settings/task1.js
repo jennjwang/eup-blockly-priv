@@ -5,6 +5,9 @@ let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let person = new Person(PERSON_ROOM);
 
+let end_states = "";
+let start_states = "";
+
 const KITCHEN = [120, 200];
 const PLAYROOM = [450, 200];
 const BEDROOM = [220, 600];
@@ -13,13 +16,13 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
 function resetLocs() {
-  const end_states = `
+  end_states = `
   robot ended in ${robot_c.room}
   person ended in ${person.room}`;
 
-  console.log("end", end_states);
-
-  document.getElementById("end").innerHTML = end_states;
+  start_states = `
+  robot started in ${ROBOT_ROOM}
+  person started in ${PERSON_ROOM}`;
 
   robot_c.start = true;
   prev_room = null;
@@ -40,14 +43,6 @@ function resetLocs() {
   let x = dst[0] + 100;
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
-
-  let starter_code = `
-  robot started in ${robot_c.room}
-  person started in ${PERSON_ROOM}`;
-
-  console.log(starter_code);
-
-  document.getElementById("start").innerHTML = starter_code;
 
   return "";
 }
@@ -91,8 +86,25 @@ function movePerson() {
   }, 4000);
 }
 
-document.querySelector("#runButton").addEventListener("click", movePerson);
+function toggleTask1() {
+  var button = document.getElementById("runButton");
 
-document.querySelector("#stopButton").addEventListener("click", () => {
-  clearInterval(interval);
-});
+  if (button.innerHTML === "Run Program") {
+    clearInterval(interval);
+    console.log(start_states);
+    console.log("end", end_states);
+    document.getElementById("start").innerHTML = start_states;
+    document.getElementById("end").innerHTML = end_states;
+    start_states = "";
+    end_states = "";
+  } else {
+    console.log("moving person");
+    movePerson();
+  }
+}
+
+document.querySelector("#runButton").addEventListener("click", toggleTask1);
+
+// document.querySelector("#stopButton").addEventListener("click", () => {
+//   clearInterval(interval);
+// });

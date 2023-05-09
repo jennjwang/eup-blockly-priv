@@ -16,6 +16,9 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [bear, car, duck], playroom: [], bedroom: [] };
 
+let end_states = "";
+let start_states = "";
+
 function randomizeToys() {
   let toys = [bear, car, duck];
   i = Math.floor(Math.random() * 3) + 1;
@@ -23,7 +26,26 @@ function randomizeToys() {
   return toys.slice(0, i);
 }
 
+let toys = randomizeToys();
+
+let SAVE_TOYS = toys.toString();
+
+console.log("toys", toys);
+
 function resetLocs() {
+  start_states = `
+  robot started in ${ROBOT_ROOM}
+  toys in kitchen include [${SAVE_TOYS}]`;
+
+  console.log(toys_in_room["kitchen"]);
+
+  end_states = `
+  robot ended in ${robot_c.room}
+  toys in kitchen include [${toys_in_room["kitchen"].toString()}]
+  toys in bedroom include [${toys_in_room["bedroom"].toString()}]
+  toys in playroom include [${toys_in_room["playroom"].toString()}]
+  `;
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
@@ -36,7 +58,9 @@ function resetLocs() {
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
 
-  let toys = randomizeToys();
+  toys = randomizeToys();
+
+  SAVE_TOYS = toys.toString();
 
   const bear_elt = document.getElementById("bear");
   const car_elt = document.getElementById("car");
@@ -71,11 +95,20 @@ function resetLocs() {
 
   toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
 
-  let starter_code = `
-  // robot started in ${robot_c.room}
-  // toys in kitchen include ${toys.toString()}\n\n`;
-
-  return starter_code;
-
-  return starter_code;
+  return "";
 }
+
+function toggleTask3() {
+  var button = document.getElementById("runButton");
+
+  if (button.innerHTML === "Run Program") {
+    console.log(start_states);
+    console.log("end", end_states);
+    document.getElementById("start").innerHTML = start_states;
+    document.getElementById("end").innerHTML = end_states;
+    start_states = "";
+    end_states = "";
+  }
+}
+
+document.querySelector("#runButton").addEventListener("click", toggleTask3);

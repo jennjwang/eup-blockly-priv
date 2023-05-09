@@ -25,11 +25,11 @@
         </div>
         <div class="modal-body">
           <p>Please return to Qualtrics and enter the following code: <mark>61948336</mark></p>
-          <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p>
+          <!-- <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p> -->
         </div>
-        <button onclick="window.close()">
+        <!-- <button onclick="window.close()">
           Exit
-        </button>
+        </button> -->
       </div>
     
     </div>
@@ -62,12 +62,9 @@
     <div class="blockly-editor">
       <div id="controls">
       <!-- <div id="clock"></div> -->
-      <button id="runButton" title="Makes the player do what the blocks say.">
-        Run Program
-      </button>
-      <button id="stopButton" class="stop">
-        Stop Program
-      </button>
+      <button class="run" id="runButton" onclick="toggleButton()" title="Makes the player do what the blocks say.">Run Program</button>
+      <button id="doneButton">I'm Done</button>
+      <button id="done">I'm Done</button>
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
@@ -125,8 +122,6 @@
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
 
-    console.log(new Date(performance.timing.connectStart));
-
     const firebaseConfig = {
       apiKey: "%API_KEY%",
       authDomain: "eup-blockly.firebaseapp.com",
@@ -147,6 +142,9 @@
     const url = new URL(window.location.href);
 
     // document.querySelector("#runButton").addEventListener("click", record);
+    
+    document.querySelector("#doneButton").addEventListener("click", finalRecord);
+
 
     async function record(){
         try {
@@ -165,6 +163,25 @@
           console.error("Error adding document: ", e);
         }
     }
+
+    // TODO: adjust this
+    async function finalRecord(){
+      try{
+        startTime = new Date(performance.timing.connectStart);
+        const docRef = await addDoc(collection(db, "task1"), {
+            task: 1,
+            study_id: url.searchParams.get('STUDY_ID'),
+            prolific_pid: url.searchParams.get('PROLIFIC_PID'),
+            session_id: url.searchParams.get('SESSION_ID'),
+            timestamp: today.toISOString(),
+            code: document.getElementById("code").innerHTML,
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+    }
+    
 
   </script>
   <!-- <script src="scripts/timer.js"></script> -->
