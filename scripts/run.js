@@ -354,7 +354,7 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-4").style.display = "none";
   document.getElementById("blockly-5").style.display = "none";
   document.getElementById("blockly-6").style.display = "none";
-} else {
+} else if (url.searchParams.get("format") == "TAP") {
   // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
     `
@@ -372,6 +372,30 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-5").style.display = "none";
   document.getElementById("blockly-6").style.display = "none";
   document.getElementById("blockly-7").style.display = "none";
+} else if (url.searchParams.get("format") == "MDP") {
+  xml = Blockly.Xml.textToDom(
+    `
+  <xml>
+  <block type="goals" deletable="false" x="100" y="50"></block>
+  </xml>`
+  );
+
+  // hiding the original categories of controls, commands, and conditions
+  document.getElementById("blockly-0").style.display = "none";
+  document.getElementById("blockly-1").style.display = "none";
+  document.getElementById("blockly-2").style.display = "none";
+  document.getElementById("blockly-3").style.display = "none";
+  document.getElementById("blockly-4").style.display = "none";
+  document.getElementById("blockly-6").style.display = "none";
+  document.getElementById("blockly-7").style.display = "none";
+} else if (url.searchParams.get("format") == "SEQ") {
+  document.getElementById("blockly-0").style.display = "none";
+  document.getElementById("blockly-1").style.display = "";
+  document.getElementById("blockly-2").style.display = "none";
+  document.getElementById("blockly-3").style.display = "";
+  document.getElementById("blockly-4").style.display = "none";
+  document.getElementById("blockly-5").style.display = "none";
+  document.getElementById("blockly-6").style.display = "none";
 }
 
 Blockly.Xml.domToWorkspace(xml, workspace);
