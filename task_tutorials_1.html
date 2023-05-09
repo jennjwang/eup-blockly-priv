@@ -27,7 +27,7 @@
     <div id="modal" class="modal">
 
       <!-- Modal content -->
-      <div class="modal-content">
+      <!-- <div class="modal-content">
         <div class="modal-header">
           <h2>Thank you for completing the study</h2>
         </div>
@@ -38,7 +38,11 @@
         <button onclick="window.close()">
           Exit
         </button>
-      </div>
+      </div> -->
+
+    <p style="display: none;", id="code"></p>
+    <p style="display: none;", id="start"></p>
+    <p style="display: none;", id="end"></p>
     
     </div>
 
@@ -81,9 +85,8 @@
         <category name="Controls" style="display: none;" categorystyle="logic_category">
           <block type="if_then"></block>
           <block type="if_while_then"></block>
-          <block type="if_start"></block>
       </category>
-      <category name="Commands" categorystyle="variable_category">
+      <category name="Actions" categorystyle="variable_category">
         <block type="drop_toy"></block>
         <block type="pick_up_toy"></block>
         <block type="to_room"></block>
@@ -94,11 +97,13 @@
         <block type="in_the"></block>
         <block type="hands_free"></block>
         <block type="hands_full"></block>
+        <block type="start"></block>
       </category>
       <category name="States" categorystyle="event_category">
         <block type="e_out_of"></block>
         <block type="e_in_the"></block>
         <block type="e_toy_in_room"></block>
+        <block type="e_toy_not_in_room"></block>
         <block type="e_hands_free"></block>
         <block type="e_hands_full"></block>
         <block type="and"></block>
@@ -113,16 +118,23 @@
         <block type="e_out_of"></block>
         <block type="e_toy_in_room"></block>
         <block type="e_in_the"></block>
+        <block type="e_toy_not_in_room"></block>
         <block type="e_hands_free"></block>
         <block type="e_hands_full"></block>
         <block type="and"></block>
       </category>
-      <category name="Triggers" categorystyle="logic_category">
+      <category name="States" categorystyle="logic_category">
         <block type="trigger_out_of"></block>
         <block type="trigger_in_the"></block>
         <block type="trigger_hands_full"></block>
         <block type="trigger_hands_free"></block>
       </category>
+      <category name="Controls" style="display: none;" categorystyle="logic_category">
+        <block type="controls_if"></block>
+        <block type="controls_ifelse"></block>
+        <block type="logic_boolean"></block>
+        <block type="controls_whileUntil"></block>
+    </category>
       </xml>
     </div>
   </div>
@@ -179,15 +191,23 @@
         }
     }
   </script>
+
   <script src="https://unpkg.com/blockly"></script>
   <!-- <script src="scripts/timer.js"></script> -->
   <script src="scripts/obj.js"></script>
-  <script src="scripts/settings/task2.js"></script>
+  <script src="scripts/settings/task_tutorial.js"></script>
   <!-- <script id="tap" src="scripts/tap_blocks.js"></script> -->
   <script id="rl" src="scripts/rl_blocks.js"></script>
   <script src="scripts/run.js"></script>
   <script src="scripts/game.js"></script>
-  <script src="scripts/rl.js"></script>
+  
+<!--   <script src="https://unpkg.com/blockly"></script>
+  <script src="scripts/obj.js"></script>
+  <script src="scripts/game.js"></script>
+  <script id="tap" src="scripts/tap_blocks.js"></script>
+  <script id="rl" src="scripts/rl_blocks.js"></script>
+  <script src="scripts/settings/"></script>
+  <script src="scripts/run.js"></script> -->
 
   <script type="text/javascript">
     var next_ctr = 0;
