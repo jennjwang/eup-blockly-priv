@@ -302,7 +302,9 @@ function toggleButton() {
   }
 }
 
-// document.querySelector("#stopButton").addEventListener("click", reset);
+document.querySelector("#doneButton").addEventListener("click", () => {
+  document.getElementById("modal").style.display = "block";
+});
 
 // function runButton() {
 //   // document.getElementById("stopButton").classList.remove("stop");

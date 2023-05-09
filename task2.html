@@ -64,6 +64,7 @@
 
         <!-- </div> -->
         <button class="run" id="runButton" onclick="toggleButton()" title="Makes the player do what the blocks say.">Run Program</button>
+        <button id="doneButton">I'm Done</button>
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
@@ -162,7 +163,9 @@
             prolific_pid: url.searchParams.get('PROLIFIC_PID'),
             session_id: url.searchParams.get('SESSION_ID'),
             timestamp: today.toISOString(),
-            code: document.getElementById("code").innerHTML
+            code: document.getElementById("code").innerHTML,
+            start_state: document.getElementById("start").innerHTML,
+            end_state: document.getElementById("end").innerHTML
           });
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {
