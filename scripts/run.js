@@ -218,7 +218,7 @@ function initApi(interpreter, globalObject) {
   };
   interpreter.setProperty(
     globalObject,
-    "isPersonNotInRoomEvent",
+    "isPersonNotinRoomEvent",
     interpreter.createNativeFunction(wrapper)
   );
 

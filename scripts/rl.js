@@ -381,7 +381,7 @@ function get_policy(code, taskNum){
     }
 
     if(triggers.includes("isRobotinRoomEvent(\'kitchen\');") || triggers.includes("isRobotinRoomEvent(\'bedroom\');") || triggers.includes("isRobotinRoomEvent(\'playroom\');") ||
-    trigger == "isRobotOutOfEvent(\'bedroom\');" || trigger == "isRobotOutOfEvent(\'kitchen\');" || trigger == "isRobotOutOfEvent(\'playroom\');"){
+    triggers.includes("isRobotOutOfEvent(\'bedroom\');") || triggers.includes("isRobotOutOfEvent(\'kitchen\');") || triggers.includes("isRobotOutOfEvent(\'playroom\');")){
         triggers.push("isRobotinRoomEvent(\'kitchen\');")
         triggers.push("isRobotinRoomEvent(\'bedroom\');")
         triggers.push("isRobotinRoomEvent(\'playroom\');")
