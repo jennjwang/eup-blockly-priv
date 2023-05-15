@@ -200,7 +200,7 @@ function initApi(interpreter, globalObject) {
   };
   interpreter.setProperty(
     globalObject,
-    "isPersonInRoomEvent",
+    "isPersoninRoomEvent",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -219,6 +219,15 @@ function initApi(interpreter, globalObject) {
   interpreter.setProperty(
     globalObject,
     "eHandsFree",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return handsFree();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "handsFree",
     interpreter.createNativeFunction(wrapper)
   );
 
@@ -241,11 +250,20 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function () {
-    return handsFree();
+    return eHandsFree();
   };
   interpreter.setProperty(
     globalObject,
     "handsFree",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return eHandsFull();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "eHandsFull",
     interpreter.createNativeFunction(wrapper)
   );
 
