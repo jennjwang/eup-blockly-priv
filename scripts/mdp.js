@@ -360,7 +360,7 @@ function get_mdp_policy(code, taskNum){
         block_list = [[]]
         triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
     }
-    if(taskNum == 2){
+    if(taskNum == 2 || taskNum == '_'){
         block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
         person_locs = [null]
         triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
