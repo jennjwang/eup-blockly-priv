@@ -32,11 +32,15 @@ function update(event) {
 
   document.getElementById("code").innerHTML = code;
   // console.log(check == "");
+  console.log(code);
+
+   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
+   //Can debug by running with url params == RL
 
   if (url.searchParams.get("format") == "RL") {
     check = taskNum + "\n" + code;
     console.log(check);
-    return;
+    code = run_rl(code, taskNum)
   }
 
   if (url.searchParams.get("format") == "TAP") {
@@ -50,6 +54,13 @@ function update(event) {
   // if (url.searchParams.get("format") == "SEQ") {
   //   runButton();
   // }
+
+  if (url.searchParams.get("format") == "MDP") {
+    check = taskNum + "\n" + code;
+    console.log(check);
+    code = run_mdp(code, taskNum)
+  }
+  
 
   myInterpreter = new Interpreter(code, initApi);
 
@@ -146,6 +157,23 @@ function initApi(interpreter, globalObject) {
   interpreter.setProperty(
     globalObject,
     "isRobotOutOf",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return isRobotOutOfEvent(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotOutOfEvent",
+    interpreter.createNativeFunction(wrapper)
+  );
+  wrapper = function (room) {
+    return is_toy_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_toy_in_room",
     interpreter.createNativeFunction(wrapper)
   );
 

@@ -92,10 +92,8 @@
     position: absolute;
     opacity: 0.8;
   }
- 
   
-    
-  #nextButton {
+    #nextButton {
     border: 2px solid blue;
     background: white;
     padding: 9px;
