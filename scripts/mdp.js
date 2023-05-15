@@ -351,19 +351,19 @@ function find_id(state, map){
 
 function get_mdp_policy(code, taskNum){
     [triggers, actions, goal, goalfinal] = parser(code)
-    // actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
+    actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
     values_table = {}
     state_ids = {}
 
     if(taskNum == 1){
         person_locs = ['kitchen', 'bedroom', 'playroom', null]
         block_list = [[]]
-        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
     }
     if(taskNum == 2){
         block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
         person_locs = [null]
-        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
     if(taskNum == 3){
         block_list = [[], ['kitchen'], ['bedroom'], ['kitchen', 'kitchen'], ['kitchen', 'bedroom'], ['bedroom', 'bedroom'],
@@ -371,21 +371,9 @@ function get_mdp_policy(code, taskNum){
                         ['bedroom', 'bedroom', 'bedroom'], ['kitchen', 'kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'kitchen', 'bedroom'],
                         ['kitchen', 'kitchen', 'bedroom', 'bedroom'], ['kitchen', 'bedroom', 'bedroom', 'bedroom'], ['bedroom', 'bedroom', 'bedroom', 'bedroom']]
         person_locs = [null]
-        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
 
-    if(triggers.includes('toy_in_room();')){
-        triggers.push("is_toy_in_room(\'bedroom\');")
-        triggers.push("is_toy_in_room(\'playroom\');")
-        triggers.push("is_toy_in_room(\'kitchen\');")
-    }
-
-    if(triggers.includes("isRobotinRoomEvent(\'kitchen\');") || triggers.includes("isRobotinRoomEvent(\'bedroom\');") || triggers.includes("isRobotinRoomEvent(\'playroom\');") ||
-    trigger == "isRobotOutOfEvent(\'bedroom\');" || trigger == "isRobotOutOfEvent(\'kitchen\');" || trigger == "isRobotOutOfEvent(\'playroom\');"){
-        triggers.push("isRobotinRoomEvent(\'kitchen\');")
-        triggers.push("isRobotinRoomEvent(\'bedroom\');")
-        triggers.push("isRobotinRoomEvent(\'playroom\');")
-    }
     id = 0
     //Populate values table
     these_rooms = ['kitchen', 'bedroom', 'playroom']
