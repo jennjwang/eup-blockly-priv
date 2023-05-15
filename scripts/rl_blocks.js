@@ -106,6 +106,33 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "is_toy_in_room",
+    message0: "a toy is in the current room",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+        ],
+      },
+    ],
+    output: "Boolean",
+    colour: 260,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["is_toy_in_room"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return ["isRobotOutOfEvent(" + value + ")", Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "in_the",
     message0: "I arrived at the %1",
     args0: [
@@ -134,19 +161,19 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_person_not_in_room"] = function () {
-  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+  return ["isPersonNotinRoomEvent()", Blockly.JavaScript.PRECEDENCE];
 };
 
 // Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.ORDER_NONE];
+  return ["isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript["out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.ORDER_NONE];
+  return ["isRobotOutOfEvent(" + value + ")", Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -159,7 +186,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["hands_free"] = function (block) {
-  return ["handsFree()", Blockly.JavaScript.ORDER_NONE];
+  return ["eHandsFree()", Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -172,7 +199,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["hands_full"] = function (block) {
-  return ["handsFull()", Blockly.JavaScript.ORDER_NONE];
+  return ["eHandsFull()", Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -331,7 +358,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_full"] = function (block) {
-  return ["ehandsFull()", Blockly.JavaScript.PRECEDENCE];
+  return ["eHandsFull()", Blockly.JavaScript.PRECEDENCE];
 };
 
 // triggers:
@@ -376,7 +403,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["trigger_out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "isRobotOutOf(" + value + ");\n\t";
+  return "isRobotOutOfEvent(" + value + ");\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -402,7 +429,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["trigger_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "isRobotinRoom(" + value + ");\n\t";
+  return "isRobotinRoomEvent(" + value + ");\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -416,7 +443,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_hands_free"] = function (block) {
-  return "handsFree();\n\t";
+  return "eHandsFree();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -430,7 +457,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_hands_full"] = function (block) {
-  return "handsFull();\n\t";
+  return "eHandsFull();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -444,7 +471,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_person_in_room"] = function (block) {
-  return "isPersonInRoom();\n\t";
+  return "isPersoninRoomEvent();\n\t";
 };
 
 // workspace blocks
@@ -517,6 +544,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_statement",
         name: "input",
         check: [
+          "is_toy_in_room",
           "trigger_toy_in_room",
           "trigger_out_of",
           "trigger_in_the",
@@ -553,6 +581,7 @@ Blockly.defineBlocksWithJsonArray([
           "e_person_in_room",
           "e_hands_free",
           "e_toy_in_room",
+          "is_toy_in_room",
           "e_person_not_in_room",
           "e_toy_not_in_room",
           "Boolean",

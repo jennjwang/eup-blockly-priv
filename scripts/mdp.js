@@ -40,10 +40,10 @@ function simulator(state, action) {
 function generate_goal_func(goal, state) {
     val = true
 
-    if(goal.includes('isPersonInRoomEvent()')){
+    if(goal.includes('isPersoninRoomEvent()')){
         val = val && (state.person == state.robot_position)
     }
-    if(goal.includes('isPersonNotInRoomEvent()')){
+    if(goal.includes('isPersonNotinRoomEvent()')){
         val = val && !(state.person == state.robot_position)
     }
 
@@ -159,11 +159,18 @@ function generate_triggers(triggers, state){
             }
         }
 
-        if(trigger == "isPersonNotInRoomEvent();") {
+        if(trigger == "isPersonNotinRoomEvent();") {
             if(!(state.person == state.robot_position)) {
                 output.push(1)
             } else {
                 output.push(0)
+            }
+        }
+        if(trigger == "isPersoninRoomEvent();") {
+            if(!(state.person == state.robot_position)) {
+                output.push(0)
+            } else {
+                output.push(1)
             }
         }
         if(trigger == "is_toy_in_room(\'bedroom\');") {
@@ -344,19 +351,19 @@ function find_id(state, map){
 
 function get_mdp_policy(code, taskNum){
     [triggers, actions, goal, goalfinal] = parser(code)
-    actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
+    // actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
     values_table = {}
     state_ids = {}
 
     if(taskNum == 1){
         person_locs = ['kitchen', 'bedroom', 'playroom', null]
         block_list = [[]]
-        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotInRoomEvent();"]
+        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
     }
     if(taskNum == 2){
         block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
         person_locs = [null]
-        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
+        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
     if(taskNum == 3){
         block_list = [[], ['kitchen'], ['bedroom'], ['kitchen', 'kitchen'], ['kitchen', 'bedroom'], ['bedroom', 'bedroom'],
@@ -364,7 +371,20 @@ function get_mdp_policy(code, taskNum){
                         ['bedroom', 'bedroom', 'bedroom'], ['kitchen', 'kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'kitchen', 'bedroom'],
                         ['kitchen', 'kitchen', 'bedroom', 'bedroom'], ['kitchen', 'bedroom', 'bedroom', 'bedroom'], ['bedroom', 'bedroom', 'bedroom', 'bedroom']]
         person_locs = [null]
-        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
+        // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
+    }
+
+    if(triggers.includes('toy_in_room();')){
+        triggers.push("is_toy_in_room(\'bedroom\');")
+        triggers.push("is_toy_in_room(\'playroom\');")
+        triggers.push("is_toy_in_room(\'kitchen\');")
+    }
+
+    if(triggers.includes("isRobotinRoomEvent(\'kitchen\');") || triggers.includes("isRobotinRoomEvent(\'bedroom\');") || triggers.includes("isRobotinRoomEvent(\'playroom\');") ||
+    trigger == "isRobotOutOfEvent(\'bedroom\');" || trigger == "isRobotOutOfEvent(\'kitchen\');" || trigger == "isRobotOutOfEvent(\'playroom\');"){
+        triggers.push("isRobotinRoomEvent(\'kitchen\');")
+        triggers.push("isRobotinRoomEvent(\'bedroom\');")
+        triggers.push("isRobotinRoomEvent(\'playroom\');")
     }
     id = 0
     //Populate values table
@@ -425,9 +445,13 @@ function get_mdp_policy(code, taskNum){
     for(key in values_table){
         state = state_ids[key]
 
+        if(key == 79){
+            debugger
+        }
+
         if(!(generate_goal_func(goal, state))){
             max_val = 0
-            max_act = "moveRobotToRoom(\'bedroom\');"
+            max_act = actions[0]
 
             for(action_ind in actions){
                 action = actions[action_ind]
@@ -446,19 +470,19 @@ function get_mdp_policy(code, taskNum){
                 }
             }
 
-            test = true
+            tb = true
             triggerz = generate_triggers(triggers,state)
-            test = [0, 1, 0, 0, 0, 0, 1, 0, 1]
-            for(i in [1, 2, 3, 4, 5, 6, 7, 8, 9]){
+            test = [0, 0, 0, 0, 0, 1]
+            for(i in [0, 1, 2, 3, 4, 5]){
                 if(!(triggerz[i] == test[i])){
-                    test = false
+                    tb = false
                     break
                 }
             }
-            if(test){
+            if(tb){
                 debugger
             }
-            if(!(state.blocks.length == 4 && state.holding)){
+            if(!(state.blocks.length >= 4 || (state.holding && state.blocks.length == 3))){
                 policy[generate_triggers(triggers, state)] = max_act
             }
         }
