@@ -45,6 +45,13 @@ function update(event) {
     code = run_rl(code, taskNum)
   }
 
+  if (url.searchParams.get("format") == "MDP") {
+    check = taskNum + "\n" + code;
+    console.log(check);
+    code = run_mdp(code, taskNum)
+  }
+  
+
   if (check != "") {
     runButton();
   } else {

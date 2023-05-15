@@ -342,7 +342,7 @@ function find_id(state, map){
 }
 
 
-function get_policy(code, taskNum){
+function get_mdp_policy(code, taskNum){
     [triggers, actions, goal, goalfinal] = parser(code)
     actions = ["moveRobotToRoom(\'bedroom\');", "moveRobotToRoom(\'kitchen\');", "moveRobotToRoom(\'playroom\');", "drop_toy();", "pick_up_toy();"]
     values_table = {}
@@ -469,14 +469,10 @@ function get_policy(code, taskNum){
     return [policy, triggers, goal, goalfinal]
     }
 
-function count_blocks(state){
-
-}
-
-function run_rl(code, taskNum){
+function run_mdp(code, taskNum){
     debugger
     start = Date.now();
-    [policy, triggers, goal, goalfinal] = get_policy(code, taskNum)
+    [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum)
     if(taskNum == 1){
         goalfinal = false
     }
