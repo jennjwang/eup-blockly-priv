@@ -74,7 +74,7 @@
 
         <!-- </div> -->
       <button class="run" id="runButton" onclick="toggleButton()" title="Makes the player do what the blocks say.">Run Program</button>
-        <button id="doneButton">I'm Done</button>
+        <button id="doneButton" style="visibility: hidden;">I'm Done</button>
     </div>
       <div id="blocklyDiv">
       <xml id="toolbox" style="display: none;">
@@ -227,15 +227,18 @@
      "If your progarm looks like the image on the right, <br> then press the \"Run Program\" button to see your program running."
     ];
 
-    var tutorial_texts_RL = ["The robot is designed to act based on a <b>goal</b> specified to it. In addition to the goal, the robot requires the user to specify all the possible <b>states</b> it can be in such as \"I am holding a toy.\", \"I am in the kitchen.\" etc. It also requires knowing all the possible states to achieve its goal. Finally,  the robot must be informed of the set of <b>actions</b> it needs to use to complete the task. Once this is provided to it, the robot tries to find an optimal behavior towards accomplishing the task.",
-      "Now, let's attempt to move the robot to the kitchen. To achieve this, <ol><li>First, we need to specify is the goal. To do that click on the \"Goal\" tab and drag \"I am in the kitchen\" piece and attach it to the \"Goal\" piece in the programming interface.</li> <li>Next, we need to specify the action. Click on the \"Actions\" tab and drag the \"Go to kitchen\" piece and attach it to \"Actions\" on the programming interface. </li> <li>Finally, we need to tell the robot all of the states it can be in while trying to get to the kitchen. </li> <li>Click on the \"States\" tab and drag the \"Am I in the kitchen\" piece and attach it to \"States\" on the programming interface.</li> </ol>",
+    var tutorial_texts_RL = ["The robot is designed to act based on a <b>goal</b> specified to it. In addition to the goal, the robot requires the user to specify all the possible <b>states</b> it can be in such as \"I am holding a toy.\", \"I am in the kitchen.\" etc. It also requires knowing all the possible states to achieve its goal. Finally,  the robot must be informed of the set of <b>actions</b> it needs to use to complete the task. Once these are provided to it, the robot tries to find an optimal behavior towards accomplishing the task.",
+      "Now, let's attempt to move the robot to the kitchen. To achieve this, <ol><li>First, we need to specify is the goal. To do that click on the \"Goal\" tab and drag \"I am in the kitchen\" piece and attach it to the \"Goal\" piece in the programming interface.</li> <li>Next, we need to specify the action. Click on the \"Actions\" tab and drag the \"Go to kitchen\" piece and attach it to \"Actions\" on the programming interface. </li> <li>Finally, we need to tell the robot all of the states it can be in while trying to get to the kitchen. </li> <li>Click on the \"States\" tab and drag the \"Am I in the kitchen?\" piece and attach it to \"States\" on the programming interface.</li> </ol>", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen.", "To do this, <ol> <li>First remove the \"Am I in the kitchen?\" piece added to the \"Goal\" block by dragging it to the trash found on the bottom right corner</li><li>To successfully perform the task, the robot needs to have a set of actions: going to the kitchen, going to the playroom, picking up the toy, and putting down the toy. Therefore, drag the \"Go to kitchen\" from the actions tab and attach it to the actions block. Add the \"Go to playroom\", \"pick up the toy\", and \"put down the toy\" to the actions block below the previous piece</li>, <li>Next, let's specify the states the robot could be in while trying to complete the task. These states are being in the kitchen, being in the playroom, and holding the toy. Drag the pieces that represent each state and attach them to the states block.</li> <li>Finally, we specify the goal. The robot can only know it has achieved the goal by sensing the environment. For the current task, the goal can be stated as the robot seeing the toy in the kitchen. To specify this, drag the \"and\" piece from the Goal tab and attach it to the Goal piece. Then drag \"Am I in the kitchen?\" piece from the Goal tab and attach it to one of the empty spaces in the \"and\" piece. Then, drag \"a toy is in the room\" piece and attach it to the remaining space of the \"and\" piece </li>", "If your progarm looks like the image on the right, <br> then press the \"Run Program\" button to see your program running."
+    ];
 
+    var tutorial_texts_MDP = ["The robot is designed to act based on a <b>goal</b> specified to it. Once the goal is provided to it, the robot tries to find an optimal behavior towards accomplishing the task.",
+      "Now, let's attempt to move the robot to the kitchen. To achieve this, we need to specify is the goal. To do that click on the \"Goal\" tab and drag \"I am in the kitchen\" piece and attach it to the \"Goal\" piece in the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen.", "To do this, <ol> <li>First remove the \"Am I in the kitchen?\" piece added to the \"Goal\" block by dragging it to the trash found on the bottom right corner</li><li>To successfully perform the task, the robot needs a specification of the goal. The robot can only know it has achieved the goal by sensing the environment. For the current task, the goal can be stated as the robot seeing the toy in the kitchen. To specify this, drag the \"and\" piece from the Goal tab and attach it to the Goal piece. Then drag \"Am I in the kitchen?\" piece from the Goal tab and attach it to one of the empty spaces in the \"and\" piece. Then, drag \"a toy is in the room\" piece and attach it to the remaining space of the \"and\" piece </li>", "If your progarm looks like the image on the right, <br> then press the \"Run Program\" button to see your program running."
     ];
 
     var tutorial_texts_SEQ = ["The robot is designed to follow actions specified by users. These sequences of actions are specified in the programming interface by dragging and dropping actions. The robot also has sensors to sense where it is and if it is holding objects.", "Now, let's attempt to move the robot to the kitchen. To achieve this, Click on the \"Actions\" tab and drag \"Go to kitchen\" piece and drop it on the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen. To do this, <ol><li>First remove the \"Go to kitchen\" piece added to the programming interface by dragging it to the trash found on the bottom right corner</li> <li>Then click on the <b>Actions</b> tab and drag the \"Go to kitchen\" piece and change kitchen to playroom</li><li>After getting to the playroom, the robot needs to pick up the toy. Before trying to pick up the toy, we will first make the robot check if there is a toy. For that, click on the Controls tab and drag the \"If do\" block and attach it under the \"Go to playroom\" piece. Then drag \"a toy is in the room\" piece from the states tab and attach it to the if.</li><li>click on the <b>actions</b> menu and drag the \"Pick up the toy\" piece and attach it next to <b>do</b>. </li> <li>Once the robot picks up the toy, the next step is to take the toy to the kitchen. Drag \"Go to kitchen\" piece and attach it below the \"if do\" block.</li><li>The final step is to put down the toy. For that click on the <b>actions</b> menu and drag the \"put down the toy\" piece and place it below the last piece.</li></ol>", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running."]
 
     function nextTutorialListener(){
-      if(value==null || value=="TAP"){
+      if(value=="TAP"){
         document.getElementById('tutorial_text').innerHTML = tutorial_texts[next_ctr];
 
         if(next_ctr == 4){
@@ -257,6 +260,7 @@
 
         if (next_ctr >= tutorial_texts.length){
             document.getElementById("img_div").innerHTML = '';
+            document.getElementById('doneButton').style.visibility = 'visible';
             document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! <br/>Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks.";
           }
       }
@@ -266,11 +270,55 @@
         }else{
           document.getElementById('tutorial_text').innerHTML = tutorial_texts_RL[next_ctr-2];
         }
-        if (next_ctr - 2 >= tutorial_texts_RL.length){
-            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+        if(next_ctr == 4){
+          var elem = document.createElement("img");
+          elem.src = 'tutorial/sol_05.png';
+          document.getElementById('img_div').appendChild(elem);
         }
+        else if(next_ctr == 5){
+            document.getElementById("img_div").innerHTML = '';
+            document.getElementById('bear').style.visibility = 'visible';
+        }else if(next_ctr == 7){
+            var elem = document.createElement("img");
+            elem.src = 'tutorial/sol_06.png';
+            document.getElementById('img_div').appendChild(elem);
+        }
+
+        if (next_ctr - 2 >= tutorial_texts_RL.length){
+            document.getElementById("img_div").innerHTML = '';
+            document.getElementById('doneButton').style.visibility = 'visible';
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+       } 
         
-      }else if (value == 'SEQ'){
+      }
+      else if(value=='MDP'){
+        if(next_ctr < 2){
+          document.getElementById('tutorial_text').innerHTML = tutorial_texts[next_ctr];
+        }else{
+          document.getElementById('tutorial_text').innerHTML = tutorial_texts_MDP[next_ctr-2];
+        }
+        if(next_ctr == 4){
+          var elem = document.createElement("img");
+          elem.src = 'tutorial/sol_07.png';
+          document.getElementById('img_div').appendChild(elem);
+        }
+        else if(next_ctr == 5){
+            document.getElementById("img_div").innerHTML = '';
+            document.getElementById('bear').style.visibility = 'visible';
+        }else if(next_ctr == 7){
+            var elem = document.createElement("img");
+            elem.src = 'tutorial/sol_08.png';
+            document.getElementById('img_div').appendChild(elem);
+        }
+
+        if (next_ctr - 2 >= tutorial_texts_RL.length){
+            document.getElementById("img_div").innerHTML = '';
+            document.getElementById('doneButton').style.visibility = 'visible';
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+       }
+
+     }
+      else if (value == 'SEQ'){
          if(next_ctr < 2){
           document.getElementById('tutorial_text').innerHTML = tutorial_texts[next_ctr];
           }else{
@@ -293,6 +341,7 @@
 
           if (next_ctr - 2 >= tutorial_texts_SEQ.length){
             document.getElementById("img_div").innerHTML = '';
+            document.getElementById('doneButton').style.visibility = 'visible';
             document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
           }
 
