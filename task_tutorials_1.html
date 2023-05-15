@@ -27,18 +27,18 @@
     <div id="modal" class="modal">
 
       <!-- Modal content -->
-      <!-- <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
           <h2>Thank you for completing the study</h2>
         </div>
         <div class="modal-body">
-          <p>Please return to Qualtrics and enter the following code: <mark>61948336</mark></p>
+          <p>Please return to the survey and enter the following code: <mark>TD4823</mark></p>
           <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p>
         </div>
-        <button onclick="window.close()">
+<!--         <button onclick="window.close()">
           Exit
-        </button>
-      </div> -->
+        </button> -->
+      </div>
 
     <p style="display: none;", id="code"></p>
     <p style="display: none;", id="start"></p>
@@ -264,7 +264,7 @@
         if (next_ctr >= tutorial_texts.length){
             document.getElementById("img_div").innerHTML = '';
             document.getElementById('doneButton').style.visibility = 'visible';
-            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! <br/>Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks.";
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Now click on the <b>I'm done</b> button";
           }
       }
       else if(value=='RL'){
@@ -290,7 +290,7 @@
         if (next_ctr - 2 >= tutorial_texts_RL.length){
             document.getElementById("img_div").innerHTML = '';
             document.getElementById('doneButton').style.visibility = 'visible';
-            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Now click on the <b>I'm done</b> button";
        } 
         
       }
@@ -317,7 +317,7 @@
         if (next_ctr - 2 >= tutorial_texts_RL.length){
             document.getElementById("img_div").innerHTML = '';
             document.getElementById('doneButton').style.visibility = 'visible';
-            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Now click on the <b>I'm done</b> button";
        }
 
      }
@@ -345,7 +345,7 @@
           if (next_ctr - 2 >= tutorial_texts_SEQ.length){
             document.getElementById("img_div").innerHTML = '';
             document.getElementById('doneButton').style.visibility = 'visible';
-            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Please copy the code <b>TD4823</b> and paste it into the survey to proceed with the next set of tasks."
+            document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial tasks! Now click on the <b>I'm done</b> button";
           }
 
       }      
