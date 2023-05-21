@@ -28,6 +28,14 @@
   text-align: center;
 }
 
+.text{
+  padding: 40px;
+  width: 60%;
+  font-size: 17px;
+  display: block;
+  margin: auto;
+}
+
 #runButton {
     /* border: 2px solid green;
     background: white;
