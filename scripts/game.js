@@ -18,7 +18,6 @@ function pick_up_toy() {
   }
 }
 
-
 function drop_toy() {
   if (robot_c.start) {
     robot_c.start = false;
@@ -158,10 +157,11 @@ function toy_in_room() {
 
 function toy_not_in_room() {
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
-  return toys_in_room[robot_c.room].length == 0;}
-  
+  return toys_in_room[robot_c.room].length == 0;
+}
+
 function is_toy_in_room(room) {
-  return (toys_in_room[room].length != 0)
+  return toys_in_room[room].length != 0;
 }
 
 function resolveAfter3Seconds() {
@@ -187,11 +187,11 @@ function isPersoninRoom() {
   return person.isPersoninRoom(robot_c.room);
 }
 
-function isPersoninRoomEvent() {
+function isPersonInRoomEvent() {
   return person.isPersoninRoom(robot_c.room);
 }
 
-function isPersonNotinRoomEvent() {
+function isPersonNotInRoomEvent() {
   return !person.isPersoninRoom(robot_c.room);
 }
 

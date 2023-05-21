@@ -34,13 +34,13 @@ function update(event) {
   // console.log(check == "");
   console.log(code);
 
-   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
-   //Can debug by running with url params == RL
+  //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
+  //Can debug by running with url params == RL
 
   if (url.searchParams.get("format") == "RL") {
     check = taskNum + "\n" + code;
     console.log(check);
-    code = run_rl(code, taskNum)
+    code = run_rl(code, taskNum);
   }
 
   if (url.searchParams.get("format") == "TAP") {
@@ -58,9 +58,8 @@ function update(event) {
   if (url.searchParams.get("format") == "MDP") {
     check = taskNum + "\n" + code;
     console.log(check);
-    code = run_mdp(code, taskNum)
+    code = run_mdp(code, taskNum);
   }
-  
 
   myInterpreter = new Interpreter(code, initApi);
 
@@ -205,20 +204,20 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function () {
-    return isPersoninRoomEvent();
+    return isPersonInRoomEvent();
   };
   interpreter.setProperty(
     globalObject,
-    "isPersoninRoomEvent",
+    "isPersonInRoomEvent",
     interpreter.createNativeFunction(wrapper)
   );
 
   wrapper = function () {
-    return isPersonNotinRoomEvent();
+    return isPersonNotInRoomEvent();
   };
   interpreter.setProperty(
     globalObject,
-    "isPersonNotinRoomEvent",
+    "isPersonNotInRoomEvent",
     interpreter.createNativeFunction(wrapper)
   );
 
