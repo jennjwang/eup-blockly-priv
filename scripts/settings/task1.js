@@ -8,9 +8,9 @@ let person = new Person(PERSON_ROOM);
 let end_states = "";
 let start_states = "";
 
-const KITCHEN = [120, 200];
-const PLAYROOM = [450, 200];
-const BEDROOM = [220, 600];
+const KITCHEN = [90, 90];
+const PLAYROOM = [320, 90];
+const BEDROOM = [150, 320];
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
@@ -40,7 +40,7 @@ function resetLocs() {
   dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
   person.setRoom(PERSON_ROOM);
-  let x = dst[0] + 100;
+  let x = dst[0] + 50;
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
 
