@@ -134,11 +134,34 @@
     opacity: 0.8;
   }
 
+  #nextButton:hover {
+    cursor: pointer;
+    background-color: solid blue;
+  }
+
+  #backButton {
+    border: 2px solid red;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: medium;
+    position: absolute;
+    opacity: 0.8;
+  }
+
+  #backButton:hover {
+    cursor: pointer;
+    background-color: solid red;
+  }
+
   /* p{
     font-size: 12px;
   } */
   
 
   #img_div img {
-    height: 250px;
+    height: 100%;
+    max-height: 250px;
   }

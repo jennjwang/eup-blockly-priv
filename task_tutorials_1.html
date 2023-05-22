@@ -14,9 +14,12 @@
 </head>
 <body>
 
-  <div id="tutorial_controls" style="float: right;margin-right: 30%; margin-top: 50px;">
-      <button id="nextButton"  title="Next tutorial" onclick="nextTutorialListener()">
+  <div id="tutorial_controls" style="float: right;margin-right: 30%; margin-top: 40px;">
+      <button id="nextButton"  title="Next tutorial" onclick="nextTutorialListener(0)">
       Next
+      </button><br><br><br>
+      <button id="backButton"  title="Back tutorial" onclick="nextTutorialListener(1)">
+      Back
       </button>
     </div>
   <div>
@@ -211,6 +214,7 @@
 
   <script type="text/javascript">
     var next_ctr = 0;
+    var img_added = false;
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
@@ -239,9 +243,23 @@
       "Now, let's program the robot to go to the kitchen. To achieve this, we need to specify is the goal. Goals are specific states or combinations of states that we desire the robot to reach or achieve by the end of its execution. States are the different situations or conditions that the robot can be in while performing tasks such as \"I am holding a toy.\", \"I am in the kitchen.\" etc. To do that click on the \"Goal\" tab and drag \"I am in the kitchen\" piece and attach it to the \"Goal\" piece in the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen.", "To do this, <ol> <li>First remove the \"Am I in the kitchen?\" piece added to the \"Goal\" block by dragging it to the trash found on the bottom right corner</li><li>To successfully perform this task, the robot needs a specification of the goal. The robot can only know it has achieved the goal by sensing the environment. For the current task, the goal can be stated as the robot seeing the toy in the kitchen. To specify this, drag the \"and\" piece from the Goal tab and attach it to the Goal piece. Then drag \"Am I in the kitchen?\" piece from the Goal tab and attach it to one of the empty spaces in the \"and\" piece. Then, drag \"a toy is in the room\" piece and attach it to the remaining space of the \"and\" piece </li>", "If your program looks like the image on the right, <br> then press the \"Run Program\" button to see your program running."
     ];
 
-    var tutorial_texts_SEQ = ["The robot is designed to follow actions specified by users (e.g., go to the kitchen, pick up a toy).  These sequences of actions are specified in the programming interface by dragging and dropping action blocks and connecting them in a linear sequence. The robot also has sensors which helps it understand where it is and if it is holding objects.", "Now, let's program the robot to move to the kitchen. To achieve this, Click on the \"Actions\" tab and drag \"Go to kitchen\" piece and drop it on the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen. To do this, <ol><li>First remove the \"Go to kitchen\" piece added to the programming interface by dragging it to the trash found on the bottom right corner</li> <li>Then click on the <b>Actions</b> tab and drag the \"Go to kitchen\" piece to the programming interface and change kitchen to playroom</li><li>Once the robot arrives in the playroom, the robot needs to pick up the toy. Before trying to pick up the toy, we will first make the robot check if there is a toy. This check becomes crucial when the robot doesn't know where the toy is ahead of time. Therefore, it would have to check if a toy is present before it tries to pick up the toy. For that, click on the Controls tab and drag the \"If do\" block and attach it under the \"Go to playroom\" piece. Then drag \"a toy is in the room\" piece from the states tab and attach it to the if.</li><li>Click on the <b>actions</b> menu and drag the \"Pick up the toy\" piece and attach it next to <b>do</b>. This block instructs the robot to pick up the toy only if it detects there is a toy in the room. </li> <li>Once the robot picks up the toy, the next step is to take the toy to the kitchen. Drag \"Go to kitchen\" piece and attach it below the \"if do\" block.</li><li>The final step is to put down the toy. For that click on the <b>actions</b> menu and drag the \"put down the toy\" piece and place it below the last piece.</li></ol>", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running."]
+    var tutorial_texts_SEQ = ["The robot is designed to follow actions specified by users (e.g., go to the kitchen, pick up a toy).  These sequences of actions are specified in the programming interface by dragging and dropping action blocks and connecting them in a linear sequence. The robot also has sensors which helps it understand where it is and if it is holding objects.", "Now, let's program the robot to move to the kitchen. To achieve this, Click on the \"Actions\" tab and drag \"Go to kitchen\" piece and drop it on the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen. To do this, <ol><li>First remove the \"Go to kitchen\" piece added to the programming interface by dragging it to the trash found on the bottom right corner</li> <li>Then click on the <b>Actions</b> tab and drag the \"Go to kitchen\" piece to the programming interface and change kitchen to playroom</li><li>Once the robot arrives in the playroom, the robot needs to pick up the toy. Before trying to pick up the toy, we will first make the robot check if there is a toy. This check becomes crucial when the robot doesn't know where the toy is ahead of time. Therefore, it would have to check if a toy is present before it tries to pick up the toy. For that, click on the Controls tab and drag the \"If do\" block and attach it under the \"Go to playroom\" piece. Then drag \"a toy is in the room\" piece from the states tab and attach it to the if.</li></ol>","<ol start=3><li>Click on the <b>actions</b> menu and drag the \"Pick up the toy\" piece and attach it next to <b>do</b>. This block instructs the robot to pick up the toy only if it detects there is a toy in the room. </li> <li>Once the robot picks up the toy, the next step is to take the toy to the kitchen. Drag \"Go to kitchen\" piece and attach it below the \"if do\" block.</li><li>The final step is to put down the toy. For that click on the <b>actions</b> menu and drag the \"put down the toy\" piece and place it below the last piece.</li></ol>", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running."]
 
-    function nextTutorialListener(){
+    function nextTutorialListener(n){
+      if(Number(n) == 1 & next_ctr > 0){
+        next_ctr-=1;
+        console.log('here');
+      }else if(Number(n) == 1 & next_ctr <= 0){
+        next_ctr = next_ctr;
+      }else{
+        next_ctr+=1;
+      }
+
+      if(img_added){
+        document.getElementById("img_div").innerHTML = '';
+        img_added = false;
+      }
+
       if(value=="TAP"){
         document.getElementById('tutorial_text').innerHTML = tutorial_texts[next_ctr];
 
@@ -249,6 +267,7 @@
           var elem = document.createElement("img");
           elem.src = 'tutorial/sol_01.png';
           document.getElementById('img_div').appendChild(elem);
+          img_added = true;
         }
 
         else if(next_ctr == 5){
@@ -260,6 +279,7 @@
             var elem = document.createElement("img");
             elem.src = 'tutorial/sol_02.png';
             document.getElementById('img_div').appendChild(elem);
+            img_added = true;
         }
 
         if (next_ctr >= tutorial_texts.length){
@@ -271,6 +291,7 @@
       else if(value=='RL'){
         if(next_ctr < 2){
           document.getElementById('tutorial_text').innerHTML = tutorial_texts[next_ctr];
+          document.getElementById("img_div").innerHTML = '';
         }else{
           document.getElementById('tutorial_text').innerHTML = tutorial_texts_RL[next_ctr-2];
         }
@@ -278,6 +299,7 @@
           var elem = document.createElement("img");
           elem.src = 'tutorial/sol_05.png';
           document.getElementById('img_div').appendChild(elem);
+          img_added = true;
         }
         else if(next_ctr == 5){
             document.getElementById("img_div").innerHTML = '';
@@ -286,6 +308,7 @@
             var elem = document.createElement("img");
             elem.src = 'tutorial/sol_06.png';
             document.getElementById('img_div').appendChild(elem);
+            img_added = true;
         }
 
         if (next_ctr - 2 >= tutorial_texts_RL.length){
@@ -305,6 +328,7 @@
           var elem = document.createElement("img");
           elem.src = 'tutorial/sol_07.png';
           document.getElementById('img_div').appendChild(elem);
+          img_added = true;
         }
         else if(next_ctr == 5){
             document.getElementById("img_div").innerHTML = '';
@@ -313,6 +337,7 @@
             var elem = document.createElement("img");
             elem.src = 'tutorial/sol_08.png';
             document.getElementById('img_div').appendChild(elem);
+            img_added = true;
         }
 
         if (next_ctr - 2 >= tutorial_texts_RL.length){
@@ -333,14 +358,16 @@
             var elem = document.createElement("img");
             elem.src = 'tutorial/sol_03.png';
             document.getElementById('img_div').appendChild(elem);
+            img_added = true;
           }else if(next_ctr == 5){
             document.getElementById("img_div").innerHTML = '';
             document.getElementById('bear').style.visibility = 'visible';
           }
-          else if(next_ctr == 6){
+          else if(next_ctr == 7){
             var elem = document.createElement("img");
             elem.src = 'tutorial/sol_04.png';
             document.getElementById('img_div').appendChild(elem);
+            img_added = true;
           }
 
           if (next_ctr - 2 >= tutorial_texts_SEQ.length){
@@ -349,9 +376,7 @@
             document.getElementById('tutorial_text').innerHTML = "Congratulations on completing the tutorial! Now click on the <b>I'm done</b> button";
           }
 
-      }      
-
-      next_ctr+=1;
+      }    
     }
 
   </script>
