@@ -351,7 +351,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_full"] = function (block) {
-  return ["ehandsFull()", Blockly.JavaScript.PRECEDENCE];
+  return ["eHandsFull()", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -478,6 +478,7 @@ Blockly.defineBlocksWithJsonArray([
           "e_hands_free",
           "e_toy_in_room",
           "Boolean",
+          "e_hands_full",
           "e_toy_not_in_room",
           "e_person_not_in_room",
         ],

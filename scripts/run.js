@@ -6,7 +6,7 @@ const categoryStyles = {
 
 var workspace = Blockly.inject("blocklyDiv", {
   toolbox: document.getElementById("toolbox"),
-  scrollbars: false,
+  scrollbars: true,
   theme: Blockly.Theme.defineTheme("themeName", {
     base: Blockly.Themes.Classic,
     categoryStyles: categoryStyles,
