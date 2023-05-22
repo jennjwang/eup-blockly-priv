@@ -258,15 +258,6 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function () {
-    return eHandsFree();
-  };
-  interpreter.setProperty(
-    globalObject,
-    "handsFree",
-    interpreter.createNativeFunction(wrapper)
-  );
-
-  wrapper = function () {
     return eHandsFull();
   };
   interpreter.setProperty(

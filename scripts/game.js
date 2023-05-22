@@ -111,8 +111,8 @@ function moveRobotTo(id, coor) {
 }
 
 function handsFull() {
-  console.log("handsPrev", robot_c.handsPrev);
-  console.log("handsFree", robot_c.handsFree);
+  // console.log("handsPrev", robot_c.handsPrev);
+  // console.log("handsFree", robot_c.handsFree);
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
   }
@@ -124,12 +124,18 @@ function handsFull() {
 }
 
 function handsFree() {
-  console.log("handsPrev", robot_c.handsPrev);
-  console.log("handsFree", robot_c.handsFree);
+  // console.log("handsPrev", robot_c.handsPrev);
+  // console.log("handsFree", robot_c.handsFree);
+  // console.log("start", robot_c.start);
   if (robot_c.handsFree == robot_c.handsPrev) {
     console.log("hand not free");
     return false;
   }
+
+  if (robot_c.start) {
+    return false;
+  }
+
   if (robot_c.handsFree) {
     robot_c.handsPrev = robot_c.handsFree;
   }
