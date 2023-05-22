@@ -445,10 +445,6 @@ function get_policy(code, taskNum){
     for(key in values_table){
         state = state_ids[key]
 
-        if(key == 79){
-            debugger
-        }
-
         if(!(generate_goal_func(goal, state))){
             max_val = 0
             max_act = actions[0]
@@ -479,9 +475,9 @@ function get_policy(code, taskNum){
                     break
                 }
             }
-            if(tb){
-                debugger
-            }
+            // if(tb){
+            //     debugger
+            // }
             if(!(state.blocks.length >= 4 || (state.holding && state.blocks.length == 3))){
                 policy[generate_triggers(triggers, state)] = max_act
             }
