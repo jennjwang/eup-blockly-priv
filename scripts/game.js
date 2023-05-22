@@ -47,7 +47,7 @@ function moveRobotTo(id, coor) {
   let goal_x = coor[0];
   let goal_y = coor[1];
 
-  console.log("moving");
+  // console.log("moving");
 
   let robot = document.getElementById(id);
 
@@ -81,7 +81,7 @@ function moveRobotTo(id, coor) {
 
   function moveX() {
     if (robot_x == goal_x) {
-      console.log("y");
+      // console.log("y");
       clearInterval(id);
       id = setInterval(moveY, 0);
       pidList.push(id);
@@ -183,7 +183,7 @@ function isPersoninRoom() {
   }
 
   // console.log(robot_c.room);
-  console.log(person.isPersoninRoom(robot_c.room));
+  console.log("person is in room", person.isPersoninRoom(robot_c.room));
   return person.isPersoninRoom(robot_c.room);
 }
 

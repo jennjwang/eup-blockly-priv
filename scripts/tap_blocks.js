@@ -295,7 +295,9 @@ Blockly.JavaScript["forever"] = function (block) {
     var randNum = Math.floor(Math.random() * 10);
     var trigs = [];
     ${Blockly.JavaScript.statementToCode(block, "input")}
-    trigs[randNum % trigs.length]();
+    if (trigs.length != 0) {
+      trigs[randNum % trigs.length]();
+    }
   }\n
   `;
 };

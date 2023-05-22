@@ -161,7 +161,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_person_not_in_room"] = function () {
-  return ["isPersonNotinRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
 };
 
 // Blockly.JavaScript.PRECEDENCE = 0;
@@ -471,7 +471,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["trigger_person_in_room"] = function (block) {
-  return "isPersoninRoomEvent();\n\t";
+  return "isPersonInRoomEvent();\n\t";
 };
 
 // workspace blocks
