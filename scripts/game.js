@@ -18,7 +18,6 @@ function pick_up_toy() {
   }
 }
 
-
 function drop_toy() {
   if (robot_c.start) {
     robot_c.start = false;
@@ -48,7 +47,7 @@ function moveRobotTo(id, coor) {
   let goal_x = coor[0];
   let goal_y = coor[1];
 
-  console.log("moving");
+  // console.log("moving");
 
   let robot = document.getElementById(id);
 
@@ -82,7 +81,7 @@ function moveRobotTo(id, coor) {
 
   function moveX() {
     if (robot_x == goal_x) {
-      console.log("y");
+      // console.log("y");
       clearInterval(id);
       id = setInterval(moveY, 0);
       pidList.push(id);
@@ -112,8 +111,8 @@ function moveRobotTo(id, coor) {
 }
 
 function handsFull() {
-  console.log("handsPrev", robot_c.handsPrev);
-  console.log("handsFree", robot_c.handsFree);
+  // console.log("handsPrev", robot_c.handsPrev);
+  // console.log("handsFree", robot_c.handsFree);
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
   }
@@ -125,12 +124,18 @@ function handsFull() {
 }
 
 function handsFree() {
-  console.log("handsPrev", robot_c.handsPrev);
-  console.log("handsFree", robot_c.handsFree);
+  // console.log("handsPrev", robot_c.handsPrev);
+  // console.log("handsFree", robot_c.handsFree);
+  // console.log("start", robot_c.start);
   if (robot_c.handsFree == robot_c.handsPrev) {
     console.log("hand not free");
     return false;
   }
+
+  if (robot_c.start) {
+    return false;
+  }
+
   if (robot_c.handsFree) {
     robot_c.handsPrev = robot_c.handsFree;
   }
@@ -158,10 +163,11 @@ function toy_in_room() {
 
 function toy_not_in_room() {
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
-  return toys_in_room[robot_c.room].length == 0;}
-  
+  return toys_in_room[robot_c.room].length == 0;
+}
+
 function is_toy_in_room(room) {
-  return (toys_in_room[room].length != 0)
+  return toys_in_room[room].length != 0;
 }
 
 function resolveAfter3Seconds() {
@@ -183,15 +189,15 @@ function isPersoninRoom() {
   }
 
   // console.log(robot_c.room);
-  console.log(person.isPersoninRoom(robot_c.room));
+  console.log("person is in room", person.isPersoninRoom(robot_c.room));
   return person.isPersoninRoom(robot_c.room);
 }
 
-function isPersoninRoomEvent() {
+function isPersonInRoomEvent() {
   return person.isPersoninRoom(robot_c.room);
 }
 
-function isPersonNotinRoomEvent() {
+function isPersonNotInRoomEvent() {
   return !person.isPersoninRoom(robot_c.room);
 }
 

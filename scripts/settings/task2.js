@@ -5,7 +5,7 @@ function brandomRoom(rooms) {
   return rooms[i];
 }
 
-var ROBOT_ROOM = "";
+var ROBOT_ROOM = "kitchen";
 let BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
 if (BEAR_ROOM == "kitchen") {
   ROBOT_ROOM = "bedroom";
@@ -13,14 +13,15 @@ if (BEAR_ROOM == "kitchen") {
   ROBOT_ROOM = "kitchen";
 }
 
+const KITCHEN = [90, 90];
+const PLAYROOM = [320, 90];
+const BEDROOM = [150, 320];
+const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
-let bear = new Toy(BEAR_ROOM, 450, 200, "bear");
-
-const KITCHEN = [120, 200];
-const PLAYROOM = [450, 200];
-const BEDROOM = [220, 600];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+let bear_coors = rooms[BEAR_ROOM];
+let bear = new Toy(BEAR_ROOM, bear_coors[0], bear_coors[1], "bear");
 
 var toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 

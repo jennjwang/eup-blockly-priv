@@ -5,13 +5,13 @@ let CAR_ROOM = "kichen";
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
-let bear = new Toy(BEAR_ROOM, 120, 200, "bear");
-let car = new Toy(CAR_ROOM, 140, 200, "car");
-let duck = new Toy(DUCK_ROOM, 160, 200, "duck");
+let bear = new Toy(BEAR_ROOM, 80, 90, "bear");
+let car = new Toy(CAR_ROOM, 100, 90, "car");
+let duck = new Toy(DUCK_ROOM, 120, 90, "duck");
 
-const KITCHEN = [120, 200];
-const PLAYROOM = [450, 200];
-const BEDROOM = [220, 600];
+const KITCHEN = [90, 90];
+const PLAYROOM = [320, 90];
+const BEDROOM = [150, 340];
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [bear, car, duck], playroom: [], bedroom: [] };
@@ -68,27 +68,28 @@ function resetLocs() {
 
   if (toys.includes(bear)) {
     bear_elt.style.display = "block";
-    bear_elt.style.left = "120px";
-    bear_elt.style.bottom = "200px";
-    bear = new Toy(BEAR_ROOM, 120, 200, "bear");
+    bear_elt.style.left = "80px";
+    bear_elt.style.bottom = "90px";
+    let bear_coors = rooms[BEAR_ROOM];
+    bear = new Toy(BEAR_ROOM, 80, 90, "bear");
   } else {
     bear_elt.style.display = "none";
   }
 
   if (toys.includes(car)) {
     car_elt.style.display = "block";
-    car_elt.style.left = "120px";
-    car_elt.style.bottom = "200px";
-    car = new Toy(CAR_ROOM, 140, 200, "car");
+    car_elt.style.left = "100px";
+    car_elt.style.bottom = "90px";
+    car = new Toy(CAR_ROOM, 100, 90, "car");
   } else {
     car_elt.style.display = "none";
   }
 
   if (toys.includes(duck)) {
     duck_elt.style.display = "block";
-    duck_elt.style.left = "160px";
-    duck_elt.style.bottom = "200px";
-    duck = new Toy(DUCK_ROOM, 160, 200, "duck");
+    duck_elt.style.left = "120px";
+    duck_elt.style.bottom = "90px";
+    duck = new Toy(DUCK_ROOM, 120, 90, "duck");
   } else {
     duck_elt.style.display = "none";
   }

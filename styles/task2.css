@@ -13,14 +13,17 @@ header {
   }
   
   .blockly-editor {
-    width: 100%;
+    width: 40%;
     height: 100%;
     position: relative;
   }
   
   #blocklyDiv {
-    height: 800px;
+    /* height: 800px;
     width: 800px;
+    margin-top: 10px; */
+    height: 500px;
+    width: 500px;
     margin-top: 10px;
   }
   
@@ -33,57 +36,70 @@ header {
   
   .wrapper {
     display: flex;
-    flex-direction: row;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /* flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 80px 100px;
+    padding: 80px 80px;
     margin: auto;
-    padding: auto;
+    padding: auto; */
     /* height: 100vh;
     width: 100vw; */
   }
   
   .simulation {
-    width: 1600px;
+    /* width: 1600px;
     height: 800px;
+    position: relative;
+    background: lightgray;
+    margin-right: 40px; */
+    width: 490px;
+    height: 510px;
     position: relative;
     background: lightgray;
     margin-right: 40px;
   }
-  
-  #bedroom {
-    width: 670px;
-    height: 300px;
-    position: absolute;
-    margin: 10px;
-    z-index: 1;
-    background: lightcyan;
-  }
-  
-  #kitchen {
-    width: 360px;
-    height: 470px;
-    position: absolute;
-    margin-top: 320px;
-    margin-left: 10px;
-    z-index: 1;
-    background: lightgoldenrodyellow;
-  }
-  
-  #playroom {
-    width: 300px;
-    height: 470px;
-    margin-top: 320px;
-    margin-left: 380px;
-    z-index: 1;
-    background: lightpink;
-  }
+
+
+#bedroom {
+  width: 470px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  z-index: 1;
+  background: lightcyan;
+}
+
+#kitchen {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  margin-top: 270px;
+  margin-left: 10px;
+  z-index: 1;
+  background: lightgoldenrodyellow;
+}
+
+#playroom {
+  width: 230px;
+  height: 230px;
+  margin-top: 270px;
+  margin-left: 250px;
+  z-index: 1;
+  background: lightpink;
+  margin-right: 10px;
+}
   
   #robot {
-    width: 100px;
+    width: 80px;
     height: auto;
-    left: 220px;
-    bottom: 600px;
+    left: 200px;
+    bottom: 320px;
     z-index: 2;
     position: absolute;
   }
@@ -95,9 +111,9 @@ header {
   
   #bear{
     z-index: 2;
-    left: 500px;
-    bottom: 200px;
-    width: 50px;
+    left: 330px;
+    bottom: 100px;
+    width: 35px;
     height: auto;
     position: absolute;
   }
@@ -160,9 +176,12 @@ header {
   }
   
   #controls{
-    margin-top: -40px;
-    margin-left: 660px;
+    margin-top: -45px;
+    margin-left: 420px;
     position: absolute;
+    /* margin-top: -40px;
+    margin-left: 660px;
+    position: absolute; */
   }
   
   #stopButton:hover {

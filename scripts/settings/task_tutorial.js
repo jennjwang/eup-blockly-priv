@@ -17,9 +17,9 @@ let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Toy(BEAR_ROOM, 450, 200, "bear");
 
-const KITCHEN = [120, 200];
-const PLAYROOM = [450, 200];
-const BEDROOM = [220, 600];
+const KITCHEN = [90, 90];
+const PLAYROOM = [320, 90];
+const BEDROOM = [150, 320];
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 var toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
