@@ -122,7 +122,7 @@
     opacity: 0.8;
   }
   
-    #nextButton {
+  #nextButton {
     border: 2px solid blue;
     background: white;
     padding: 9px;
@@ -132,11 +132,13 @@
     font-size: medium;
     position: absolute;
     opacity: 0.8;
+    transition-duration: 0.4s;
   }
 
   #nextButton:hover {
     cursor: pointer;
-    background-color: solid blue;
+    background-color: blue; /* Green */
+    color: white;
   }
 
   #backButton {
@@ -149,11 +151,12 @@
     font-size: medium;
     position: absolute;
     opacity: 0.8;
+    transition-duration: 0.4s;
   }
 
   #backButton:hover {
     cursor: pointer;
-    background-color: solid red;
+    background-color: red;
   }
 
   /* p{
