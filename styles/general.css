@@ -138,3 +138,7 @@
     font-size: 12px;
   } */
   
+
+  #img_div img {
+    height: 250px;
+  }
