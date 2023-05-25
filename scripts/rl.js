@@ -261,7 +261,7 @@ function parser(code){
                     }
                 }
 
-                else {
+                if(!(goalsarr.length == 2) && !(goalsarr.length == 3)) {
                     goals.push(goalsarr[0])
                 }
             }
@@ -366,15 +366,15 @@ function get_policy(code, taskNum){
         // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
     if(taskNum == 3){
-        block_list = [[], ['kitchen'], ['bedroom'], ['kitchen', 'kitchen'], ['kitchen', 'bedroom'], ['bedroom', 'bedroom'],
-                        ['kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'bedroom'], ['kitchen', 'bedroom', 'bedroom'],
-                        ['bedroom', 'bedroom', 'bedroom'], ['kitchen', 'kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'kitchen', 'bedroom'],
-                        ['kitchen', 'kitchen', 'bedroom', 'bedroom'], ['kitchen', 'bedroom', 'bedroom', 'bedroom'], ['bedroom', 'bedroom', 'bedroom', 'bedroom']]
+        block_list = [[], ['kitchen'], ['playroom'], ['kitchen', 'kitchen'], ['kitchen', 'playroom'], ['playroom', 'playroom'],
+                        ['kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'playroom'], ['kitchen', 'playroom', 'playroom'],
+                        ['playroom', 'playroom', 'playroom'], ['kitchen', 'kitchen', 'kitchen', 'kitchen'], ['kitchen', 'kitchen', 'kitchen', 'playroom'],
+                        ['kitchen', 'kitchen', 'playroom', 'playroom'], ['kitchen', 'playroom', 'playroom', 'playroom'], ['playroom', 'playroom', 'playroom', 'playroom']]
         person_locs = [null]
         // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');"]
     }
 
-    if(triggers.includes('toy_in_room();')){
+    if(triggers.includes('toy_in_room();' || triggers.includes('toy_not_in_room();'))){
         triggers.push("is_toy_in_room(\'bedroom\');")
         triggers.push("is_toy_in_room(\'playroom\');")
         triggers.push("is_toy_in_room(\'kitchen\');")
