@@ -75,6 +75,10 @@ function generate_goal_func(goal, state) {
         val = val && (!state.holding)
     }
 
+    if(goal.includes('eHandsFull()')){
+        val = val && (state.holding)
+    }
+
     if(goal.includes('toy_in_room()')){
         val = val && (state.blocks.includes(state.robot_position))
     }
@@ -147,6 +151,15 @@ function generate_triggers(triggers, state){
                 output.push(1)
             } else {
                 output.push(0)
+            }
+
+        }
+
+        if(trigger == "eHandsFull();") {
+            if(!(state.holding)) {
+                output.push(0)
+            } else {
+                output.push(1)
             }
 
         }
@@ -261,7 +274,7 @@ function parser(code){
                     }
                 }
 
-                else {
+                if(!(goalsarr.length == 2) && !(goalsarr.length == 3)) {
                     goals.push(goalsarr[0])
                 }
             }
