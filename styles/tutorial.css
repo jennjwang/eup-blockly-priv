@@ -38,10 +38,10 @@ header {
     display: flex;
     margin: 0;
     position: absolute;
-    top: 75%;
+    top: 50%;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -40%);
+    transform: translate(-50%, -40%);
     /* flex-direction: row;
     justify-content: center;
     align-items: center;
