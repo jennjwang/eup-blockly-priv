@@ -8,7 +8,7 @@
   <title>Blockly for EUP</title>
 
   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-  <link rel="stylesheet" href="styles/task2.css">
+  <link rel="stylesheet" href="styles/tutorial.css">
   <link rel="stylesheet" href="styles/general.css">
   <script src="interpreter/acorn_interpreter.js"></script>
 </head>
@@ -27,7 +27,7 @@
         Welcome to the Robot Programming Tutorial! The goal of this tutorial is to familiarize you with the robot programming interface, so you can start creating custom behaviors for robotic tasks. Let's get started! <br/><b>Once you have completed each step, click on the <i>"Next"</i> button located at the bottom right to proceed with the tutorial.</b>
       </div>
 
-    <div id='img_div' style="height: 40%; display:inline-block; margin-top:10px; margin-left: -200px;"></div>
+    <div id='img_div' style="height: 40%; display:inline-block; margin-top:10px; margin-left: -250px;"></div>
   </div>
 
   <div class="wrapper" style="top: 55%;">
@@ -149,49 +149,49 @@
 
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
+    // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+    // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+    // import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "%API_KEY%",
-      authDomain: "eup-blockly.firebaseapp.com",
-      projectId: "eup-blockly",
-      storageBucket: "eup-blockly.appspot.com",
-      messagingSenderId: "217753483766",
-      appId: "%APP_ID%",
-      measurementId: "G-9CXK0MCT41",
-    };
+    // const firebaseConfig = {
+    //   apiKey: "%API_KEY%",
+    //   authDomain: "eup-blockly.firebaseapp.com",
+    //   projectId: "eup-blockly",
+    //   storageBucket: "eup-blockly.appspot.com",
+    //   messagingSenderId: "217753483766",
+    //   appId: "%APP_ID%",
+    //   measurementId: "G-9CXK0MCT41",
+    // };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+    // // Initialize Firebase
+    // const app = initializeApp(firebaseConfig);
 
-    // Initialize Cloud Firestore and get a reference to the service
-    const db = getFirestore(app);
+    // // Initialize Cloud Firestore and get a reference to the service
+    // const db = getFirestore(app);
 
-    console.log(window.location.href);
-    const url = new URL(window.location.href);
-    // console.log(url.searchParams.get('STUDY_ID'));
+    // console.log(window.location.href);
+    // const url = new URL(window.location.href);
+    // // console.log(url.searchParams.get('STUDY_ID'));
 
-    // document.querySelector("#runButton").addEventListener("click", record);
-    document.querySelector("#doneButton").addEventListener("click", finalRecord);
+    // // document.querySelector("#runButton").addEventListener("click", record);
+    // document.querySelector("#doneButton").addEventListener("click", finalRecord);
 
-    async function record(){
-        try {
-          const timeElapsed = Date.now();
-          const today = new Date(timeElapsed);
-          const docRef = await addDoc(collection(db, "task_tutorial"), {
-            study_id: url.searchParams.get('STUDY_ID'),
-            prolific_pid: url.searchParams.get('PROLIFIC_PID'),
-            session_id: url.searchParams.get('SESSION_ID'),
-            timestamp: today.toISOString(),
-            code: document.getElementById("code").innerHTML
-          });
-          console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
-    }
+    // async function record(){
+    //     try {
+    //       const timeElapsed = Date.now();
+    //       const today = new Date(timeElapsed);
+    //       const docRef = await addDoc(collection(db, "task_tutorial"), {
+    //         study_id: url.searchParams.get('STUDY_ID'),
+    //         prolific_pid: url.searchParams.get('PROLIFIC_PID'),
+    //         session_id: url.searchParams.get('SESSION_ID'),
+    //         timestamp: today.toISOString(),
+    //         code: document.getElementById("code").innerHTML
+    //       });
+    //       console.log("Document written with ID: ", docRef.id);
+    //     } catch (e) {
+    //       console.error("Error adding document: ", e);
+    //     }
+    // }
   </script>
 
   <script src="https://unpkg.com/blockly"></script>
