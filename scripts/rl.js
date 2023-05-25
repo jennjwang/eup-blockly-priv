@@ -40,10 +40,10 @@ function simulator(state, action) {
 function generate_goal_func(goal, state) {
     val = true
 
-    if(goal.includes('isPersoninRoomEvent()')){
+    if(goal.includes('isPersonInRoomEvent()')){
         val = val && (state.person == state.robot_position)
     }
-    if(goal.includes('isPersonNotinRoomEvent()')){
+    if(goal.includes('isPersonNotInRoomEvent()')){
         val = val && !(state.person == state.robot_position)
     }
 
@@ -159,14 +159,14 @@ function generate_triggers(triggers, state){
             }
         }
 
-        if(trigger == "isPersonNotinRoomEvent();") {
+        if(trigger == "isPersonNotInRoomEvent();") {
             if(!(state.person == state.robot_position)) {
                 output.push(1)
             } else {
                 output.push(0)
             }
         }
-        if(trigger == "isPersoninRoomEvent();") {
+        if(trigger == "isPersonInRoomEvent();") {
             if(!(state.person == state.robot_position)) {
                 output.push(0)
             } else {

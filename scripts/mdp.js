@@ -40,10 +40,10 @@ function simulator(state, action) {
 function generate_goal_func(goal, state) {
     val = true
 
-    if(goal.includes('isPersoninRoomEvent()')){
+    if(goal.includes('isPersonInRoomEvent()')){
         val = val && (state.person == state.robot_position)
     }
-    if(goal.includes('isPersonNotinRoomEvent()')){
+    if(goal.includes('isPersonNotInRoomEvent()')){
         val = val && !(state.person == state.robot_position)
     }
 
@@ -159,14 +159,14 @@ function generate_triggers(triggers, state){
             }
         }
 
-        if(trigger == "isPersonNotinRoomEvent();") {
+        if(trigger == "isPersonNotInRoomEvent();") {
             if(!(state.person == state.robot_position)) {
                 output.push(1)
             } else {
                 output.push(0)
             }
         }
-        if(trigger == "isPersoninRoomEvent();") {
+        if(trigger == "isPersonInRoomEvent();") {
             if(!(state.person == state.robot_position)) {
                 output.push(0)
             } else {
@@ -358,7 +358,7 @@ function get_mdp_policy(code, taskNum){
     if(taskNum == 1){
         person_locs = ['kitchen', 'bedroom', 'playroom', null]
         block_list = [[]]
-        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
+        triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotInRoomEvent();"]
     }
     if(taskNum == 2 || taskNum == '_'){
         block_list = [['playroom'], [], ['bedroom'], ['kitchen']]
