@@ -210,3 +210,7 @@ header {
   #code {
     display: none;
   }
+
+  #tutorial_text ol li{
+    font-size: 1.5vh;
+  }

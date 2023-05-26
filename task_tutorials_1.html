@@ -22,7 +22,7 @@
       Back
       </button>
     </div>
-      <div id='tutorial_text' style="display:inline-block;width: 55%; font: 14px Arial, sans-serif; margin-left: 50px; margin-top: 20px; float: left;">
+      <div id='tutorial_text' style="display:inline-block;width: 55%; font-size: 1.5vh; font-family:  Arial, sans-serif; margin-left: 50px; margin-top: 20px; float: left;">
         Welcome to the Robot Programming Tutorial! The goal of this tutorial is to familiarize you with the robot programming interface, so you can start creating custom behaviors for robotic tasks. Let's get started! <br/><b>Once you have completed each step, click on the <i>"Next"</i> button located at the bottom right to proceed with the tutorial.</b>
       </div>
       <div id='img_div' style="height: 40%; display:inline-block; margin-top:10px; float: left;"></div>
@@ -243,12 +243,16 @@
     var tutorial_texts_SEQ = ["The robot is designed to follow actions specified by users (e.g., go to the kitchen, pick up a toy).  These sequences of actions are specified in the programming interface by dragging and dropping action blocks and connecting them in a linear sequence. The robot also has sensors which helps it understand where it is and if it is holding objects.", "Now, let's program the robot to move to the kitchen. To achieve this, Click on the \"Actions\" tab and drag \"Go to kitchen\" piece and drop it on the programming interface.", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running.", "Now let's work on a second task. In this task you will program the robot to move the toy from the playroom to the kitchen. To do this, <ol><li>First remove the \"Go to kitchen\" piece added to the programming interface by dragging it to the trash bin found on the bottom right corner</li> <li>Then click on the <b>Actions</b> tab and drag the \"Go to kitchen\" piece to the programming interface and change kitchen to playroom</li><li>Once the robot arrives in the playroom, the robot needs to pick up the toy. Before trying to pick up the toy, we will first make the robot check if there is a toy. This check becomes crucial when the robot doesn't know where the toy is ahead of time. Therefore, it would have to check if a toy is present before it tries to pick up the toy. For that, click on the Controls tab and drag the \"If do\" block and attach it under the \"Go to playroom\" piece. Then drag \"a toy is in the room\" piece from the states tab and attach it to the if.</li></ol>","<ol start=3><li>Click on the <b>actions</b> menu and drag the \"Pick up the toy\" piece and attach it next to <b>do</b>. This block instructs the robot to pick up the toy only if it detects there is a toy in the room. </li> <li>Once the robot picks up the toy, the next step is to take the toy to the kitchen. Drag \"Go to kitchen\" piece and attach it below the \"if do\" block.</li><li>The final step is to put down the toy. For that click on the <b>actions</b> menu and drag the \"put down the toy\" piece and place it below the last piece.</li></ol>", "If your program looks like the image on the right,<br> then press the \"Run Program\" button to see your program running."]
 
     function nextTutorialListener(n){
+      if (value=='TAP'){
+        final_cnt = tutorial_texts.length;
+      }else{
+        final_cnt = tutorial_texts_RL.length;
+      }
       if(Number(n) == 1 & next_ctr > 0){
         next_ctr-=1;
-        console.log('here');
       }else if(Number(n) == 1 & next_ctr <= 0){
         next_ctr = next_ctr;
-      }else{
+      }else if(Number(n) == 0 & next_ctr <= final_cnt + 1){
         next_ctr+=1;
       }
 
