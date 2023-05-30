@@ -83,7 +83,7 @@ function movePerson() {
     // if (person.room != robot_c.room) {
     movePersonHelper();
     // }
-  }, 4000);
+  }, 5000);
 }
 
 function toggleTask1() {

@@ -215,8 +215,10 @@ function moveRobotToRandomRoom() {
   }
   let temp_rooms = ["kitchen", "bedroom", "playroom"];
   shuffleArray(temp_rooms);
-  let i = Math.floor(Math.random() * 3);
-  moveRobotToRoom(temp_rooms[i]);
+  temp_rooms.splice(temp_rooms.indexOf(robot_c.room), 1);
+  // let i = Math.floor(Math.random() * 3);
+  temp_rooms.push(robot_c.room);
+  moveRobotToRoom(temp_rooms[0]);
 }
 
 function isRobotinRoom(room) {
