@@ -5,7 +5,10 @@ function pick_up_toy() {
   let room = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
     let toys = toys_in_room[room];
-    holding = toys.pop();
+    // holding = toys.pop();
+    console.log(room, 'this room');
+    toys[toys.length - 1].room = room;
+    holding = toys[toys.length - 1];
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
@@ -282,6 +285,7 @@ function moveRobotToRoom(room) {
   console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
+    toys_in_room[robot_c.holding.room].pop()
     robot_c.holding.room = room;
   }
 
