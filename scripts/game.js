@@ -29,9 +29,6 @@ function drop_toy() {
     let room = robot_c.room;
     console.log("dropped toy");
 
-    toys_in_room[robot_c.holding.room].pop()
-    robot_c.holding.room = room;
-
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
     toys_in_room[room].push(robot_c.holding);
@@ -288,10 +285,10 @@ function moveRobotToRoom(room) {
 
   console.log("holding", robot_c.holding);
 
-  // if (!robot_c.handsFree) {
-  //   toys_in_room[robot_c.holding.room].pop()
-  //   robot_c.holding.room = room;
-  // }
+  if (!robot_c.handsFree) {
+    toys_in_room[robot_c.holding.room].pop()
+    robot_c.holding.room = room;
+  }
 
   moveRobotTo("robot", dst);
 
