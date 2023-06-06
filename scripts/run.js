@@ -33,6 +33,7 @@ function update(event) {
   document.getElementById("code").innerHTML = code;
   // console.log(check == "");
   console.log(code);
+  // if (code.length == 0): alert('there there') 
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
@@ -322,9 +323,26 @@ function reset() {
 
 // document.querySelector("#runButton").addEventListener("click", toggleButton);
 
+document.querySelector('#doneButton').disabled = true;
+
 function toggleButton() {
   var button = document.getElementById("runButton");
 
+  let code_input = Blockly.JavaScript.workspaceToCode(workspace);
+  
+  let paradigm = url.searchParams.get("format");
+
+  // alert(code_input);
+  
+  if ((paradigm == 'MDP' || paradigm == 'RL')  & !code_input.includes('undefined')){
+    document.querySelector('#doneButton').disabled = false;
+  }else if(paradigm=='TAP' & !code_input.includes('trigs = []')){
+    document.querySelector('#doneButton').disabled = false;
+  }else if(paradigm=='SEQ' & code_input.length > 0){
+    document.querySelector('#doneButton').disabled = false;
+  }
+
+  
   if (button.innerHTML === "Run Program") {
     button.innerHTML = "Stop Program";
     button.classList.remove("run");
