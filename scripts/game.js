@@ -165,16 +165,22 @@ function toy_in_room() {
   // console.log("robot is in", robot_c.room);
   // console.log(toys_in_room);
   // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
-  return toys_in_room[robot_c.room].length != 0;
+  // return toys_in_room[robot_c.room].length != 0;
+  let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
+  if (!robot_c.handsFree){return (toy_in_room_check || robot_c.holding.room == robot_c.room);} 
+  else{return toy_in_room_check}
 }
 
 function toy_not_in_room() {
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
-  return toys_in_room[robot_c.room].length == 0;
+  return !toy_in_room(); //toys_in_room[robot_c.room].length == 0;
 }
 
 function is_toy_in_room(room) {
-  return toys_in_room[room].length != 0;
+  let toy_in_room_check = toys_in_room[room].length != 0;
+  if (!robot_c.handsFree){return (toy_in_room_check || robot_c.holding.room == room);} 
+  else{return toy_in_room_check}
+  // return toy_in_room_check = toys_in_room[room].length != 0 
 }
 
 function isPersoninRoom() {
