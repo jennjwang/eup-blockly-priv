@@ -44,9 +44,9 @@ function update(event) {
   }
 
   if (url.searchParams.get("format") == "TAP") {
-    // if (check == "") {
-    //   return;
-    // }
+    if (check == "") {
+      return;
+    }
   }
 
   // if (url.searchParams.get("format") == "SEQ") {

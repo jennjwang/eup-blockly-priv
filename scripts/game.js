@@ -20,7 +20,6 @@ function pick_up_toy() {
     console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
     moveRobotTo(robot_c.holding.id, dst);
-    // toys_in_room[robot_c.holding.room].pop();
   }
 }
 
@@ -34,11 +33,10 @@ function drop_toy() {
 
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
-    toys_in_room[robot_c.holding.room].pop();
-    toys_in_room[room].push(robot_c.holding);
 
     const dst = rooms[room];
     moveRobotTo(robot_c.holding.id, dst);
+    toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;
@@ -294,8 +292,8 @@ function moveRobotToRoom(room) {
   console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
-    // toys_in_room[robot_c.holding.room].pop();
-    // robot_c.holding.room = room;
+    toys_in_room[robot_c.holding.room].pop();
+    robot_c.holding.room = room;
     console.log(robot_c.holding);
     console.log("toys", toys_in_room);
   }
