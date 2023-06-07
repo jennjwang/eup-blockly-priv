@@ -147,7 +147,12 @@
     console.log(window.location.href);
     const url = new URL(window.location.href);
 
-    document.querySelector("#runButton").addEventListener("click", record);
+
+    document.querySelector("#runButton").addEventListener("click", () => {
+      if (document.getElementById("runButton").innerHTML == "Stop Program"){
+        record();
+      }
+    });
     
     // document.querySelector("#doneButton").addEventListener("click", finalRecord);
 

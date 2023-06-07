@@ -359,21 +359,6 @@ document.querySelector("#doneButton").addEventListener("click", () => {
   document.getElementById("modal").style.display = "block";
 });
 
-// function runButton() {
-//   // document.getElementById("stopButton").classList.remove("stop");
-//   document.getElementById("runButton").classList.remove("run");
-//   document.getElementById("runButton").classList.add("stop");
-// }
-
-// function stopButton() {
-//   document.getElementById("stopButton").classList.add("stop");
-//   document.getElementById("runButton").classList.add("done");
-// }
-
-// document.querySelector("#runButton").addEventListener("click", runButton);
-
-// document.querySelector("#stopButton").addEventListener("click", stopButton);
-
 // add blocks to the workspace
 const url = new URL(window.location.href);
 // console.log(url.searchParams.get("format"));
