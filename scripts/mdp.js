@@ -80,11 +80,11 @@ function generate_goal_func(goal, state) {
     }
 
     if(goal.includes('toy_in_room()')){
-        val = val && (state.blocks.includes(state.robot_position))
+        val = val && (state.blocks.includes(state.robot_position) || state.holding)
     }
     
     if(goal.includes('toy_not_in_room()')){
-        val = val && !(state.blocks.includes(state.robot_position))
+        val = val && !(state.blocks.includes(state.robot_position) || state.holding)
     }
 
     return val
@@ -165,7 +165,7 @@ function generate_triggers(triggers, state){
         }
         
         if(trigger == "toy_in_room();") {
-            if(state.blocks.includes(state.robot_position)) {
+            if(state.blocks.includes(state.robot_position) || (state.holding == true)) {
                 output.push(1)
             } else {
                 output.push(0)
@@ -187,28 +187,28 @@ function generate_triggers(triggers, state){
             }
         }
         if(trigger == "is_toy_in_room(\'bedroom\');") {
-            if(state.blocks.includes('bedroom')) {
+            if(state.blocks.includes('bedroom') || (state.holding == true && state.robot_position == 'bedroom')) {
                 output.push(1)
             } else {
                 output.push(0)
             }
         }
         if(trigger == "is_toy_in_room(\'kitchen\');") {
-            if(state.blocks.includes('kitchen')) {
+            if(state.blocks.includes('kitchen') || (state.holding == true && state.robot_position == 'kitchen')) {
                 output.push(1)
             } else {
                 output.push(0)
             }
         }
         if(trigger == "is_toy_in_room(\'playroom\');") {
-            if(state.blocks.includes('playroom')) {
+            if(state.blocks.includes('playroom') || (state.holding == true && state.robot_position == 'playroom')) {
                 output.push(1)
             } else {
                 output.push(0)
             }
         }
         if(trigger == "toy_not_in_room();") {
-            if(!(state.blocks.includes(state.robot_position))) {
+            if(!(state.blocks.includes(state.robot_position)  || (state.holding == true))) {
                 output.push(1)
             } else {
                 output.push(0)
