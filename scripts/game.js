@@ -269,9 +269,9 @@ function isRobotOutOfEvent(room) {
 // HELPER
 function resolveAfter3Seconds() {
   return new Promise((resolve) => {
-    const id = setTimeout(() => {
-      resolve(1 + 4);
-    }, 800);
+    // const id = setTimeout(() => {
+    resolve(1 + 4);
+    // }, 10);
     pidList.push(id);
   });
 }
@@ -286,7 +286,7 @@ function moveRobotToRoom(room) {
     moveRobotTo("robot", [x, y + 20]);
     setTimeout(() => {
       moveRobotTo("robot", dst);
-    }, 400);
+    }, 300);
   }
 
   robot_c.setRoom(room);
