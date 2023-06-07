@@ -64,7 +64,7 @@ function update(event) {
 
   function nextStep() {
     if (myInterpreter.step()) {
-      const pid = setTimeout(nextStep, 3);
+      const pid = setTimeout(nextStep, 0);
       pids.push(pid);
     } else {
       // alert(

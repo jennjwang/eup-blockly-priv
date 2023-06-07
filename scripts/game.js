@@ -18,6 +18,8 @@ function pick_up_toy() {
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
     console.log("hands are free?", robot_c.handsFree);
+    const dst = [rooms[room][0], rooms[room][1] + 10];
+    moveRobotTo(robot_c.holding.id, dst);
     // toys_in_room[robot_c.holding.room].pop();
   }
 }
@@ -34,6 +36,10 @@ function drop_toy() {
     robot_c.handsFree = true;
     toys_in_room[robot_c.holding.room].pop();
     toys_in_room[room].push(robot_c.holding);
+
+    const dst = rooms[room];
+    moveRobotTo(robot_c.holding.id, dst);
+
     robot_c.holding.room = room;
     robot_c.holding = null;
   }
@@ -176,13 +182,13 @@ function is_toy_in_room(room) {
   return toys_in_room[room].length != 0;
 }
 
-function resolveAfter3Seconds() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(1 + 4);
-    }, 3000);
-  });
-}
+// function resolveAfter3Seconds() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(1 + 4);
+//     }, 3000);
+//   });
+// }
 
 function isPersoninRoom() {
   // console.log("person: " + person.prev == person.room);
@@ -265,7 +271,7 @@ function resolveAfter3Seconds() {
   return new Promise((resolve) => {
     const id = setTimeout(() => {
       resolve(1 + 4);
-    }, 2500);
+    }, 800);
     pidList.push(id);
   });
 }
@@ -297,7 +303,8 @@ function moveRobotToRoom(room) {
   moveRobotTo("robot", dst);
 
   if (!robot_c.handsFree) {
-    moveRobotTo(robot_c.holding.id, dst);
+    const toy_dst = [dst[0], dst[1] + 10];
+    moveRobotTo(robot_c.holding.id, toy_dst);
     // toys_in_room[room].push(robot_c.holding);
   }
 }
