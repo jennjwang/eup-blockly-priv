@@ -24,16 +24,14 @@ function update(event) {
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
   // code =
-  //   "var trigs = [function(){moveRobotToRoom('kitchen');}, function(){moveRobotToRoom('bedroom');}];trigs[1]()";
-  // code =
-  //   "while (true) {var trigs = [];if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('kitchen');});};if(isRobotinRoom('bedroom')){trigs.push(function(){moveRobotToRoom('bedroom')});};trigs[1]();break;}";
+  //   "while (!((isRobotinRoomEvent('kitchen') && toy_not_in_room()))) { if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ pick_up_toy(); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ pick_up_toy(); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ drop_toy(); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ drop_toy(); } }";
 
   let check = document.getElementById("code").innerHTML;
 
   document.getElementById("code").innerHTML = code;
   // console.log(check == "");
   console.log(code);
-  // if (code.length == 0): alert('there there') 
+  // if (code.length == 0): alert('there there')
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
@@ -42,14 +40,13 @@ function update(event) {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_rl(code, taskNum);
+    console.log("rl code", code);
   }
 
   if (url.searchParams.get("format") == "TAP") {
-    if (check == "") {
-      //   runButton();
-      // } else {
-      return;
-    }
+    // if (check == "") {
+    //   return;
+    // }
   }
 
   // if (url.searchParams.get("format") == "SEQ") {
@@ -60,13 +57,14 @@ function update(event) {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_mdp(code, taskNum);
+    console.log("mdp", code);
   }
 
   myInterpreter = new Interpreter(code, initApi);
 
   function nextStep() {
     if (myInterpreter.step()) {
-      const pid = setTimeout(nextStep, 10);
+      const pid = setTimeout(nextStep, 3);
       pids.push(pid);
     } else {
       // alert(
@@ -323,26 +321,27 @@ function reset() {
 
 // document.querySelector("#runButton").addEventListener("click", toggleButton);
 
-document.querySelector('#doneButton').disabled = true;
+document.querySelector("#doneButton").disabled = true;
 
 function toggleButton() {
   var button = document.getElementById("runButton");
 
   let code_input = Blockly.JavaScript.workspaceToCode(workspace);
-  
+
   let paradigm = url.searchParams.get("format");
 
   // alert(code_input);
-  
-  if ((paradigm == 'MDP' || paradigm == 'RL')  & !code_input.includes('undefined')){
-    document.querySelector('#doneButton').disabled = false;
-  }else if(paradigm=='TAP' & !code_input.includes('trigs = []')){
-    document.querySelector('#doneButton').disabled = false;
-  }else if(paradigm=='SEQ' & code_input.length > 0){
-    document.querySelector('#doneButton').disabled = false;
+
+  if (
+    (paradigm == "MDP" || paradigm == "RL") & !code_input.includes("undefined")
+  ) {
+    document.querySelector("#doneButton").disabled = false;
+  } else if ((paradigm == "TAP") & !code_input.includes("trigs = []")) {
+    document.querySelector("#doneButton").disabled = false;
+  } else if ((paradigm == "SEQ") & (code_input.length > 0)) {
+    document.querySelector("#doneButton").disabled = false;
   }
 
-  
   if (button.innerHTML === "Run Program") {
     button.innerHTML = "Stop Program";
     button.classList.remove("run");
