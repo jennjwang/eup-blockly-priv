@@ -12,8 +12,6 @@ function pick_up_toy() {
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
-    console.log("going to", [x, y]);
-    // moveRobotTo("robot", [x, y]);
     console.log("picked up", robot_c.holding.id);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
@@ -116,7 +114,6 @@ function moveRobotTo(id, coor) {
       robot_y--;
       robot.style.bottom = robot_y + "px";
     }
-    // console.log(robot.style);
   }
 }
 
@@ -179,14 +176,6 @@ function toy_not_in_room() {
 function is_toy_in_room(room) {
   return toys_in_room[room].length != 0;
 }
-
-// function resolveAfter3Seconds() {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(1 + 4);
-//     }, 3000);
-//   });
-// }
 
 function isPersoninRoom() {
   // console.log("person: " + person.prev == person.room);
@@ -303,7 +292,6 @@ function moveRobotToRoom(room) {
   if (!robot_c.handsFree) {
     const toy_dst = [dst[0], dst[1] + 10];
     moveRobotTo(robot_c.holding.id, toy_dst);
-    // toys_in_room[room].push(robot_c.holding);
   }
 }
 

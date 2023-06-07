@@ -111,8 +111,8 @@ header {
   
   #bear{
     z-index: 2;
-    left: 330px;
-    bottom: 100px;
+    left: 80px;
+    bottom: 90px;
     width: 35px;
     height: auto;
     position: absolute;
