@@ -317,10 +317,6 @@ function reset() {
   code = resetLocs();
 }
 
-// document.querySelector("#runButton").addEventListener("click", update);
-
-// document.querySelector("#runButton").addEventListener("click", toggleButton);
-
 document.querySelector("#doneButton").disabled = true;
 
 function toggleButton() {
@@ -354,6 +350,19 @@ function toggleButton() {
     reset();
   }
 }
+
+// function saveStates() {
+//   var button = document.getElementById("runButton");
+
+//   if (button.innerHTML === "Run Program") {
+//     console.log(start_states);
+//     console.log("end", end_states);
+//     document.getElementById("start").innerHTML = start_states;
+//     document.getElementById("end").innerHTML = end_states;
+//     start_states = "";
+//     end_states = "";
+//   }
+// }
 
 document.querySelector("#doneButton").addEventListener("click", () => {
   document.getElementById("modal").style.display = "block";

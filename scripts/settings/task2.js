@@ -37,6 +37,11 @@ function resetLocs() {
   robot started in ${ROBOT_ROOM}
   toy started in ${BEAR_ROOM}`;
 
+  console.log(start_states);
+  console.log("end", end_states);
+  document.getElementById("start").innerHTML = start_states;
+  document.getElementById("end").innerHTML = end_states;
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
@@ -68,18 +73,3 @@ function resetLocs() {
 function isSameRoom(room) {
   return robot_c.room == room;
 }
-
-function toggleTask2() {
-  var button = document.getElementById("runButton");
-
-  if (button.innerHTML === "Run Program") {
-    console.log(start_states);
-    console.log("end", end_states);
-    document.getElementById("start").innerHTML = start_states;
-    document.getElementById("end").innerHTML = end_states;
-    start_states = "";
-    end_states = "";
-  }
-}
-
-document.querySelector("#runButton").addEventListener("click", toggleTask2);

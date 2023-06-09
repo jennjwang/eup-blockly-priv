@@ -137,23 +137,21 @@
 
   </div>
   <script src="https://unpkg.com/blockly"></script>
-  <script src="scripts/require.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
 
-    require("dotenv").config()
-
     const firebaseConfig = {
-      apiKey: process.env.API_KEY,
+      apiKey: "AIzaSyDiIxREdUezYv-Pxt2Z0uEJeZkyWYmAxw4",
       authDomain: "eup-blockly.firebaseapp.com",
       projectId: "eup-blockly",
       storageBucket: "eup-blockly.appspot.com",
       messagingSenderId: "217753483766",
-      appId: process.env.API_ID,
-      measurementId: "G-9CXK0MCT41",
+      appId: "1:217753483766:web:e70dc79808942eddd1afd7",
+      measurementId: "G-9CXK0MCT41"
     };
+
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -164,9 +162,12 @@
     console.log(window.location.href);
     const url = new URL(window.location.href);
     // console.log(url.searchParams.get('STUDY_ID'));
-
-    // document.querySelector("#runButton").addEventListener("click", record);
-
+    
+    document.querySelector("#runButton").addEventListener("click", () => {
+      if (document.getElementById("runButton").innerHTML == "Stop Program"){
+        record();
+      }
+    });
     async function record(){
         try {
           const timeElapsed = Date.now();
@@ -176,7 +177,9 @@
             prolific_pid: url.searchParams.get('PROLIFIC_PID'),
             session_id: url.searchParams.get('SESSION_ID'),
             timestamp: today.toISOString(),
-            code: document.getElementById("code").innerHTML
+            code: document.getElementById("code").innerHTML,
+            start_state: document.getElementById("start").innerHTML,
+            end_state: document.getElementById("end").innerHTML
           });
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -185,7 +188,6 @@
     }
 
   </script>
-  <script src="scripts/util.js" type="module"></script>
   <script src="scripts/obj.js"></script>
   <script src="scripts/settings/task3.js"></script>
   <script id="tap" src="scripts/tap_blocks.js"></script>

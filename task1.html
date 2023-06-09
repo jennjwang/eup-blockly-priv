@@ -149,7 +149,9 @@
 
 
     document.querySelector("#runButton").addEventListener("click", () => {
-      if (document.getElementById("runButton").innerHTML == "Stop Program"){
+      console.log(document.getElementById("runButton").innerHTML)
+      if (document.getElementById("runButton").innerHTML != "Stop Program"){
+        console.log('recording')
         record();
       }
     });
@@ -158,6 +160,8 @@
 
 
     async function record(){
+      console.log('end', document.getElementById("end").innerHTML)
+      console.log('start', document.getElementById("start").innerHTML)
         try {
           const timeElapsed = Date.now();
           const today = new Date(timeElapsed);
@@ -168,6 +172,8 @@
             session_id: url.searchParams.get('SESSION_ID'),
             timestamp: today.toISOString(),
             code: document.getElementById("code").innerHTML,
+            start_state: document.getElementById("start").innerHTML,
+            end_state: document.getElementById("end").innerHTML
           });
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {

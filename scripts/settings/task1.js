@@ -24,6 +24,12 @@ function resetLocs() {
   robot started in ${ROBOT_ROOM}
   person started in ${PERSON_ROOM}`;
 
+  clearInterval(interval);
+  document.getElementById("start").innerHTML = start_states;
+  document.getElementById("end").innerHTML = end_states;
+  start_states = "";
+  end_states = "";
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
@@ -89,16 +95,7 @@ function movePerson() {
 function toggleTask1() {
   var button = document.getElementById("runButton");
 
-  if (button.innerHTML === "Run Program") {
-    clearInterval(interval);
-    console.log(start_states);
-    console.log("end", end_states);
-    document.getElementById("start").innerHTML = start_states;
-    document.getElementById("end").innerHTML = end_states;
-    start_states = "";
-    end_states = "";
-  } else {
-    console.log("moving person");
+  if (button.innerHTML != "Run Program") {
     movePerson();
   }
 }
