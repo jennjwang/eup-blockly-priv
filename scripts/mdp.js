@@ -51,7 +51,7 @@ function generate_goal_func(goal, state) {
         val = val && (state.robot_position == 'kitchen')
     }
 
-    if(goal.includes('isRobotOutOfEvent(\'kitchen\')')){
+    if(goal.includes('!isRobotinRoomEvent(\'kitchen\')')){
         val = val && (state.robot_position != 'kitchen')
     }
 
@@ -59,7 +59,7 @@ function generate_goal_func(goal, state) {
         val = val && (state.robot_position == 'bedroom')
     }
 
-    if(goal.includes('isRobotOutOfEvent(\'bedroom\')')){
+    if(goal.includes('!isRobotinRoomEvent(\'bedroom\')')){
         val = val && (state.robot_position != 'bedroom')
     }
 
@@ -67,7 +67,7 @@ function generate_goal_func(goal, state) {
         val = val && (state.robot_position == 'playroom')
     }
 
-    if(goal.includes('isRobotOutOfEvent(\'playroom\')')){
+    if(goal.includes('!isRobotinRoomEvent(\'playroom\')')){
         val = val && (state.robot_position != 'playroom')
     }
 
