@@ -75,6 +75,11 @@ function generate_goal_func(goal, state) {
         val = val && (!state.holding)
     }
 
+    if(goal.includes('eHandsFull()')){
+        val = val && (state.holding)
+    }
+
+
     if(goal.includes('toy_in_room()')){
         val = val && (state.blocks.includes(state.robot_position) || state.holding)
     }
@@ -147,6 +152,15 @@ function generate_triggers(triggers, state){
                 output.push(1)
             } else {
                 output.push(0)
+            }
+
+        }
+
+        if(trigger == "eHandsFull();") {
+            if(!(state.holding)) {
+                output.push(0)
+            } else {
+                output.push(1)
             }
 
         }
