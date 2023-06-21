@@ -332,7 +332,7 @@ function toggleButton() {
     (paradigm == "MDP" || paradigm == "RL") & !code_input.includes("undefined")
   ) {
     document.querySelector("#doneButton").disabled = false;
-  } else if ((paradigm == "TAP") & !code_input.includes("trigs = []")) {
+  } else if ((paradigm == "TAP") & (code_input != null)) {
     document.querySelector("#doneButton").disabled = false;
   } else if ((paradigm == "SEQ") & (code_input.length > 0)) {
     document.querySelector("#doneButton").disabled = false;
