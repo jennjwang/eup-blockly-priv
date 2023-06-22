@@ -263,7 +263,7 @@ function isRobotOutOfEvent(room) {
 function resolveAfter3Seconds() {
   let delay = 10;
   let condition = url.searchParams.get("format");
-  if (condition == "SEQ" || condition == "TAP") {delay = 1000;}
+  if (condition == "SEQ" || condition == "TAP") {delay = 1500;}
 
   return new Promise((resolve) => {
     const id = setTimeout(() => {
