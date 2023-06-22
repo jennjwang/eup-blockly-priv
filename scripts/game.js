@@ -261,10 +261,14 @@ function isRobotOutOfEvent(room) {
 
 // HELPER
 function resolveAfter3Seconds() {
+  let delay = 10;
+  let condition = url.searchParams.get("format");
+  if (condition == "SEQ" || condition == "TAP") {delay = 1000;}
+
   return new Promise((resolve) => {
-    // const id = setTimeout(() => {
-    resolve(1 + 4);
-    // }, 10);
+    const id = setTimeout(() => {
+      resolve(1 + 4);
+    }, delay);
     pidList.push(id);
   });
 }
