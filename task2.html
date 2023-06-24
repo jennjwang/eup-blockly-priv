@@ -134,8 +134,13 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
-
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+    } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
+  
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
       apiKey: "AIzaSyDiIxREdUezYv-Pxt2Z0uEJeZkyWYmAxw4",
       authDomain: "eup-blockly.firebaseapp.com",
@@ -143,50 +148,186 @@
       storageBucket: "eup-blockly.appspot.com",
       messagingSenderId: "217753483766",
       appId: "1:217753483766:web:e70dc79808942eddd1afd7",
-      measurementId: "G-9CXK0MCT41"
+      measurementId: "G-9CXK0MCT41",
     };
-
-
+  
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-
+  
     // Initialize Cloud Firestore and get a reference to the service
     const db = getFirestore(app);
-
+  
     console.log(window.location.href);
     const url = new URL(window.location.href);
-    // console.log(url.searchParams.get('STUDY_ID'));
-    
+    const study_id = url.searchParams.get("STUDY_ID");
+    const prolific_pid = url.searchParams.get("PROLIFIC_PID")
+    const session_id = url.searchParams.get("SESSION_ID")
+    const format = url.searchParams.get("format")
+  
+    let round = 1
+    let operationOrder = 1
+  
     document.querySelector("#runButton").addEventListener("click", () => {
-      if (document.getElementById("runButton").innerHTML == "Stop Program"){
-        record();
+      console.log(document.getElementById("runButton").innerHTML);
+      if (document.getElementById("runButton").innerHTML != "Stop Program") {
+        console.log("recording");
+        record("stopped");
+        round += 1;
+        operationOrder = 0;
+      }
+      else{
+        record('started')
       }
     });
-    async function record(){
-        try {
-          const timeElapsed = Date.now();
-          const today = new Date(timeElapsed);
-          const docRef = await addDoc(collection(db, "task2"), {
-            study_id: url.searchParams.get('STUDY_ID'),
-            prolific_pid: url.searchParams.get('PROLIFIC_PID'),
-            session_id: url.searchParams.get('SESSION_ID'),
+  
+    document.querySelector("#doneButton").addEventListener("click", () => {
+      record('final');
+      document.getElementById("modal").style.display = "block";
+    });
+  
+  
+    async function onChange(event) {
+    if (event.type == Blockly.Events.BLOCK_CHANGE && event.name) {
+      const eventJson = event.toJson()
+      const block = workspace.getBlockById(eventJson.blockId)
+      try {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task2/round${round}/changed/`),
+        {
             timestamp: today.toISOString(),
-            code: document.getElementById("code").innerHTML,
-            start_state: document.getElementById("start").innerHTML,
-            end_state: document.getElementById("end").innerHTML
+            code: Blockly.JavaScript.workspaceToCode(workspace),
+            change: eventJson.type,
+            block: block.type,
+            newValue: eventJson.newValue,
+            oldValue: eventJson.oldValue,
+            order: operationOrder
           });
-          console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
+          operationOrder += 1
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     }
-
+  }
+  
+  async function onDelete(event) {
+    if (event.type == Blockly.Events.BLOCK_DELETE) {
+      const eventJson = event.toJson();
+      console.log(event.toJson());
+  
+      try {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
+        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task2/round${round}/deleted/`),
+        {
+            timestamp: today.toISOString(),
+            code: Blockly.JavaScript.workspaceToCode(workspace),
+            change: eventJson.type,
+            block: eventJson.oldJson,
+            order: operationOrder
+          });
+          operationOrder += 1
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+  }
+  
+  async function onBlockCreate(event) {
+    if (event.type == Blockly.Events.BLOCK_CREATE) {
+      const eventJson = event.toJson();
+      console.log(event.toJson());
+      try {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
+        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task2/round${round}/created/`),
+        {
+            timestamp: today.toISOString(),
+            code: Blockly.JavaScript.workspaceToCode(workspace),
+            change: eventJson.type,
+            block: eventJson.json.type,
+            order: operationOrder
+          });
+          operationOrder += 1
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+  }
+  
+  async function onMove(event) {
+    if (event.type == Blockly.Events.BLOCK_MOVE) {
+      // alert("Congratulations on creating your first comment!");
+      console.log(event.toJson());
+      const eventJson = event.toJson()
+      const block = workspace.getBlockById(eventJson.blockId)
+      let newParent = ''
+      let oldParent = ''
+      if (eventJson.newParentId){
+        newParent = workspace.getBlockById(eventJson.newParentId).type
+      }
+      if (eventJson.oldParentId){
+        oldParent = workspace.getBlockById(eventJson.newParentId).type
+      }
+      try {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task2/round${round}/moved/`),
+          {
+              timestamp: today.toISOString(),
+              code: Blockly.JavaScript.workspaceToCode(workspace),
+              change: eventJson.type,
+              block: block.type,
+              newConnection: newParent,
+              oldConnection: oldParent,
+              order: operationOrder
+            });
+            operationOrder += 1
+          console.log("Document written with ID: ", docRef.id);
+        // console.log(Blockly.JavaScript.workspaceToCode(workspace));
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+  }
+  
+  workspace.addChangeListener(onChange);
+  workspace.addChangeListener(onDelete);
+  workspace.addChangeListener(onBlockCreate);
+  workspace.addChangeListener(onMove);
+  
+  async function record(runStatus) {
+    console.log("end", document.getElementById("end").innerHTML);
+    console.log("start", document.getElementById("start").innerHTML);
+    try {
+      const timeElapsed = Date.now();
+      const today = new Date(timeElapsed);
+      const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task2/round${round}/${runStatus}/`),
+      {
+          timestamp: today.toISOString(),
+          code: Blockly.JavaScript.workspaceToCode(workspace),
+          start_state: document.getElementById("start").innerHTML,
+          end_state: document.getElementById("end").innerHTML,
+          runStatus: runStatus,
+          order: operationOrder
+        });
+        operationOrder += 1
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
   </script>
   <script src="https://unpkg.com/blockly"></script>
   <!-- <script src="scripts/timer.js"></script> -->
   <script src="scripts/obj.js"></script>
   <script src="scripts/settings/task2.js"></script>
-  <!-- <script id="tap" src="scripts/tap_blocks.js"></script> -->
+  <script id="tap" src="scripts/tap_blocks.js"></script>
   <script id="rl" src="scripts/rl_blocks.js"></script>
   <script src="scripts/run.js"></script>
   <script src="scripts/game.js"></script>

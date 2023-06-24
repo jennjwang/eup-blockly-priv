@@ -23,20 +23,16 @@ function update(event) {
   taskNum = url.toString().split("task")[1][0];
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
-  // code =
-  //   "while (!((isRobotinRoomEvent('kitchen') && toy_not_in_room()))) { if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ pick_up_toy(); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ pick_up_toy(); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if((isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && (isRobotinRoomEvent('bedroom')) && !(isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('playroom'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && (eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && !(toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && !(is_toy_in_room('playroom'))){ drop_toy(); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && !(is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ moveRobotToRoom('kitchen'); } if(!(isRobotinRoomEvent('kitchen')) && !(isRobotinRoomEvent('bedroom')) && (isRobotinRoomEvent('playroom')) && !(eHandsFree()) && (toy_in_room()) && !(is_toy_in_room('bedroom')) && (is_toy_in_room('kitchen')) && (is_toy_in_room('playroom'))){ drop_toy(); } }";
 
   let check = document.getElementById("code").innerHTML;
 
-  document.getElementById("code").innerHTML = code;
-  // console.log(check == "");
   console.log(code);
   // if (code.length == 0): alert('there there')
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
 
-  if (url.searchParams.get("format") == "RL") {
+  if (url.searchParams.get("format") == "FULL_MDP") {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_rl(code, taskNum);
@@ -53,7 +49,7 @@ function update(event) {
   //   runButton();
   // }
 
-  if (url.searchParams.get("format") == "MDP") {
+  if (url.searchParams.get("format") == "GOAL_MDP") {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_mdp(code, taskNum);
@@ -329,7 +325,8 @@ function toggleButton() {
   // alert(code_input);
 
   if (
-    (paradigm == "MDP" || paradigm == "RL") & !code_input.includes("undefined")
+    (paradigm == "GOAL_MDP" || paradigm == "FULL_MDP") &
+    !code_input.includes("undefined")
   ) {
     document.querySelector("#doneButton").disabled = false;
   } else if ((paradigm == "TAP") & (code_input != null)) {
@@ -351,33 +348,12 @@ function toggleButton() {
   }
 }
 
-// function saveStates() {
-//   var button = document.getElementById("runButton");
-
-//   if (button.innerHTML === "Run Program") {
-//     console.log(start_states);
-//     console.log("end", end_states);
-//     document.getElementById("start").innerHTML = start_states;
-//     document.getElementById("end").innerHTML = end_states;
-//     start_states = "";
-//     end_states = "";
-//   }
-// }
-
-document.querySelector("#doneButton").addEventListener("click", () => {
-  document.getElementById("modal").style.display = "block";
-});
-
 // add blocks to the workspace
 const url = new URL(window.location.href);
-// console.log(url.searchParams.get("format"));
-// console.log(url.searchParams.get("STUDY_ID"));
-// console.log(url.searchParams.get("PROLIFIC_PID"));
-// console.log(url.searchParams.get("SESSION_ID"));
 var xml;
 
 // categories of action, goals, trigger for RL format
-if (url.searchParams.get("format") == "RL") {
+if (url.searchParams.get("format") == "FULL_MDP") {
   xml = Blockly.Xml.textToDom(
     `
   <xml>
@@ -419,7 +395,7 @@ if (url.searchParams.get("format") == "RL") {
   document.getElementById("blockly-5").style.display = "none";
   document.getElementById("blockly-6").style.display = "none";
   document.getElementById("blockly-7").style.display = "none";
-} else if (url.searchParams.get("format") == "MDP") {
+} else if (url.searchParams.get("format") == "GOAL_MDP") {
   xml = Blockly.Xml.textToDom(
     `
   <xml>
@@ -450,8 +426,8 @@ Blockly.Xml.domToWorkspace(xml, workspace);
 window.onload = function () {
   // updates script dynamically depending on format
   if (
-    url.searchParams.get("format") == "RL" ||
-    url.searchParams.get("format") == "MDP"
+    url.searchParams.get("format") == "FULL_MDP" ||
+    url.searchParams.get("format") == "GOAL_MDP"
   ) {
     const scriptList = document.querySelectorAll(
       "script[type='text/javascript']"
