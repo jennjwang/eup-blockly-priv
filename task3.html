@@ -199,7 +199,7 @@
       try {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
-        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task3/round${round}/changed/`),
+        const docRef = await addDoc(collection(db, `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/changed/`),
         {
             timestamp: today.toISOString(),
             code: Blockly.JavaScript.workspaceToCode(workspace),
@@ -226,7 +226,7 @@
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
         // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
-        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task3/round${round}/deleted/`),
+        const docRef = await addDoc(collection(db, `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/deleted/`),
         {
             timestamp: today.toISOString(),
             code: Blockly.JavaScript.workspaceToCode(workspace),
@@ -250,7 +250,7 @@
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
         // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
-        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task3/round${round}/created/`),
+        const docRef = await addDoc(collection(db, `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/created/`),
         {
             timestamp: today.toISOString(),
             code: Blockly.JavaScript.workspaceToCode(workspace),
@@ -283,7 +283,7 @@
       try {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
-        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task3/round${round}/moved/`),
+        const docRef = await addDoc(collection(db, `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/moved/`),
           {
               timestamp: today.toISOString(),
               code: Blockly.JavaScript.workspaceToCode(workspace),
@@ -313,7 +313,7 @@
       try {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
-        const docRef = await addDoc(collection(db, `${study_id}_${prolific_pid}_${session_id}/${format}/task3/round${round}/${runStatus}/`),
+        const docRef = await addDoc(collection(db, `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/${runStatus}/`),
         {
             timestamp: today.toISOString(),
             code: Blockly.JavaScript.workspaceToCode(workspace),
