@@ -17,7 +17,9 @@ function pick_up_toy() {
     robot_c.handsFree = false;
     console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
-    moveRobotTo(robot_c.holding.id, dst);
+    setTimeout(() => {
+      moveRobotTo(robot_c.holding.id, dst);
+    }, 500);
   }
 }
 
@@ -167,8 +169,11 @@ function toy_in_room() {
   // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
   // return toys_in_room[robot_c.room].length != 0;
   let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
-  if (!robot_c.handsFree){return (toy_in_room_check || robot_c.holding.room == robot_c.room);} 
-  else{return toy_in_room_check}
+  if (!robot_c.handsFree) {
+    return toy_in_room_check || robot_c.holding.room == robot_c.room;
+  } else {
+    return toy_in_room_check;
+  }
 }
 
 function toy_not_in_room() {
@@ -178,9 +183,12 @@ function toy_not_in_room() {
 
 function is_toy_in_room(room) {
   let toy_in_room_check = toys_in_room[room].length != 0;
-  if (!robot_c.handsFree){return (toy_in_room_check || robot_c.holding.room == room);} 
-  else{return toy_in_room_check}
-  // return toy_in_room_check = toys_in_room[room].length != 0 
+  if (!robot_c.handsFree) {
+    return toy_in_room_check || robot_c.holding.room == room;
+  } else {
+    return toy_in_room_check;
+  }
+  // return toy_in_room_check = toys_in_room[room].length != 0
 }
 
 function isPersoninRoom() {
@@ -263,7 +271,9 @@ function isRobotOutOfEvent(room) {
 function resolveAfter3Seconds() {
   let delay = 10;
   let condition = url.searchParams.get("format");
-  if (condition == "SEQ" || condition == "TAP") {delay = 1500;}
+  if (condition == "SEQ" || condition == "TAP") {
+    delay = 1500;
+  }
 
   return new Promise((resolve) => {
     const id = setTimeout(() => {

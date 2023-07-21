@@ -21,7 +21,7 @@ let start_states = "";
 
 function randomizeToys() {
   let toys = [bear, car, duck];
-  i = Math.floor(Math.random() * 3) + 1;
+  i = Math.floor(Math.random() * 2) + 2;
   console.log(i);
   return toys.slice(0, i);
 }
