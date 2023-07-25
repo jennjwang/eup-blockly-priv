@@ -124,15 +124,15 @@
   
   #nextButton {
     border: 2px solid blue;
+    transition-duration: 0.4s;
     background: white;
     padding: 9px;
     width: 140px;
     border-radius: 4px;
     color: black;
-    font-size: medium;
+    font-size: small;
     position: absolute;
     opacity: 0.8;
-    transition-duration: 0.4s;
   }
 
   #nextButton:hover {
@@ -143,15 +143,15 @@
 
   #backButton {
     border: 2px solid red;
+    transition-duration: 0.4s;
     background: white;
     padding: 9px;
     width: 140px;
     border-radius: 4px;
     color: black;
-    font-size: medium;
+    font-size: small;
     position: absolute;
     opacity: 0.8;
-    transition-duration: 0.4s;
   }
 
   #backButton:hover {
@@ -166,7 +166,7 @@
 
   #img_div img {
     height: auto;
-    max-height: 28vh;
+    max-height: 25vh;
     width: auto;
     max-width: 350px;
   }

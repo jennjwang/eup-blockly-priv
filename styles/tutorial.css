@@ -176,8 +176,11 @@ header {
   }
   
   #controls{
-    margin-top: -45px;
+    /* margin-top: -45px;
     margin-left: 420px;
+    position: absolute; */
+    margin-top: -45px;
+    margin-left: 120%;
     position: absolute;
     /* margin-top: -40px;
     margin-left: 660px;
