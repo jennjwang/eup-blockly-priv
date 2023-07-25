@@ -2,8 +2,14 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
     message0: "put down the toy",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "pick_up_toy",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "actions",
+    ],
+    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
     colour: 330,
   },
 ]);
@@ -16,8 +22,14 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "to_random_room",
     message0: "go to a random room",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "pick_up_toy",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "actions",
+    ],
+    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
     colour: 330,
   },
 ]);
@@ -33,8 +45,14 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "pick_up_toy",
     message0: "pick up the toy",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "pick_up_toy",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "actions",
+    ],
+    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
     colour: 330,
   },
 ]);
@@ -58,8 +76,14 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "pick_up_toy",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "actions",
+    ],
+    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
     colour: 330,
   },
 ]);
@@ -367,8 +391,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_toy_in_room",
     message0: "Is there a toy in the current room?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     colour: 210,
   },
 ]);
@@ -383,8 +420,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_out_of",
     message0: "Am I out of the %1?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     args0: [
       {
         type: "field_dropdown",
@@ -396,7 +446,6 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
     colour: 210,
   },
 ]);
@@ -410,8 +459,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_in_the",
     message0: "Am I in the %1?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     args0: [
       {
         type: "field_dropdown",
@@ -436,8 +498,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_hands_free",
     message0: "Are my hands free?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     colour: 210,
   },
 ]);
@@ -450,8 +525,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_hands_full",
     message0: "Are my hands full?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     colour: 210,
   },
 ]);
@@ -464,8 +552,21 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_person_in_room",
     message0: "Is there a person in the current room?",
-    previousStatement: null,
-    nextStatement: null,
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
     colour: 210,
   },
 ]);
