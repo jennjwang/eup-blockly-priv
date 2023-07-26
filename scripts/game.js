@@ -19,7 +19,7 @@ function pick_up_toy() {
     const dst = [rooms[room][0], rooms[room][1] + 10];
     setTimeout(() => {
       moveRobotTo(robot_c.holding.id, dst);
-    }, 500);
+    }, 1000);
   }
 }
 
@@ -235,9 +235,9 @@ function moveRobotToRandomRoom() {
 }
 
 function isRobotinRoom(room) {
-  console.log("curr", robot_c.room);
-  console.log("prev", robot_c.prev);
-  console.log("room", room);
+  // console.log("curr", robot_c.room);
+  // console.log("prev", robot_c.prev);
+  // console.log("room", room);
   // console.log("prev==room", robot_c.room === robot_c.prev);
   // console.log(robot_c.room === room);
   if (robot_c.prev === robot_c.room) {
