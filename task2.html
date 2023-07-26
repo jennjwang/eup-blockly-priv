@@ -296,13 +296,20 @@
           console.log(event.toJson());
           const eventJson = event.toJson();
           const block = workspace.getBlockById(eventJson.blockId);
+          if (block == null) {
+            return;
+          }
           let newParent = "";
           let oldParent = "";
           if (eventJson.newParentId) {
             newParent = workspace.getBlockById(eventJson.newParentId).type;
           }
           if (eventJson.oldParentId) {
-            oldParent = workspace.getBlockById(eventJson.newParentId).type;
+            console.log(
+              "old",
+              workspace.getBlockById(eventJson.oldParentId).type
+            );
+            oldParent = workspace.getBlockById(eventJson.oldParentId).type;
           }
           try {
             const timeElapsed = Date.now();
