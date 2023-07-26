@@ -505,7 +505,7 @@ Blockly.JavaScript["if_while_then"] = function (block) {
   );
 
   if (value_condition == "") {
-    value_condition = true;
+    value_condition = false;
   }
 
   var value_event = Blockly.JavaScript.valueToCode(
@@ -515,7 +515,7 @@ Blockly.JavaScript["if_while_then"] = function (block) {
   );
 
   if (value_event == "") {
-    value_event = true;
+    value_event = false;
   }
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");

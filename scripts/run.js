@@ -234,7 +234,7 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
-  wrapper = function (room) {
+  wrapper = function () {
     return toy_in_room();
   };
   interpreter.setProperty(
@@ -243,7 +243,7 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
-  wrapper = function (room) {
+  wrapper = function () {
     return toy_not_in_room();
   };
   interpreter.setProperty(

@@ -9,7 +9,13 @@ class Robot {
   }
 
   setRoom(room) {
-    this.prev = this.room;
+    console.log("moving to ", room);
+    console.log("last room was ", this.room);
+    if (this.room == room) {
+      this.prev = null;
+    } else {
+      this.prev = this.room;
+    }
     this.room = room;
   }
 

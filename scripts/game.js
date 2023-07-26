@@ -120,13 +120,15 @@ function moveRobotTo(id, coor) {
 }
 
 function handsFull() {
-  // console.log("handsPrev", robot_c.handsPrev);
-  // console.log("handsFree", robot_c.handsFree);
+  console.log("handsPrev", robot_c.handsPrev);
+  console.log("handsFree", robot_c.handsFree);
+
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
   }
   if (robot_c.handsPrev) {
     robot_c.handsPrev = robot_c.handsFree;
+    console.log("hands are full");
     return true;
   }
   return false;
@@ -170,13 +172,19 @@ function toy_in_room() {
   // return toys_in_room[robot_c.room].length != 0;
   let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
   if (!robot_c.handsFree) {
+    console.log(
+      "toy is in room: ",
+      toy_in_room_check || robot_c.holding.room == robot_c.room
+    );
     return toy_in_room_check || robot_c.holding.room == robot_c.room;
   } else {
+    console.log("toy is in room: ", toy_in_room_check);
     return toy_in_room_check;
   }
 }
 
 function toy_not_in_room() {
+  console.log("here");
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
   return !toy_in_room(); //toys_in_room[robot_c.room].length == 0;
 }
@@ -235,18 +243,25 @@ function moveRobotToRandomRoom() {
 }
 
 function isRobotinRoom(room) {
-  // console.log("curr", robot_c.room);
-  // console.log("prev", robot_c.prev);
+  if (robot_c.start) {
+    return false;
+  }
+  console.log("curr", robot_c.room);
+  console.log("prev", robot_c.prev);
   // console.log("room", room);
-  // console.log("prev==room", robot_c.room === robot_c.prev);
-  // console.log(robot_c.room === room);
+  console.log("prev==curr", robot_c.room === robot_c.prev);
+  console.log("room==curr", robot_c.room === room);
+  // if (robot_c.prev == null && robot_c.room == room) {
+  //   return true;
+  // }
   if (robot_c.prev === robot_c.room) {
     console.log("robot has not arrived at room", room);
     return false;
   }
   if (robot_c.room == room) {
     console.log("robot has arrived at room", room);
-    robot_c.prev = robot_c.room;
+    // robot_c.prev = robot_c.room;
+    return true;
   }
   return robot_c.room == room;
 }
