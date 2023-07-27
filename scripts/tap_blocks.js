@@ -302,12 +302,6 @@ Blockly.JavaScript["forever"] = function (block) {
   `;
 };
 
-// if (trigs.length > 1) {
-//   trigs[randNum % trigs.length]();
-// } else if (trigs.length == 1){
-//   trigs[0]();
-// }
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "actions",
@@ -385,36 +379,21 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-// Blockly.defineBlocksWithJsonArray([
-//   {
-//     type: "if_start",
-//     message0: "if program starts %1 %2",
-//     args0: [
-//       {
-//         type: "input_dummy",
-//       },
-//       {
-//         type: "input_statement",
-//         name: "execute",
-//         check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
-//       },
-//     ],
-//     previousStatement: "",
-//     nextStatement: ["if_then", "if_while_then", "if_start"],
-//     colour: 210,
-//     tooltip: "",
-//     helpUrl: "",
-//   },
-// ]);
-
-// Blockly.JavaScript["if_start"] = function (block) {
-//   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");
-//   var code = `if (started) {
-//       ${statements_execute}
-//         started = false;
-//     };`;
-//   return code;
-// };
+Blockly.Blocks["if_then"].onchange = function (changeEvent) {
+  console.log(changeEvent);
+  if (changeEvent.newInputName == "execute" && changeEvent.newParentId) {
+    var inputBlock = this.workspace.getBlockById(changeEvent.blockId);
+    var parentBlock = this.workspace.getBlockById(changeEvent.newParentId);
+    if (
+      (inputBlock.type == "if_then" || inputBlock.type == "if_while_then") &&
+      (parentBlock.type == "if_then" || parentBlock.type == "if_while_then")
+    ) {
+      console.log("NESTING");
+      // console.log("type", parentBlock.type);
+      parentBlock.getInput("execute").connection.disconnect();
+    }
+  }
+};
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -490,12 +469,28 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: "",
-    nextStatement: ["if_then", "if_while_then", "if_start"],
+    nextStatement: ["if_then", "if_while_then"],
     colour: 210,
     tooltip: "",
     helpUrl: "",
   },
 ]);
+
+Blockly.Blocks["if_while_then"].onchange = function (changeEvent) {
+  // console.log(changeEvent);
+  if (changeEvent.newInputName == "execute" && changeEvent.newParentId) {
+    var inputBlock = this.workspace.getBlockById(changeEvent.blockId);
+    var parentBlock = this.workspace.getBlockById(changeEvent.newParentId);
+    if (
+      (inputBlock.type == "if_then" || inputBlock.type == "if_while_then") &&
+      (parentBlock.type == "if_then" || parentBlock.type == "if_while_then")
+    ) {
+      console.log("NESTING");
+      // console.log("type", parentBlock.type);
+      parentBlock.getInput("execute").connection.disconnect();
+    }
+  }
+};
 
 Blockly.JavaScript["if_while_then"] = function (block) {
   var value_condition = Blockly.JavaScript.valueToCode(
