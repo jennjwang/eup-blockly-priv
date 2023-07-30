@@ -40,8 +40,8 @@ h1 {
   position: absolute;
   top: 55%;
   left: 50%;
-  -ms-transform: translate(-50%, -40%);
-  transform: translate(-50%, -40%);
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
   /* flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -213,5 +213,5 @@ h1 {
 }
 
 #tutorial_text ol li {
-  font-size: 1.2vh;
+  font-size: 1.5vh;
 }
