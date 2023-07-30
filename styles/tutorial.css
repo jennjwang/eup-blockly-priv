@@ -40,8 +40,8 @@ h1 {
   position: absolute;
   top: 55%;
   left: 50%;
-  -ms-transform: translate(-50%, -30%);
-  transform: translate(-50%, -30%);
+  -ms-transform: translate(-50%, -40%);
+  transform: translate(-50%, -40%);
   /* flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -50,6 +50,20 @@ h1 {
     padding: auto; */
   /* height: 100vh;
     width: 100vw; */
+}
+
+@media (max-width: 1440px) {
+  .wrapper {
+    -ms-transform: translate(-50%, -35%);
+    transform: translate(-50%, -35%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    -ms-transform: translate(-50%, -27%);
+    transform: translate(-50%, -27%);
+  }
 }
 
 .simulation {
