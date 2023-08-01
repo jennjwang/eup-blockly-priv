@@ -53,11 +53,10 @@ h1 {
 
 @media (min-width: 1400px) {
   .wrapper {
-    -ms-transform: translate(-50%, -60%);
-    transform: translate(-50%, -60%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
-
 
 .simulation {
   /* width: 1600px;
