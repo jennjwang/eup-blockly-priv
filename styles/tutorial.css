@@ -44,7 +44,7 @@ h1 {
   transform: translate(-50%, -40%);
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .wrapper {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
