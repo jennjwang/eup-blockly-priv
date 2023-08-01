@@ -38,23 +38,25 @@ h1 {
   display: flex;
   margin: 0;
   position: absolute;
-  top: 55%;
+  top: 60%;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -40%);
+  transform: translate(-50%, -40%);
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 1100px) {
   .wrapper {
-    top: 60%;
+    -ms-transform: translate(-50%, -60%);
+    transform: translate(-50%, -60%);
   }
 }
 
-@media (max-width: 1200px) {
+/* @media (min-width: 1440px) {
   .wrapper {
-    top: 70%;
+    -ms-transform: translate(-50%, -5%);
+    transform: translate(-50%, -75%);
   }
-}
+} */
 
 .simulation {
   /* width: 1600px;
