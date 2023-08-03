@@ -262,7 +262,7 @@
         "The robot requires you to specify the sequence of <b>ACTIONS</b> it needs to complete the task (for example, pick up a toy, move to the kitchen). The robot executes these sequences of actions one after the other towards completing its mission. <br><br>Optionally, you may specify <b>STATES</b> or conditions that a robot may need to evaluate before executing an action. For example, before trying to pick up a toy (action), the robot could first assess whether it is already holding a toy (state). <br><br> Click <b>Next</b> to proceed.",
         'Now, let\'s construct a program to move the robot from the bedroom to the kitchen. To achieve this, Click on the "Actions" tab and drag "Go to kitchen" piece and drop it on the programming interface. This action will allow the robot to move from the bedroom to the kitchen. <br><br> Click <b>Next</b> to proceed.',
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. <br><br> Otherwise, move the blocks around to make them match the image and then run the program. <br><br>If the robot remains inactive after you click "Run Program," double check that your program is correct. Click "Stop Program" to make any needed changes and then rerun the program.<br> <br> Click <b>Next</b> to proceed.',
-        'Now let\'s work on a second task. Your task is to program the robot to go back and forth between the kitchen and the playroom forever. If you create a program like the one on the right, the robot will initially go to the playroom, then to the kitchen, then back to the playroom. After this third action, the robot will come to a stop in the kitchen and remain there. <br><br> However, this task requires you to program the robot to move forever. While it is possible to include additional "Go to kitchen" and "Go to playroom" pieces, they will only contribute to one additional loop through the movements. <br><br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece (click on the caret to change the room name). <br><br> Click <b>Next</b> to proceed.',
+        'Now let\'s work on a second task. Your task is to program the robot to go back and forth between the kitchen and the playroom forever. If you create a program like the one on the right, the robot will initially go to the playroom, then to the kitchen, then back to the playroom. After this third action, the robot will come to a stop in the kitchen and remain there. <br><br> Click <b>Next</b> to proceed.', 'However, this task requires you to program the robot to move forever. While it is possible to include additional "Go to kitchen" and "Go to playroom" pieces, they will only contribute to one additional loop through the movements. <br><br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece (click on the caret to change the room name). <br><br> Click <b>Next</b> to proceed.',
         'To program the robot to move iteratively, first remove all the pieces you added to the programming interface by dragging each of them to the trash bin found on the bottom right corner. <br><br>  Click <b>Next</b> to proceed.',
         'Then click on the "Control" tab and drag the piece labeled "repeat while do" and attach it right below the "Go to playroom" piece. Next from the "Control" tab drag the piece labeled "True" and attach it right next to <b>while</b>. The "repeat while do" block runs all the pieces inside it as long as the condition you attach next to while is true. Attaching <b>True</b> next to while means the block will be executed forever.<br><br> Click <b>Next</b> to proceed.',
         'Next you need to put the actions that the robot needs to repeat inside the "repeat while do" block. For this task, the robot needs to move to the kitchen. Click on "Actions" tab and drag the "Go to kitchen" piece and attach it inside the "repeat while do" block. <br><br> Again, go to the "Actions" tab and drag "Go to kitchen" piece inside the "repeat while do" block right below the previous piece. Now, change <b>kitchen</b> to <b>playroom</b> by clicking on the caret (downward pointing triangle) of the piece. This block makes sure the robot goes to the kitchen, then to the playroom, repeating forever. <br><br>Click <b>Next</b> to proceed.',
@@ -415,15 +415,15 @@
           } else if (next_ctr == 6) {
             document.getElementById("img_div").innerHTML = "";
             document.getElementById("one_time_div").innerHTML = "";
-          } else if (next_ctr == 9) {
+          } else if (next_ctr == 10) {
             var elem = document.createElement("img");
             elem.src = "tutorial/extra_seq_sol.png";
             document.getElementById("img_div").appendChild(elem);
             img_added = true;
-          } else if (next_ctr == 10) {
+          } else if (next_ctr == 11) {
             document.getElementById("img_div").innerHTML = "";
             document.getElementById("bear").style.visibility = "visible";
-          } else if (next_ctr == 15) {
+          } else if (next_ctr == 16) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_04.png";
             document.getElementById("img_div").appendChild(elem);
