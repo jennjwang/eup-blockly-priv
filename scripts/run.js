@@ -323,6 +323,9 @@ function toggleButton() {
   let paradigm = url.searchParams.get("format");
 
   // alert(code_input);
+  // console.log("run program", button.innerHTML.trim());
+
+  button_text = button.innerHTML.trim();
 
   if (
     (paradigm == "GOAL_MDP" || paradigm == "FULL_MDP") &
@@ -335,7 +338,7 @@ function toggleButton() {
     document.querySelector("#doneButton").disabled = false;
   }
 
-  if (button.innerHTML === "Run Program") {
+  if (button_text === "Run Program") {
     button.innerHTML = "Stop Program";
     button.classList.remove("run");
     button.classList.add("stop");
