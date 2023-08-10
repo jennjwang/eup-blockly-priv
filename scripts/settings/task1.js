@@ -85,6 +85,7 @@ function movePersonHelper() {
 
 function movePerson() {
   clearInterval(interval);
+  console.log("moving person");
   interval = setInterval(function () {
     // if (person.room != robot_c.room) {
     movePersonHelper();
@@ -100,7 +101,9 @@ function toggleTask1() {
   }
 }
 
-document.querySelector("#runButton").addEventListener("click", toggleTask1);
+if (document.getElementById("runButton")) {
+  document.querySelector("#runButton").addEventListener("click", toggleTask1);
+}
 
 // document.querySelector("#stopButton").addEventListener("click", () => {
 //   clearInterval(interval);
