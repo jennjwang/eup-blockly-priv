@@ -18,10 +18,26 @@
     <script src="interpreter/acorn_interpreter.js"></script>
   </head>
   <body>
-    <div class="text">
-      <p id="key_id"></p>
-    </div>
     <div class="wrapper">
+      <div id="modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Thank you for completing the study</h3>
+          </div>
+          <div class="modal-body">
+            <p>
+              Please return to Qualtrics and enter the following code:
+              <mark>T37435907</mark>
+            </p>
+            <!-- <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p> -->
+          </div>
+          <!-- <button onclick="window.close()">
+          Exit
+        </button> -->
+        </div>
+      </div>
+
       <p style="display: none" , id="code"></p>
       <p style="display: none" , id="start"></p>
       <p style="display: none" , id="end"></p>
@@ -59,7 +75,6 @@
     <script src="scripts/blockly.min.js"></script>
     <script src="scripts/obj.js"></script>
     <script src="scripts/run_simulations.js"></script>
-    <script id='script3' src="scripts/settings/task3.js"></script>
     <!-- <script id='script3' src="scripts/settings/task3.js"></script>
     <script id='script2' src="scripts/settings/task2.js"></script>
     <script id='script1' src="scripts/settings/task1.js"></script> -->

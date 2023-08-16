@@ -10,7 +10,7 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0); /* Black w/ opacity */
+  background-color: rgba(0,0,0); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.text {
+.text{
   padding: 40px;
   width: 60%;
   font-size: 17px;
@@ -37,7 +37,7 @@
 }
 
 #runButton {
-  /* border: 2px solid green;
+    /* border: 2px solid green;
     background: white;
     padding: 9px;
     width: 140px;
@@ -47,60 +47,60 @@
     position: absolute;
     opacity: 0.8;
     margin-left: -60px; */
-  background: white;
-  padding: 9px;
-  width: 140px;
-  border-radius: 4px;
-  color: black;
-  font-size: small;
-  position: absolute;
-  opacity: 0.8;
-  margin-left: -60px;
-}
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: small;
+    position: absolute;
+    opacity: 0.8;
+    margin-left: -60px;
+  }
 
-#runButton:hover {
-  /* opacity: 1;
+  #runButton:hover {
+    /* opacity: 1;
     background:lightcoral !important;
     color: white !important; */
-  cursor: pointer;
-}
+    cursor: pointer
+  }
 
-.done {
-  color: black !important;
-  background-color: white !important;
-}
+  .done{
+    color: black !important;
+    background-color: white !important;
+  }
 
-.run {
-  opacity: 1 !important;
-  background: green !important;
-  color: white !important;
-}
+  .run{
+    opacity: 1 !important;
+    background:green !important;
+    color: white !important
+  }
 
-#clock {
-  border: 2px solid gray;
-  border-radius: 5px;
-  margin-left: 90px;
-  padding: 9px;
-  /* width: 140px; */
-  font-size: medium;
-  position: absolute;
-}
+  #clock{
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-left: 90px;
+    padding:9px;
+    /* width: 140px; */
+    font-size: medium;
+    position: absolute;
+  }
 
-.stop {
-  opacity: 1 !important;
-  background: lightcoral !important;
-  color: white !important;
-}
-
-#doneButton:hover {
-  opacity: 1;
-  background: plum;
-  color: white;
-  cursor: pointer;
-}
-
-#doneButton {
-  /* border: 2px solid plum;
+  .stop{
+    opacity: 1 !important;
+    background:lightcoral !important;
+    color: white !important
+  }
+  
+  #doneButton:hover {
+    opacity: 1;
+    background:plum;
+    color: white;
+    cursor: pointer
+  }
+  
+  #doneButton {
+    /* border: 2px solid plum;
     background: white;
     padding:9px;
     width: 140px;
@@ -110,62 +110,63 @@
     font-size: medium;
     position: absolute;
     opacity: 0.8; */
-  border: 2px solid plum;
-  background: white;
-  padding: 9px;
-  width: 140px;
-  margin-left: -210px;
-  border-radius: 4px;
-  color: black;
-  font-size: small;
-  position: absolute;
-  opacity: 0.8;
-}
+    border: 2px solid plum;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    margin-left: -210px;
+    border-radius: 4px;
+    color: black;
+    font-size: small;
+    position: absolute;
+    opacity: 0.8;
+  }
+  
+  #nextButton {
+    border: 2px solid blue;
+    transition-duration: 0.4s;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: small;
+    position: absolute;
+    opacity: 0.8;
+  }
 
-#nextButton {
-  border: 2px solid blue;
-  transition-duration: 0.4s;
-  background: white;
-  padding: 9px;
-  width: 140px;
-  border-radius: 4px;
-  color: black;
-  font-size: small;
-  position: absolute;
-  opacity: 0.8;
-}
+  #nextButton:hover {
+    cursor: pointer;
+    background-color: blue; /* Green */
+    color: white;
+  }
 
-#nextButton:hover {
-  cursor: pointer;
-  background-color: blue; /* Green */
-  color: white;
-}
+  #backButton {
+    border: 2px solid red;
+    transition-duration: 0.4s;
+    background: white;
+    padding: 9px;
+    width: 140px;
+    border-radius: 4px;
+    color: black;
+    font-size: small;
+    position: absolute;
+    opacity: 0.8;
+  }
 
-#backButton {
-  border: 2px solid red;
-  transition-duration: 0.4s;
-  background: white;
-  padding: 9px;
-  width: 140px;
-  border-radius: 4px;
-  color: black;
-  font-size: small;
-  position: absolute;
-  opacity: 0.8;
-}
+  #backButton:hover {
+    cursor: pointer;
+    background-color: red;
+  }
 
-#backButton:hover {
-  cursor: pointer;
-  background-color: red;
-}
-
-/* p{
+  /* p{
     font-size: 12px;
   } */
+  
 
-/* #img_div img {
+  #img_div img {
     height: auto;
     max-height: 25vh;
     width: auto;
     max-width: 350px;
-  } */
+  }

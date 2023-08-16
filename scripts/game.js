@@ -1,5 +1,3 @@
-const display = true;
-
 function pick_up_toy() {
   if (robot_c.start) {
     robot_c.start = false;
@@ -15,20 +13,15 @@ function pick_up_toy() {
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
-    console.log("picked up", robot_c.holding.id);
+    // console.log("picked up", robot_c.holding.id);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
     // console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
-    if (display) {
-      setTimeout(() => {
-        moveRobotTo(robot_c.holding.id, dst);
-      }, 1000);
-    } else {
+    setTimeout(() => {
       moveRobotTo(robot_c.holding.id, dst);
-    }
+    }, 1000);
   }
-  changed = false;
 }
 
 function drop_toy() {
@@ -61,10 +54,6 @@ function drop_toy() {
 function moveRobotTo(id, coor) {
   if (robot_c.start) {
     robot_c.start = false;
-  }
-
-  if (!display) {
-    return;
   }
 
   let goal_x = coor[0];
@@ -297,12 +286,6 @@ function isRobotOutOfEvent(room) {
 
 // HELPER
 function resolveAfter3Seconds() {
-  if (!display) {
-    console.log("running");
-    return new Promise((resolve) => {
-      resolve(1 + 4);
-    });
-  }
   let delay = 10;
   let condition = url.searchParams.get("format");
   if (condition == "SEQ" || condition == "TAP") {
@@ -325,13 +308,9 @@ function moveRobotToRoom(room) {
     x = dst[0];
     y = dst[1];
     moveRobotTo("robot", [x, y + 20]);
-    if (display) {
-      setTimeout(() => {
-        moveRobotTo("robot", dst);
-      }, 300);
-    } else {
+    setTimeout(() => {
       moveRobotTo("robot", dst);
-    }
+    }, 300);
   }
 
   robot_c.setRoom(room);
