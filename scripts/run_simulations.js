@@ -18,14 +18,14 @@ function parse_key(key) {
 function record(id) {
   console.log("end", document.getElementById("end").innerHTML);
   console.log("start", document.getElementById("start").innerHTML);
-  const data = fs.readFileSync("simulated_results.json");
-  const jsonData = JSON.parse(data);
-  jsonData.push({
-    id: id,
-    start_state: document.getElementById("start").innerHTML,
-    end_state: document.getElementById("end").innerHTML,
-  });
-  fs.writeFileSync("simulated_results.json", JSON.stringify(jsonData));
+  // const data = fs.readFileSync("simulated_results.json");
+  // const jsonData = JSON.parse(data);
+  // jsonData.push({
+  //   id: id,
+  //   start_state: document.getElementById("start").innerHTML,
+  //   end_state: document.getElementById("end").innerHTML,
+  // });
+  // fs.writeFileSync("simulated_results.json", JSON.stringify(jsonData));
 }
 
 function addCss(fileName) {
@@ -39,8 +39,9 @@ function addCss(fileName) {
   head.appendChild(link);
 }
 
-function loadScript(url, callback) {
+function loadScript(url, callback, task) {
   var script = document.createElement("script");
+  script.id = task;
   script.type = "text/javascript";
   if (script.readyState) {
     // only required for IE <9
@@ -61,84 +62,311 @@ function loadScript(url, callback) {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
-function run_simulation(id, task, format) {
-  if (task == "task1") {
-    console.log("hi");
-    addCss("styles/task1.css");
-    const scriptList = document.getElementsByTagName("script");
-    console.log("scripts", scriptList);
-    toy = document.getElementById("bear");
-    toy.remove();
-    toy = document.getElementById("duck");
-    toy.remove();
-    toy = document.getElementById("car");
-    toy.remove();
+/*
+function run_simulation(id, task, format, code) {
+  return new Promise((resolve, reject) => {
+    if (task == "task1") {
+      // console.log("hi");
+      // addCss("styles/task1.css");
+      // const scriptList = document.getElementsByTagName("script");
+      // console.log("scripts", scriptList);
+      // toy = document.getElementById("bear");
+      // toy.remove();
+      // toy = document.getElementById("duck");
+      // toy.remove();
+      // toy = document.getElementById("car");
+      // toy.remove();
 
-    loadScript("scripts/settings/task1.js", () => {
-      update(id);
-      movePerson();
-    });
-  }
+      loadScript(
+        "scripts/settings/task1.js",
+        () => {
+          var scriptToRemove = document.getElementById("task2");
+          var otherscriptToRemove = document.getElementById("task3");
 
-  if (task == "task2") {
-    addCss("styles/task2.css");
-    person = document.getElementById("person");
-    person.remove();
-    toy = document.getElementById("duck");
-    toy.remove();
-    toy = document.getElementById("car");
-    toy.remove();
+          var removalPromises = [];
 
-    loadScript("scripts/settings/task2.js", () => {
-      update(id);
-    });
-  }
+          if (scriptToRemove) {
+            var parent = scriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(scriptToRemove);
+                resolve();
+              })
+            );
+          }
+          if (otherscriptToRemove) {
+            var parent = otherscriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(otherscriptToRemove);
+                resolve();
+              })
+            );
+          }
 
-  if (task == "task3") {
-    addCss("styles/task3.css");
-    person = document.getElementById("person");
-    person.remove();
-    loadScript("scripts/settings/task3.js", () => {
-      update(id);
-    });
-  }
+          Promise.all(removalPromises).then(() => {
+            update(id, code);
+            movePerson();
+            resolve();
+          });
+        },
+        task
+      );
+    }
+
+    if (task == "task2") {
+      // addCss("styles/task2.css");
+      // person = document.getElementById("person");
+      // person.remove();
+      // toy = document.getElementById("duck");
+      // toy.remove();
+      // toy = document.getElementById("car");
+      // toy.remove();
+
+      loadScript(
+        "scripts/settings/task2.js",
+        () => {
+          var scriptToRemove = document.getElementById("task1");
+          var otherscriptToRemove = document.getElementById("task3");
+          var removalPromises = [];
+          if (scriptToRemove) {
+            var parent = scriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(scriptToRemove);
+                resolve();
+              })
+            );
+          }
+          if (otherscriptToRemove) {
+            var parent = otherscriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(otherscriptToRemove);
+                resolve();
+              })
+            );
+          }
+          Promise.all(removalPromises).then(() => {
+            update(id, code, function () {
+              var scriptToRemove = document.getElementById("task2");
+              if (scriptToRemove) {
+                var scriptParent = scriptToRemove.parentElement;
+                scriptParent.removeChild(scriptToRemove);
+              }
+            });
+          });
+        },
+        task
+      );
+    }
+
+    if (task == "task3") {
+      // addCss("styles/task3.css");
+      // person = document.getElementById("person");
+      // person.remove();
+      loadScript(
+        "scripts/settings/task3.js",
+        () => {
+          var scriptToRemove = document.getElementById("task2");
+          var otherscriptToRemove = document.getElementById("task1");
+          var removalPromises = [];
+          if (scriptToRemove) {
+            var parent = scriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(scriptToRemove);
+                // console.log(parent);
+                resolve();
+              })
+            );
+          }
+          if (otherscriptToRemove) {
+            var parent = otherscriptToRemove.parentElement;
+            removalPromises.push(
+              new Promise((resolve) => {
+                parent.removeChild(otherscriptToRemove);
+                resolve();
+              })
+            );
+          }
+          Promise.all(removalPromises).then(() => {
+            update(id, code, function () {
+              var scriptToRemove = document.getElementById("task3");
+              if (scriptToRemove) {
+                var scriptParent = scriptToRemove.parentElement;
+                scriptParent.removeChild(scriptToRemove);
+              }
+            });
+          });
+        },
+        task
+      );
+    }
+  });
+}
+*/
+
+function run_simulation(id, task, format, code) {
+  return new Promise((resolve, reject) => {
+    function loadTaskScript(taskScriptPath, callback) {
+      const script = document.createElement("script");
+      script.src = taskScriptPath;
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
+
+    if (task == "task1") {
+      loadTaskScript("scripts/settings/task1.js", () => {
+        var scriptToRemove = document.getElementById("task2");
+        var otherscriptToRemove = document.getElementById("task3");
+
+        var removalPromises = [];
+
+        if (scriptToRemove) {
+          var parent = scriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(scriptToRemove);
+              resolve();
+            })
+          );
+        }
+        if (otherscriptToRemove) {
+          var parent = otherscriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(otherscriptToRemove);
+              resolve();
+            })
+          );
+        }
+
+        // Extend Promise.all to wait for both removal and update/movePerson
+        Promise.all([...removalPromises, update(id, code), movePerson()])
+          .then(() => {
+            resolve(); // Resolve the main promise after all operations
+          })
+          .catch(reject);
+      });
+    }
+
+    if (task == "task2") {
+      loadTaskScript("scripts/settings/task2.js", () => {
+        var scriptToRemove = document.getElementById("task1");
+        var otherscriptToRemove = document.getElementById("task3");
+
+        var removalPromises = [];
+
+        if (scriptToRemove) {
+          var parent = scriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(scriptToRemove);
+              resolve();
+            })
+          );
+        }
+        if (otherscriptToRemove) {
+          var parent = otherscriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(otherscriptToRemove);
+              resolve();
+            })
+          );
+        }
+
+        // Extend Promise.all to wait for both removal and update/movePerson
+        Promise.all([...removalPromises, update(id, code)])
+          .then(() => {
+            resolve(); // Resolve the main promise after all operations
+          })
+          .catch(reject);
+      });
+    }
+
+    if (task == "task3") {
+      loadTaskScript("scripts/settings/task3.js", () => {
+        var scriptToRemove = document.getElementById("task1");
+        var otherscriptToRemove = document.getElementById("task2");
+
+        var removalPromises = [];
+
+        if (scriptToRemove) {
+          var parent = scriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(scriptToRemove);
+              resolve();
+            })
+          );
+        }
+        if (otherscriptToRemove) {
+          var parent = otherscriptToRemove.parentElement;
+          removalPromises.push(
+            new Promise((resolve) => {
+              parent.removeChild(otherscriptToRemove);
+              resolve();
+            })
+          );
+        }
+
+        // Extend Promise.all to wait for both removal and update/movePerson
+        Promise.all([...removalPromises, update(id, code)])
+          .then(() => {
+            resolve(); // Resolve the main promise after all operations
+          })
+          .catch(reject);
+      });
+    }
+
+    // Handle other tasks...
+  });
 }
 
-function update(id) {
-  function reset() {
-    for (var i = 0; i < pids.length; i++) {
-      window.clearTimeout(pids[i]);
-      window.clearInterval(pids[i]);
-    }
+function update(id, myCode) {
+  return new Promise((resolve, reject) => {
+    function reset() {
+      for (var i = 0; i < pids.length; i++) {
+        window.clearTimeout(pids[i]);
+        window.clearInterval(pids[i]);
+      }
 
-    pids = [];
+      pids = [];
 
-    // clears all the upcoming actions if reset is initiated in the middle of execution
-    for (var i = 0; i < pidList.length; i++) {
-      clearTimeout(pidList[i]);
-      window.clearInterval(pidList[i]);
-    }
-    pidList = [];
+      // clears all the upcoming actions if reset is initiated in the middle of execution
+      for (var i = 0; i < pidList.length; i++) {
+        clearTimeout(pidList[i]);
+        window.clearInterval(pidList[i]);
+      }
+      pidList = [];
 
-    resetLocs();
-  }
-
-  reset();
-
-  var myInterpreter = new Interpreter(code, initApi);
-
-  function nextStep() {
-    if (myInterpreter.step()) {
-      const pid = setTimeout(nextStep, 0);
-      pids.push(pid);
-    } else {
-      console.log("DONE");
       resetLocs();
-      // reset();
-      record(id);
     }
-  }
-  nextStep();
+
+    reset();
+    var myInterpreter = new Interpreter(myCode, initApi);
+    // myInterpreter.run();
+    // resetLocs();
+    // record(id);
+    // reset();
+
+    function nextStep() {
+      // console.log("hi", myInterpreter);
+      if (myInterpreter.step()) {
+        // nextStep();
+        const pid = setTimeout(nextStep, 0);
+        // pids.push(pid);
+      } else {
+        console.log("DONE");
+        resetLocs();
+        record(id);
+        resolve();
+      }
+    }
+    nextStep();
+  });
 }
 
 function initApi(interpreter, globalObject) {
@@ -342,33 +570,43 @@ function randomRoomWithoutKitchen() {
   return rooms[i];
 }
 
-const code_dict = {
-  "644b58f7c74e29dea19413b8_iqrjdpw7fu_64cc788c5fa0100c34b14d8b_TAP_task1":
-    "  while (true) {\n    var randNum = Math.floor(Math.random() * 10);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isPersonInRoom()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+async function runAndRecord(k, val) {
+  return new Promise((resolve) => {
+    pids = [];
+    let code = val;
+    document.getElementById("key_id").innerHTML = k;
+    let [key_id, key_format, key_task] = parse_key(k);
+    if (key_task != "task1") {
+      var closingBraceIndex = code.lastIndexOf("}");
+      code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
+      // console.log(code);
+    }
+    // console.log(key_id);
+    // console.log(key_format);
+    // console.log(key_task);
+    run_simulation(key_id, key_task, key_format, code).then(() => {
+      resolve();
+    });
+    // resolve();
+  });
+}
+
+let code_dict = {
   "644b58f7c74e29dea19413b8_iqrjdpw7fu_64cc788c5fa0100c34b14d8b_TAP_task3":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 10);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
-  "64cd50590f37fc832720ee73_1gnzf16ev8_64cd58af9fa5f454c085d767_TAP_task3":
-    "  while (true) {\n    var randNum = Math.floor(Math.random() * 10);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (handsFree() && isRobotinRoomEvent('playroom')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (handsFree() && isRobotinRoomEvent('playroom')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "64cd50590f37fc832720ee73_pk5x6s2s5d_64cd5825a5879580ac514c4b_TAP_task2":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 10);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_not_in_room()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('bedroom');\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_toy();\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
 };
 
 let pids = [];
-
-k = "64cd50590f37fc832720ee73_1gnzf16ev8_64cd58af9fa5f454c085d767_TAP_task3";
-val = code_dict[k];
 let url = new URL(window.location.href);
-// for (const [k, val] of Object.entries(code_dict)) {
-console.log(k);
-pids = [];
-let code = val;
-document.getElementById("key_id").innerHTML = k;
-let [key_id, key_format, key_task] = parse_key(k);
-console.log(key_id);
-console.log(key_format);
-console.log(key_task);
-if (key_task != "task1") {
-  var closingBraceIndex = code.lastIndexOf("}");
-  code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
+
+async function processCodeDict() {
+  for (const [k, val] of Object.entries(code_dict)) {
+    console.log(k);
+    await runAndRecord(k, val);
+    // location.reload();
+  }
 }
-run_simulation(key_id, key_task, key_format, code);
-record(key_id);
-// }
+
+processCodeDict();

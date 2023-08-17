@@ -19,8 +19,6 @@ let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 let end_states = "";
 let start_states = "";
 
-let changed = true;
-
 function randomizeToys() {
   let toys = [bear, car, duck];
   i = Math.floor(Math.random() * 2) + 2;
@@ -37,8 +35,6 @@ toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
 console.log("toys", toys);
 
 function resetLocs() {
-  console.log(changed);
-
   start_states = `
   robot started in ${ROBOT_ROOM}
   toys in kitchen include [${SAVE_TOYS}]`;
@@ -51,6 +47,9 @@ function resetLocs() {
   toys in bedroom include [${toys_in_room["bedroom"].toString()}]
   toys in playroom include [${toys_in_room["playroom"].toString()}]
   `;
+
+  console.log(start_states);
+  console.log(end_states);
 
   document.getElementById("start").innerHTML = start_states;
   document.getElementById("end").innerHTML = end_states;

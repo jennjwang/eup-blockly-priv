@@ -1,7 +1,7 @@
 function brandomRoom(rooms) {
   // let rooms = ["kitchen", "bedroom"];
   i = Math.floor(Math.random() * rooms.length);
-  console.log(rooms[i]);
+  // console.log(rooms[i]);
   return rooms[i];
 }
 
@@ -37,8 +37,8 @@ function resetLocs() {
   robot started in ${ROBOT_ROOM}
   toy started in ${BEAR_ROOM}`;
 
-  console.log(start_states);
-  console.log("end", end_states);
+  // console.log(start_states);
+  // console.log("end", end_states);
   document.getElementById("start").innerHTML = start_states;
   document.getElementById("end").innerHTML = end_states;
 
@@ -54,7 +54,7 @@ function resetLocs() {
   bear = new Toy(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
   toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
   toys_in_room[BEAR_ROOM] = [bear];
-  console.log(toys_in_room);
+  // console.log(toys_in_room);
 
   if (BEAR_ROOM == "kitchen") {
     ROBOT_ROOM = brandomRoom(["playroom", "bedroom"]);

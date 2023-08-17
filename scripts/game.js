@@ -1,4 +1,4 @@
-const display = true;
+const display = false;
 
 function pick_up_toy() {
   if (robot_c.start) {
