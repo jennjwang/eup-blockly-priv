@@ -162,6 +162,7 @@ function initApi(interpreter, globalObject) {
     "isRobotOutOfEvent",
     interpreter.createNativeFunction(wrapper)
   );
+
   wrapper = function (room) {
     return is_toy_in_room(room);
   };

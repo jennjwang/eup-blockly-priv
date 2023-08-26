@@ -11,6 +11,8 @@ class Robot {
   setRoom(room) {
     console.log("moving to ", room);
     console.log("last room was ", this.room);
+    // console.log("hi");
+
     if (this.room == room) {
       this.prev = null;
     } else {

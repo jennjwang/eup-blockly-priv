@@ -1,5 +1,9 @@
 const display = false;
 
+function start() {
+  return robot_c.start;
+}
+
 function pick_up_toy() {
   if (robot_c.start) {
     robot_c.start = false;
@@ -170,10 +174,6 @@ function eHandsFree() {
   return robot_c.handsFree;
 }
 
-function start() {
-  return robot_c.start;
-}
-
 function eHandsFull() {
   return !robot_c.handsFree;
 }
@@ -298,10 +298,11 @@ function isRobotOutOfEvent(room) {
 // HELPER
 function resolveAfter3Seconds() {
   if (!display) {
-    console.log("running");
-    return new Promise((resolve) => {
-      resolve(1 + 4);
-    });
+    return;
+    // console.log("running");
+    // return new Promise((resolve) => {
+    //   resolve(1 + 4);
+    // });
   }
   let delay = 10;
   let condition = url.searchParams.get("format");
@@ -335,8 +336,6 @@ function moveRobotToRoom(room) {
   }
 
   robot_c.setRoom(room);
-
-  // console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
     toys_in_room[robot_c.holding.room].pop();
