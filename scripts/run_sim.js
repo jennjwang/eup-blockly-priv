@@ -726,6 +726,9 @@ function run_key(k, i) {
     console.log("key", key_id);
 
     let code = code_dict[k];
+
+    console.log(code);
+
     if (key_task != "task1" && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
       code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
@@ -740,8 +743,6 @@ function run_key(k, i) {
       code = run_mdp(code, taskNum);
       //   console.log(code);
     }
-
-    console.log(code);
     var myInterpreter = new Interpreter(code, initApi);
     // resetLocs();
     // myInterpreter.run();

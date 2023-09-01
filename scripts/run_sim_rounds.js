@@ -1168,10 +1168,8 @@ function run_key(k, i) {
     console.log("format", key_format);
     console.log("key", key_id);
 
-    // let code = code_dict[k];
-
-    let code =
-      "goals(\n  (toy_in_room() && ((eHandsFree() && isRobotinRoomEvent('playroom'))))\n)\n";
+    let code = code_dict[k];
+    console.log(code);
 
     if (key_task != "task1" && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
@@ -1188,7 +1186,7 @@ function run_key(k, i) {
       //   console.log(code);
     }
 
-    console.log(code);
+    // console.log(code);
 
     try {
       var myInterpreter = new Interpreter(code, initApi);
@@ -1269,7 +1267,7 @@ function customSort(a, b) {
 
 const keys = Object.keys(code_dict).sort(customSort);
 let task1_keys = keys.filter((key) => key.includes("task1"));
-// let task2_keys = keys.filter((key) => key.includes("task2"));
+let task2_keys = keys.filter((key) => key.includes("task2"));
 // let task1_keys = [
 //   "644b58f7c74e29dea19413b8_iqrjdpw7fu_64cc788c5fa0100c34b14d8b_TAP_task1",
 // ];
@@ -1277,12 +1275,12 @@ let task3_keys = keys.filter((key) => key.includes("task3"));
 // let task3_keys = [
 //   "64cd50590f37fc832720ee73_2cpt5bpaui_64cd5455bb88ef87f1783c5f_SEQ_task3",
 // ];
-task2_keys = [
-  "64cd50590f37fc832720ee73_4q7o0q1ybhf_64dfdfdf665e1fe5fb5a1242_round18_GOAL_MDP_task2",
-  // "64cd50590f37fc832720ee73_5rfvmt6mdy_64dfba30671c0691a677f4bb_round1_FULL_MDP_task2",
-  // "64cd50590f37fc832720ee73_4q7o0q1ybhf_64dfdfdf665e1fe5fb5a1242_round36_GOAL_MDP_task2",
-  // "644b58f7c74e29dea19413b8_xrpvkav917j_64cc840a0787283a2310ac9a_round1_FULL_MDP_task2",
-];
+// task2_keys = [
+//   "64cd50590f37fc832720ee73_4q7o0q1ybhf_64dfdfdf665e1fe5fb5a1242_round18_GOAL_MDP_task2",
+//   // "64cd50590f37fc832720ee73_5rfvmt6mdy_64dfba30671c0691a677f4bb_round1_FULL_MDP_task2",
+//   // "64cd50590f37fc832720ee73_4q7o0q1ybhf_64dfdfdf665e1fe5fb5a1242_round36_GOAL_MDP_task2",
+//   // "644b58f7c74e29dea19413b8_xrpvkav917j_64cc840a0787283a2310ac9a_round1_FULL_MDP_task2",
+// ];
 // console.log(keys.length);
 
 // importScripts("settings/task3_nodisp.js");
@@ -1311,8 +1309,11 @@ async function test(keys) {
   // let i = 0;
   // postMessage(`Worker A - Iteration ${i}`);
   console.log(jsonData);
-  // self.postMessage({ type: "download", data: jsonData });
+  self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 test(task2_keys);
+
+// 64cd50590f37fc832720ee73_4q7o0q1ybhf_64dfdfdf665e1fe5fb5a1242
+// 64cd50590f37fc832720ee73_rbhoiyzo9h_64dfba2387dd4adeed4d6fc1_round11

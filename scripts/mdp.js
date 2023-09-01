@@ -372,9 +372,9 @@ function find_id(state, map) {
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
   actions = [
+    "moveRobotToRoom('playroom');",
     "moveRobotToRoom('bedroom');",
     "moveRobotToRoom('kitchen');",
-    "moveRobotToRoom('playroom');",
     "drop_toy();",
     "pick_up_toy();",
   ];
