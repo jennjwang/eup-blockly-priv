@@ -66,7 +66,7 @@
     <script id="tap" src="scripts/tap_blocks.js"></script>
     <!-- <script id="rl" src="scripts/rl_blocks.js"></script> -->
     <script>
-      const worker = new Worker("scripts/run_sim.js");
+      const worker = new Worker("scripts/run_sim_rounds.js");
 
       worker.onmessage = function(event) {
       if (event.data.type === 'download') {

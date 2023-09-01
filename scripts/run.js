@@ -23,6 +23,8 @@ function update(event) {
   taskNum = url.toString().split("task")[1][0];
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
+  code =
+    "goals(\n  (toy_in_room() && ((eHandsFree() && isRobotinRoomEvent('playroom'))))\n)\n";
 
   let check = document.getElementById("code").innerHTML;
 

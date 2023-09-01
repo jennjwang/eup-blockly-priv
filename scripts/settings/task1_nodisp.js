@@ -17,8 +17,8 @@ let start_states = "";
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
-function resetLocs(key_id, key_task, key_format, iteration) {
-  end_states = `robot ended in ${robot_c.room},person ended in ${person.room}`;
+function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
+  end_states = `robot ended in ${robot_c.room},person ended in ${person.room},the times that robot and person were in the same room is ${same_room},the number of timesteps is ${count}`;
 
   start_states = `robot started in ${ROBOT_ROOM},person started in ${PERSON_ROOM}`;
 

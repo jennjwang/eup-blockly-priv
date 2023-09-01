@@ -13,7 +13,7 @@ if (BEAR_ROOM == "kitchen") {
 } else {
   ROBOT_ROOM = brandomRoom(["kitchen", "playroom"]);
 }
-// console.log("bear is in", BEAR_ROOM);
+console.log("bear is in", BEAR_ROOM);
 // console.log("robot is in", ROBOT_ROOM);
 
 robot_c = new Robot(ROBOT_ROOM);
@@ -43,8 +43,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
     end_state: end_states,
   };
 
-  console.log(end_states);
-  console.log(start_states);
+  console.log(data);
 
   jsonData.push(data);
 

@@ -57,6 +57,8 @@ function resetLocs(key_id, key_task, key_format, iteration) {
     end_state: end_states,
   };
 
+  console.log(data);
+
   jsonData.push(data);
 
   start_states = "";
