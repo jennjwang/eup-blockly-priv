@@ -26,8 +26,7 @@ function update(event) {
 
   let check = document.getElementById("code").innerHTML;
 
-  console.log(code);
-  // if (code.length == 0): alert('there there')
+  console.log("hi", code);
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
@@ -435,10 +434,10 @@ window.onload = function () {
     const scriptList = document.querySelectorAll(
       "script[type='text/javascript']"
     );
-    console.log(scriptList);
+    // console.log(scriptList);
     const convertedNodeList = Array.from(scriptList);
     const testScript = convertedNodeList.find((script) => script.id === "tap");
-    console.log(testScript);
+    // console.log(testScript);
     //testScript.remove();
     //testScript.parentNode.removeChild(testScript);
   } else {

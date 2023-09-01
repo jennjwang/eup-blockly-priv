@@ -19,8 +19,10 @@ function pick_up_toy() {
     // console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
     setTimeout(() => {
-      moveRobotTo(robot_c.holding.id, dst);
-    }, 1000);
+      if (robot_c.holding) {
+        moveRobotTo(robot_c.holding.id, dst);
+      }
+    }, 800);
   }
 }
 
