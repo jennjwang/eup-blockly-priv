@@ -509,9 +509,9 @@ function get_mdp_policy(code, taskNum) {
   for (key in values_table) {
     state = state_ids[key];
 
-    if (key == 79) {
-      debugger;
-    }
+    // if (key == 79) {
+    //   debugger;
+    // }
 
     if (!generate_goal_func(goal, state)) {
       max_val = 0;
@@ -543,9 +543,9 @@ function get_mdp_policy(code, taskNum) {
           break;
         }
       }
-      if (tb) {
-        debugger;
-      }
+      // if (tb) {
+      //   debugger;
+      // }
       if (
         !(
           state.blocks.length >= 4 ||
@@ -567,7 +567,7 @@ function get_mdp_policy(code, taskNum) {
 }
 
 function run_mdp(code, taskNum) {
-  debugger;
+  // debugger;
   start = Date.now();
   [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
   if (taskNum == 1) {
@@ -591,6 +591,6 @@ function run_mdp(code, taskNum) {
   out += "}\n";
   end = Date.now();
   timer = (end - start) / 100;
-  debugger;
+  // debugger;
   return out;
 }

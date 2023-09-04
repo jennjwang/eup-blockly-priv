@@ -468,7 +468,7 @@ function get_policy(code, taskNum) {
       }
     }
   }
-  debugger;
+  // debugger;
 
   //Train
   num_epochs = 20;
@@ -499,7 +499,7 @@ function get_policy(code, taskNum) {
       }
     }
   }
-  debugger;
+  // debugger;
   //Generate policy
   policy = {};
   for (key in values_table) {
@@ -560,7 +560,7 @@ function get_policy(code, taskNum) {
 function count_blocks(state) {}
 
 function run_rl(code, taskNum) {
-  debugger;
+  // debugger;
   start = Date.now();
   [policy, triggers, goal, goalfinal] = get_policy(code, taskNum);
   if (taskNum == 1) {
@@ -584,6 +584,6 @@ function run_rl(code, taskNum) {
   out += "}\n";
   end = Date.now();
   timer = (end - start) / 100;
-  debugger;
+  // debugger;
   return out;
 }
