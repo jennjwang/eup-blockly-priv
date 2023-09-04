@@ -552,7 +552,13 @@ function get_mdp_policy(code, taskNum) {
           (state.holding && state.blocks.length == 3)
         )
       ) {
-        policy[generate_triggers(triggers, state)] = max_act;
+        if (policy.hasOwnProperty(generate_triggers(triggers, state))) {
+          if (max_val > 0) {
+            policy[generate_triggers(triggers, state)] = max_act;
+          }
+        } else {
+          policy[generate_triggers(triggers, state)] = max_act;
+        }
       }
     }
   }

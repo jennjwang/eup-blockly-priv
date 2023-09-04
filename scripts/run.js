@@ -21,12 +21,16 @@ function update(event) {
   reset();
 
   taskNum = url.toString().split("task")[1][0];
+  console.log("hi");
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
+  // code =
+  //"actions( moveRobotToRandomRoom(); pick_up_toy(); moveRobotToRoom('playroom'); drop_toy();)goals( (isRobotinRoomEvent('playroom') && toy_in_room()))triggers( eHandsFree(); toy_in_room(); isRobotOutOfEvent('playroom');)";
+  // "actions(\n    moveRobotToRandomRoom();\n  \tpick_up_toy();\n  \tdrop_toy();\n\n)\n\n\ngoals(\n  (isRobotinRoomEvent('playroom') && toy_in_room())\n)\n\n\ntriggers(\n    toy_in_room();\n  \tisRobotinRoomEvent('playroom');\n  \teHandsFree();\n\n)\n";
 
   let check = document.getElementById("code").innerHTML;
 
-  console.log("hi", code);
+  // console.log("hi", code);
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
