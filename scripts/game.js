@@ -2,6 +2,10 @@ function pick_up_toy() {
   if (robot_c.start) {
     robot_c.start = false;
   }
+  if (!robot_c.handsFree) {
+    console.log("hands already full");
+    return;
+  }
   let room = robot_c.room;
   robot_c.prev = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
@@ -13,7 +17,7 @@ function pick_up_toy() {
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
-    // console.log("picked up", robot_c.holding.id);
+    console.log("picked up", robot_c.holding.id);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
     // console.log("hands are free?", robot_c.handsFree);
@@ -30,17 +34,20 @@ function drop_toy() {
   if (robot_c.start) {
     robot_c.start = false;
   }
+  if (robot_c.handsFree) {
+    return;
+  }
   robot_c.prev = robot_c.room;
   if (!robot_c.handsFree) {
     let room = robot_c.room;
-    // console.log("dropped toy");
+    console.log("dropped toy");
 
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
 
     const dst = rooms[room];
     moveRobotTo(robot_c.holding.id, dst);
-    toys_in_room[room].push(robot_c.holding);
+    // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;
@@ -189,7 +196,8 @@ function toy_in_room() {
 
 function toy_not_in_room() {
   // console.log("here");
-  // console.log("# of toys in room", toys_in_room[robot_c.room].length);
+  console.log("toys", toys_in_room);
+  console.log("# of toys in room", toys_in_room[robot_c.room].length);
   return !toy_in_room(); //toys_in_room[robot_c.room].length == 0;
 }
 
@@ -320,8 +328,11 @@ function moveRobotToRoom(room) {
   // console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
-    toys_in_room[robot_c.holding.room].pop();
+    let toy = toys_in_room[robot_c.holding.room].pop();
+    console.log("popped toy", toy);
     robot_c.holding.room = room;
+    toys_in_room[room].push(toy);
+    console.log("moved with toy", toys_in_room);
     // console.log(robot_c.holding);
     // console.log("toys", toys_in_room);
   }

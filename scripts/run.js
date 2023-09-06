@@ -21,10 +21,8 @@ function update(event) {
   reset();
 
   taskNum = url.toString().split("task")[1][0];
-  console.log("hi");
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
-
   let check = document.getElementById("code").innerHTML;
 
   // console.log("hi", code);

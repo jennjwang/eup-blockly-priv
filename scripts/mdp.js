@@ -476,16 +476,12 @@ function get_mdp_policy(code, taskNum) {
   gamma = 0.99;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
-      // if(key == 36){
-      //debugger;
-      // }
       state = state_ids[key];
-      console.log(state);
+      // console.log(state);
       if (!generate_goal_func(goal, state)) {
         max_val = 0;
         for (action_ind in actions) {
           action = actions[action_ind];
-          //   console.log(action);
           next = simulator(state, action);
           console.log("state: ", state, "action: ", action);
           console.log(next);
@@ -508,10 +504,6 @@ function get_mdp_policy(code, taskNum) {
   policy = {};
   for (key in values_table) {
     state = state_ids[key];
-
-    // if (key == 79) {
-    //   debugger;
-    // }
 
     if (!generate_goal_func(goal, state)) {
       max_val = 0;
