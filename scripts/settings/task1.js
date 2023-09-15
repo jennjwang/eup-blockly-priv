@@ -1,5 +1,15 @@
-let ROBOT_ROOM = "kitchen";
-let PERSON_ROOM = "bedroom";
+function randomRoom() {
+  let rooms = ["kitchen", "bedroom", "playroom"];
+  i = Math.floor(Math.random() * 3);
+  return rooms[i];
+}
+
+let ROBOT_ROOM = randomRoom();
+let PERSON_ROOM = randomRoom();
+
+while (PERSON_ROOM === ROBOT_ROOM) {
+  PERSON_ROOM = randomRoom();
+}
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
@@ -34,15 +44,18 @@ function resetLocs() {
   prev_room = null;
   counter = 0;
   const robot = document.getElementById("robot");
-  ROBOT_ROOM = randomRoomWithoutKitchen();
+  ROBOT_ROOM = randomRoom();
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
 
   const person_elt = document.getElementById("person");
-  // PERSON_ROOM = randomRoom();
-  PERSON_ROOM = "kitchen";
+  PERSON_ROOM = randomRoom();
+  while (PERSON_ROOM === ROBOT_ROOM) {
+    PERSON_ROOM = randomRoom();
+  }
+  // PERSON_ROOM = "kitchen";
   dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
   person.setRoom(PERSON_ROOM);
