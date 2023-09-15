@@ -23,9 +23,12 @@ function update(event) {
   taskNum = url.toString().split("task")[1][0];
 
   code += Blockly.JavaScript.workspaceToCode(workspace);
+  // code =
+  //   "goals(\n (toy_not_in_room() && ((!isRobotinRoomEvent('kitchen') && !isRobotinRoomEvent('bedroom'))))\n)\n";
+
   let check = document.getElementById("code").innerHTML;
 
-  // console.log("hi", code);
+  console.log(code);
 
   //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
   //Can debug by running with url params == RL
@@ -317,6 +320,7 @@ function toggleButton() {
   var button = document.getElementById("runButton");
 
   let code_input = Blockly.JavaScript.workspaceToCode(workspace);
+  let check = document.getElementById("code").innerHTML;
 
   let paradigm = url.searchParams.get("format");
 
@@ -330,7 +334,7 @@ function toggleButton() {
     !code_input.includes("undefined")
   ) {
     document.querySelector("#doneButton").disabled = false;
-  } else if ((paradigm == "TAP") & (code_input != null)) {
+  } else if ((paradigm == "TAP") & (check != "")) {
     document.querySelector("#doneButton").disabled = false;
   } else if ((paradigm == "SEQ") & (code_input.length > 0)) {
     document.querySelector("#doneButton").disabled = false;

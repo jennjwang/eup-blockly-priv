@@ -195,7 +195,6 @@ function toy_in_room() {
 }
 
 function toy_not_in_room() {
-  // console.log("here");
   console.log("toys", toys_in_room);
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
   return !toy_in_room(); //toys_in_room[robot_c.room].length == 0;
