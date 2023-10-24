@@ -118,6 +118,8 @@ Blockly.defineBlocksWithJsonArray([
     type: "toy_in_room",
     message0: "a toy is in the current room",
     output: "Boolean",
+    previousStatement: [],
+    nextStatement: [],
     colour: 260,
   },
 ]);
@@ -310,7 +312,9 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_in_room",
     message0: "a toy is in the room",
-    output: "Boolean",
+    previousStatement: [],
+    nextStatement: [],
+    // output: "Boolean",
     colour: 160,
   },
 ]);
@@ -325,6 +329,8 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_in_the",
     message0: "I am in the %1",
+    previousStatement: [],
+    nextStatement: [],
     args0: [
       {
         type: "field_dropdown",
@@ -336,7 +342,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    // output: "Boolean",
     colour: 160,
   },
 ]);
@@ -616,7 +622,7 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "input_statement",
         name: "input",
-        check: ["goal"],
+        // check: ["goal"],
       },
     ],
     colour: 160,
@@ -776,24 +782,12 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
       {
-        type: "input_value",
-        name: "goal",
-        align: "CENTRE",
+        type: "input_statement",
+        name: "NAME",
       },
     ],
-    previousStatement: ["goal"],
-    nextStatement: ["goal"],
-    check: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "Boolean",
-    ],
+    previousStatement: null,
+    nextStatement: null,
     colour: 160,
     tooltip: "",
     helpUrl: "",

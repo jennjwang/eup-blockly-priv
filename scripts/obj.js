@@ -42,7 +42,7 @@ class Person {
   }
 }
 
-class Toy {
+class Thing {
   constructor(room, width, height, id) {
     this.room = room;
     this.width = width;

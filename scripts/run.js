@@ -163,14 +163,14 @@ function initApi(interpreter, globalObject) {
     "isRobotOutOfEvent",
     interpreter.createNativeFunction(wrapper)
   );
-  wrapper = function (room) {
-    return is_toy_in_room(room);
-  };
-  interpreter.setProperty(
-    globalObject,
-    "is_toy_in_room",
-    interpreter.createNativeFunction(wrapper)
-  );
+  // wrapper = function (room) {
+  //   return is_toy_in_room(room);
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "is_toy_in_room",
+  //   interpreter.createNativeFunction(wrapper)
+  // );
 
   wrapper = function (room) {
     return isRobotinRoom(room);
