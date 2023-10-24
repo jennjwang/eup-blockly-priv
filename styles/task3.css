@@ -64,11 +64,21 @@ h1 {
   margin-right: 40px;
 }
 
-#bedroom {
-  width: 470px;
+#porch{ 
+  width: 100px;
   height: 250px;
   position: absolute;
   margin: 10px;
+  z-index: 2;
+  background: lightgreen;
+}
+
+#bedroom {
+  width: 360px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  margin-left: 120px;
   z-index: 1;
   background: lightcyan;
 }
