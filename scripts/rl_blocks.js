@@ -608,12 +608,15 @@ actions(
 Blockly.defineBlocksWithJsonArray([
   {
     type: "goals",
-    message0: "Goal %1",
+    message0: "Goals %1 %2",
     args0: [
       {
-        type: "input_value",
+        type: "input_dummy",
+      },
+      {
+        type: "input_statement",
         name: "input",
-        check: "Boolean",
+        check: ["goal"],
       },
     ],
     colour: 160,
@@ -623,15 +626,23 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["goals"] = function (block) {
-  a = block.getInputTargetBlock("input");
-  b = Blockly.JavaScript.blockToCode(a);
-
   return `
 goals(
-  ${b[0]}
+  ${Blockly.JavaScript.statementToCode(block, "input")}
 )
   `;
 };
+
+// Blockly.JavaScript["goals"] = function (block) {
+//   a = block.getInputTargetBlock("input");
+//   b = Blockly.JavaScript.blockToCode(a);
+
+//   return `
+// goals(
+//   ${b[0]}
+// )
+//   `;
+// };
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -710,6 +721,9 @@ Blockly.defineBlocksWithJsonArray([
           "e_person_in_room",
           "e_hands_free",
           "e_toy_in_room",
+          "is_toy_in_room",
+          "e_person_not_in_room",
+          "e_toy_not_in_room",
           "Boolean",
         ],
         align: "CENTRE",
@@ -746,3 +760,42 @@ Blockly.JavaScript["and"] = function (block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "goal",
+    message0: "goal with %1 %2",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "priorities",
+        options: [
+          ["high priority", "high"],
+          ["medium priority", "medium"],
+          ["low priority", "low "],
+        ],
+      },
+      {
+        type: "input_value",
+        name: "goal",
+        align: "CENTRE",
+      },
+    ],
+    previousStatement: ["goal"],
+    nextStatement: ["goal"],
+    check: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "Boolean",
+    ],
+    colour: 160,
+    tooltip: "",
+    helpUrl: "",
+  },
+]);
