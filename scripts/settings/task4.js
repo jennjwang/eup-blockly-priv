@@ -25,7 +25,7 @@ const PLAYROOM = [320, 90];
 const BEDROOM = [150, 320];
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
-let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+let toys_in_room = { kitchen: [coffee], playroom: [], bedroom: [] };
 
 function resetLocs() {
   end_states = `
@@ -65,6 +65,13 @@ function resetLocs() {
   let x = dst[0] + 50;
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
+
+  const coffee_elt = document.getElementById("coffee");
+
+  coffee_elt.style.display = "block";
+  coffee_elt.style.left = "100px";
+  coffee_elt.style.bottom = "90px";
+  let coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 
   return "";
 }

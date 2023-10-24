@@ -223,15 +223,20 @@ h1 {
   height: 120px;
 }
 
-#person {
-  z-index: 2;
-  left: 500px;
-  bottom: 600px;
-  width: 70px;
-  height: auto;
-  position: absolute;
-}
-
 #code {
   display: none;
+}
+
+#person-img {
+  width: auto;
+  height: 90px;
+}
+
+#person {
+  z-index: 2;
+  left: 90px;
+  bottom: 310px;
+  width: 40px;
+  height: auto;
+  position: absolute;
 }
