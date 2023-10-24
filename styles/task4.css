@@ -153,6 +153,20 @@ h1 {
   position: absolute;
 }
 
+#mail-img {
+  width: 100%;
+  height: auto;
+}
+
+#mail {
+  z-index: 2;
+  left: 80px;
+  bottom: 90px;
+  width: 40px;
+  height: auto;
+  position: absolute;
+}
+
 #room-txt {
   position: absolute;
   margin: 3px 10px;
