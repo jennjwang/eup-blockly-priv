@@ -21,7 +21,7 @@ const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear_coors = rooms[BEAR_ROOM];
-let bear = new Toy(BEAR_ROOM, bear_coors[0], bear_coors[1], "bear");
+let bear = new Thing(BEAR_ROOM, bear_coors[0], bear_coors[1], "bear");
 
 var toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
@@ -51,7 +51,7 @@ function resetLocs() {
   let toy_dst = rooms[BEAR_ROOM];
   bear_elt.style.left = toy_dst[0] + 50 + "px";
   bear_elt.style.bottom = toy_dst[1] + "px";
-  bear = new Toy(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
+  bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
   toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
   toys_in_room[BEAR_ROOM] = [bear];
   console.log(toys_in_room);
