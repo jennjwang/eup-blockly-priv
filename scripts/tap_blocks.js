@@ -18,7 +18,16 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "pick_up_toy",
     message0: "pick up the toy",
-    previousStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
@@ -31,7 +40,16 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_toy",
     message0: "put down the toy",
-    previousStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);

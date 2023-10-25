@@ -43,6 +43,94 @@ Blockly.JavaScript["to_random_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "pick_up_coffee",
+    message0: "pick up the coffee",
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["pick_up_coffee"] = function (block) {
+  return "pick_up_thing('coffee');";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "drop_coffee",
+    message0: "put down the coffee",
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["drop_coffee"] = function () {
+  return "drop_coffee();";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "pick_up_mail",
+    message0: "pick up the mail",
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["pick_up_mail"] = function (block) {
+  return "pick_up_thing('mail');";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "drop_mail",
+    message0: "put down the mail",
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["drop_mail"] = function () {
+  return "drop_thing('mail');";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "pick_up_toy",
     message0: "pick up the toy",
     previousStatement: [
@@ -402,6 +490,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
       "trigger_hands_full",
       "triggers",
     ],
@@ -410,6 +500,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
       "trigger_hands_full",
     ],
     colour: 210,
@@ -424,12 +516,80 @@ Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "trigger_coffee_in_room",
+    message0: "Is there coffee in the current room?",
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["trigger_coffee_in_room"] = function (block) {
+  return "thing_in_room('coffee');\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "trigger_mail_in_room",
+    message0: "Is there mail in the current room?",
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "trigger_mail_in_room",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_hands_full",
+    ],
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["trigger_mail_in_room"] = function (block) {
+  return "thing_in_room('mail');\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "trigger_out_of",
     message0: "Am I out of the %1?",
     previousStatement: [
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_free",
       "trigger_hands_full",
       "triggers",
@@ -438,6 +598,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_free",
       "trigger_hands_full",
     ],
@@ -469,6 +631,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_free",
       "trigger_hands_full",
       "triggers",
@@ -477,7 +641,9 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_mail_in_room",
       "trigger_hands_free",
+      "trigger_coffee_in_room",
       "trigger_hands_full",
     ],
     args0: [
@@ -509,6 +675,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_full",
       "triggers",
     ],
@@ -517,6 +685,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_full",
     ],
     colour: 210,
@@ -536,6 +706,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_full",
       "triggers",
     ],
@@ -544,6 +716,8 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_in_the",
       "trigger_toy_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_full",
     ],
     colour: 210,
@@ -562,7 +736,9 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
       "trigger_hands_full",
       "triggers",
     ],
@@ -570,7 +746,9 @@ Blockly.defineBlocksWithJsonArray([
       "trigger_out_of",
       "trigger_in_the",
       "trigger_toy_in_room",
+      "trigger_coffee_in_room",
       "trigger_hands_free",
+      "trigger_mail_in_room",
       "trigger_hands_full",
     ],
     colour: 210,
