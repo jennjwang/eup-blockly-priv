@@ -48,6 +48,9 @@
       <p style="display: none" , id="end"></p>
 
       <div class="simulation">
+        <div id="porch">
+          <p id="room-txt">porch</p>
+        </div>
         <div id="bedroom">
           <p id="room-txt">bedroom</p>
         </div>
@@ -94,6 +97,10 @@
             <category name="Actions" categorystyle="variable_category">
               <block type="drop_toy"></block>
               <block type="pick_up_toy"></block>
+              <block type="drop_coffee"></block>
+              <block type="pick_up_coffee"></block>
+              <block type="drop_mail"></block>
+              <block type="pick_up_mail"></block>
               <block type="to_room"></block>
               <block type="to_random_room"></block>
             </category>
@@ -111,6 +118,10 @@
               <block type="e_toy_not_in_room"></block>
               <block type="e_hands_free"></block>
               <block type="e_hands_full"></block>
+              <block type="e_coffee_in_room"></block>
+              <block type="e_coffee_not_in_room"></block>
+              <block type="e_mail_in_room"></block>
+              <block type="e_mail_not_in_room"></block>
               <block type="and"></block>
             </category>
             <category name="Actions" categorystyle="variable_category">
@@ -127,6 +138,10 @@
               <block type="e_in_the"></block>
               <block type="e_hands_free"></block>
               <block type="e_hands_full"></block>
+              <block type="e_coffee_in_room"></block>
+              <block type="e_coffee_not_in_room"></block>
+              <block type="e_mail_in_room"></block>
+              <block type="e_mail_not_in_room"></block>
               <block type="and"></block>
             </category>
             <category name="States" categorystyle="logic_category">

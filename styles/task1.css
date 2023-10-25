@@ -58,7 +58,6 @@ h1 {
   }
 } */
 
-
 .simulation {
   /* width: 1600px;
   height: 800px;
@@ -72,14 +71,13 @@ h1 {
   margin-right: 40px;
 }
 
-
-#porch{ 
+#porch {
   width: 100px;
   height: 250px;
   position: absolute;
   margin: 10px;
   z-index: 2;
-  background: lightgreen;
+  background: #d4f8d3;
 }
 
 #bedroom {
@@ -115,7 +113,7 @@ h1 {
 #robot {
   width: 80px;
   height: auto;
-  left: 200px;
+  left: 280px;
   bottom: 320px;
   z-index: 2;
   position: absolute;
@@ -216,7 +214,7 @@ h1 {
 
 #person {
   z-index: 2;
-  left: 100px;
+  left: 200px;
   bottom: 310px;
   width: 40px;
   height: auto;

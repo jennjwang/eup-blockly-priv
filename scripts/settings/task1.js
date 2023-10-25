@@ -18,9 +18,9 @@ let person = new Person(PERSON_ROOM);
 let end_states = "";
 let start_states = "";
 
-const KITCHEN = [90, 90];
+const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [150, 320];
+const BEDROOM = [220, 320];
 const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };

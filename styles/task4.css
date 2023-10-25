@@ -65,14 +65,14 @@ h1 {
 }
 
 #bedroom {
-  width: 470px;
+  width: 360px;
   height: 250px;
   position: absolute;
   margin: 10px;
+  margin-left: 120px;
   z-index: 1;
   background: lightcyan;
 }
-
 #kitchen {
   width: 230px;
   height: 230px;
@@ -234,9 +234,18 @@ h1 {
 
 #person {
   z-index: 2;
-  left: 90px;
+  left: 100px;
   bottom: 310px;
   width: 40px;
   height: auto;
   position: absolute;
+}
+
+#porch {
+  width: 100px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  z-index: 2;
+  background: #d4f8d3;
 }

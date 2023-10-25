@@ -64,13 +64,13 @@ h1 {
   margin-right: 40px;
 }
 
-#porch{ 
+#porch {
   width: 100px;
   height: 250px;
   position: absolute;
   margin: 10px;
   z-index: 2;
-  background: lightgreen;
+  background: #d4f8d3;
 }
 
 #bedroom {
