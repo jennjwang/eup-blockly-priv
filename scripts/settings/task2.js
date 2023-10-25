@@ -5,19 +5,22 @@ function brandomRoom(rooms) {
   return rooms[i];
 }
 
-var ROBOT_ROOM = "kitchen";
-let BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
-if (BEAR_ROOM == "kitchen") {
-  ROBOT_ROOM = "bedroom";
-} else {
-  ROBOT_ROOM = "kitchen";
+var ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
+let BEAR_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
+while (BEAR_ROOM == ROBOT_ROOM) {
+  ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
 }
 
 const KITCHEN = [90, 90];
 const PLAYROOM = [320, 90];
 const BEDROOM = [150, 320];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
-
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear_coors = rooms[BEAR_ROOM];
@@ -47,7 +50,8 @@ function resetLocs() {
   counter = 0;
 
   const bear_elt = document.getElementById("bear");
-  BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
+
+  BEAR_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
   let toy_dst = rooms[BEAR_ROOM];
   bear_elt.style.left = toy_dst[0] + 50 + "px";
   bear_elt.style.bottom = toy_dst[1] + "px";
@@ -56,11 +60,10 @@ function resetLocs() {
   toys_in_room[BEAR_ROOM] = [bear];
   console.log(toys_in_room);
 
-  if (BEAR_ROOM == "kitchen") {
-    ROBOT_ROOM = brandomRoom(["playroom", "bedroom"]);
-  } else {
-    ROBOT_ROOM = brandomRoom(["kitchen", "playroom"]);
+  while (BEAR_ROOM === ROBOT_ROOM) {
+    ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
   }
+
   const robot = document.getElementById("robot");
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";

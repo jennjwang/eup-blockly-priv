@@ -23,8 +23,13 @@ let start_states = "";
 const KITCHEN = [90, 90];
 const PLAYROOM = [320, 90];
 const BEDROOM = [150, 320];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
-
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
 let toys_in_room = { kitchen: [coffee], playroom: [], bedroom: [] };
 
 function resetLocs() {

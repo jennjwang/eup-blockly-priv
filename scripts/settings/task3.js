@@ -12,10 +12,20 @@ let duck = new Thing(DUCK_ROOM, 120, 90, "duck");
 const KITCHEN = [180, 90];
 const PLAYROOM = [320, 90];
 const BEDROOM = [150, 340];
-const PORCH = [90, 90];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
 
-let toys_in_room = { kitchen: [bear, car, duck], playroom: [], bedroom: [] };
+let toys_in_room = {
+  kitchen: [bear, car, duck],
+  playroom: [],
+  bedroom: [],
+  porch: [],
+};
 
 let end_states = "";
 let start_states = "";

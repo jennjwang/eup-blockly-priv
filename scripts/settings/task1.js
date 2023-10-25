@@ -1,5 +1,5 @@
 function randomRoom() {
-  let rooms = ["kitchen", "bedroom", "playroom"];
+  let rooms = ["kitchen", "bedroom", "playroom", "porch"];
   i = Math.floor(Math.random() * 3);
   return rooms[i];
 }
@@ -21,7 +21,13 @@ let start_states = "";
 const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
 const BEDROOM = [220, 320];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
 
@@ -74,6 +80,40 @@ function shuffleArray(array) {
 }
 
 let interval;
+
+function movePersonHelper() {
+  let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
+  const index = temp_rooms.indexOf(person.room);
+  if (index > -1) {
+    temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
+  }
+  shuffleArray(temp_rooms);
+  i = Math.floor(Math.random() * 2);
+  dst = rooms[temp_rooms[i]];
+  x = dst[0];
+  y = dst[1];
+  if (person.room == "playroom" && temp_rooms[i] == "bedroom") {
+    x += 100;
+  }
+  if (person.room == "kitchen" && temp_rooms[i] == "bedroom") {
+    x -= 130;
+  }
+  if (temp_rooms[i] == "porch") {
+    x -= 70;
+  }
+  moveRobotTo("person", [x + 70, y]);
+  person.setRoom(temp_rooms[i]);
+}
+
+function movePerson() {
+  clearInterval(interval);
+  console.log("moving person");
+  interval = setInterval(function () {
+    // if (person.room != robot_c.room) {
+    movePersonHelper();
+    // }
+  }, 5000);
+}
 
 function toggleTask1() {
   var button = document.getElementById("runButton");

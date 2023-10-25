@@ -237,6 +237,7 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
