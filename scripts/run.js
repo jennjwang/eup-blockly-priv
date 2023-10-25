@@ -137,6 +137,24 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (thing) {
+    pick_up_thing(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "pick_up_thing",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (thing) {
+    drop_thing(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "drop_thing",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     return start();
   };

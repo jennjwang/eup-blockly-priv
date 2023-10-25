@@ -5,8 +5,27 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "to_random_room",
     message0: "go to a random room",
-    previousStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
   },
 ]);
 
@@ -19,6 +38,16 @@ Blockly.defineBlocksWithJsonArray([
     type: "pick_up_toy",
     message0: "pick up the toy",
     previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
       "pick_up_toy",
       "pick_up_coffee",
       "drop_coffee",
@@ -50,6 +79,16 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
@@ -63,6 +102,16 @@ Blockly.defineBlocksWithJsonArray([
     type: "pick_up_coffee",
     message0: "pick up the coffee",
     previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
       "pick_up_toy",
       "pick_up_coffee",
       "drop_coffee",
@@ -94,12 +143,22 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
 
 Blockly.JavaScript["drop_coffee"] = function () {
-  return "drop_coffee();";
+  return "drop_thing('coffee');";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -107,6 +166,16 @@ Blockly.defineBlocksWithJsonArray([
     type: "pick_up_mail",
     message0: "pick up the mail",
     previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
       "pick_up_toy",
       "pick_up_coffee",
       "drop_coffee",
@@ -129,6 +198,16 @@ Blockly.defineBlocksWithJsonArray([
     type: "drop_mail",
     message0: "put down the mail",
     previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
       "pick_up_toy",
       "pick_up_coffee",
       "drop_coffee",
@@ -161,7 +240,26 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    previousStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
@@ -482,7 +580,7 @@ Blockly.defineBlocksWithJsonArray([
         check: ["drop_toy", "pick_up_toy", "to_room", "to_random_room"],
       },
     ],
-    colour: 230,
+    colour: 330,
     tooltip: "",
     helpUrl: "",
   },

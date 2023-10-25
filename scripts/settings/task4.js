@@ -7,6 +7,7 @@ function randomRoom() {
 let ROBOT_ROOM = randomRoom();
 let PERSON_ROOM = randomRoom();
 let COFFEE_ROOM = "kitchen";
+let coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 
 while (PERSON_ROOM === ROBOT_ROOM) {
   PERSON_ROOM = randomRoom();
@@ -15,7 +16,6 @@ while (PERSON_ROOM === ROBOT_ROOM) {
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let person = new Person(PERSON_ROOM);
-let coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 
 let end_states = "";
 let start_states = "";
@@ -71,7 +71,7 @@ function resetLocs() {
   coffee_elt.style.display = "block";
   coffee_elt.style.left = "100px";
   coffee_elt.style.bottom = "90px";
-  let coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
+  coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 
   return "";
 }
