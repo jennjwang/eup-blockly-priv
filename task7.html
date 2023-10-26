@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Blockly for EUP</title>
+
+    <link
+      rel="stylesheet"
+      href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css"
+    />
+    <link rel="stylesheet" href="styles/task7.css" />
+    <link rel="stylesheet" href="styles/general.css" />
+    <script src="interpreter/acorn_interpreter.js"></script>
+  </head>
+  <body>
+    <div class="text">
+      <b>Description:</b> In this task, your goal is to program a robot to move
+      all of the toys from the kitchen to the playroom. At the start of the
+      task, the toys will be in the kitchen. The robot should move the toys to
+      the playroom one at a time. Note, the robot can start in different rooms.
+    </div>
+
+    <div class="wrapper">
+      <div id="modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Thank you for completing the study</h3>
+          </div>
+          <div class="modal-body">
+            <p>
+              Please return to Qualtrics and enter the following code:
+              <mark>T37435907</mark>
+            </p>
+            <!-- <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p> -->
+          </div>
+          <!-- <button onclick="window.close()">
+          Exit
+        </button> -->
+        </div>
+      </div>
+
+      <p style="display: none" , id="code"></p>
+      <p style="display: none" , id="start"></p>
+      <p style="display: none" , id="end"></p>
+
+      <div class="simulation">
+        <div id="porch">
+          <p id="room-txt">porch</p>
+        </div>
+        <div id="bedroom">
+          <p id="room-txt">bedroom</p>
+        </div>
+        <div id="kitchen">
+          <p id="room-txt">kitchen</p>
+        </div>
+        <div id="playroom">
+          <p id="room-txt">playroom</p>
+        </div>
+
+        <div id="robot">
+          <img id="robot-img" src="assets/robot.png" />
+        </div>
+        <div id="mail">
+          <img id="mail-img" src="assets/mail.png" />
+        </div>
+        <div id="coffee">
+          <img id="coffee-img" src="assets/coffee.png" />
+        </div>
+      </div>
+
+      <div class="blockly-editor">
+        <div id="controls">
+          <button
+            class="run"
+            id="runButton"
+            onclick="toggleButton()"
+            title="Makes the player do what the blocks say."
+          >
+            Run Program
+          </button>
+          <button id="doneButton">I'm Done</button>
+        </div>
+        <div id="blocklyDiv">
+          <xml id="toolbox" style="display: none">
+            <category
+              name="Controls"
+              style="display: none"
+              categorystyle="logic_category"
+            >
+              <block type="if_then"></block>
+              <block type="if_while_then"></block>
+            </category>
+            <category name="Actions" categorystyle="variable_category">
+              <block type="drop_toy"></block>
+              <block type="pick_up_toy"></block>
+              <block type="drop_coffee"></block>
+              <block type="pick_up_coffee"></block>
+              <block type="drop_mail"></block>
+              <block type="pick_up_mail"></block>
+              <block type="to_room"></block>
+              <block type="to_random_room"></block>
+            </category>
+            <category name="Events" categorystyle="list_category">
+              <block type="out_of"></block>
+              <block type="in_the"></block>
+              <block type="hands_free"></block>
+              <block type="hands_full"></block>
+              <block type="start"></block>
+            </category>
+            <category name="States" categorystyle="event_category">
+              <block type="e_out_of"></block>
+              <block type="e_in_the"></block>
+              <block type="e_toy_in_room"></block>
+              <block type="e_toy_not_in_room"></block>
+              <block type="e_hands_free"></block>
+              <block type="e_hands_full"></block>
+              <block type="e_coffee_in_room"></block>
+              <block type="e_coffee_not_in_room"></block>
+              <block type="e_mail_in_room"></block>
+              <block type="e_mail_not_in_room"></block>
+              <block type="and"></block>
+            </category>
+            <category name="Actions" categorystyle="variable_category">
+              <block type="drop_toy"></block>
+              <block type="pick_up_toy"></block>
+              <block type="drop_coffee"></block>
+              <block type="pick_up_coffee"></block>
+              <block type="drop_mail"></block>
+              <block type="pick_up_mail"></block>
+              <block type="to_room"></block>
+              <block type="to_random_room"></block>
+            </category>
+            <category name="Goal" categorystyle="event_category">
+              <block type="goal"></block>
+              <block type="e_out_of"></block>
+              <block type="e_toy_in_room"></block>
+              <block type="e_toy_not_in_room"></block>
+              <block type="e_in_the"></block>
+              <block type="e_hands_free"></block>
+              <block type="e_hands_full"></block>
+              <block type="e_coffee_in_room"></block>
+              <block type="e_coffee_not_in_room"></block>
+              <block type="e_mail_in_room"></block>
+              <block type="e_mail_not_in_room"></block>
+              <block type="and"></block>
+            </category>
+            <category name="States" categorystyle="logic_category">
+              <block type="trigger_out_of"></block>
+              <block type="trigger_in_the"></block>
+              <block type="trigger_toy_in_room"></block>
+              <block type="trigger_hands_free"></block>
+              <block type="trigger_mail_in_room"></block>
+              <block type="trigger_coffee_in_room"></block>
+              <block type="trigger_hands_full"></block>
+            </category>
+            <category
+              name="Controls"
+              style="display: none"
+              categorystyle="logic_category"
+            >
+              <block type="controls_if"></block>
+              <block type="controls_ifelse"></block>
+              <block type="logic_boolean"></block>
+              <block type="controls_whileUntil"></block>
+            </category>
+          </xml>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/blockly.min.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js";
+
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDiIxREdUezYv-Pxt2Z0uEJeZkyWYmAxw4",
+        authDomain: "eup-blockly.firebaseapp.com",
+        projectId: "eup-blockly",
+        storageBucket: "eup-blockly.appspot.com",
+        messagingSenderId: "217753483766",
+        appId: "1:217753483766:web:e70dc79808942eddd1afd7",
+        measurementId: "G-9CXK0MCT41",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Initialize Cloud Firestore and get a reference to the service
+      const db = getFirestore(app);
+
+      console.log(window.location.href);
+      const url = new URL(window.location.href);
+      const study_id = url.searchParams.get("STUDY_ID");
+      const prolific_pid = url.searchParams.get("PROLIFIC_PID");
+      const session_id = url.searchParams.get("SESSION_ID");
+      const format = url.searchParams.get("format");
+
+      let round = 1;
+      let operationOrder = 1;
+
+      document.querySelector("#runButton").addEventListener("click", () => {
+        console.log(document.getElementById("runButton").innerHTML);
+        if (document.getElementById("runButton").innerHTML != "Stop Program") {
+          console.log("recording");
+          record("stopped");
+          round += 1;
+          operationOrder = 0;
+        } else {
+          record("started");
+        }
+      });
+
+      document.querySelector("#doneButton").addEventListener("click", () => {
+        record("final");
+        document.getElementById("modal").style.display = "block";
+      });
+
+      async function onChange(event) {
+        if (event.type == Blockly.Events.BLOCK_CHANGE && event.name) {
+          const eventJson = event.toJson();
+          const block = workspace.getBlockById(eventJson.blockId);
+          try {
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed);
+            const docRef = await addDoc(
+              collection(
+                db,
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/changed/`
+              ),
+              {
+                timestamp: today.toISOString(),
+                code: Blockly.JavaScript.workspaceToCode(workspace),
+                change: eventJson.type,
+                block: block.type,
+                newValue: eventJson.newValue,
+                oldValue: eventJson.oldValue,
+                order: operationOrder,
+              }
+            );
+            operationOrder += 1;
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+      }
+
+      async function onDelete(event) {
+        if (event.type == Blockly.Events.BLOCK_DELETE) {
+          const eventJson = event.toJson();
+          console.log(event.toJson());
+
+          try {
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed);
+            // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
+            const docRef = await addDoc(
+              collection(
+                db,
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/deleted/`
+              ),
+              {
+                timestamp: today.toISOString(),
+                code: Blockly.JavaScript.workspaceToCode(workspace),
+                change: eventJson.type,
+                block: eventJson.oldJson,
+                order: operationOrder,
+              }
+            );
+            operationOrder += 1;
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+      }
+
+      async function onBlockCreate(event) {
+        if (event.type == Blockly.Events.BLOCK_CREATE) {
+          const eventJson = event.toJson();
+          console.log(event.toJson());
+          try {
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed);
+            // console.log(`${study_id}/${prolific_pid}/${session_id}/task1/${format}/added`)
+            const docRef = await addDoc(
+              collection(
+                db,
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/created/`
+              ),
+              {
+                timestamp: today.toISOString(),
+                code: Blockly.JavaScript.workspaceToCode(workspace),
+                change: eventJson.type,
+                block: eventJson.json.type,
+                order: operationOrder,
+              }
+            );
+            operationOrder += 1;
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+      }
+
+      async function onMove(event) {
+        if (event.type == Blockly.Events.BLOCK_MOVE) {
+          // alert("Congratulations on creating your first comment!");
+          console.log(event.toJson());
+          const eventJson = event.toJson();
+          const block = workspace.getBlockById(eventJson.blockId);
+          let newParent = "";
+          let oldParent = "";
+          if (eventJson.newParentId) {
+            newParent = workspace.getBlockById(eventJson.newParentId).type;
+          }
+          if (eventJson.oldParentId) {
+            oldParent = workspace.getBlockById(eventJson.oldParentId).type;
+          }
+          try {
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed);
+            const docRef = await addDoc(
+              collection(
+                db,
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/moved/`
+              ),
+              {
+                timestamp: today.toISOString(),
+                code: Blockly.JavaScript.workspaceToCode(workspace),
+                change: eventJson.type,
+                block: block.type,
+                newConnection: newParent,
+                oldConnection: oldParent,
+                order: operationOrder,
+              }
+            );
+            operationOrder += 1;
+            console.log("Document written with ID: ", docRef.id);
+            // console.log(Blockly.JavaScript.workspaceToCode(workspace));
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+      }
+
+      workspace.addChangeListener(onChange);
+      workspace.addChangeListener(onDelete);
+      workspace.addChangeListener(onBlockCreate);
+      workspace.addChangeListener(onMove);
+
+      async function record(runStatus) {
+        console.log("end", document.getElementById("end").innerHTML);
+        console.log("start", document.getElementById("start").innerHTML);
+        try {
+          const timeElapsed = Date.now();
+          const today = new Date(timeElapsed);
+          const docRef = await addDoc(
+            collection(
+              db,
+              `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/${runStatus}/`
+            ),
+            {
+              timestamp: today.toISOString(),
+              code: Blockly.JavaScript.workspaceToCode(workspace),
+              start_state: document.getElementById("start").innerHTML,
+              end_state: document.getElementById("end").innerHTML,
+              runStatus: runStatus,
+              order: operationOrder,
+            }
+          );
+          operationOrder += 1;
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
+    </script>
+    <script src="scripts/obj.js"></script>
+    <script src="scripts/settings/task3.js"></script>
+    <script id="tap" src="scripts/tap_blocks.js"></script>
+    <script id="rl" src="scripts/rl_blocks.js"></script>
+    <script src="scripts/run.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/rl.js"></script>
+    <script src="scripts/mdp.js"></script>
+  </body>
+</html>
