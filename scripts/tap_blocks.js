@@ -626,6 +626,8 @@ Blockly.defineBlocksWithJsonArray([
           "in_the",
           "person_in_room",
           "hands_free",
+          "e_hands_free",
+          "e_hands_full",
           "hands_full",
           "start",
         ],

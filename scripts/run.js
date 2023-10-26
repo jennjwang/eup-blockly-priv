@@ -262,6 +262,24 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (thing) {
+    return thing_in_room(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "thing_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (thing) {
+    return thing_not_in_room(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "thing_not_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     return toy_not_in_room();
   };
