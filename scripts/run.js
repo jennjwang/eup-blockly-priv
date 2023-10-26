@@ -462,8 +462,6 @@ if (url.searchParams.get("format") == "FULL_MDP") {
   document.getElementById("blockly-6").style.display = "none";
 }
 
-Blockly.Xml.domToWorkspace(xml, workspace);
-
 window.onload = function () {
   // updates script dynamically depending on format
   if (
@@ -473,17 +471,19 @@ window.onload = function () {
     const scriptList = document.querySelectorAll(
       "script[type='text/javascript']"
     );
-    // console.log(scriptList);
+    console.log(scriptList);
     const convertedNodeList = Array.from(scriptList);
     const testScript = convertedNodeList.find((script) => script.id === "tap");
-    // console.log(testScript);
-    //testScript.remove();
-    //testScript.parentNode.removeChild(testScript);
+    console.log(testScript);
+    testScript.remove();
+    testScript.parentNode.removeChild(testScript);
   } else {
     var block_script = document.createElement("script");
     block_script.setAttribute("src", "scripts/tap_blocks.js");
     document.body.appendChild(block_script);
   }
 };
+
+Blockly.Xml.domToWorkspace(xml, workspace);
 
 workspace.addChangeListener(Blockly.Events.disableOrphans);

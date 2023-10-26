@@ -381,7 +381,20 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_not_in_room",
     message0: "a toy is not in the room",
-    output: "Boolean",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
@@ -404,10 +417,24 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
-    output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    // output: "Boolean",
     colour: 160,
   },
 ]);
@@ -421,9 +448,20 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_toy_in_room",
     message0: "a toy is in the room",
-    previousStatement: [],
-    nextStatement: [],
     // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
@@ -436,10 +474,64 @@ Blockly.JavaScript["e_toy_in_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_coffee_in_room",
+    message0: "there is coffee in the room",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_coffee_in_room"] = function (block) {
+  return ["thing_in_room('coffee')", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_coffee_not_in_room",
+    message0: "there is no coffee in the room",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_coffee_not_in_room"] = function (block) {
+  return ["thing_not_in_room('coffee')", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "e_in_the",
     message0: "I am in the %1",
     previousStatement: [],
-    nextStatement: [],
     args0: [
       {
         type: "field_dropdown",
@@ -448,6 +540,7 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
@@ -465,7 +558,20 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_in_room",
     message0: "a person is in the room",
-    output: "Boolean",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
@@ -478,7 +584,20 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_free",
     message0: "my hands are free",
-    output: "Boolean",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
@@ -491,7 +610,20 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_full",
     message0: "my hands are full",
-    output: "Boolean",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
