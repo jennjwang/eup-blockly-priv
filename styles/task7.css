@@ -108,40 +108,13 @@ h1 {
   height: auto;
   left: 200px;
   bottom: 320px;
-  z-index: 4;
+  z-index: 3;
   position: absolute;
 }
 
 #robot-img {
   width: 100%;
   height: auto;
-}
-
-#bear {
-  z-index: 2;
-  left: 80px;
-  bottom: 90px;
-  width: 35px;
-  height: auto;
-  position: absolute;
-}
-
-#car {
-  z-index: 2;
-  left: 100px;
-  bottom: 90px;
-  width: 40px;
-  height: auto;
-  position: absolute;
-}
-
-#duck {
-  z-index: 2;
-  left: 120px;
-  bottom: 90px;
-  width: 35px;
-  height: auto;
-  position: absolute;
 }
 
 #toy-img {
@@ -155,7 +128,7 @@ h1 {
 }
 
 #coffee {
-  z-index: 2;
+  z-index: 4;
   left: 50px;
   bottom: 320px;
   width: 35px;
@@ -169,7 +142,7 @@ h1 {
 }
 
 #mail {
-  z-index: 2;
+  z-index: 4;
   left: 30px;
   bottom: 320px;
   width: 40px;
