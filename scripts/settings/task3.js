@@ -11,7 +11,7 @@ let duck = new Thing(DUCK_ROOM, 120, 90, "duck");
 
 const KITCHEN = [180, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [150, 340];
+const BEDROOM = [280, 340];
 const PORCH = [20, 320];
 const rooms = {
   kitchen: KITCHEN,

@@ -20,7 +20,7 @@ let start_states = "";
 
 const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [220, 320];
+const BEDROOM = [280, 320];
 const PORCH = [20, 320];
 const rooms = {
   kitchen: KITCHEN,

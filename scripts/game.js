@@ -270,7 +270,7 @@ function moveRobotToRandomRoom() {
   if (robot_c.start) {
     robot_c.start = false;
   }
-  let temp_rooms = ["kitchen", "bedroom", "playroom"];
+  let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   shuffleArray(temp_rooms);
   temp_rooms.splice(temp_rooms.indexOf(robot_c.room), 1);
   // let i = Math.floor(Math.random() * 3);
@@ -323,7 +323,7 @@ function resolveAfter3Seconds() {
   let delay = 10;
   let condition = url.searchParams.get("format");
   if (condition == "SEQ" || condition == "TAP") {
-    delay = 1500;
+    delay = 2500;
   }
 
   return new Promise((resolve) => {
