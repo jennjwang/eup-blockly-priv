@@ -199,7 +199,6 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["to_room"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  console.log(value);
   return "moveRobotToRoom(" + value + ");\n\t";
 };
 
