@@ -200,15 +200,38 @@ function toy_not_in_room() {
   return !toy_in_room(); //toys_in_room[robot_c.room].length == 0;
 }
 
-// function is_toy_in_room(room) {
-//   let toy_in_room_check = toys_in_room[room].length != 0;
-//   if (!robot_c.handsFree) {
-//     return toy_in_room_check || robot_c.holding.room == room;
-//   } else {
-//     return toy_in_room_check;
-//   }
-//   // return toy_in_room_check = toys_in_room[room].length != 0
-// }
+function is_toy_in_room(room) {
+  let toy_in_room_check = toys_in_room[room].length != 0;
+  if (!robot_c.handsFree) {
+    return toy_in_room_check || robot_c.holding.room == room;
+  } else {
+    return toy_in_room_check;
+  }
+  // return toy_in_room_check = toys_in_room[room].length != 0
+}
+
+function is_coffee_in_room(room) {
+  let id = "coffee";
+  return is_thing_in_room(id, room);
+}
+
+function is_mail_in_room(room) {
+  let id = "mail";
+  return is_thing_in_room(id, room);
+}
+
+function is_thing_in_room(id, room) {
+  let toy_in_room_check = toys_in_room[room].length != 0;
+  if (robot_c.handsFull) {
+    return robot_c.holding.id == id;
+  } else if (toy_in_room_check) {
+    let objs = toys_in_room[room];
+    // we know there's only one coffee and once piece of mail
+    let containsObj = objs.some((obj) => obj.id === id);
+    return containsObj;
+  }
+  return false;
+}
 
 function isPersoninRoom() {
   // console.log("person: " + person.prev == person.room);
@@ -369,19 +392,6 @@ function thing_in_room(id) {
     return containsObj;
   }
   return false;
-
-  // if (!robot_c.handsFree) {
-  //   console.log("robot hands are full");
-  //   return (
-  //     toy_in_room_check ||
-  //     (robot_c.holding.room == robot_c.room && robot_c.holding.id == id)
-  //   );
-  // } else if (toy_in_room_check) {
-  //   console.log("room is not empty");
-  //   console.log(toys_in_room);
-  //   return toys_in_room[robot_c.room][0].id === id;
-  // }
-  // return false;
 }
 
 function thing_not_in_room(id) {
