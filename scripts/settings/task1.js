@@ -92,8 +92,9 @@ function movePersonHelper() {
   dst = rooms[temp_rooms[i]];
   x = dst[0];
   y = dst[1];
+
   if (person.room == "playroom" && temp_rooms[i] == "bedroom") {
-    x += 100;
+    x -= 100;
   }
   if (person.room == "kitchen" && temp_rooms[i] == "bedroom") {
     x -= 130;
@@ -112,7 +113,7 @@ function movePerson() {
     // if (person.room != robot_c.room) {
     movePersonHelper();
     // }
-  }, 5000);
+  }, 3000);
 }
 
 function toggleTask1() {
