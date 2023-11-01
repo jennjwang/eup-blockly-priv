@@ -9,9 +9,9 @@ let bear = new Thing(BEAR_ROOM, 80, 90, "bear");
 let car = new Thing(CAR_ROOM, 100, 90, "car");
 let duck = new Thing(DUCK_ROOM, 120, 90, "duck");
 
-const KITCHEN = [180, 90];
+const KITCHEN = [130, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [280, 340];
+const BEDROOM = [220, 340];
 const PORCH = [20, 320];
 const rooms = {
   kitchen: KITCHEN,

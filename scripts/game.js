@@ -344,7 +344,7 @@ function moveRobotToRoom(room) {
     moveRobotTo("robot", [x, y + 20]);
     setTimeout(() => {
       moveRobotTo("robot", dst);
-    }, 300);
+    }, 100);
   }
 
   robot_c.setRoom(room);

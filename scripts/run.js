@@ -341,14 +341,14 @@ function initApi(interpreter, globalObject) {
 }
 
 function randomRoom() {
-  let rooms = ["kitchen", "bedroom", "playroom"];
-  i = Math.floor(Math.random() * 3);
+  let rooms = ["kitchen", "bedroom", "playroom", "porch"];
+  i = Math.floor(Math.random() * rooms.length);
   return rooms[i];
 }
 
 function randomRoomWithoutKitchen() {
-  let rooms = ["bedroom", "playroom"];
-  i = Math.floor(Math.random() * 2);
+  let rooms = ["bedroom", "playroom", "porch"];
+  i = Math.floor(Math.random() * rooms.length);
   return rooms[i];
 }
 
