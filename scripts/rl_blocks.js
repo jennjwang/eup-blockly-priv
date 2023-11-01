@@ -441,7 +441,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
-  return ["toy_not_in_room()", Blockly.JavaScript.PRECEDENCE];
+  return "toy_not_in_room()\t\n";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -495,7 +495,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["e_out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["!isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "!isRobotinRoomEvent(" + value + ")";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -535,10 +535,8 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["e_toy_in_room"] = function (block) {
-  return ["toy_in_room()", Blockly.JavaScript.PRECEDENCE];
+  return "toy_in_room()";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -580,7 +578,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_coffee_in_room"] = function (block) {
-  return ["thing_in_room('coffee')", Blockly.JavaScript.PRECEDENCE];
+  return "thing_in_room('coffee')";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -622,7 +620,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_mail_in_room"] = function (block) {
-  return ["thing_in_room('mail')", Blockly.JavaScript.PRECEDENCE];
+  return "thing_in_room('mail')";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -664,7 +662,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_mail_not_in_room"] = function (block) {
-  return ["thing_not_in_room('mail')", Blockly.JavaScript.PRECEDENCE];
+  return "thing_not_in_room('mail')";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -702,10 +700,8 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
-
 Blockly.JavaScript["e_coffee_not_in_room"] = function (block) {
-  return ["thing_not_in_room('coffee')", Blockly.JavaScript.PRECEDENCE];
+  return "thing_not_in_room('coffee')";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -757,7 +753,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["e_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.PRECEDENCE];
+  return "isRobotinRoomEvent(" + value + ")";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -783,7 +779,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_person_in_room"] = function () {
-  return ["isPersonInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+  return "isPersonInRoomEvent()";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -822,7 +818,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_free"] = function (block) {
-  return ["eHandsFree()", Blockly.JavaScript.PRECEDENCE];
+  return "eHandsFree()";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -861,7 +857,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_full"] = function (block) {
-  return ["eHandsFull()", Blockly.JavaScript.PRECEDENCE];
+  return "eHandsFull()";
 };
 
 // triggers:
@@ -1216,24 +1212,18 @@ Blockly.defineBlocksWithJsonArray([
   },
 ]);
 
-// Blockly.JavaScript["goals"] = function (block) {
-//   return `
-// goals(
-//   ${Blockly.JavaScript.statementToCode(block, "input")}
-// )
-//   `;
-// };
-
-// Blockly.JavaScript["goals"] = function (block) {
-//   a = block.getInputTargetBlock("input");
-//   b = Blockly.JavaScript.blockToCode(a);
-
-//   return `
-// goals(
-//   ${b[0]}
-// )
-//   `;
-// };
+Blockly.JavaScript["goals"] = function (block) {
+  return `
+goals(
+  high : goals(${Blockly.JavaScript.statementToCode(block, "high priority")}),
+  medium: goals(${Blockly.JavaScript.statementToCode(
+    block,
+    "medium priority"
+  )}),
+  low: goals(${Blockly.JavaScript.statementToCode(block, "low priority")}),
+)
+  `;
+};
 
 Blockly.defineBlocksWithJsonArray([
   {

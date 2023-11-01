@@ -211,16 +211,16 @@
         console.log(document.getElementById("runButton").innerHTML);
         if (document.getElementById("runButton").innerHTML != "Stop Program") {
           console.log("recording");
-          record("stopped");
+          // record("stopped");
           round += 1;
           operationOrder = 0;
         } else {
-          record("started");
+          // record("started");
         }
       });
 
       document.querySelector("#doneButton").addEventListener("click", () => {
-        record("final");
+        // record("final");
         document.getElementById("modal").style.display = "block";
       });
 
@@ -354,10 +354,10 @@
         }
       }
 
-      workspace.addChangeListener(onChange);
-      workspace.addChangeListener(onDelete);
-      workspace.addChangeListener(onBlockCreate);
-      workspace.addChangeListener(onMove);
+      // workspace.addChangeListener(onChange);
+      // workspace.addChangeListener(onDelete);
+      // workspace.addChangeListener(onBlockCreate);
+      // workspace.addChangeListener(onMove);
 
       async function record(runStatus) {
         console.log("end", document.getElementById("end").innerHTML);
