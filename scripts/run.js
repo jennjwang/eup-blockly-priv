@@ -128,6 +128,24 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (room) {
+    is_mail_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_mail_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    is_coffee_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_coffee_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     pick_up_toy();
   };
@@ -181,14 +199,15 @@ function initApi(interpreter, globalObject) {
     "isRobotOutOfEvent",
     interpreter.createNativeFunction(wrapper)
   );
-  // wrapper = function (room) {
-  //   return is_toy_in_room(room);
-  // };
-  // interpreter.setProperty(
-  //   globalObject,
-  //   "is_toy_in_room",
-  //   interpreter.createNativeFunction(wrapper)
-  // );
+
+  wrapper = function (room) {
+    return is_toy_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_toy_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
 
   wrapper = function (room) {
     return isRobotinRoom(room);

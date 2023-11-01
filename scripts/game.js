@@ -212,11 +212,13 @@ function is_toy_in_room(room) {
 
 function is_coffee_in_room(room) {
   let id = "coffee";
+  console.log(is_thing_in_room(id, room));
   return is_thing_in_room(id, room);
 }
 
 function is_mail_in_room(room) {
   let id = "mail";
+  console.log(is_thing_in_room(id, room));
   return is_thing_in_room(id, room);
 }
 
