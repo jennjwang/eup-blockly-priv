@@ -89,9 +89,26 @@ function generate_goal_func(goal, state) {
       val && !(state.blocks.includes(state.robot_position) || state.holding);
   }
 
-  //   if (goal.includes("is_toy_in_room('kitchen)"){
-  //     val = val && (state.holding)
-  //   }
+  if (goal.includes("isRobotinRoomEvent('porch')")) {
+    val = val && state.robot_position != "porch";
+  }
+  if (goal.includes("!isRobotinRoomEvent('porch')")) {
+    val = val && state.robot_position != "porch";
+  }
+  
+  if (goal.includes("thing_in_room('mail')")) {
+    val = val && state.robot_position != "porch";
+  }
+  if (goal.includes("thing_not_in_room('mail')")) {
+    val = val && state.robot_position != "porch";
+  } 
+
+  if (goal.includes("thing_in_room('coffee')")) {
+    val = val && state.robot_position != "porch";
+  }
+  if (goal.includes("thing_not_in_room('coffee')")) {
+    val = val && state.robot_position != "porch";
+  }  
 
   return val;
 }
@@ -246,6 +263,8 @@ function parser(code) {
         actions.push(lines[line].trim());
       }
       if (state == 2) {
+        console.log(lines[line], 'linez');
+        debugger;
         goalsarr = lines[line].trim().split(" && ");
         goalfinal = lines[line].trim();
 
@@ -303,7 +322,9 @@ function parser(code) {
       }
     }
   }
+  // return [triggers, actions, goals, goalfinal];
   return [triggers, actions, goals, goalfinal];
+
 }
 
 // function get_policy(code, taskNum) {
@@ -375,12 +396,18 @@ function find_id(state, map) {
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
+
   actions = [
     "moveRobotToRoom('playroom');",
     "drop_toy();",
     "moveRobotToRoom('kitchen');",
     "moveRobotToRoom('bedroom');",
     "pick_up_toy();",
+    "moveRobotToRoom('porch');",
+    "pick_up_thing('mail');",
+    "pick_up_thing('coffee');",
+    "drop_thing('mail');",
+    "drop_thing('coffee');"
   ];
   values_table = {};
   state_ids = {};
@@ -412,6 +439,7 @@ function get_mdp_policy(code, taskNum) {
       "is_toy_in_room('bedroom');",
       "is_toy_in_room('kitchen');",
       "is_toy_in_room('playroom');",
+      "isRobotinRoomEvent('porch');",
     ];
   }
   if (taskNum == 3) {
@@ -443,11 +471,36 @@ function get_mdp_policy(code, taskNum) {
       "is_toy_in_room('kitchen');",
       "is_toy_in_room('playroom');",
     ];
+  }if(taskNum==7){
+    person_locs = [null];
+    block_list = [
+      ["porch", "porch"],
+      ["porch", "kitchen"],
+      ["kitchen", "porch"],
+      ["bedroom", "porch"],
+      ["bedroom", "kitchen"]
+    ];
+    triggers = [
+      "isRobotinRoomEvent('kitchen');",
+      "isRobotinRoomEvent('bedroom');",
+      "isRobotinRoomEvent('playroom');",
+      "eHandsFree();",
+      "toy_in_room();",
+      "is_mail_in_room('bedroom');",
+      "is_mail_in_room('kitchen');",
+      "is_mail_in_room('playroom');",
+      "is_coffee_in_room('bedroom');",
+      "is_coffee_in_room('kitchen');",
+      "is_coffee_in_room('playroom');",
+      "e_mail_in_room();",
+      "e_coffee_in_room();"
+    ];
+    
   }
 
   id = 0;
   //Populate values table
-  these_rooms = ["kitchen", "bedroom", "playroom"];
+  these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   truth = [false, true];
   for (room in these_rooms) {
     for (held in truth) {
@@ -459,9 +512,16 @@ function get_mdp_policy(code, taskNum) {
             holding: truth[held],
             person: person_locs[person_loc],
           };
-          if (generate_goal_func(goal, state)) {
+          if (goal[0] != ';' && generate_goal_func(goal[0], state)) {
+            values_table[id] = 3;
+          }
+          else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
+            values_table[id] = 2;
+          }
+          else if(goal[2] != ';' && generate_goal_func(goal[2], state)){
             values_table[id] = 1;
-          } else {
+          }
+          else {
             values_table[id] = 0;
           }
           state_ids[id] = state;
@@ -478,13 +538,13 @@ function get_mdp_policy(code, taskNum) {
     for (key in values_table) {
       state = state_ids[key];
       // console.log(state);
-      if (!generate_goal_func(goal, state)) {
+      if (!generate_goal_func(goal[0], state)) {
         max_val = 0;
         for (action_ind in actions) {
           action = actions[action_ind];
           next = simulator(state, action);
-          console.log("state: ", state, "action: ", action);
-          console.log(next);
+          // console.log("state: ", state, "action: ", action);
+          // console.log(next);
           if (!(next == false) && !(next == null)) {
             next_id = find_id(next, state_ids);
 
@@ -505,7 +565,7 @@ function get_mdp_policy(code, taskNum) {
   for (key in values_table) {
     state = state_ids[key];
 
-    if (!generate_goal_func(goal, state)) {
+    if (!generate_goal_func(goal[0], state)) {
       max_val = 0;
       max_act = actions[0];
 

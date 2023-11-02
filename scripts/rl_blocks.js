@@ -1214,14 +1214,10 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["goals"] = function (block) {
   return `
-goals(
-  high : goals(${Blockly.JavaScript.statementToCode(block, "high priority")}),
-  medium: goals(${Blockly.JavaScript.statementToCode(
-    block,
-    "medium priority"
-  )}),
-  low: goals(${Blockly.JavaScript.statementToCode(block, "low priority")}),
-)
+goals( 
+  ${Blockly.JavaScript.statementToCode(block, "high priority")};
+  ${Blockly.JavaScript.statementToCode(block,"medium priority")};
+  ${Blockly.JavaScript.statementToCode(block, "low priority")};
   `;
 };
 
