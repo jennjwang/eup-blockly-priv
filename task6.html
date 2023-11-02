@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css"
     />
-    <link rel="stylesheet" href="styles/task7.css" />
+    <link rel="stylesheet" href="styles/task6.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <script src="interpreter/acorn_interpreter.js"></script>
   </head>
@@ -65,10 +65,13 @@
           <img id="robot-img" src="assets/robot.png" />
         </div>
         <div id="mail">
-          <img id="mail-img" src="assets/mail.png" />
+          <img id="mail-img" src="assets/mail_sing.png" />
         </div>
-        <div id="coffee">
-          <img id="coffee-img" src="assets/coffee.png" />
+        <div id="mail2">
+          <img id="mail-img" src="assets/mail_sing.png" />
+        </div>
+        <div id="mail3">
+          <img id="mail-img" src="assets/mail_sing.png" />
         </div>
       </div>
 
@@ -95,8 +98,6 @@
               <block type="if_while_then"></block>
             </category>
             <category name="Actions" categorystyle="variable_category">
-              <block type="drop_coffee"></block>
-              <block type="pick_up_coffee"></block>
               <block type="drop_mail"></block>
               <block type="pick_up_mail"></block>
               <block type="to_room"></block>
@@ -114,17 +115,11 @@
               <block type="e_in_the"></block>
               <block type="e_hands_free"></block>
               <block type="e_hands_full"></block>
-              <block type="e_coffee_in_room"></block>
-              <block type="e_coffee_not_in_room"></block>
               <block type="e_mail_in_room"></block>
               <block type="e_mail_not_in_room"></block>
               <block type="and"></block>
             </category>
             <category name="Actions" categorystyle="variable_category">
-              <block type="drop_toy"></block>
-              <block type="pick_up_toy"></block>
-              <block type="drop_coffee"></block>
-              <block type="pick_up_coffee"></block>
               <block type="drop_mail"></block>
               <block type="pick_up_mail"></block>
               <block type="to_room"></block>
@@ -135,8 +130,6 @@
               <block type="e_in_the"></block>
               <block type="e_hands_free"></block>
               <block type="e_hands_full"></block>
-              <block type="e_coffee_in_room"></block>
-              <block type="e_coffee_not_in_room"></block>
               <block type="e_mail_in_room"></block>
               <block type="e_mail_not_in_room"></block>
               <block type="and"></block>
@@ -146,7 +139,6 @@
               <block type="trigger_in_the"></block>
               <block type="trigger_hands_free"></block>
               <block type="trigger_mail_in_room"></block>
-              <block type="trigger_coffee_in_room"></block>
               <block type="trigger_hands_full"></block>
             </category>
             <category
@@ -204,16 +196,16 @@
         console.log(document.getElementById("runButton").innerHTML);
         if (document.getElementById("runButton").innerHTML != "Stop Program") {
           console.log("recording");
-          // record("stopped");
+          record("stopped");
           round += 1;
           operationOrder = 0;
         } else {
-          // record("started");
+          record("started");
         }
       });
 
       document.querySelector("#doneButton").addEventListener("click", () => {
-        // record("final");
+        record("final");
         document.getElementById("modal").style.display = "block";
       });
 
@@ -347,10 +339,10 @@
         }
       }
 
-      // workspace.addChangeListener(onChange);
-      // workspace.addChangeListener(onDelete);
-      // workspace.addChangeListener(onBlockCreate);
-      // workspace.addChangeListener(onMove);
+      workspace.addChangeListener(onChange);
+      workspace.addChangeListener(onDelete);
+      workspace.addChangeListener(onBlockCreate);
+      workspace.addChangeListener(onMove);
 
       async function record(runStatus) {
         console.log("end", document.getElementById("end").innerHTML);
@@ -380,7 +372,7 @@
       }
     </script>
     <script src="scripts/obj.js"></script>
-    <script src="scripts/settings/task7.js"></script>
+    <script src="scripts/settings/task6.js"></script>
     <script id="tap" src="scripts/tap_blocks.js"></script>
     <script id="rl" src="scripts/rl_blocks.js"></script>
     <script src="scripts/run.js"></script>

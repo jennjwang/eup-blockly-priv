@@ -282,10 +282,11 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
-    output: "out_of",
+    output: "Boolean",
     colour: 260,
   },
 ]);
@@ -306,7 +307,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "e_out_of",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -323,10 +324,11 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
-    output: "e_in_the",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -435,6 +437,7 @@ Blockly.defineBlocksWithJsonArray([
           ["kitchen", "kitchen"],
           ["bedroom", "bedroom"],
           ["playroom", "playroom"],
+          ["porch", "porch"],
         ],
       },
     ],
@@ -592,7 +595,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_free",
     message0: "my hands are free",
-    output: "e_hands_free",
+    output: "Boolean",
     colour: 160,
   },
 ]);
@@ -605,7 +608,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_full",
     message0: "my hands are full",
-    output: "e_hands_full",
+    output: "Boolean",
     colour: 160,
   },
 ]);

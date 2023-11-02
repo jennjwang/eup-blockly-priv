@@ -344,7 +344,7 @@ function moveRobotToRoom(room) {
     moveRobotTo("robot", [x, y + 20]);
     setTimeout(() => {
       moveRobotTo("robot", dst);
-    }, 300);
+    }, 100);
   }
 
   robot_c.setRoom(room);
@@ -446,7 +446,7 @@ function drop_thing(id) {
     return;
   }
   robot_c.prev = robot_c.room;
-  if (!robot_c.handsFree && robot_c.holding.id == id) {
+  if (!robot_c.handsFree && robot_c.holding.id.includes(id)) {
     let room = robot_c.room;
     console.log("dropped thing");
 

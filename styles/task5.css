@@ -156,11 +156,12 @@ h1 {
 
 #coffee {
   z-index: 2;
-  left: 120px;
-  bottom: 90px;
+  left: 40px;
+  bottom: 320px;
   width: 35px;
   height: auto;
   position: absolute;
+  display: hidden;
 }
 
 #mail-img {
@@ -170,8 +171,8 @@ h1 {
 
 #mail {
   z-index: 2;
-  left: 80px;
-  bottom: 90px;
+  left: 40px;
+  bottom: 320px;
   width: 40px;
   height: auto;
   position: absolute;

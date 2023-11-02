@@ -51,6 +51,15 @@ h1 {
   }
 }
 
+#porch {
+  width: 100px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  z-index: 2;
+  background: #d4f8d3;
+}
+
 .simulation {
   /* width: 1600px;
     height: 800px;
@@ -73,6 +82,7 @@ h1 {
   z-index: 1;
   background: lightcyan;
 }
+
 #kitchen {
   width: 230px;
   height: 230px;
@@ -146,11 +156,12 @@ h1 {
 
 #coffee {
   z-index: 2;
-  left: 100px;
-  bottom: 90px;
+  left: 40px;
+  bottom: 320px;
   width: 35px;
   height: auto;
   position: absolute;
+  display: hidden;
 }
 
 #mail-img {
@@ -160,8 +171,26 @@ h1 {
 
 #mail {
   z-index: 2;
-  left: 80px;
-  bottom: 90px;
+  left: 40px;
+  bottom: 320px;
+  width: 40px;
+  height: auto;
+  position: absolute;
+}
+
+#mail2 {
+  z-index: 2;
+  left: 30px;
+  bottom: 320px;
+  width: 40px;
+  height: auto;
+  position: absolute;
+}
+
+#mail3 {
+  z-index: 2;
+  left: 50px;
+  bottom: 320px;
   width: 40px;
   height: auto;
   position: absolute;
@@ -223,29 +252,15 @@ h1 {
   height: 120px;
 }
 
-#code {
-  display: none;
-}
-
-#person-img {
-  width: auto;
-  height: 90px;
-}
-
 #person {
   z-index: 2;
-  left: 260px;
-  bottom: 310px;
-  width: 40px;
+  left: 500px;
+  bottom: 600px;
+  width: 70px;
   height: auto;
   position: absolute;
 }
 
-#porch {
-  width: 100px;
-  height: 250px;
-  position: absolute;
-  margin: 10px;
-  z-index: 2;
-  background: #d4f8d3;
+#code {
+  display: none;
 }
