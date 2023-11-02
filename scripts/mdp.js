@@ -263,51 +263,61 @@ function parser(code) {
         actions.push(lines[line].trim());
       }
       if (state == 2) {
-        console.log(lines[line]);
-        console.log(lines[line].split("\t"));
-        debugger;
-        goalsarr = lines[line].trim().split(" && ");
-        goalfinal = lines[line].trim();
+        priority_goals = lines[1].split('#');
+        for (var i = 0; i < priority_goals.length; i++) {
+          if (priority_goals[i].trim() != ';' && priority_goals[i].trim() != ''){
+            cur_priority_goals = (priority_goals[i]).trim().split('\t');
+            if (cur_priority_goals != ''){
+              goals.push(cur_priority_goals);
+            }
+          }else{
+            goals.push([]);
+          }   
+        }
+        // console.log(goals)
+        // debugger;
+        // goalsarr = lines[line].trim().split(" && ");
+        // goalfinal = lines[line].trim();
 
-        if (goalsarr.length == 2) {
-          for (goal in goalsarr) {
-            if (goal == 0) {
-              goals.push(goalsarr[goal].slice(1, goalsarr[goal].length));
-            } else if (goal == goalsarr.length - 1) {
-              goals.push(goalsarr[goal].slice(0, -1));
-            } else {
-              goals.push(goalsarr[goal].slice(0, goalsarr[goal].length));
-            }
-          }
-        }
-        if (goalsarr.length == 3) {
-          for (goal in goalsarr) {
-            prefix = true;
-            while (prefix) {
-              if (goalsarr[goal][0] == "(") {
-                goalsarr[goal] = goalsarr[goal].slice(1, goalsarr[goal].length);
-              } else {
-                prefix = false;
-              }
-            }
-            suffix = true;
-            while (suffix) {
-              if (
-                goalsarr[goal][goalsarr[goal].length - 1] == ")" &&
-                goalsarr[goal][goalsarr[goal].length - 2] == ")"
-              ) {
-                goalsarr[goal] = goalsarr[goal].slice(0, -1);
-              } else {
-                suffix = false;
-              }
-            }
-            goals.push(goalsarr[goal]);
-          }
-        }
+        // if (goalsarr.length == 2) {
+        //   for (goal in goalsarr) {
+        //     if (goal == 0) {
+        //       goals.push(goalsarr[goal].slice(1, goalsarr[goal].length));
+        //     } else if (goal == goalsarr.length - 1) {
+        //       goals.push(goalsarr[goal].slice(0, -1));
+        //     } else {
+        //       goals.push(goalsarr[goal].slice(0, goalsarr[goal].length));
+        //     }
+        //   }
+        // }
+        // if (goalsarr.length == 3) {
+        //   for (goal in goalsarr) {
+        //     prefix = true;
+        //     while (prefix) {
+        //       if (goalsarr[goal][0] == "(") {
+        //         goalsarr[goal] = goalsarr[goal].slice(1, goalsarr[goal].length);
+        //       } else {
+        //         prefix = false;
+        //       }
+        //     }
+        //     suffix = true;
+        //     while (suffix) {
+        //       if (
+        //         goalsarr[goal][goalsarr[goal].length - 1] == ")" &&
+        //         goalsarr[goal][goalsarr[goal].length - 2] == ")"
+        //       ) {
+        //         goalsarr[goal] = goalsarr[goal].slice(0, -1);
+        //       } else {
+        //         suffix = false;
+        //       }
+        //     }
+        //     goals.push(goalsarr[goal]);
+        //   }
+        // }
 
-        if (!(goalsarr.length == 2) && !(goalsarr.length == 3)) {
-          goals.push(goalsarr[0]);
-        }
+        // if (!(goalsarr.length == 2) && !(goalsarr.length == 3)) {
+        //   goals.push(goalsarr[0]);
+        // }
       }
       if (state == 3) {
         triggers.push(lines[line].trim());
@@ -323,6 +333,14 @@ function parser(code) {
       }
     }
   }
+  // if (goals.length != 3){
+    
+  // }
+
+  goalfinal = false;
+  
+  console.log(priority_goals, 'here here');
+  debugger;
   // return [triggers, actions, goals, goalfinal];
   return [triggers, actions, goals, goalfinal];
 }
@@ -493,8 +511,9 @@ function get_mdp_policy(code, taskNum) {
       "is_coffee_in_room('bedroom');",
       "is_coffee_in_room('kitchen');",
       "is_coffee_in_room('playroom');",
-      "e_mail_in_room();",
+      "thing_in_room('coffee')",
       "e_coffee_in_room();",
+      "thing_in_room('mail')",
     ];
   }
 
@@ -517,28 +536,39 @@ function get_mdp_policy(code, taskNum) {
           low_prior = goal[2];
 
           values_table[id] = 0;
-          for (let i = 0; i < high_prior; i++) {
+          console.log(goal, med_prior,'here',generate_goal_func(high_prior[0], state));
+          debugger;
+          for (let i = 0; i < high_prior.length; i++) {
             if (
               high_prior[i] != ";" &&
               generate_goal_func(high_prior[i], state)
             ) {
               values_table[id] = 3;
             }
+            else {
+              values_table[id] = 0;
+            }
           }
-          for (let i = 0; i < med_prior; i++) {
+          for (let i = 0; i < med_prior.length; i++) {
             if (
               med_prior[i] != ";" &&
               generate_goal_func(med_prior[i], state)
             ) {
               values_table[id] = 2;
             }
+            else {
+              values_table[id] = 0;
+            }
           }
-          for (let i = 0; i < low_prior; i++) {
+          for (let i = 0; i < low_prior.length; i++) {
             if (
               low_prior[i] != ";" &&
               generate_goal_func(low_prior[i], state)
             ) {
               values_table[id] = 1;
+            }
+            else {
+              values_table[id] = 0;
             }
           }
           // else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
@@ -552,6 +582,7 @@ function get_mdp_policy(code, taskNum) {
           // }
           state_ids[id] = state;
           id += 1;
+          
         }
       }
     }
