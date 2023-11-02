@@ -263,7 +263,8 @@ function parser(code) {
         actions.push(lines[line].trim());
       }
       if (state == 2) {
-        console.log(lines[line], "linez");
+        console.log(lines[line]);
+        console.log(lines[line].split("\t"));
         debugger;
         goalsarr = lines[line].trim().split(" && ");
         goalfinal = lines[line].trim();
@@ -650,7 +651,7 @@ function run_mdp(code, taskNum) {
   if (taskNum == 1) {
     goalfinal = false;
   }
-  out = "while (!(" + goalfinal + ")) {\n";
+  out = "while (!(" + false + ")) {\n";
 
   for (key in policy) {
     out += "\tif(";
