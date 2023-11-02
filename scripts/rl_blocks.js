@@ -497,7 +497,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["e_out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "!isRobotinRoomEvent(" + value + ")";
+  return "!isRobotinRoomEvent(" + value + ")\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -755,7 +755,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["e_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "isRobotinRoomEvent(" + value + ")";
+  return "isRobotinRoomEvent(" + value + ")\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
