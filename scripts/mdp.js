@@ -95,20 +95,20 @@ function generate_goal_func(goal, state) {
   if (goal.includes("!isRobotinRoomEvent('porch')")) {
     val = val && state.robot_position != "porch";
   }
-  
+
   if (goal.includes("thing_in_room('mail')")) {
     val = val && state.robot_position != "porch";
   }
   if (goal.includes("thing_not_in_room('mail')")) {
     val = val && state.robot_position != "porch";
-  } 
+  }
 
   if (goal.includes("thing_in_room('coffee')")) {
     val = val && state.robot_position != "porch";
   }
   if (goal.includes("thing_not_in_room('coffee')")) {
     val = val && state.robot_position != "porch";
-  }  
+  }
 
   return val;
 }
@@ -263,7 +263,7 @@ function parser(code) {
         actions.push(lines[line].trim());
       }
       if (state == 2) {
-        console.log(lines[line], 'linez');
+        console.log(lines[line], "linez");
         debugger;
         goalsarr = lines[line].trim().split(" && ");
         goalfinal = lines[line].trim();
@@ -324,7 +324,6 @@ function parser(code) {
   }
   // return [triggers, actions, goals, goalfinal];
   return [triggers, actions, goals, goalfinal];
-
 }
 
 // function get_policy(code, taskNum) {
@@ -407,7 +406,7 @@ function get_mdp_policy(code, taskNum) {
     "pick_up_thing('mail');",
     "pick_up_thing('coffee');",
     "drop_thing('mail');",
-    "drop_thing('coffee');"
+    "drop_thing('coffee');",
   ];
   values_table = {};
   state_ids = {};
@@ -471,14 +470,15 @@ function get_mdp_policy(code, taskNum) {
       "is_toy_in_room('kitchen');",
       "is_toy_in_room('playroom');",
     ];
-  }if(taskNum==7){
+  }
+  if (taskNum == 7) {
     person_locs = [null];
     block_list = [
       ["porch", "porch"],
       ["porch", "kitchen"],
       ["kitchen", "porch"],
       ["bedroom", "porch"],
-      ["bedroom", "kitchen"]
+      ["bedroom", "kitchen"],
     ];
     triggers = [
       "isRobotinRoomEvent('kitchen');",
@@ -493,9 +493,8 @@ function get_mdp_policy(code, taskNum) {
       "is_coffee_in_room('kitchen');",
       "is_coffee_in_room('playroom');",
       "e_mail_in_room();",
-      "e_coffee_in_room();"
+      "e_coffee_in_room();",
     ];
-    
   }
 
   id = 0;
@@ -512,18 +511,44 @@ function get_mdp_policy(code, taskNum) {
             holding: truth[held],
             person: person_locs[person_loc],
           };
-          if (goal[0] != ';' && generate_goal_func(goal[0], state)) {
-            values_table[id] = 3;
+          high_prior = goal[0];
+          med_prior = goal[1];
+          low_prior = goal[2];
+
+          values_table[id] = 0;
+          for (let i = 0; i < high_prior; i++) {
+            if (
+              high_prior[i] != ";" &&
+              generate_goal_func(high_prior[i], state)
+            ) {
+              values_table[id] = 3;
+            }
           }
-          else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
-            values_table[id] = 2;
+          for (let i = 0; i < med_prior; i++) {
+            if (
+              med_prior[i] != ";" &&
+              generate_goal_func(med_prior[i], state)
+            ) {
+              values_table[id] = 2;
+            }
           }
-          else if(goal[2] != ';' && generate_goal_func(goal[2], state)){
-            values_table[id] = 1;
+          for (let i = 0; i < low_prior; i++) {
+            if (
+              low_prior[i] != ";" &&
+              generate_goal_func(low_prior[i], state)
+            ) {
+              values_table[id] = 1;
+            }
           }
-          else {
-            values_table[id] = 0;
-          }
+          // else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
+          //   values_table[id] = 2;
+          // }
+          // else if(goal[2] != ';' && generate_goal_func(goal[2], state)){
+          //   values_table[id] = 1;
+          // }
+          // else {
+          //   values_table[id] = 0;
+          // }
           state_ids[id] = state;
           id += 1;
         }
