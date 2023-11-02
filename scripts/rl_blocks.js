@@ -538,7 +538,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_toy_in_room"] = function (block) {
-  return "toy_in_room()";
+  return "toy_in_room()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -580,7 +580,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_coffee_in_room"] = function (block) {
-  return "thing_in_room('coffee')";
+  return "thing_in_room('coffee')\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -622,7 +622,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_mail_in_room"] = function (block) {
-  return "thing_in_room('mail')";
+  return "thing_in_room('mail')\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -664,7 +664,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_mail_not_in_room"] = function (block) {
-  return "thing_not_in_room('mail')";
+  return "thing_not_in_room('mail')\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -703,7 +703,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_coffee_not_in_room"] = function (block) {
-  return "thing_not_in_room('coffee')";
+  return "thing_not_in_room('coffee')\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -781,7 +781,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_person_in_room"] = function () {
-  return "isPersonInRoomEvent()";
+  return "isPersonInRoomEvent()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -820,7 +820,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_free"] = function (block) {
-  return "eHandsFree()";
+  return "eHandsFree()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -859,7 +859,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["e_hands_full"] = function (block) {
-  return "eHandsFull()";
+  return "eHandsFull()\t";
 };
 
 // triggers:
@@ -1220,7 +1220,7 @@ Blockly.JavaScript["goals"] = function (block) {
   return `
 goals( 
   ${Blockly.JavaScript.statementToCode(block, "high priority")};
-  ${Blockly.JavaScript.statementToCode(block,"medium priority")};
+  ${Blockly.JavaScript.statementToCode(block, "medium priority")};
   ${Blockly.JavaScript.statementToCode(block, "low priority")};
   `;
 };
