@@ -339,8 +339,8 @@ function parser(code) {
 
   goalfinal = false;
   
-  console.log(priority_goals, 'here here');
-  debugger;
+  // console.log(priority_goals, 'here here');
+  // debugger;
   // return [triggers, actions, goals, goalfinal];
   return [triggers, actions, goals, goalfinal];
 }
@@ -536,8 +536,8 @@ function get_mdp_policy(code, taskNum) {
           low_prior = goal[2];
 
           values_table[id] = 0;
-          console.log(goal, med_prior,'here',generate_goal_func(high_prior[0], state));
-          debugger;
+          // console.log(goal, med_prior,'here',generate_goal_func(high_prior[0], state));
+          // debugger;
           for (let i = 0; i < high_prior.length; i++) {
             if (
               high_prior[i] != ";" &&
@@ -682,7 +682,7 @@ function run_mdp(code, taskNum) {
   if (taskNum == 1) {
     goalfinal = false;
   }
-  out = "while (!(" + false + ")) {\n";
+  out = "while (" + true + ") {\n";
 
   for (key in policy) {
     out += "\tif(";
@@ -694,7 +694,7 @@ function run_mdp(code, taskNum) {
       }
     }
     out = out.slice(0, -4);
-    out += "){\n\t\t" + policy[key] + "\n\t}\n";
+    out += "))){\n\t\t" + policy[key] + "\n\t}\n";
   }
 
   out += "}\n";
