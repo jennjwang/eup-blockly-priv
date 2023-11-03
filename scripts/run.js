@@ -174,6 +174,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  // wrapper = function (thing) {
+  //   drop_thing_disappears(thing);
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "drop_thing_disappears",
+  //   interpreter.createNativeFunction(wrapper)
+  // );
+
   wrapper = function () {
     return start();
   };

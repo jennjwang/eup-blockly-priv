@@ -360,11 +360,22 @@ function moveRobotToRoom(room) {
   // console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
-    let toy = toys_in_room[robot_c.holding.room].pop();
-    console.log("popped toy", toy);
-    robot_c.holding.room = room;
-    toys_in_room[room].push(toy);
-    console.log("moved with toy", toys_in_room);
+    const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
+      (toy) => toy.id === robot_c.holding.id
+    );
+    if (indexToRemove !== -1) {
+      // Use splice to remove the object from the array
+      const toy = toys_in_room[robot_c.holding.room].splice(
+        indexToRemove,
+        1
+      )[0];
+      console.log("popped toy", toy);
+      robot_c.holding.room = room;
+      toys_in_room[room].push(toy);
+      console.log("moved with toy", toys_in_room);
+    } else {
+      console.log("there's no toy here");
+    }
     // console.log(robot_c.holding);
     // console.log("toys", toys_in_room);
   }
@@ -485,8 +496,18 @@ function drop_thing_disappears(id) {
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
 
-    const dst = rooms[room];
-    moveRobotTo(robot_c.holding.id, dst);
+    const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
+      (toy) => toy.id === robot_c.holding.id
+    );
+
+    if (indexToRemove !== -1) {
+      // Use splice to remove the object from the array
+      toys_in_room[robot_c.holding.room].splice(indexToRemove, 1)[0];
+    }
+
+    console.log(toys_in_room);
+    // const dst = rooms[room];
+    // moveRobotTo(robot_c.holding.id, dst);
     // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
