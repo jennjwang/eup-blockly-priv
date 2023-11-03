@@ -222,6 +222,14 @@ function is_mail_in_room(room) {
   return is_thing_in_room(id, room);
 }
 
+function coffee_in_room() {
+  return is_coffee_in_room(robot_c.room);
+}
+
+function mail_in_room() {
+  return is_mail_in_room(robot_c.room);
+}
+
 function is_thing_in_room(id, room) {
   let toy_in_room_check = toys_in_room[room].length != 0;
   if (robot_c.handsFull) {
@@ -439,6 +447,30 @@ function pick_up_thing(id) {
 }
 
 function drop_thing(id) {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
+  if (robot_c.handsFree) {
+    return;
+  }
+  robot_c.prev = robot_c.room;
+  if (!robot_c.handsFree && robot_c.holding.id.includes(id)) {
+    let room = robot_c.room;
+    console.log("dropped thing");
+
+    robot_c.handsPrev = false;
+    robot_c.handsFree = true;
+
+    const dst = rooms[room];
+    moveRobotTo(robot_c.holding.id, dst);
+    // toys_in_room[room].push(robot_c.holding);
+
+    robot_c.holding.room = room;
+    robot_c.holding = null;
+  }
+}
+
+function drop_thing_disappears(id) {
   if (robot_c.start) {
     robot_c.start = false;
   }
