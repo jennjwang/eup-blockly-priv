@@ -1266,7 +1266,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: "%1 %2 %3 %4",
     args0: [
       {
-        type: "input_value",
+        type: "input_statement",
         name: "s1",
         check: [
           "e_out_of",
@@ -1294,7 +1294,7 @@ Blockly.defineBlocksWithJsonArray([
         align: "CENTRE",
       },
       {
-        type: "input_value",
+        type: "input_statement",
         name: "s2",
         check: [
           "e_out_of",
@@ -1310,7 +1310,8 @@ Blockly.defineBlocksWithJsonArray([
         align: "CENTRE",
       },
     ],
-    output: "Boolean",
+    nextStatement: "",
+    previousStatement: "",
     colour: 160,
     tooltip: "",
     helpUrl: "",
