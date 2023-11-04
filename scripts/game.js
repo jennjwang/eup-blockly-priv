@@ -446,10 +446,11 @@ function pick_up_thing(id) {
     if (!containsObj) {
       return;
     }
+    let obj = objs.find((obj) => obj.id === id);
     // holding = toys.pop();
     // console.log(room, "this room");
-    objs[objs.length - 1].room = room;
-    holding = objs[objs.length - 1];
+    obj.room = room;
+    holding = obj;
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;

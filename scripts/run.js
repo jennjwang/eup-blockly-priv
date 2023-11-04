@@ -55,10 +55,8 @@ function update(event) {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_mdp(code, taskNum);
-    // console.log("mdp", code);
+    console.log("mdp", code);
   }
-
-  console.log(code);
 
   myInterpreter = new Interpreter(code, initApi);
 

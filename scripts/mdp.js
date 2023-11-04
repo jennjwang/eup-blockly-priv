@@ -11,7 +11,7 @@ function simulator(state, action) {
     copiedState.robot_position = "kitchen";
   }
   if (action == "drop_toy();") {
-    if (copiedState.holding != 'toy') {
+    if (copiedState.holding != "toy") {
       return false;
     } else {
       copiedState.holding = null;
@@ -26,7 +26,7 @@ function simulator(state, action) {
       return false;
     } else {
       ind = copiedState.blocks.indexOf(copiedState.robot_position);
-      copiedState.holding = 'toy';
+      copiedState.holding = "toy";
       copiedState.blocks.splice(ind, 1);
     }
   }
@@ -41,18 +41,18 @@ function simulator(state, action) {
   if (action == "pick_up_thing('mail');") {
     if (
       copiedState.holding != null ||
-      (copiedState.blocks[0] != copiedState.robot_position)
+      copiedState.blocks[0] != copiedState.robot_position
     ) {
       return false;
     } else {
       // ind = copiedState.blocks.indexOf(copiedState.robot_position);
-      copiedState.holding = 'mail';
+      copiedState.holding = "mail";
       copiedState.blocks[0] = null;
     }
   }
 
   if (action == "drop_thing('mail');") {
-    if (copiedState.holding != 'mail') {
+    if (copiedState.holding != "mail") {
       return false;
     } else {
       copiedState.holding = null;
@@ -101,16 +101,19 @@ function generate_goal_func(goal, state) {
   }
 
   if (goal.includes("eHandsFull()")) {
-    val = val && state.holding!=null;
+    val = val && state.holding != null;
   }
 
   if (goal.includes("toy_in_room()")) {
-    val = val && (state.blocks.includes(state.robot_position) || state.holding!=null);
+    val =
+      val &&
+      (state.blocks.includes(state.robot_position) || state.holding != null);
   }
 
   if (goal.includes("toy_not_in_room()")) {
     val =
-      val && !(state.blocks.includes(state.robot_position) || state.holding!=null);
+      val &&
+      !(state.blocks.includes(state.robot_position) || state.holding != null);
   }
 
   if (goal.includes("isRobotinRoomEvent('porch')")) {
@@ -122,11 +125,13 @@ function generate_goal_func(goal, state) {
 
   if (goal.includes("thing_in_room('mail')")) {
     val =
-      val && (state.blocks[0]==state.robot_position || state.holding=='mail');
+      val &&
+      (state.blocks[0] == state.robot_position || state.holding == "mail");
   }
   if (goal.includes("thing_not_in_room('mail')")) {
     val =
-      val && !(state.blocks[0]==state.robot_position || state.holding=='mail');
+      val &&
+      !(state.blocks[0] == state.robot_position || state.holding == "mail");
   }
 
   // if (goal.includes("thing_in_room('coffee')")) {
@@ -192,7 +197,7 @@ function generate_triggers(triggers, state) {
     }
 
     if (trigger == "eHandsFree();") {
-      if (state.holding==null) {
+      if (state.holding == null) {
         output.push(1);
       } else {
         output.push(0);
@@ -200,7 +205,7 @@ function generate_triggers(triggers, state) {
     }
 
     if (trigger == "eHandsFull();") {
-      if (state.holding!=null) {
+      if (state.holding != null) {
         output.push(0);
       } else {
         output.push(1);
@@ -327,15 +332,12 @@ function generate_triggers(triggers, state) {
       }
     }
     if (trigger == "thing_in_room('mail');") {
-      if (
-        (state.blocks[0] == state.robot_position || state.holding == "mail")
-      ) {
+      if (state.blocks[0] == state.robot_position || state.holding == "mail") {
         output.push(1);
       } else {
         output.push(0);
       }
     }
-
   }
 
   return output;
@@ -356,16 +358,19 @@ function parser(code) {
         actions.push(lines[line].trim());
       }
       if (state == 2) {
-        priority_goals = lines[1].split('#');
+        priority_goals = lines[1].split("#");
         for (var i = 0; i < priority_goals.length; i++) {
-          if (priority_goals[i].trim() != ';' && priority_goals[i].trim() != ''){
-            cur_priority_goals = (priority_goals[i]).trim().split('\t');
-            if (cur_priority_goals != ''){
+          if (
+            priority_goals[i].trim() != ";" &&
+            priority_goals[i].trim() != ""
+          ) {
+            cur_priority_goals = priority_goals[i].trim().split("\t");
+            if (cur_priority_goals != "") {
               goals.push(cur_priority_goals);
             }
-          }else{
+          } else {
             goals.push([]);
-          }   
+          }
         }
         // console.log(goals)
         // debugger;
@@ -427,11 +432,11 @@ function parser(code) {
     }
   }
   // if (goals.length != 3){
-    
+
   // }
 
   goalfinal = false;
-  
+
   // console.log(priority_goals, 'here here');
   // debugger;
   // return [triggers, actions, goals, goalfinal];
@@ -585,14 +590,14 @@ function get_mdp_policy(code, taskNum) {
   }
   if (taskNum == 7) {
     person_locs = [null];
-    block_list =     
-    // // index 0 mail, index 1 coffee
-    [
-      ["porch", "porch"],
-      ["porch", "bedroom"],
-      ["kitchen", "bedroom"],
-      ["kitchen", "porch"]
-    ];
+    block_list =
+      // // index 0 mail, index 1 coffee
+      [
+        ["porch", "porch"],
+        ["porch", "bedroom"],
+        ["kitchen", "bedroom"],
+        ["kitchen", "porch"],
+      ];
     triggers = [
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
@@ -615,7 +620,7 @@ function get_mdp_policy(code, taskNum) {
   id = 0;
   //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
-  holding = [null, 'toy', 'mail', 'coffee'];
+  holding = [null, "toy", "mail", "coffee"];
   for (room in these_rooms) {
     for (obj in holding) {
       for (person_loc in person_locs) {
@@ -673,7 +678,6 @@ function get_mdp_policy(code, taskNum) {
           // }
           state_ids[id] = state;
           id += 1;
-          
         }
       }
     }
@@ -777,9 +781,9 @@ function run_mdp(code, taskNum) {
   out = "while (" + true + ") {\n";
   var count = 0;
   for (key in policy) {
-    if (count == 0){
+    if (count == 0) {
       out += "\tif(";
-    }else{
+    } else {
       out += "\telse if(";
     }
     for (ind in triggers) {
