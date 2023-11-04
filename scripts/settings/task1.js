@@ -29,7 +29,7 @@ const rooms = {
   porch: PORCH,
 };
 
-let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs() {
   end_states = `
