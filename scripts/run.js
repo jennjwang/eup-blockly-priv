@@ -55,8 +55,10 @@ function update(event) {
     check = taskNum + "\n" + code;
     console.log(check);
     code = run_mdp(code, taskNum);
-    console.log("mdp", code);
+    // console.log("mdp", code);
   }
+
+  console.log(code);
 
   myInterpreter = new Interpreter(code, initApi);
 
@@ -130,7 +132,7 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function (room) {
-    is_mail_in_room(room);
+    return is_mail_in_room(room);
   };
   interpreter.setProperty(
     globalObject,
@@ -139,7 +141,7 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function (room) {
-    is_coffee_in_room(room);
+    return is_coffee_in_room(room);
   };
   interpreter.setProperty(
     globalObject,

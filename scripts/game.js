@@ -212,14 +212,19 @@ function is_toy_in_room(room) {
 
 function is_coffee_in_room(room) {
   let id = "coffee";
-  console.log(is_thing_in_room(id, room));
+  // console.log(is_thing_in_room(id, room));
   return is_thing_in_room(id, room);
 }
 
 function is_mail_in_room(room) {
-  let id = "mail";
-  console.log(is_thing_in_room(id, room));
-  return is_thing_in_room(id, room);
+  // let id = "mail";
+  if (is_thing_in_room("mail", room)) {
+    console.log("returning true");
+    return true;
+  }
+  return false;
+  // console.log(is_thing_in_room(id, room));
+  // return is_thing_in_room(id, room);
 }
 
 function coffee_in_room() {
@@ -233,13 +238,17 @@ function mail_in_room() {
 function is_thing_in_room(id, room) {
   let toy_in_room_check = toys_in_room[room].length != 0;
   if (robot_c.handsFull) {
+    // console.log("hands full");
     return robot_c.holding.id == id;
   } else if (toy_in_room_check) {
+    // console.log("things in room");
     let objs = toys_in_room[room];
     // we know there's only one coffee and once piece of mail
-    let containsObj = objs.some((obj) => obj.id === id);
+    let containsObj = objs.some((obj) => obj.id == id);
+    // console.log(containsObj);
     return containsObj;
   }
+  // console.log("else");
   return false;
 }
 
