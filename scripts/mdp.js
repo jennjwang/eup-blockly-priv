@@ -97,7 +97,7 @@ function generate_goal_func(goal, state) {
   }
 
   if (goal.includes("eHandsFree()")) {
-    val = val && !state.holding;
+    val = val && state.holding==null;
   }
 
   if (goal.includes("eHandsFull()")) {
@@ -129,14 +129,14 @@ function generate_goal_func(goal, state) {
       val && !(state.blocks[0]==state.robot_position || state.holding=='mail');
   }
 
-  // if (goal.includes("thing_in_room('coffee')")) {
-  //   val =
-  //     val && (state.blocks.includes(state.robot_position) || state.holding);
-  // }
-  // if (goal.includes("thing_not_in_room('coffee')")) {
-  //   val =
-  //     val && !(state.blocks.includes(state.robot_position) || state.holding);
-  // }
+  if (goal.includes("thing_in_room('coffee')")) {
+    val =
+      val && (state.blocks[1] == state.robot_position || state.holding=='coffee');
+  }
+  if (goal.includes("thing_not_in_room('coffee')")) {
+    val =
+      val && !(state.blocks[1] == state.robot_position || state.holding=='coffee');
+  }
 
   return val;
 }
@@ -200,7 +200,7 @@ function generate_triggers(triggers, state) {
     }
 
     if (trigger == "eHandsFull();") {
-      if (state.holding!=null) {
+      if (state.holding==null) {
         output.push(0);
       } else {
         output.push(1);
