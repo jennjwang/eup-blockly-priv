@@ -637,10 +637,7 @@ function get_mdp_policy(code, taskNum) {
               high_prior[i] != ";" &&
               generate_goal_func(high_prior[i], state)
             ) {
-              values_table[id] = 3;
-            }
-            else {
-              values_table[id] = 0;
+              values_table[id] += 3;
             }
           }
           for (let i = 0; i < med_prior.length; i++) {
@@ -648,22 +645,22 @@ function get_mdp_policy(code, taskNum) {
               med_prior[i] != ";" &&
               generate_goal_func(med_prior[i], state)
             ) {
-              values_table[id] = 2;
+              values_table[id] += 2;
             }
-            else {
-              values_table[id] = 0;
-            }
+            // else {
+            //   values_table[id] = 0;
+            // }
           }
           for (let i = 0; i < low_prior.length; i++) {
             if (
               low_prior[i] != ";" &&
               generate_goal_func(low_prior[i], state)
             ) {
-              values_table[id] = 1;
+              values_table[id] += 1;
             }
-            else {
-              values_table[id] = 0;
-            }
+            // else {
+            //   values_table[id] = 0;
+            // }
           }
           // else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
           //   values_table[id] = 2;
