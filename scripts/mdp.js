@@ -516,10 +516,10 @@ function get_mdp_policy(code, taskNum) {
 
   actions = [
     "moveRobotToRoom('playroom');",
-    "drop_toy();",
+    // "drop_toy();",
     "moveRobotToRoom('kitchen');",
     "moveRobotToRoom('bedroom');",
-    "pick_up_toy();",
+    // "pick_up_toy();",
     "moveRobotToRoom('porch');",
     "pick_up_thing('mail');",
     // "pick_up_thing('coffee');",
@@ -596,15 +596,28 @@ function get_mdp_policy(code, taskNum) {
       // // index 0 mail, index 1 coffee
       [
         ["porch", "porch", null],
+        [null, "porch", null],
+        ["porch", null, null],
+
         ["porch", "bedroom", null],
+        ["porch", null, null],
+        [null, "porch", null],
+
         ["kitchen", "bedroom", null],
+        [null, "bedroom", null],
+        ["kitchen", null, null],
+
         ["kitchen", "porch", null],
+        ["kitchen", null, null],
+        [null, "porch", null],
+
       ];
     triggers = [
       "toy_in_room();",
       "is_toy_in_room('bedroom');",
       "is_toy_in_room('kitchen');",
       "is_toy_in_room('playroom');",
+      "is_toy_in_room('porch');",
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
       "isRobotinRoomEvent('playroom');",
@@ -650,7 +663,7 @@ function get_mdp_policy(code, taskNum) {
               high_prior[i] != ";" &&
               generate_goal_func(high_prior[i], state)
             ) {
-              rewards_table[id] += 3;
+              rewards_table[id] += 5;
             }
           }
           for (let i = 0; i < med_prior.length; i++) {
@@ -658,7 +671,7 @@ function get_mdp_policy(code, taskNum) {
               med_prior[i] != ";" &&
               generate_goal_func(med_prior[i], state)
             ) {
-              rewards_table[id] += 2;
+              rewards_table[id] += 3;
             }
             // else {
             //   values_table[id] = 0;
@@ -694,14 +707,16 @@ function get_mdp_policy(code, taskNum) {
   transition_table = {}
   //Train
   num_epochs = 20;
-  gamma = 0.99;
+  gamma = 0.9;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
       // console.log(state);
       // if (generate_goal_func(goal[0], state)) {
-        max_val = 0;
+        max_val = -Infinity;
         optimal_action = null;
+        next_state = null;
+
         for (action_ind in actions) {
           action = actions[action_ind];
           next = simulator(state, action);
@@ -715,87 +730,70 @@ function get_mdp_policy(code, taskNum) {
               if (val > max_val) {
                 max_val = val;
                 optimal_action = action;
+                next_state = next_id;
               }
             }
           }
         }
-        transition_table[key] = [optimal_action, ]
-
         values_table[key] = gamma * max_val + rewards_table[key];
-        // debugger;
-      // }
-    }
-  }
-  //Generate policy
-  policy = {};
-  for (key in values_table) {
-    state = state_ids[key];
-
-    // if (generate_goal_func(goal[0], state)) {        
-      max_val = 0;
-      max_act = actions[0];
-
-      // for (action_ind in actions) {
-      //   action = actions[action_ind];
-
-      //   next = simulator(state, action);
-      //   console.log(next, state, action)
-      //   debugger;
-      //   if (!(next == false) && !(next == null)) {
-      //     next_id = find_id(next, state_ids);
-
-      //     if (!(next_id == null)) {
-      //       val = values_table[next_id];
-      //       if (val > max_val) {
-      //         max_val = val;
-      //         max_act = action;
-      //       }
-      //     }
-      //   }
-        if (key  > 57){
-          console.log(action)
-          console.log(state, val, max_val)
-          
-          debugger;
-        }
-      }
-
-      tb = true;
-      triggerz = generate_triggers(triggers, state);
-      test = [0, 0, 0, 0, 0, 1];
-      for (i in [0, 1, 2, 3, 4, 5]) {
-        if (!(triggerz[i] == test[i])) {
-          tb = false;
-          break;
-        }
-      }
-      // if (tb) {
-      //   debugger;
-      // }
-      if (
-        !(
-          state.blocks.length >= 4 ||
-          (state.holding && state.blocks.length == 3)
-        )
-      ) {
-        if (policy.hasOwnProperty(generate_triggers(triggers, state))) {
-          if (max_val > 0) {
-            policy[generate_triggers(triggers, state)] = max_act;
-          }
-        } else {
-          policy[generate_triggers(triggers, state)] = max_act;
-        }
-      }
     // }
   }
+  }
 
-  return [policy, triggers, goal, goalfinal];
+  //Generate policy
+
+  for (v in values_table){
+    state = state_ids[v]
+
+    max_val = -Infinity;
+    optimal_action = null;
+    next_state = null;
+
+    for (action_ind in actions) {
+      action = actions[action_ind];
+      
+      next = simulator(state, action);
+
+      if (!(next == false) && !(next == null)) {
+        next_id = find_id(next, state_ids);
+
+        if (!(next_id == null)) {
+          val = values_table[next_id];
+          if (val > max_val) {
+            max_val = val;
+            optimal_action = action;
+            next_state = next_id;
+            }
+          }
+        }
+      }  
+      transition_table[v] = [optimal_action, next_state, max_val]  
+    } 
+  
+  return [transition_table, values_table];
 }
 
 function run_mdp(code, taskNum) {
   // debugger;
   start = Date.now();
-  [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
+  // [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
+  
+  [transition_table, values_table] = get_mdp_policy(code, taskNum); 
+  
+
+  for (key in transition_table){
+    [act, next_st, max_value]= transition_table[key];
+    cur_state = state_ids[key];
+    object_positions = cur_state['blocks']
+
+    check0 = "isRobotinRoomEvent(" + cur_state['robot_position'] + ")";
+    console.log(check0)
+    
+    break;
+  }
+
+
+
 
   if (taskNum == 1) {
     goalfinal = false;
