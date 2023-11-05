@@ -656,6 +656,10 @@ function get_mdp_policy(code, taskNum) {
           med_prior = goal[1];
           low_prior = goal[2];
 
+          if (high_prior.length == 0 && med_prior == 0 && low_prior == 0){
+            return [false, false];
+          }
+
           rewards_table[id] = 0;
           values_table[id] = 0
           for (let i = 0; i < high_prior.length; i++) {
@@ -779,48 +783,84 @@ function run_mdp(code, taskNum) {
   // [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
   
   [transition_table, values_table] = get_mdp_policy(code, taskNum); 
-  
+  if (transition_table == false){return ""}
+
+  // out = "while (" + true + ") {\n";
+  out = ""
+  var count = 0;
 
   for (key in transition_table){
     [act, next_st, max_value]= transition_table[key];
     cur_state = state_ids[key];
     object_positions = cur_state['blocks']
 
-    check0 = "isRobotinRoomEvent(" + cur_state['robot_position'] + ")";
-    console.log(check0)
+    conditions = ["isRobotinRoomEvent('" + cur_state['robot_position'] + "')"];
     
-    break;
-  }
+    if (object_positions[0] != null){
+      conditions.push("is_mail_in_room('" + object_positions[0] + "')");
+    }
+    if (object_positions[1] != null){
+      conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
+    }
+    if (object_positions.length >= 3){
+      if(object_positions[2] != null){
+        for(i = 2; i < object_positions.length; i++){
+          conditions.push("is_toy_in_room('" + object_positions[i] + "')");
+        }  
+      }   
+    }
+    if (cur_state['holding'] == null){
+      conditions.push("eHandsFree()")
+    }else{
+      conditions.push("!eHandsFree()")
+    }
 
+    if (cur_state['person'] != null){
+      conditions.push("isPersonNotInRoomEvent()")
+    }
 
-
-
-  if (taskNum == 1) {
-    goalfinal = false;
-  }
-  out = "while (" + true + ") {\n";
-  var count = 0;
-  for (key in policy) {
     if (count == 0) {
       out += "\tif(";
     } else {
       out += "\telse if(";
     }
-    for (ind in triggers) {
-      if (key.split(",")[ind] == 1) {
-        out += "(" + triggers[ind].slice(0, -1) + ") && ";
-      } else {
-        out += "!(" + triggers[ind].slice(0, -1) + ") && ";
-      }
+    state_condition = "";
+
+    for (c in conditions){
+      state_condition += (conditions[c] + " && ")
     }
-    out = out.slice(0, -4);
-    out += "){\n\t\t" + policy[key] + "\n\t}\n";
-    count += 1;
+    state_condition = state_condition.slice(0,-4) + ")";
+    out += state_condition
+    out += "{\n\t\t" + transition_table[key][0] + "\n\t}\n";
   }
 
-  out += "}\n";
-  end = Date.now();
-  timer = (end - start) / 100;
+  // policy ={}
+  // if (taskNum == 1) {
+  //   goalfinal = false;
+  // }
+  // out = "while (" + true + ") {\n";
+  // var count = 0;
+  // for (key in policy) {
+  //   if (count == 0) {
+  //     out += "\tif(";
+  //   } else {
+  //     out += "\telse if(";
+  //   }
+  //   for (ind in triggers) {
+  //     if (key.split(",")[ind] == 1) {
+  //       out += "(" + triggers[ind].slice(0, -1) + ") && ";
+  //     } else {
+  //       out += "!(" + triggers[ind].slice(0, -1) + ") && ";
+  //     }
+  //   }
+  //   out = out.slice(0, -4);
+  //   out += "){\n\t\t" + policy[key] + "\n\t}\n";
+  //   count += 1;
+  // }
+
+  // out += "}\n";
+  // end = Date.now();
+  // timer = (end - start) / 100;
   // debugger;
   return out;
 }
