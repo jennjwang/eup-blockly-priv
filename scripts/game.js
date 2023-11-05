@@ -1,58 +1,78 @@
+// function pick_up_toy() {
+//   if (robot_c.start) {
+//     robot_c.start = false;
+//   }
+//   if (!robot_c.handsFree) {
+//     console.log("hands already full");
+//     return;
+//   }
+//   let room = robot_c.room;
+//   robot_c.prev = robot_c.room;
+//   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
+//     let toys = toys_in_room[room];
+//     // holding = toys.pop();
+//     // console.log(room, "this room");
+//     toys[toys.length - 1].room = room;
+//     holding = toys[toys.length - 1];
+//     x = holding.width;
+//     y = holding.height;
+//     robot_c.holding = holding;
+//     console.log("picked up", robot_c.holding.id);
+//     robot_c.handsPrev = true;
+//     robot_c.handsFree = false;
+//     // console.log("hands are free?", robot_c.handsFree);
+//     const dst = [rooms[room][0], rooms[room][1] + 10];
+//     setTimeout(() => {
+//       if (robot_c.holding) {
+//         moveRobotTo(robot_c.holding.id, dst);
+//       }
+//     }, 800);
+//   }
+// }
+
 function pick_up_toy() {
-  if (robot_c.start) {
-    robot_c.start = false;
-  }
-  if (!robot_c.handsFree) {
-    console.log("hands already full");
-    return;
-  }
-  let room = robot_c.room;
-  robot_c.prev = robot_c.room;
-  if (toys_in_room[room].length != 0 && robot_c.handsFree) {
-    let toys = toys_in_room[room];
-    // holding = toys.pop();
-    // console.log(room, "this room");
-    toys[toys.length - 1].room = room;
-    holding = toys[toys.length - 1];
-    x = holding.width;
-    y = holding.height;
-    robot_c.holding = holding;
-    console.log("picked up", robot_c.holding.id);
-    robot_c.handsPrev = true;
-    robot_c.handsFree = false;
-    // console.log("hands are free?", robot_c.handsFree);
-    const dst = [rooms[room][0], rooms[room][1] + 10];
-    setTimeout(() => {
-      if (robot_c.holding) {
-        moveRobotTo(robot_c.holding.id, dst);
-      }
-    }, 800);
+  if (robot_c.handsFree && is_thing_in_room("bear", robot_c.room)) {
+    pick_up_thing("bear");
+  } else if (robot_c.handsFree && is_thing_in_room("duck", robot_c.room)) {
+    pick_up_thing("duck");
+  } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
+    pick_up_thing("car");
   }
 }
 
 function drop_toy() {
-  if (robot_c.start) {
-    robot_c.start = false;
-  }
-  if (robot_c.handsFree) {
-    return;
-  }
-  robot_c.prev = robot_c.room;
-  if (!robot_c.handsFree) {
-    let room = robot_c.room;
-    console.log("dropped toy");
-
-    robot_c.handsPrev = false;
-    robot_c.handsFree = true;
-
-    const dst = rooms[room];
-    moveRobotTo(robot_c.holding.id, dst);
-    // toys_in_room[room].push(robot_c.holding);
-
-    robot_c.holding.room = room;
-    robot_c.holding = null;
+  if (robot_c.holding.id == "bear") {
+    drop_thing("bear");
+  } else if (robot_c.holding.id == "duck") {
+    drop_thing("duck");
+  } else if (robot_c.holding.id == "car") {
+    drop_thing("car");
   }
 }
+
+// function drop_toy() {
+//   if (robot_c.start) {
+//     robot_c.start = false;
+//   }
+//   if (robot_c.handsFree) {
+//     return;
+//   }
+//   robot_c.prev = robot_c.room;
+//   if (!robot_c.handsFree) {
+//     let room = robot_c.room;
+//     console.log("dropped toy");
+
+//     robot_c.handsPrev = false;
+//     robot_c.handsFree = true;
+
+//     const dst = rooms[room];
+//     moveRobotTo(robot_c.holding.id, dst);
+//     // toys_in_room[room].push(robot_c.holding);
+
+//     robot_c.holding.room = room;
+//     robot_c.holding = null;
+//   }
+// }
 
 // HELPER id - robot, bear, car, duck, person
 /**
@@ -60,7 +80,7 @@ function drop_toy() {
  * @param {*} id - possible id (robot, bear, car, duck, person)
  * @param {*} coor
  */
-function moveRobotTo(id, coor) {
+function moveThing(id, coor) {
   if (robot_c.start) {
     robot_c.start = false;
   }
@@ -177,21 +197,21 @@ function eHandsFull() {
 }
 
 function toy_in_room() {
+  return is_toy_in_room(robot_c.room);
   // console.log("robot is in", robot_c.room);
   // console.log(toys_in_room);
   // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
-  // return toys_in_room[robot_c.room].length != 0;
-  let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
-  if (!robot_c.handsFree) {
-    // console.log(
-    //   "toy is in room: ",
-    //   toy_in_room_check || robot_c.holding.room == robot_c.room
-    // );
-    return toy_in_room_check || robot_c.holding.room == robot_c.room;
-  } else {
-    // console.log("toy is in room: ", toy_in_room_check);
-    return toy_in_room_check;
-  }
+  // let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
+  // if (!robot_c.handsFree) {
+  //   // console.log(
+  //   //   "toy is in room: ",
+  //   //   toy_in_room_check || robot_c.holding.room == robot_c.room
+  //   // );
+  //   return toy_in_room_check || robot_c.holding.room == robot_c.room;
+  // } else {
+  //   // console.log("toy is in room: ", toy_in_room_check);
+  //   return toy_in_room_check;
+  // }
 }
 
 function toy_not_in_room() {
@@ -201,12 +221,17 @@ function toy_not_in_room() {
 }
 
 function is_toy_in_room(room) {
-  let toy_in_room_check = toys_in_room[room].length != 0;
-  if (!robot_c.handsFree) {
-    return toy_in_room_check || robot_c.holding.room == room;
-  } else {
-    return toy_in_room_check;
-  }
+  return (
+    is_thing_in_room("bear", room) ||
+    is_thing_in_room("duck", room) ||
+    is_thing_in_room("car", room)
+  );
+  // let toy_in_room_check = toys_in_room[room].length != 0;
+  // if (!robot_c.handsFree) {
+  //   return toy_in_room_check || robot_c.holding.room == room;
+  // } else {
+  //   return toy_in_room_check;
+  // }
   // return toy_in_room_check = toys_in_room[room].length != 0
 }
 
@@ -358,9 +383,9 @@ function moveRobotToRoom(room) {
   if (robot_c.room == room) {
     x = dst[0];
     y = dst[1];
-    moveRobotTo("robot", [x, y + 20]);
+    moveThing("robot", [x, y + 20]);
     setTimeout(() => {
-      moveRobotTo("robot", dst);
+      moveThing("robot", dst);
     }, 100);
   }
 
@@ -389,11 +414,11 @@ function moveRobotToRoom(room) {
     // console.log("toys", toys_in_room);
   }
 
-  moveRobotTo("robot", dst);
+  moveThing("robot", dst);
 
   if (!robot_c.handsFree) {
     const toy_dst = [dst[0], dst[1] + 10];
-    moveRobotTo(robot_c.holding.id, toy_dst);
+    moveThing(robot_c.holding.id, toy_dst);
   }
 }
 
@@ -444,6 +469,7 @@ function pick_up_thing(id) {
     let objs = toys_in_room[room];
     let containsObj = objs.some((obj) => obj.id === id);
     if (!containsObj) {
+      console.log("couldn't find", id);
       return;
     }
     let obj = objs.find((obj) => obj.id === id);
@@ -459,11 +485,12 @@ function pick_up_thing(id) {
     robot_c.handsFree = false;
     // console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
+    console.log(dst);
     setTimeout(() => {
       if (robot_c.holding) {
-        moveRobotTo(robot_c.holding.id, dst);
+        moveThing(robot_c.holding.id, dst);
       }
-    }, 800);
+    }, 1500);
   }
 }
 
@@ -481,9 +508,11 @@ function drop_thing(id) {
 
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
+    const id = robot_c.holding.id;
 
     const dst = rooms[room];
-    moveRobotTo(robot_c.holding.id, dst);
+    // console.log("dropping off at", dst);
+    moveThing(id, dst);
     // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;

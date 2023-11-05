@@ -102,7 +102,7 @@ function movePersonHelper() {
   if (temp_rooms[i] == "porch") {
     x -= 70;
   }
-  moveRobotTo("person", [x + 70, y]);
+  moveThing("person", [x + 70, y]);
   person.setRoom(temp_rooms[i]);
 }
 
