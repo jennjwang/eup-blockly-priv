@@ -1,7 +1,7 @@
 let ROBOT_ROOM = "bedroom";
-let BEAR_ROOM = "kichen";
-let DUCK_ROOM = "kichen";
-let CAR_ROOM = "kichen";
+let BEAR_ROOM = "kitchen";
+let DUCK_ROOM = "kitchen";
+let CAR_ROOM = "kitchen";
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);

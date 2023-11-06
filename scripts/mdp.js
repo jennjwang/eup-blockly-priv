@@ -373,50 +373,6 @@ function parser(code) {
             goals.push([]);
           }
         }
-        // console.log(goals)
-        // debugger;
-        // goalsarr = lines[line].trim().split(" && ");
-        // goalfinal = lines[line].trim();
-
-        // if (goalsarr.length == 2) {
-        //   for (goal in goalsarr) {
-        //     if (goal == 0) {
-        //       goals.push(goalsarr[goal].slice(1, goalsarr[goal].length));
-        //     } else if (goal == goalsarr.length - 1) {
-        //       goals.push(goalsarr[goal].slice(0, -1));
-        //     } else {
-        //       goals.push(goalsarr[goal].slice(0, goalsarr[goal].length));
-        //     }
-        //   }
-        // }
-        // if (goalsarr.length == 3) {
-        //   for (goal in goalsarr) {
-        //     prefix = true;
-        //     while (prefix) {
-        //       if (goalsarr[goal][0] == "(") {
-        //         goalsarr[goal] = goalsarr[goal].slice(1, goalsarr[goal].length);
-        //       } else {
-        //         prefix = false;
-        //       }
-        //     }
-        //     suffix = true;
-        //     while (suffix) {
-        //       if (
-        //         goalsarr[goal][goalsarr[goal].length - 1] == ")" &&
-        //         goalsarr[goal][goalsarr[goal].length - 2] == ")"
-        //       ) {
-        //         goalsarr[goal] = goalsarr[goal].slice(0, -1);
-        //       } else {
-        //         suffix = false;
-        //       }
-        //     }
-        //     goals.push(goalsarr[goal]);
-        //   }
-        // }
-
-        // if (!(goalsarr.length == 2) && !(goalsarr.length == 3)) {
-        //   goals.push(goalsarr[0]);
-        // }
       }
       if (state == 3) {
         triggers.push(lines[line].trim());
@@ -511,15 +467,29 @@ function find_id(state, map) {
   return null;
 }
 
+function find_state(state_map, robot_position, 
+  obj_positions, robot_holding, person_pos){
+    for (s in state_map){
+      cur_state = state_map[s]
+      if (cur_state['robot_position'] == robot_position && 
+        cur_state['blocks'].toString() == obj_positions.toString() &&
+        cur_state['holding'] == robot_holding &&
+        cur_state['person'] == person_pos
+      ){
+        return s;
+      }
+    }
+}
+
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
 
   actions = [
     "moveRobotToRoom('playroom');",
-    // "drop_toy();",
+    "drop_toy();",
     "moveRobotToRoom('kitchen');",
     "moveRobotToRoom('bedroom');",
-    // "pick_up_toy();",
+    "pick_up_toy();",
     "moveRobotToRoom('porch');",
     "pick_up_thing('mail');",
     // "pick_up_thing('coffee');",
@@ -784,55 +754,59 @@ function run_mdp(code, taskNum) {
   
   [transition_table, values_table] = get_mdp_policy(code, taskNum); 
   if (transition_table == false){return ""}
+  return [transition_table, state_ids]
+
+
 
   // out = "while (" + true + ") {\n";
-  out = ""
-  var count = 0;
+  // out = ""
+  // var count = 0;
 
-  for (key in transition_table){
-    [act, next_st, max_value]= transition_table[key];
-    cur_state = state_ids[key];
-    object_positions = cur_state['blocks']
+  // for (key in transition_table){
+  //   [act, next_st, max_value]= transition_table[key];
+  //   cur_state = state_ids[key];
+  //   object_positions = cur_state['blocks']
 
-    conditions = ["isRobotinRoomEvent('" + cur_state['robot_position'] + "')"];
+  //   conditions = ["isRobotinRoomEvent('" + cur_state['robot_position'] + "')"];
     
-    if (object_positions[0] != null){
-      conditions.push("is_mail_in_room('" + object_positions[0] + "')");
-    }
-    if (object_positions[1] != null){
-      conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
-    }
-    if (object_positions.length >= 3){
-      if(object_positions[2] != null){
-        for(i = 2; i < object_positions.length; i++){
-          conditions.push("is_toy_in_room('" + object_positions[i] + "')");
-        }  
-      }   
-    }
-    if (cur_state['holding'] == null){
-      conditions.push("eHandsFree()")
-    }else{
-      conditions.push("!eHandsFree()")
-    }
+  //   if (object_positions[0] != null){
+  //     conditions.push("is_mail_in_room('" + object_positions[0] + "')");
+  //   }
+  //   if (object_positions[1] != null){
+  //     conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
+  //   }
+  //   if (object_positions.length >= 3){
+  //     if(object_positions[2] != null){
+  //       for(i = 2; i < object_positions.length; i++){
+  //         conditions.push("is_toy_in_room('" + object_positions[i] + "')");
+  //       }  
+  //     }   
+  //   }
+  //   if (cur_state['holding'] == null){
+  //     conditions.push("eHandsFree()")
+  //   }else{
+  //     conditions.push("!eHandsFree()")
+  //   }
 
-    if (cur_state['person'] != null){
-      conditions.push("isPersonNotInRoomEvent()")
-    }
+  //   if (cur_state['person'] != null){
+  //     conditions.push("isPersonNotInRoomEvent()")
+  //   }
 
-    if (count == 0) {
-      out += "\tif(";
-    } else {
-      out += "\telse if(";
-    }
-    state_condition = "";
+  //   if (count == 0) {
+  //     out += "\tif(";
+  //   } else {
+  //     out += "\telse if(";
+  //   }
+  //   state_condition = "";
 
-    for (c in conditions){
-      state_condition += (conditions[c] + " && ")
-    }
-    state_condition = state_condition.slice(0,-4) + ")";
-    out += state_condition
-    out += "{\n\t\t" + transition_table[key][0] + "\n\t}\n";
-  }
+  //   for (c in conditions){
+  //     state_condition += (conditions[c] + " && ")
+  //   }
+  //   state_condition = state_condition.slice(0,-4) + ")";
+  //   out += state_condition
+  //   out += "{\n\t\t" + transition_table[key][0] + "\n\t}\n";
+  //   count+=1;
+  // }
 
   // policy ={}
   // if (taskNum == 1) {

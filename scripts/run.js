@@ -17,6 +17,44 @@ let pids = [];
 
 var myInterpreter = new Interpreter("", initApi);
 
+function find_state(state_map, robot_position, 
+  obj_positions, robot_holding, person_pos){
+    for (s in state_map){
+      cur_state = state_map[s]
+      if (cur_state['robot_position'] == robot_position && 
+        cur_state['blocks'].toString() == obj_positions.toString() &&
+        cur_state['holding'] == robot_holding &&
+        cur_state['person'] == person_pos
+      ){
+        return s;
+      }
+    }
+}
+
+function get_current_state(state_ids, taskNum){
+  person_location = null;
+  if (taskNum == 1) {person_location = person.loc;}
+  all_objs = [null, null, null]
+    for (t in toys){
+      if (toys[t]['id'] == 'mail' && robot_c.holding.id != 'mail'){all_objs[0]=toys[t]['room']}
+      else if (toys[t]['id'] == 'coffee' && robot_c.holding.id != 'coffee'){all_objs[1]=toys[t]['room']}
+      else if (all_objs[2] == null){all_objs[2]=toys[t]['room']}
+      else{all_objs.push(toys[t]['room'])}
+    }
+    // if(robot_c.holding != null && robot_c.holding.id != 'mail' && robot_c.holding.id != 'coffee'){
+    //   ind = all_objs.slice(2,).indexOf(robot_c.room) + 2
+    //   all_objs.splice(ind, 1);
+    // }
+    if (all_objs.length < 3){all_objs.push(null)}
+  
+  held_obj = null;
+  if (robot_c.holding!=null){
+    if(robot_c.holding.id != 'mail' && robot_c.holding.id != 'coffee'){held_obj='toy'}
+    else{held_obj = robot_c.holding.id}
+  }
+  return find_state(state_ids, robot_c.room, all_objs, held_obj,person_location)
+}
+
 function update(event) {
   reset();
 
@@ -52,10 +90,25 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
+    
+    [transition_table, state_ids] = run_mdp(code, taskNum);
+    // console.log("mdp", code);
+    current_state = get_current_state(state_ids, taskNum);
+    prv_action = null;
+    [cur_action, next_state, cur_val] = transition_table[current_state];
+
+    while(cur_action != prv_action){
+      eval(cur_action);
+      prv_action = cur_action;
+      current_state = get_current_state(state_ids, taskNum);
+      [cur_action, next_state, cur_val] = transition_table[current_state];
+    }
+        
+    console.log(transition_table);
+    // debugger;
+    code = ""
     check = taskNum + "\n" + code;
     console.log(check);
-    code = run_mdp(code, taskNum);
-    console.log("mdp", code);
   }
 
   myInterpreter = new Interpreter(code, initApi);
