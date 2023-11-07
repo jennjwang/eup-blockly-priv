@@ -43,7 +43,7 @@ function get_current_state(state_ids, taskNum){
     if (toy_whereabouts[toy]['id'] == 'mail'){all_objs[0]=toy_whereabouts[toy]['room']}
     else if (toy_whereabouts[toy]['id'] == 'coffee'){all_objs[1]=toy_whereabouts[toy]['room']}
     else if (all_objs[2] == null){all_objs[2]=toy_whereabouts[toy]['room']}
-    else{all_objs.push(toy_whereabouts[t]['room'])}
+    else{all_objs.push(toy_whereabouts[toy]['room'])}
   }
   if (all_objs.length < 3){all_objs.push(null)}
 

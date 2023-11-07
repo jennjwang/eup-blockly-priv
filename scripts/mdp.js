@@ -779,6 +779,12 @@ function run_mdp(code, taskNum) {
         }  
       }   
     }
+    if(object_positions.length < 3 || object_positions[2] == null){
+      conditions.push("!is_toy_in_room('kitchen')");
+      conditions.push("!is_toy_in_room('bedroom')");
+      conditions.push("!is_toy_in_room('playroom')");
+    }
+
     if (cur_state['holding'] == null){
       conditions.push("eHandsFree()")
     }else{
