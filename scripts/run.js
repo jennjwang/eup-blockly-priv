@@ -17,42 +17,68 @@ let pids = [];
 
 var myInterpreter = new Interpreter("", initApi);
 
-function find_state(state_map, robot_position, 
-  obj_positions, robot_holding, person_pos){
-    for (s in state_map){
-      cur_state = state_map[s]
-      if (cur_state['robot_position'] == robot_position && 
-        cur_state['blocks'].toString() == obj_positions.toString() &&
-        cur_state['holding'] == robot_holding &&
-        cur_state['person'] == person_pos
-      ){
-        return s;
-      }
+function find_state(
+  state_map,
+  robot_position,
+  obj_positions,
+  robot_holding,
+  person_pos
+) {
+  for (s in state_map) {
+    cur_state = state_map[s];
+    if (
+      cur_state["robot_position"] == robot_position &&
+      cur_state["blocks"].toString() == obj_positions.toString() &&
+      cur_state["holding"] == robot_holding &&
+      cur_state["person"] == person_pos
+    ) {
+      return s;
     }
+  }
 }
 
-function get_current_state(state_ids, taskNum){
+function get_current_state(state_ids, taskNum) {
   person_location = null;
-  if (taskNum == 1) {person_location = person.loc;}
-
-  toy_whereabouts = []
-  for (t in toys_in_room){toy_whereabouts = toy_whereabouts.concat(toys_in_room[t]) }
-
-  all_objs = [null, null, null]
-  for (t in toy_whereabouts){
-    if (toy_whereabouts[t]['id'] == 'mail'){all_objs[0]=toy_whereabouts[t]['room']}
-    else if (toy_whereabouts[t]['id'] == 'coffee'){all_objs[1]=toy_whereabouts[t]['room']}
-    else if (all_objs[2] == null){all_objs[2]=toy_whereabouts[t]['room']}
-    else{all_objs.push(toy_whereabouts[t]['room'])}
+  if (taskNum == 1) {
+    person_location = person.loc;
   }
-  if (all_objs.length < 3){all_objs.push(null)}
+
+  toy_whereabouts = [];
+  for (let toy in toys_in_room) {
+    toy_whereabouts = toy_whereabouts.concat(toys_in_room[toy]);
+  }
+
+  all_objs = [null, null, null];
+  for (let toy in toy_whereabouts) {
+    if (toy_whereabouts[toy]["id"] == "mail") {
+      all_objs[0] = toy_whereabouts[toy]["room"];
+    } else if (toy_whereabouts[toy]["id"] == "coffee") {
+      all_objs[1] = toy_whereabouts[toy]["room"];
+    } else if (all_objs[2] == null) {
+      all_objs[2] = toy_whereabouts[toy]["room"];
+    } else {
+      all_objs.push(toy_whereabouts[toy]["room"]);
+    }
+  }
+  if (all_objs.length < 3) {
+    all_objs.push(null);
+  }
 
   held_obj = null;
-  if (robot_c.holding!=null){
-    if(robot_c.holding.id != 'mail' && robot_c.holding.id != 'coffee'){held_obj='toy'}
-    else{held_obj = robot_c.holding.id}
+  if (robot_c.holding != null) {
+    if (robot_c.holding.id != "mail" && robot_c.holding.id != "coffee") {
+      held_obj = "toy";
+    } else {
+      held_obj = robot_c.holding.id;
+    }
   }
-  return find_state(state_ids, robot_c.room, all_objs, held_obj,person_location)
+  return find_state(
+    state_ids,
+    robot_c.room,
+    all_objs,
+    held_obj,
+    person_location
+  );
 }
 
 function update(event) {
@@ -90,25 +116,25 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
-    
-    [transition_table, state_ids] = run_mdp(code, taskNum);
-    // console.log("mdp", code);
-    current_state = get_current_state(state_ids, taskNum);
-    prv_action = null;
-    [cur_action, next_state, cur_val] = transition_table[current_state];
+    // [transition_table, state_ids] = run_mdp(code, taskNum);
+    // // console.log("mdp", code);
+    // let current_state = get_current_state(state_ids, taskNum);
+    // let prv_action = null;
+    // let [cur_action, next_state, cur_val] = transition_table[current_state];
 
-    while(cur_action != prv_action){
-      eval(cur_action);
-      prv_action = cur_action;
-      current_state = get_current_state(state_ids, taskNum);
-      [cur_action, next_state, cur_val] = transition_table[current_state];
-    }
-        
-    console.log(transition_table);
-    // debugger;
-    code = ""
-    check = taskNum + "\n" + code;
-    console.log(check);
+    // code = "";
+
+    // while (cur_action != prv_action) {
+    //   // executeWithTimeout(cur_action, 1);
+    //   code += cur_action;
+    //   prv_action = cur_action;
+    //   current_state = get_current_state(state_ids, taskNum);
+    //   [cur_action, next_state, cur_val] = transition_table[next_state];
+    // }
+
+    // console.log(transition_table);
+    // console.log(code);
+    code = "moveRobotToRandomRoom()";
   }
 
   myInterpreter = new Interpreter(code, initApi);
@@ -117,11 +143,6 @@ function update(event) {
     if (myInterpreter.step()) {
       const pid = setTimeout(nextStep, 0);
       pids.push(pid);
-    } else {
-      // alert(
-      //   "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
-      // );
-      // stopButton();
     }
   }
   nextStep();
