@@ -108,7 +108,7 @@ h1 {
   height: auto;
   left: 200px;
   bottom: 320px;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
 }
 
@@ -118,7 +118,7 @@ h1 {
 }
 
 #bear {
-  z-index: 2;
+  z-index: 3;
   left: 80px;
   bottom: 90px;
   width: 35px;
@@ -127,7 +127,7 @@ h1 {
 }
 
 #car {
-  z-index: 2;
+  z-index: 3;
   left: 100px;
   bottom: 90px;
   width: 40px;
@@ -136,7 +136,7 @@ h1 {
 }
 
 #duck {
-  z-index: 2;
+  z-index: 3;
   left: 120px;
   bottom: 90px;
   width: 35px;
@@ -152,7 +152,7 @@ h1 {
 #room-txt {
   position: absolute;
   margin: 3px 10px;
-  z-index: 3;
+  z-index: 2;
 }
 
 #runButton {

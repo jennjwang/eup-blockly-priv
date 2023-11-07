@@ -41,6 +41,9 @@ function pick_up_toy() {
 }
 
 function drop_toy() {
+  if (robot_c.handsFree) {
+    return;
+  }
   if (robot_c.holding.id == "bear") {
     drop_thing("bear");
   } else if (robot_c.holding.id == "duck") {
@@ -418,6 +421,7 @@ function moveRobotToRoom(room) {
 
   if (!robot_c.handsFree) {
     const toy_dst = [dst[0], dst[1] + 10];
+    console.log("moving", robot_c.holding.id);
     moveThing(robot_c.holding.id, toy_dst);
   }
 }

@@ -13,6 +13,7 @@ const KITCHEN = [130, 90];
 const PLAYROOM = [320, 90];
 const BEDROOM = [220, 340];
 const PORCH = [20, 320];
+
 const rooms = {
   kitchen: KITCHEN,
   bedroom: BEDROOM,
@@ -110,7 +111,7 @@ function resetLocs() {
     duck_elt.style.display = "none";
   }
 
-  toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
+  toys_in_room = { kitchen: toys, playroom: [], bedroom: [], porch: [] };
 
   return "";
 }
