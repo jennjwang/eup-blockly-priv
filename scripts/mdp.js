@@ -761,6 +761,8 @@ function run_mdp(code, taskNum) {
 
   for (key in transition_table){
     [act, next_st, max_value]= transition_table[key];
+    if (key == next_st){continue;} 
+
     cur_state = state_ids[key];
     object_positions = cur_state['blocks']
 
@@ -768,9 +770,21 @@ function run_mdp(code, taskNum) {
     
     if (object_positions[0] != null){
       conditions.push("is_mail_in_room('" + object_positions[0] + "')");
+    }else{
+      conditions.push("!is_mail_in_room('kitchen')");
+      conditions.push("!is_mail_in_room('bedroom')");
+      conditions.push("!is_mail_in_room('playroom')");
+      conditions.push("!is_mail_in_room('porch')");
+
     }
     if (object_positions[1] != null){
       conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
+    }else{
+      conditions.push("!is_coffee_in_room('kitchen')");
+      conditions.push("!is_coffee_in_room('bedroom')");
+      conditions.push("!is_coffee_in_room('playroom')");
+      conditions.push("!is_coffee_in_room('porch')");
+
     }
     if (object_positions.length >= 3){
       if(object_positions[2] != null){
