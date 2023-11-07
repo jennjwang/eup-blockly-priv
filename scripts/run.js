@@ -34,19 +34,19 @@ function find_state(state_map, robot_position,
 function get_current_state(state_ids, taskNum){
   person_location = null;
   if (taskNum == 1) {person_location = person.loc;}
+
+  toy_whereabouts = []
+  for (t in toys_in_room){toy_whereabouts = toy_whereabouts.concat(toys_in_room[t]) }
+
   all_objs = [null, null, null]
-    for (t in toys){
-      if (toys[t]['id'] == 'mail' && robot_c.holding.id != 'mail'){all_objs[0]=toys[t]['room']}
-      else if (toys[t]['id'] == 'coffee' && robot_c.holding.id != 'coffee'){all_objs[1]=toys[t]['room']}
-      else if (all_objs[2] == null){all_objs[2]=toys[t]['room']}
-      else{all_objs.push(toys[t]['room'])}
-    }
-    // if(robot_c.holding != null && robot_c.holding.id != 'mail' && robot_c.holding.id != 'coffee'){
-    //   ind = all_objs.slice(2,).indexOf(robot_c.room) + 2
-    //   all_objs.splice(ind, 1);
-    // }
-    if (all_objs.length < 3){all_objs.push(null)}
-  
+  for (t in toy_whereabouts){
+    if (toy_whereabouts[t]['id'] == 'mail'){all_objs[0]=toy_whereabouts[t]['room']}
+    else if (toy_whereabouts[t]['id'] == 'coffee'){all_objs[1]=toy_whereabouts[t]['room']}
+    else if (all_objs[2] == null){all_objs[2]=toy_whereabouts[t]['room']}
+    else{all_objs.push(toy_whereabouts[t]['room'])}
+  }
+  if (all_objs.length < 3){all_objs.push(null)}
+
   held_obj = null;
   if (robot_c.holding!=null){
     if(robot_c.holding.id != 'mail' && robot_c.holding.id != 'coffee'){held_obj='toy'}
