@@ -153,7 +153,7 @@ h1 {
 #room-txt {
   position: absolute;
   margin: 3px 10px;
-  z-index: 3;
+  z-index: 2;
 }
 
 #runButton {

@@ -62,6 +62,13 @@ function resetLocs() {
   mail_elt.style.bottom = "320px";
   mail = new Thing(COFFEE_ROOM, 30, 320, "mail");
 
+  toys_in_room = {
+    kitchen: [],
+    playroom: [],
+    bedroom: [],
+    porch: [mail, coffee],
+  };
+
   return "";
 }
 
