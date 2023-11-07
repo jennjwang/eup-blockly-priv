@@ -36,13 +36,13 @@ function get_current_state(state_ids, taskNum){
   if (taskNum == 1) {person_location = person.loc;}
 
   toy_whereabouts = []
-  for (t in toys_in_room){toy_whereabouts = toy_whereabouts.concat(toys_in_room[t]) }
+  for (toy in toys_in_room){toy_whereabouts = toy_whereabouts.concat(toys_in_room[toy]) }
 
   all_objs = [null, null, null]
-  for (t in toy_whereabouts){
-    if (toy_whereabouts[t]['id'] == 'mail'){all_objs[0]=toy_whereabouts[t]['room']}
-    else if (toy_whereabouts[t]['id'] == 'coffee'){all_objs[1]=toy_whereabouts[t]['room']}
-    else if (all_objs[2] == null){all_objs[2]=toy_whereabouts[t]['room']}
+  for (toy in toy_whereabouts){
+    if (toy_whereabouts[toy]['id'] == 'mail'){all_objs[0]=toy_whereabouts[toy]['room']}
+    else if (toy_whereabouts[toy]['id'] == 'coffee'){all_objs[1]=toy_whereabouts[toy]['room']}
+    else if (all_objs[2] == null){all_objs[2]=toy_whereabouts[toy]['room']}
     else{all_objs.push(toy_whereabouts[t]['room'])}
   }
   if (all_objs.length < 3){all_objs.push(null)}
@@ -90,25 +90,8 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
-    
-    [transition_table, state_ids] = run_mdp(code, taskNum);
-    // console.log("mdp", code);
-    current_state = get_current_state(state_ids, taskNum);
-    prv_action = null;
-    [cur_action, next_state, cur_val] = transition_table[current_state];
-
-    while(cur_action != prv_action){
-      eval(cur_action);
-      prv_action = cur_action;
-      current_state = get_current_state(state_ids, taskNum);
-      [cur_action, next_state, cur_val] = transition_table[current_state];
-    }
-        
-    console.log(transition_table);
-    // debugger;
-    code = ""
-    check = taskNum + "\n" + code;
-    console.log(check);
+    out =  run_mdp(code, taskNum);
+    code = 'while(true){' + out + '}';
   }
 
   myInterpreter = new Interpreter(code, initApi);

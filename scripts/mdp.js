@@ -754,59 +754,56 @@ function run_mdp(code, taskNum) {
   
   [transition_table, values_table] = get_mdp_policy(code, taskNum); 
   if (transition_table == false){return ""}
-  return [transition_table, state_ids]
 
+  out = "while (" + true + ") {\n";
+  out = ""
+  var count = 0;
 
+  for (key in transition_table){
+    [act, next_st, max_value]= transition_table[key];
+    cur_state = state_ids[key];
+    object_positions = cur_state['blocks']
 
-  // out = "while (" + true + ") {\n";
-  // out = ""
-  // var count = 0;
-
-  // for (key in transition_table){
-  //   [act, next_st, max_value]= transition_table[key];
-  //   cur_state = state_ids[key];
-  //   object_positions = cur_state['blocks']
-
-  //   conditions = ["isRobotinRoomEvent('" + cur_state['robot_position'] + "')"];
+    conditions = ["isRobotinRoomEvent('" + cur_state['robot_position'] + "')"];
     
-  //   if (object_positions[0] != null){
-  //     conditions.push("is_mail_in_room('" + object_positions[0] + "')");
-  //   }
-  //   if (object_positions[1] != null){
-  //     conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
-  //   }
-  //   if (object_positions.length >= 3){
-  //     if(object_positions[2] != null){
-  //       for(i = 2; i < object_positions.length; i++){
-  //         conditions.push("is_toy_in_room('" + object_positions[i] + "')");
-  //       }  
-  //     }   
-  //   }
-  //   if (cur_state['holding'] == null){
-  //     conditions.push("eHandsFree()")
-  //   }else{
-  //     conditions.push("!eHandsFree()")
-  //   }
+    if (object_positions[0] != null){
+      conditions.push("is_mail_in_room('" + object_positions[0] + "')");
+    }
+    if (object_positions[1] != null){
+      conditions.push("is_coffee_in_room('" + object_positions[1] + "')");
+    }
+    if (object_positions.length >= 3){
+      if(object_positions[2] != null){
+        for(i = 2; i < object_positions.length; i++){
+          conditions.push("is_toy_in_room('" + object_positions[i] + "')");
+        }  
+      }   
+    }
+    if (cur_state['holding'] == null){
+      conditions.push("eHandsFree()")
+    }else{
+      conditions.push("!eHandsFree()")
+    }
 
-  //   if (cur_state['person'] != null){
-  //     conditions.push("isPersonNotInRoomEvent()")
-  //   }
+    if (cur_state['person'] != null){
+      conditions.push("isPersonNotInRoomEvent()")
+    }
 
-  //   if (count == 0) {
-  //     out += "\tif(";
-  //   } else {
-  //     out += "\telse if(";
-  //   }
-  //   state_condition = "";
+    if (count == 0) {
+      out += "\tif(";
+    } else {
+      out += "\telse if(";
+    }
+    state_condition = "";
 
-  //   for (c in conditions){
-  //     state_condition += (conditions[c] + " && ")
-  //   }
-  //   state_condition = state_condition.slice(0,-4) + ")";
-  //   out += state_condition
-  //   out += "{\n\t\t" + transition_table[key][0] + "\n\t}\n";
-  //   count+=1;
-  // }
+    for (c in conditions){
+      state_condition += (conditions[c] + " && ")
+    }
+    state_condition = state_condition.slice(0,-4) + ")";
+    out += state_condition
+    out += "{\n\t\t" + transition_table[key][0] + "\n\t}\n";
+    count+=1;
+  }
 
   // policy ={}
   // if (taskNum == 1) {
