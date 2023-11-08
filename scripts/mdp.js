@@ -58,8 +58,29 @@ function simulator(state, action) {
       copiedState.holding = null;
       copiedState.blocks[0] = copiedState.robot_position;
     }
-  }   
+  }  
+  if (action == "pick_up_thing('coffee');") {
+    if (
+      copiedState.holding != null ||
+      copiedState.blocks[1] != copiedState.robot_position
+    ) {
+      return false;
+    } else {
+      // ind = copiedState.blocks.indexOf(copiedState.robot_position);
+      copiedState.holding = "coffee";
+      copiedState.blocks[1] = null;
+    }
+  }
 
+  if (action == "drop_thing('coffee');") {
+    if (copiedState.holding != "coffee") {
+      return false;
+    } else {
+      copiedState.holding = null;
+      copiedState.blocks[1] = copiedState.robot_position;
+    }
+  } 
+  // if (find_id(copiedState, state_ids) == find_id(state, state_ids)){return false}
   return copiedState;
 }
 
@@ -629,7 +650,7 @@ function get_mdp_policy(code, taskNum) {
 
         ["porch", "bedroom", null],
         ["porch", null, null],
-        [null, "porch", null],
+        [null, "bedroom", null],
 
         ["kitchen", "bedroom", null],
         [null, "bedroom", null],
@@ -638,6 +659,10 @@ function get_mdp_policy(code, taskNum) {
         ["kitchen", "porch", null],
         ["kitchen", null, null],
         [null, "porch", null],
+
+        ["kitchen", "kitchen", null],
+        ["kitchen", null, null],
+        [null, "kitchen", null],
 
       ];
     triggers = [
@@ -729,6 +754,10 @@ function get_mdp_policy(code, taskNum) {
           // else {
           //   values_table[id] = 0;
           // }
+          if (['kitchen', 'bedroom', 'null'].toString() == state['blocks'].toString()){
+            console.log(id);
+          }
+
           state_ids[id] = state;
           id += 1;
         }
@@ -818,7 +847,8 @@ function run_mdp(code, taskNum) {
   // if (taskNum == 1) {
   //   goalfinal = false;
   // }
-  out = "while (" + true + ") {\n";
+  // out = "while (" + true + ") {\n";
+  out = "";
   var count = 0;
   for (key in transition_table) {
     if (count == 0) {
@@ -839,9 +869,21 @@ function run_mdp(code, taskNum) {
     count += 1;
   }
 
-  out += "}\n";
+  // out += "}\n";
   // end = Date.now();
   // timer = (end - start) / 100;
   // debugger;
   return out;
+}
+
+function get_seq_action(transition_table, state_id, action='')
+{
+  if(action == transition_table[state_id][0]){
+    return 
+  }else{
+    action = transition_table[state_id][0]
+    console.log(action);
+    state_id = transition_table[state_id][1]
+    return get_seq_action(transition_table, state_id, action)
+  }
 }
