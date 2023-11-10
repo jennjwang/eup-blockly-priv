@@ -55,12 +55,22 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
 
 Blockly.JavaScript["pick_up_coffee"] = function (block) {
-  return "pick_up_thing('coffee');";
+  return "pick_up_thing('coffee');\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -77,12 +87,22 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
     colour: 330,
   },
 ]);
 
 Blockly.JavaScript["drop_coffee"] = function () {
-  return "drop_coffee();";
+  return "drop_thing('coffee');\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -114,7 +134,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["pick_up_mail"] = function (block) {
-  return "pick_up_thing('mail');";
+  return "pick_up_thing('mail');\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -146,7 +166,7 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["drop_mail"] = function () {
-  return "drop_thing('mail');";
+  return "drop_thing('mail');\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -1221,7 +1241,7 @@ Blockly.JavaScript["goals"] = function (block) {
 goals( 
   ${Blockly.JavaScript.statementToCode(block, "high priority") + '#' +
   Blockly.JavaScript.statementToCode(block, "medium priority") + '#' +
-  Blockly.JavaScript.statementToCode(block, "low priority")};
+  Blockly.JavaScript.statementToCode(block, "low priority")});
   `;
 };
 

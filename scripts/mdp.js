@@ -441,7 +441,7 @@ function parser(code) {
         priority_goals = lines[1].split("#");
         for (var i = 0; i < priority_goals.length; i++) {
           if (
-            priority_goals[i].trim() != ";" &&
+            priority_goals[i].trim() != ");" &&
             priority_goals[i].trim() != ""
           ) {
             cur_priority_goals = priority_goals[i].trim().split("\t");
@@ -479,57 +479,6 @@ function parser(code) {
   return [triggers, actions, goals, goalfinal];
 }
 
-// function get_policy(code, taskNum) {
-//     if (taskNum == 1){
-//         init_state = {robot_position: "kitchen", blocks: [], holding: false, person: "kitchen"}
-//     }
-//     if (taskNum == 2){
-//         init_state = {robot_position: "bedroom", blocks: ["playroom"], holding: false, person: null}
-//     }
-//     if (taskNum == 3){
-//         init_state = {robot_position:"bedroom", blocks: Array(Math.floor(Math.random()*5+1)).fill("kitchen"), holding:false, person:null}
-//     }
-
-//     [triggers, actions, goal] = parser(code)
-//     max_depth = 5
-//     pairs = [[init_state, {}, 0]]
-
-//     while (!pairs.length==0) {
-
-//         [state, policy, depth] = pairs.shift()
-
-//         if(generate_goal_func(goal, state)) {
-//             return [policy, triggers, goal]
-//         }
-
-//         representation = generate_triggers(triggers, state)
-
-//         if(representation in policy) {
-
-//             newState = simulator(state, policy[representation])
-
-//             if ((!(newState == false)) && depth+1 < max_depth){
-//                 pairs.push([newState, policy, depth+1])
-//             }
-//         }
-
-//         for (ind in actions){
-//             action = actions[ind]
-//             newState = simulator(state, action)
-//             copiedPolicy = JSON.parse(JSON.stringify(policy))
-
-//             if ((!(newState == false)) && depth+1 < max_depth){
-
-//                 copiedPolicy[representation] = action
-//                 pairs.push([newState, copiedPolicy, depth+1])
-//             }
-
-//         }
-
-//     }
-
-//     return [{}, triggers, goal]
-// }
 
 function find_id(state, map) {
   for (ourKey in map) {
@@ -691,55 +640,42 @@ function get_mdp_policy(code, taskNum) {
           med_prior = goal[1];
           low_prior = goal[2];
 
-          if (high_prior.length == 0 && med_prior == 0 && low_prior == 0){
+          if (high_prior == undefined && med_prior == undefined && low_prior == undefined){
             return [false, false];
           }
 
           rewards_table[id] = 0;
           values_table[id] = 0
-          for (let i = 0; i < high_prior.length; i++) {
-            if (
-              high_prior[i] != ";" &&
-              generate_goal_func(high_prior[i], state)
-            ) {
-              rewards_table[id] += 5;
+          if(high_prior!=undefined){
+            for (let i = 0; i < high_prior.length; i++) {
+              if (
+                high_prior[i] != ";" &&
+                generate_goal_func(high_prior[i], state)
+              ) {
+                rewards_table[id] += 5;
+              }
             }
           }
-          for (let i = 0; i < med_prior.length; i++) {
-            if (
-              med_prior[i] != ";" &&
-              generate_goal_func(med_prior[i], state)
-            ) {
-              rewards_table[id] += 3;
+          if(med_prior != undefined){
+            for (let i = 0; i < med_prior.length; i++) {
+              if (
+                med_prior[i] != ";" &&
+                generate_goal_func(med_prior[i], state)
+              ) {
+                rewards_table[id] += 3;
+              }
             }
-            // else {
-            //   values_table[id] = 0;
-            // }
           }
-          for (let i = 0; i < low_prior.length; i++) {
-            if (
-              low_prior[i] != ";" &&
-              generate_goal_func(low_prior[i], state)
-            ) {
-              rewards_table[id] += 1;
+          if(low_prior != undefined){
+            for (let i = 0; i < low_prior.length; i++) {
+              if (
+                low_prior[i] != ";" &&
+                generate_goal_func(low_prior[i], state)
+              ) {
+                rewards_table[id] += 1;
+              }
             }
-            // else {
-            //   values_table[id] = 0;
-            // }
           }
-          // else if (goal[1] != ';' && generate_goal_func(goal[1], state)){
-          //   values_table[id] = 2;
-          // }
-          // else if(goal[2] != ';' && generate_goal_func(goal[2], state)){
-          //   values_table[id] = 1;
-          // }
-          // else {
-          //   values_table[id] = 0;
-          // }
-          if (['kitchen', 'bedroom', 'null'].toString() == state['blocks'].toString()){
-            console.log(id);
-          }
-
           state_ids[id] = state;
           id += 1;
         }
@@ -763,8 +699,7 @@ function get_mdp_policy(code, taskNum) {
         for (action_ind in actions) {
           action = actions[action_ind];
           next = simulator(state, action);
-          // console.log("state: ", state, "action: ", action);
-          // console.log(next);
+
           if (!(next == false) && !(next == null)) {
             next_id = find_id(next, state_ids);
 
@@ -824,12 +759,6 @@ function run_mdp(code, taskNum) {
   [transition_table, values_table, triggers] = get_mdp_policy(code, taskNum); 
   if (transition_table == false){return ""}
 
- 
-  // policy ={}
-  // if (taskNum == 1) {
-  //   goalfinal = false;
-  // }
-  // out = "while (" + true + ") {\n";
   out = "";
   var count = 0;
   for (key in transition_table) {

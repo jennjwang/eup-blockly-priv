@@ -74,8 +74,9 @@ function update(event) {
   if (url.searchParams.get("format") == "FULL_MDP") {
     check = taskNum + "\n" + code;
     console.log(check);
-    console.log("hi", code);
-    // code = run_rl(code, taskNum);
+    // console.log("hi", code);
+    // debugger;
+    code = run_rl(code, taskNum);
     console.log("rl code", code);
   }
 
