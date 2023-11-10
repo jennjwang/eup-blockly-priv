@@ -1264,6 +1264,32 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "and",
     message0: "%1 %2 %3 %4",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    nextStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     args0: [
       {
         type: "input_statement",
@@ -1273,10 +1299,13 @@ Blockly.defineBlocksWithJsonArray([
           "e_in_the",
           "e_person_in_room",
           "e_hands_free",
+          "e_hands_full",
           "e_toy_in_room",
           "is_toy_in_room",
           "e_person_not_in_room",
           "e_toy_not_in_room",
+          "e_coffee_in_room",
+          "e_coffee_not_in_room",
           "Boolean",
         ],
         align: "CENTRE",
@@ -1301,10 +1330,13 @@ Blockly.defineBlocksWithJsonArray([
           "e_in_the",
           "e_person_in_room",
           "e_hands_free",
+          "e_hands_full",
           "e_toy_in_room",
           "is_toy_in_room",
           "e_person_not_in_room",
           "e_toy_not_in_room",
+          "e_coffee_in_room",
+          "e_coffee_not_in_room",
           "Boolean",
         ],
         align: "CENTRE",
@@ -1319,19 +1351,11 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["and"] = function (block) {
-  var s1 = Blockly.JavaScript.valueToCode(
-    block,
-    "s1",
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
+  var s1 =  Blockly.JavaScript.statementToCode(block, "s1")
   var connector = block.getFieldValue("connector");
-  var s2 = Blockly.JavaScript.valueToCode(
-    block,
-    "s2",
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
+  var s2 =  Blockly.JavaScript.statementToCode(block, "s2")
 
-  connector_val = " && ";
+  var connector_val = " && ";
 
   if (connector == "or") {
     connector_val = " || ";
@@ -1340,5 +1364,5 @@ Blockly.JavaScript["and"] = function (block) {
   var code = "(" + s1 + connector_val + s2 + ")";
   console.log("hi", code);
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
 };

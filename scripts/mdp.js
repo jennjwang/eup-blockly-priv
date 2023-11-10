@@ -575,9 +575,11 @@ function get_mdp_policy(code, taskNum) {
     "drop_thing('mail');",
     "drop_thing('coffee');",
   ];
+  
   values_table = {};
   rewards_table = {}
   state_ids = {};
+  ROOMS = ["porch", "kitchen", "bedroom", "playroom", null]
 
   if (taskNum == 1) {
     person_locs = ["kitchen", "bedroom", "playroom", null];
@@ -641,30 +643,10 @@ function get_mdp_policy(code, taskNum) {
   }
   if (taskNum == 7) {
     person_locs = [null];
-    block_list =
-      // // index 0 mail, index 1 coffee
-      [
-        ["porch", "porch", null],
-        [null, "porch", null],
-        ["porch", null, null],
+    block_list = []// // index 0 mail, index 1 coffee
+      
+    for (var r1 in ROOMS){for (var r2 in ROOMS){block_list.push([ROOMS[r1], ROOMS[r2], null])}}
 
-        ["porch", "bedroom", null],
-        ["porch", null, null],
-        [null, "bedroom", null],
-
-        ["kitchen", "bedroom", null],
-        [null, "bedroom", null],
-        ["kitchen", null, null],
-
-        ["kitchen", "porch", null],
-        ["kitchen", null, null],
-        [null, "porch", null],
-
-        ["kitchen", "kitchen", null],
-        ["kitchen", null, null],
-        [null, "kitchen", null],
-
-      ];
     triggers = [
       "toy_in_room();",
       "is_toy_in_room('bedroom');",
