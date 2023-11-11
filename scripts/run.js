@@ -116,6 +116,11 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
+    if (taskNum == 1) {
+      out = run_mdp(code, taskNum);
+      code = "while(true){" + out + "}";
+      return;
+    }
     [transition_table, state_ids] = run_mdp(code, taskNum);
     // console.log("mdp", code);
     let current_state = get_current_state(state_ids, taskNum);
