@@ -284,33 +284,6 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
   return ["toy_in_room()", Blockly.JavaScript.ORDER_NONE];
 };
 
-// Blockly.defineBlocksWithJsonArray([
-//   {
-//     type: "is_toy_in_room",
-//     message0: "a toy is in the current room",
-//     args0: [
-//       {
-//         type: "field_dropdown",
-//         name: "VALUE",
-//         options: [
-//           ["kitchen", "kitchen"],
-//           ["bedroom", "bedroom"],
-//           ["playroom", "playroom"],
-//         ],
-//       },
-//     ],
-//     output: "Boolean",
-//     colour: 260,
-//   },
-// ]);
-
-// Blockly.JavaScript.PRECEDENCE = 0;
-
-// Blockly.JavaScript["is_toy_in_room"] = function (block) {
-//   let value = "'" + block.getFieldValue("VALUE") + "'";
-//   return ["isRobotOutOfEvent(" + value + ")", Blockly.JavaScript.ORDER_NONE];
-// };
-
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
@@ -336,13 +309,40 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "e_person_not_in_room",
     message0: "a person is not in the room",
-    output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+      "e_mail_in_room",
+      "e_mail_not_in_room",
+    ],
+    nextStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
     colour: 160,
   },
 ]);
 
 Blockly.JavaScript["e_person_not_in_room"] = function () {
-  return ["isPersonNotInRoomEvent()", Blockly.JavaScript.PRECEDENCE];
+  return "isPersonNotInRoomEvent()";
 };
 
 // Blockly.JavaScript.PRECEDENCE = 0;
@@ -784,6 +784,19 @@ Blockly.defineBlocksWithJsonArray([
     message0: "a person is in the room",
     // output: "Boolean",
     previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    nextStatement: [
       "e_out_of",
       "e_in_the",
       "e_person_in_room",
@@ -1239,9 +1252,13 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript["goals"] = function (block) {
   return `
 goals( 
-  ${Blockly.JavaScript.statementToCode(block, "high priority") + '#' +
-  Blockly.JavaScript.statementToCode(block, "medium priority") + '#' +
-  Blockly.JavaScript.statementToCode(block, "low priority")});
+  ${
+    Blockly.JavaScript.statementToCode(block, "high priority") +
+    "#" +
+    Blockly.JavaScript.statementToCode(block, "medium priority") +
+    "#" +
+    Blockly.JavaScript.statementToCode(block, "low priority")
+  });
   `;
 };
 
@@ -1371,9 +1388,9 @@ Blockly.defineBlocksWithJsonArray([
 ]);
 
 Blockly.JavaScript["and"] = function (block) {
-  var s1 =  Blockly.JavaScript.statementToCode(block, "s1")
+  var s1 = Blockly.JavaScript.statementToCode(block, "s1");
   var connector = block.getFieldValue("connector");
-  var s2 =  Blockly.JavaScript.statementToCode(block, "s2")
+  var s2 = Blockly.JavaScript.statementToCode(block, "s2");
 
   var connector_val = " && ";
 
