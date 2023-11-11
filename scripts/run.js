@@ -116,25 +116,20 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
-    // [transition_table, state_ids] = run_mdp(code, taskNum);
-    // // console.log("mdp", code);
-    // let current_state = get_current_state(state_ids, taskNum);
-    // let prv_action = null;
-    // let [cur_action, next_state, cur_val] = transition_table[current_state];
+    [transition_table, state_ids] = run_mdp(code, taskNum);
+    // console.log("mdp", code);
+    let current_state = get_current_state(state_ids, taskNum);
+    let prv_action = null;
+    let [cur_action, next_state, cur_val] = transition_table[current_state];
 
-    // code = "";
+    code = "";
 
-    // while (cur_action != prv_action) {
-    //   // executeWithTimeout(cur_action, 1);
-    //   code += cur_action;
-    //   prv_action = cur_action;
-    //   current_state = get_current_state(state_ids, taskNum);
-    //   [cur_action, next_state, cur_val] = transition_table[next_state];
-    // }
-
-    // console.log(transition_table);
-    // console.log(code);
-    code = "moveRobotToRandomRoom()";
+    while (cur_action != prv_action) {
+      code += cur_action;
+      prv_action = cur_action;
+      current_state = get_current_state(state_ids, taskNum);
+      [cur_action, next_state, cur_val] = transition_table[next_state];
+    }
   }
 
   myInterpreter = new Interpreter(code, initApi);

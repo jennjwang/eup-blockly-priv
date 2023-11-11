@@ -365,11 +365,11 @@ function isRobotOutOfEvent(room) {
 
 // HELPER
 function resolveAfter3Seconds() {
-  let delay = 10;
-  let condition = url.searchParams.get("format");
-  if (condition == "SEQ" || condition == "TAP") {
-    delay = 2500;
-  }
+  let delay = 2000;
+  // let condition = url.searchParams.get("format");
+  // if (condition == "SEQ" || condition == "TAP") {
+  //   delay = 2500;
+  // }
 
   return new Promise((resolve) => {
     const id = setTimeout(() => {
