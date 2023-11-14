@@ -453,6 +453,21 @@ Blockly.JavaScript["in_the"] = function (block) {
   return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "in_any",
+    message0: "I arrived at a room",
+    output: "in_any",
+    colour: 260,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["in_any"] = function (block) {
+  return ["isRobotinAnyRoom()", Blockly.JavaScript.PRECEDENCE];
+};
+
 Blockly.JavaScript["out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
   return ["isRobotOutOf(" + value + ")", Blockly.JavaScript.PRECEDENCE];
