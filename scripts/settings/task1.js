@@ -65,7 +65,11 @@ function resetLocs() {
   dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
   person.setRoom(PERSON_ROOM);
-  let x = dst[0] + 50;
+
+  let x = dst[0];
+  if (PERSON_ROOM != "porch") {
+    x = dst[0] + 50;
+  }
   person_elt.style.left = x + "px";
   person_elt.style.bottom = dst[1] + "px";
 

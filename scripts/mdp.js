@@ -558,17 +558,12 @@ function get_mdp_policy(code, taskNum) {
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
 
   if (taskNum == 1) {
-    person_locs = ["kitchen", "bedroom", "playroom", null];
+    person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
     block_list = [[]];
     triggers = [
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
       "isRobotinRoomEvent('playroom');",
-      "eHandsFree();",
-      "toy_in_room();",
-      "is_toy_in_room('bedroom');",
-      "is_toy_in_room('kitchen');",
-      "is_toy_in_room('playroom');",
       "isPersonNotInRoomEvent();",
     ];
   }
@@ -796,34 +791,36 @@ function run_mdp(code, taskNum) {
     return "";
   }
 
-  return [transition_table, state_ids];
+  if (taskNum != 1) {
+    return [transition_table, state_ids];
+  }
 
-  // out = "";
-  // var count = 0;
-  // for (key in transition_table) {
-  //   if (count == 0) {
-  //     out += "\tif(";
-  //   } else {
-  //     out += "\telse if(";
-  //   }
-  //   cur_trigger = generate_triggers(triggers, state_ids[key])
-  //   for (ind in cur_trigger) {
-  //     if (cur_trigger[ind] == 1) {
-  //       out += "(" + triggers[ind].slice(0, -1) + ") && ";
-  //     } else {
-  //       out += "!(" + triggers[ind].slice(0, -1) + ") && ";
-  //     }
-  //   }
-  //   out = out.slice(0, -4);
-  //   out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
-  //   count += 1;
-  // }
+  out = "";
+  var count = 0;
+  for (key in transition_table) {
+    if (count == 0) {
+      out += "\tif(";
+    } else {
+      out += "\telse if(";
+    }
+    cur_trigger = generate_triggers(triggers, state_ids[key]);
+    for (ind in cur_trigger) {
+      if (cur_trigger[ind] == 1) {
+        out += "(" + triggers[ind].slice(0, -1) + ") && ";
+      } else {
+        out += "!(" + triggers[ind].slice(0, -1) + ") && ";
+      }
+    }
+    out = out.slice(0, -4);
+    out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
+    count += 1;
+  }
 
-  // // out += "}\n";
-  // // end = Date.now();
-  // // timer = (end - start) / 100;
-  // // debugger;
-  // return out;
+  // out += "}\n";
+  // end = Date.now();
+  // timer = (end - start) / 100;
+  // debugger;
+  return out;
 }
 
 function get_seq_action(transition_table, state_id, action = "") {

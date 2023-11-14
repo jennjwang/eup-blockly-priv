@@ -327,24 +327,17 @@ function isRobotinRoom(room) {
   if (robot_c.start) {
     return false;
   }
-  // console.log("curr", robot_c.room);
-  // console.log("prev", robot_c.prev);
-  // // console.log("room", room);
-  // console.log("prev==curr", robot_c.room === robot_c.prev);
-  // console.log("room==curr", robot_c.room === room);
-  // if (robot_c.prev == null && robot_c.room == room) {
-  //   return true;
-  // }
   if (robot_c.prev === robot_c.room) {
-    // console.log("robot has not arrived at room", room);
     return false;
   }
-  // if (robot_c.room == room) {
-  //   console.log("robot has arrived at room", room);
-  //   // robot_c.prev = robot_c.room;
-  //   return true;
-  // }
   return robot_c.room == room;
+}
+
+function isRobotinAnyRoom() {
+  if (robot_c.start) {
+    return false;
+  }
+  return robot_c.prev != robot_c.room;
 }
 
 function isRobotinRoomEvent(room) {

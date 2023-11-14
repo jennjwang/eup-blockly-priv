@@ -121,21 +121,22 @@ function update(event) {
     if (taskNum == 1) {
       out = run_mdp(code, taskNum);
       code = "while(true){" + out + "}";
-      return;
-    }
-    [transition_table, state_ids] = run_mdp(code, taskNum);
-    // console.log("mdp", code);
-    let current_state = get_current_state(state_ids, taskNum);
-    let prv_action = null;
-    let [cur_action, next_state, cur_val] = transition_table[current_state];
+      // return;
+    } else {
+      [transition_table, state_ids] = run_mdp(code, taskNum);
+      // console.log("mdp", code);
+      let current_state = get_current_state(state_ids, taskNum);
+      let prv_action = null;
+      let [cur_action, next_state, cur_val] = transition_table[current_state];
 
-    code = "";
+      code = "";
 
-    while (cur_action != prv_action) {
-      code += cur_action;
-      prv_action = cur_action;
-      current_state = get_current_state(state_ids, taskNum);
-      [cur_action, next_state, cur_val] = transition_table[next_state];
+      while (cur_action != prv_action) {
+        code += cur_action;
+        prv_action = cur_action;
+        current_state = get_current_state(state_ids, taskNum);
+        [cur_action, next_state, cur_val] = transition_table[next_state];
+      }
     }
   }
 
