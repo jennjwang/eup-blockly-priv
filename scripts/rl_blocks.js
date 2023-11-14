@@ -1508,7 +1508,7 @@ Blockly.JavaScript["and"] = function (block) {
     connector_val = " || ";
   }
   // TODO: Assemble JavaScript into code variable.
-  var code = "(" + s1 + connector_val + s2 + ")";
+  var code = "(" + s1.trim() + connector_val + s2.trim() + ")";
   console.log("hi", code);
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
