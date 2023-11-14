@@ -498,6 +498,19 @@ Blockly.JavaScript["e_person_in_room"] = function () {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_as_many",
+    message0: "as many toys as possible are in the room",
+    output: "Boolean",
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript["e_as_many"] = function (block) {
+  return ["as_many_toys()", Blockly.JavaScript.PRECEDENCE];
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "e_person_not_in_room",
     message0: "a person is not in the room",
     output: "Boolean",

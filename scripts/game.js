@@ -400,6 +400,18 @@ function inSameRoom() {
   return counter > 3;
 }
 
+function as_many_toys() {
+  let numb_toys_in_room = toys_in_room[robot_c.room].length;
+  let max_toys = 0;
+
+  for (const room in toys_in_room) {
+    if (toys_in_room[room].length > max_toys) {
+      max_toys = toys_in_room[room].length;
+    }
+  }
+  return max_toys == numb_toys_in_room;
+}
+
 function thing_in_room(id) {
   let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
 
