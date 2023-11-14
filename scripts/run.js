@@ -35,6 +35,7 @@ function find_state(
       return s;
     }
   }
+  console.log("can't find s");
 }
 
 function get_current_state(state_ids, taskNum) {
@@ -44,12 +45,12 @@ function get_current_state(state_ids, taskNum) {
   }
 
   toy_whereabouts = [];
-  for (toy in toys_in_room) {
+  for (let toy in toys_in_room) {
     toy_whereabouts = toy_whereabouts.concat(toys_in_room[toy]);
   }
 
   all_objs = [null, null, null];
-  for (toy in toy_whereabouts) {
+  for (let toy in toy_whereabouts) {
     if (toy_whereabouts[toy]["id"] == "mail") {
       all_objs[0] = toy_whereabouts[toy]["room"];
     } else if (toy_whereabouts[toy]["id"] == "coffee") {
@@ -117,8 +118,25 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
-    out = run_mdp(code, taskNum);
-    code = "while(true){" + out + "}";
+    if (taskNum == 1) {
+      out = run_mdp(code, taskNum);
+      code = "while(true){" + out + "}";
+      return;
+    }
+    [transition_table, state_ids] = run_mdp(code, taskNum);
+    // console.log("mdp", code);
+    let current_state = get_current_state(state_ids, taskNum);
+    let prv_action = null;
+    let [cur_action, next_state, cur_val] = transition_table[current_state];
+
+    code = "";
+
+    while (cur_action != prv_action) {
+      code += cur_action;
+      prv_action = cur_action;
+      current_state = get_current_state(state_ids, taskNum);
+      [cur_action, next_state, cur_val] = transition_table[next_state];
+    }
   }
 
   console.log("code", code);
@@ -129,11 +147,6 @@ function update(event) {
     if (myInterpreter.step()) {
       const pid = setTimeout(nextStep, 0);
       pids.push(pid);
-    } else {
-      // alert(
-      //   "Thanks for completing the study. Please return to Qualtrics and enter the following code: 61948336"
-      // );
-      // stopButton();
     }
   }
   nextStep();
