@@ -21,30 +21,6 @@ function drop_toy() {
   }
 }
 
-// function drop_toy() {
-//   if (robot_c.start) {
-//     robot_c.start = false;
-//   }
-//   if (robot_c.handsFree) {
-//     return;
-//   }
-//   robot_c.prev = robot_c.room;
-//   if (!robot_c.handsFree) {
-//     let room = robot_c.room;
-//     console.log("dropped toy");
-
-//     robot_c.handsPrev = false;
-//     robot_c.handsFree = true;
-
-//     const dst = rooms[room];
-//     moveRobotTo(robot_c.holding.id, dst);
-//     // toys_in_room[room].push(robot_c.holding);
-
-//     robot_c.holding.room = room;
-//     robot_c.holding = null;
-//   }
-// }
-
 // HELPER id - robot, bear, car, duck, person
 /**
  * move any object to a goal coordinate

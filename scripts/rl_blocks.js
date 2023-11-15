@@ -1132,6 +1132,98 @@ Blockly.JavaScript["trigger_coffee_in_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "trigger_coffee_in_any",
+    message0: "Is there coffee in the %1?",
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+    ],
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+          ["porch", "porch"],
+        ],
+      },
+    ],
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["trigger_coffee_in_any"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return "is_coffee_in_room(" + value + ")\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "trigger_mail_in_any",
+    message0: "Is there mail in the %1?",
+    previousStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_hands_full",
+      "trigger_mail_in_room",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_toy_in_room",
+      "trigger_coffee_in_room",
+      "trigger_hands_free",
+      "trigger_mail_in_room",
+      "trigger_hands_full",
+    ],
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["kitchen", "kitchen"],
+          ["bedroom", "bedroom"],
+          ["playroom", "playroom"],
+          ["porch", "porch"],
+        ],
+      },
+    ],
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["trigger_mail_in_any"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return "is_mail_in_room(" + value + ")\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "trigger_mail_in_room",
     message0: "Is there mail in the current room?",
     previousStatement: [
