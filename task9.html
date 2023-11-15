@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css"
     />
-    <link rel="stylesheet" href="styles/task5.css" />
+    <link rel="stylesheet" href="styles/task9.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <script src="interpreter/acorn_interpreter.js"></script>
   </head>
@@ -67,9 +67,6 @@
         <div id="coffee">
           <img id="coffee-img" src="assets/coffee.png" />
         </div>
-        <div id="mail">
-          <img id="mail-img" src="assets/mail.png" />
-        </div>
       </div>
 
       <div class="blockly-editor">
@@ -97,15 +94,12 @@
             <category name="Actions" categorystyle="variable_category">
               <block type="drop_coffee"></block>
               <block type="pick_up_coffee"></block>
-              <block type="drop_mail"></block>
-              <block type="pick_up_mail"></block>
               <block type="to_room"></block>
               <block type="to_random_room"></block>
             </category>
             <category name="Events" categorystyle="list_category">
               <block type="out_of"></block>
               <block type="in_the"></block>
-              <block type="in_any"></block>
               <block type="hands_free"></block>
               <block type="hands_full"></block>
               <block type="start"></block>
@@ -113,41 +107,39 @@
             <category name="States" categorystyle="event_category">
               <block type="e_out_of"></block>
               <block type="e_in_the"></block>
-              <block type="e_hands_free"></block>
-              <block type="e_hands_full"></block>
-              <block type="e_coffee_in_room"></block>
-              <block type="e_coffee_not_in_room"></block>
-              <block type="e_mail_in_room"></block>
-              <block type="e_mail_not_in_room"></block>
-              <block type="and"></block>
-            </category>
-            <category name="Actions" categorystyle="variable_category">
-              <block type="drop_coffee"></block>
-              <block type="pick_up_coffee"></block>
-              <block type="drop_mail"></block>
-              <block type="pick_up_mail"></block>
-              <block type="to_room"></block>
-              <block type="to_random_room"></block>
-            </category>
-            <category name="Goal" categorystyle="event_category">
-              <block type="e_out_of"></block>
-              <block type="e_in_the"></block>
               <block type="e_in_any"></block>
               <block type="e_hands_free"></block>
               <block type="e_hands_full"></block>
               <block type="e_coffee_in_room"></block>
               <block type="e_coffee_not_in_room"></block>
-              <block type="e_mail_in_room"></block>
-              <block type="e_mail_not_in_room"></block>
+              <block type="e_person_in_room"></block>
+              <block type="e_person_not_in_room"></block>
+              <block type="and"></block>
+            </category>
+            <category name="Actions" categorystyle="variable_category">
+              <block type="drop_coffee"></block>
+              <block type="pick_up_coffee"></block>
+              <block type="to_room"></block>
+              <block type="to_random_room"></block>
+            </category>
+            <category name="Goal" categorystyle="event_category">
+              <block type="e_out_of"></block>
+              <block type="e_coffee_in_room"></block>
+              <block type="e_coffee_not_in_room"></block>
+              <block type="e_in_the"></block>
+              <block type="e_hands_free"></block>
+              <block type="e_hands_full"></block>
+              <block type="e_person_in_room"></block>
+              <block type="e_person_not_in_room"></block>
               <block type="and"></block>
             </category>
             <category name="States" categorystyle="logic_category">
               <block type="trigger_out_of"></block>
               <block type="trigger_in_the"></block>
-              <block type="trigger_hands_free"></block>
-              <block type="trigger_mail_in_room"></block>
               <block type="trigger_coffee_in_room"></block>
+              <block type="trigger_hands_free"></block>
               <block type="trigger_hands_full"></block>
+              <block type="trigger_person_in_room"></block>
             </category>
             <category
               name="Controls"
@@ -227,7 +219,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task3/round${round}/changed/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task8/round${round}/changed/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -380,7 +372,7 @@
       }
     </script>
     <script src="scripts/obj.js"></script>
-    <script src="scripts/settings/task5.js"></script>
+    <script src="scripts/settings/task9.js"></script>
     <script id="tap" src="scripts/tap_blocks.js"></script>
     <script id="rl" src="scripts/rl_blocks.js"></script>
     <script src="scripts/run.js"></script>
