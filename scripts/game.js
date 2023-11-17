@@ -216,7 +216,7 @@ function is_thing_in_room(id, room) {
     // console.log("things in room");
     let objs = toys_in_room[room];
     // we know there's only one coffee and once piece of mail
-    let containsObj = objs.some((obj) => obj.id == id);
+    let containsObj = objs.some((obj) => obj.id.includes(id));
     // console.log(containsObj);
     return containsObj;
   }
