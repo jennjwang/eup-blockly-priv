@@ -654,6 +654,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_value",
         name: "condition",
         check: [
+          "in_any",
           "out_of",
           "in_the",
           "person_in_room",
@@ -738,6 +739,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_value",
         name: "condition",
         check: [
+          "in_any",
           "out_of",
           "in_the",
           "person_in_room",
