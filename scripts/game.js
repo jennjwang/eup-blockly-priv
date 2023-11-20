@@ -1,7 +1,7 @@
 // const toys = ["bear", "duck", "car", "toy4"];
 
 function pick_up_toy() {
-  // const toys = ["bear", "duck", "car", "toy4"];
+  const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     console.log(toy);
     if (robot_c.handsFree && is_thing_in_room(toy, robot_c.room)) {
@@ -171,6 +171,7 @@ function toy_not_in_room() {
 }
 
 function is_toy_in_room(room) {
+  const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     if (is_thing_in_room(toy, room)) {
       return true;
@@ -220,7 +221,7 @@ function is_thing_in_room(id, room) {
   let toy_in_room_check = toys_in_room[room].length != 0;
   if (robot_c.handsFull) {
     // console.log("hands full");
-    return robot_c.holding.id == id;
+    return robot_c.holding.id.includes(id);
   } else if (toy_in_room_check) {
     // console.log("things in room");
     let objs = toys_in_room[room];
@@ -402,11 +403,11 @@ function thing_in_room(id) {
   let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
 
   if (robot_c.handsFull) {
-    return robot_c.holding.id == id;
+    return robot_c.holding.id.includes(id);
   } else if (toy_in_room_check) {
     let objs = toys_in_room[robot_c.room];
     // we know there's only one coffee and once piece of mail
-    let containsObj = objs.some((obj) => obj.id === id);
+    let containsObj = objs.some((obj) => obj.id.includes(id));
     return containsObj;
   }
   return false;

@@ -59,7 +59,11 @@ function resetLocs() {
   robot.style.bottom = dst[1] + "px";
   robot_c = new Robot(ROBOT_ROOM);
 
-  id = ["coffee", "mail"][Math.floor(Math.random() * 2)];
+  if (id == "mail") {
+    id = "coffee";
+  } else {
+    id = "mail";
+  }
 
   const coffee = document.getElementById("coffee");
   const mail = document.getElementById("mail");
