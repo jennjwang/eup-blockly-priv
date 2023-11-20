@@ -1,4 +1,4 @@
-const toys = ["bear", "duck", "car", "toy4"];
+// const toys = ["bear", "duck", "car", "toy4"];
 
 function pick_up_toy() {
   // const toys = ["bear", "duck", "car", "toy4"];
@@ -15,10 +15,11 @@ function drop_toy() {
   if (robot_c.handsFree) {
     return;
   }
-  // const toys = ["bear", "duck", "car", "toy4"];
+  const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     if (robot_c.holding.id == toy) {
       drop_thing(toy);
+      console.log("dropped", toy.id);
       return;
     }
   }
