@@ -117,38 +117,6 @@ h1 {
   height: auto;
 }
 
-#bear {
-  z-index: 2;
-  left: 80px;
-  bottom: 90px;
-  width: 35px;
-  height: auto;
-  position: absolute;
-}
-
-#car {
-  z-index: 2;
-  left: 100px;
-  bottom: 90px;
-  width: 40px;
-  height: auto;
-  position: absolute;
-}
-
-#duck {
-  z-index: 2;
-  left: 120px;
-  bottom: 90px;
-  width: 35px;
-  height: auto;
-  position: absolute;
-}
-
-#toy-img {
-  width: 100%;
-  height: auto;
-}
-
 #coffee-img {
   width: 100%;
   height: auto;
@@ -161,7 +129,7 @@ h1 {
   width: 35px;
   height: auto;
   position: absolute;
-  display: hidden;
+  display: none;
 }
 
 #mail-img {
@@ -227,20 +195,6 @@ h1 {
 
 #runButton:hover {
   opacity: 1;
-}
-
-#person-img {
-  width: auto;
-  height: 120px;
-}
-
-#person {
-  z-index: 2;
-  left: 500px;
-  bottom: 600px;
-  width: 70px;
-  height: auto;
-  position: absolute;
 }
 
 #code {
