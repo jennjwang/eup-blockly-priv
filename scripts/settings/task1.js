@@ -114,9 +114,9 @@ function movePerson() {
   clearInterval(interval);
   console.log("moving person");
   interval = setInterval(function () {
-    // if (person.room != robot_c.room) {
-    movePersonHelper();
-    // }
+    if (person.room != robot_c.room) {
+      movePersonHelper();
+    }
   }, 5000);
 }
 
