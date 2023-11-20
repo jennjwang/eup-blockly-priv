@@ -544,8 +544,8 @@ if (url.searchParams.get("format") == "FULL_MDP") {
     `
   <xml>
   <block type="actions" deletable="false" x="100" y="80"></block>
-  <block type="goals" deletable="false" x="100" y="300"></block>
-  <block type="triggers" deletable="false" x="100" y="200"></block>
+  <block type="triggers" deletable="false" x="300" y="80"></block>
+  <block type="goals" deletable="false" x="100" y="200"></block>
   </xml>`
   );
 
