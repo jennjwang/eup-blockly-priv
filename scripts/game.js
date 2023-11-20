@@ -1,7 +1,7 @@
 // const toys = ["bear", "duck", "car", "toy4"];
 
 function pick_up_toy() {
-  // const toys = ["bear", "duck", "car", "toy4"];
+  const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     console.log(toy);
     if (robot_c.handsFree && is_thing_in_room(toy, robot_c.room)) {
@@ -171,6 +171,7 @@ function toy_not_in_room() {
 }
 
 function is_toy_in_room(room) {
+  const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     if (is_thing_in_room(toy, room)) {
       return true;
