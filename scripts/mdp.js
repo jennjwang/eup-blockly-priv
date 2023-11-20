@@ -728,6 +728,7 @@ function get_mdp_policy(code, taskNum) {
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
       "isRobotinRoomEvent('playroom');",
+      "isRobotinRoomEvent('porch');",
       "isPersonNotInRoomEvent();",
     ];
   }

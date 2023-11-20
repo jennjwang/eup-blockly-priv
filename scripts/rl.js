@@ -708,8 +708,12 @@ function get_policy(code, taskNum) {
   }
 
   if (taskNum == 1) {
-    person_locs = ["kitchen", "bedroom", "playroom", null];
+    person_locs = ["porch","kitchen", "bedroom", "playroom", null];
     block_list = [[]];
+    triggers = ["isRobotinRoomEvent('kitchen');",
+    "isRobotinRoomEvent('bedroom');",
+    "isRobotinRoomEvent('playroom');",
+    "isRobotinRoomEvent('porch');",]
     // triggers = ["isRobotinRoomEvent(\'kitchen\');", "isRobotinRoomEvent(\'bedroom\');", "isRobotinRoomEvent(\'playroom\');", "eHandsFree();", "toy_in_room();", "is_toy_in_room(\'bedroom\');", "is_toy_in_room(\'kitchen\');", "is_toy_in_room(\'playroom\');", "isPersonNotinRoomEvent();"]
   }
   if (taskNum == 2 || taskNum == "_") {
