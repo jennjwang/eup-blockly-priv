@@ -694,11 +694,17 @@ function get_policy(code, taskNum) {
   state_ids = {};
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null];
+  block_list = [[]];
 
   if (actions.includes("moveRobotToRandomRoom();")) {
     actions.push("moveRobotToRoom('kitchen');");
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
+  }
+
+  if (taskNum == 0) {
+    block_list = [[null, null, null]];
+    person_locs = [null];
   }
 
   if (taskNum == 1) {

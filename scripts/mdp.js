@@ -710,6 +710,17 @@ function get_mdp_policy(code, taskNum) {
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null]
 
+  if (taskNum == 0) {
+    block_list = [[null, null, null]];
+    // person_locs = [null];
+    triggers = [
+      "isRobotinRoomEvent('kitchen');",
+      "isRobotinRoomEvent('bedroom');",
+      "isRobotinRoomEvent('playroom');",
+      "isRobotinRoomEvent('porch');"
+    ];
+  }
+
   if (taskNum == 1) {
     person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
     block_list = [[]];
