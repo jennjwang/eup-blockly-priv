@@ -102,6 +102,7 @@ function moveThing(id, coor) {
 }
 
 function handsFull() {
+  // 'hands became full'
   // console.log("handsPrev", robot_c.handsPrev);
   // console.log("handsFree", robot_c.handsFree);
   if (robot_c.start) {
@@ -111,12 +112,7 @@ function handsFull() {
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
   }
-  if (robot_c.handsPrev) {
-    robot_c.handsPrev = robot_c.handsFree;
-    // console.log("hands are full");
-    return true;
-  }
-  return false;
+  return robot_c.handsPrev;
 }
 
 function handsFree() {
@@ -132,9 +128,9 @@ function handsFree() {
     return false;
   }
 
-  if (robot_c.handsFree) {
-    robot_c.handsPrev = robot_c.handsFree;
-  }
+  // if (robot_c.handsFree) {
+  //   robot_c.handsPrev = robot_c.handsFree;
+  // }
   return robot_c.handsFree;
 }
 
@@ -332,6 +328,7 @@ function resolveAfter3Seconds() {
 // room - kitchen, bedroom, playroom
 function moveRobotToRoom(room) {
   dst = rooms[room];
+  robot_c.handsPrev = robot_c.handsFree;
 
   if (robot_c.room == room) {
     x = dst[0];
