@@ -7,6 +7,7 @@ let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Thing(BEAR_ROOM, 80, 90, "bear");
 let car = new Thing(CAR_ROOM, 100, 90, "car");
+let toy4 = new Thing(CAR_ROOM, 100, 90, "toy4");
 let duck = new Thing(DUCK_ROOM, 120, 90, "duck");
 
 const KITCHEN = [130, 90];
@@ -22,7 +23,7 @@ const rooms = {
 };
 
 let toys_in_room = {
-  kitchen: [bear, car, duck],
+  kitchen: [bear, car, duck, toy4],
   playroom: [],
   bedroom: [],
   porch: [],
@@ -32,8 +33,8 @@ let end_states = "";
 let start_states = "";
 
 function randomizeToys() {
-  let toys = [bear, car, duck];
-  i = Math.floor(Math.random() * 2) + 2;
+  let toys = [bear, car, duck, toy4];
+  i = Math.floor(Math.random() * 3) + 2;
   console.log(i);
   return toys.slice(0, i);
 }
@@ -82,6 +83,7 @@ function resetLocs() {
   const bear_elt = document.getElementById("bear");
   const car_elt = document.getElementById("car");
   const duck_elt = document.getElementById("duck");
+  const toy4_elt = document.getElementById("toy4");
 
   if (toys.includes(bear)) {
     bear_elt.style.display = "block";
@@ -100,6 +102,15 @@ function resetLocs() {
     car = new Thing(CAR_ROOM, 100, 90, "car");
   } else {
     car_elt.style.display = "none";
+  }
+
+  if (toys.includes(toy4)) {
+    toy4_elt.style.display = "block";
+    toy4_elt.style.left = "100px";
+    toy4_elt.style.bottom = "90px";
+    toy4 = new Thing(CAR_ROOM, 100, 90, "toy4");
+  } else {
+    toy4_elt.style.display = "none";
   }
 
   if (toys.includes(duck)) {

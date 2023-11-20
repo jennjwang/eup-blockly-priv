@@ -272,6 +272,15 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function () {
+    return isRobotinAnyRoom();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotinAnyRoom",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function (thing) {
     drop_thing(thing);
   };

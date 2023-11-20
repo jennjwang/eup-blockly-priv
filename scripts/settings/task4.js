@@ -88,6 +88,8 @@ function resetLocs() {
   coffee_elt.style.bottom = "90px";
   coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 
+  toys_in_room = { kitchen: [coffee], playroom: [], bedroom: [], porch: [] };
+
   return "";
 }
 
