@@ -40,8 +40,8 @@ function find_state(
 
 function get_current_state(state_ids, taskNum) {
   person_location = null;
-  if (taskNum == 1) {
-    person_location = person.loc;
+  if (taskNum == 1 || taskNum == 4) {
+    person_location = person.room;
   }
 
   toy_whereabouts = [];
@@ -63,6 +63,14 @@ function get_current_state(state_ids, taskNum) {
   }
   if (all_objs.length < 3) {
     all_objs.push(null);
+  }
+
+  if (taskNum == 6) {
+    all_objs = [[], null, null];
+    for (var m in toy_whereabouts){
+        if (toy_whereabouts[m] == null){all_objs[0].push(null)}
+        else{all_objs[0].push(toy_whereabouts[m]["room"])}
+    }
   }
 
   held_obj = null;
@@ -103,8 +111,28 @@ function update(event) {
     console.log(check);
     // console.log("hi", code);
     // debugger;
-    code = run_rl(code, taskNum);
-    console.log("rl code", code);
+    // code = run_rl(code, taskNum);
+    // console.log("rl code", code);
+    if (taskNum == 1) {
+      out = run_rl(code, taskNum);
+      code = "while(true){" + out + "}";
+      // return;
+    } else {
+      [transition_table, state_ids] = run_rl(code, taskNum);
+      // console.log("mdp", code);
+      let current_state = get_current_state(state_ids, taskNum);
+      let prv_action = null;
+      let [cur_action, next_state, cur_val] = transition_table[current_state];
+
+      code = "";
+
+      while (cur_action != prv_action) {
+        code += cur_action;
+        prv_action = cur_action;
+        current_state = get_current_state(state_ids, taskNum);
+        [cur_action, next_state, cur_val] = transition_table[next_state];
+      }
+    }
   }
 
   if (url.searchParams.get("format") == "TAP") {
