@@ -589,7 +589,7 @@ Blockly.JavaScript["forever"] = function (block) {
   // console.log(Blockly.JavaScript.statementToCode(block, "input"));
   return `
   while (true) {
-    var randNum = Math.floor(Math.random() * 10);
+    var randNum = Math.floor(Math.random() * 20);
     var trigs = [];
     ${Blockly.JavaScript.statementToCode(block, "input")}
     if (trigs.length != 0) {
