@@ -1,24 +1,40 @@
 function pick_up_toy() {
-  if (robot_c.handsFree && is_thing_in_room("bear", robot_c.room)) {
-    pick_up_thing("bear");
-  } else if (robot_c.handsFree && is_thing_in_room("duck", robot_c.room)) {
-    pick_up_thing("duck");
-  } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
-    pick_up_thing("car");
+  const toys = ["bear", "duck", "car", "toy4"];
+  for (var toy of toys) {
+    console.log(toy);
+    if (robot_c.handsFree && is_thing_in_room(toy, robot_c.room)) {
+      pick_up_thing(toy);
+      return;
+    }
   }
+  // if (robot_c.handsFree && is_thing_in_room("bear", robot_c.room)) {
+  //   pick_up_thing("bear");
+  // } else if (robot_c.handsFree && is_thing_in_room("duck", robot_c.room)) {
+  //   pick_up_thing("duck");
+  // } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
+  //   pick_up_thing("car");
+  // } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
+  // }
 }
 
 function drop_toy() {
   if (robot_c.handsFree) {
     return;
   }
-  if (robot_c.holding.id == "bear") {
-    drop_thing("bear");
-  } else if (robot_c.holding.id == "duck") {
-    drop_thing("duck");
-  } else if (robot_c.holding.id == "car") {
-    drop_thing("car");
+  const toys = ["bear", "duck", "car", "toy4"];
+  for (var toy of toys) {
+    if (robot_c.holding.id == toy) {
+      drop_thing(toy);
+      return;
+    }
   }
+  // if (robot_c.holding.id == "bear") {
+  //   drop_thing("bear");
+  // } else if (robot_c.holding.id == "duck") {
+  //   drop_thing("duck");
+  // } else if (robot_c.holding.id == "car") {
+  //   drop_thing("car");
+  // }
 }
 
 // HELPER id - robot, bear, car, duck, person

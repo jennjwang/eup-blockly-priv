@@ -135,6 +135,15 @@ h1 {
   position: absolute;
 }
 
+#toy4 {
+  z-index: 3;
+  left: 100px;
+  bottom: 90px;
+  width: 40px;
+  height: auto;
+  position: absolute;
+}
+
 #duck {
   z-index: 3;
   left: 120px;
