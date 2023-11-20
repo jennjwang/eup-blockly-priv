@@ -7,14 +7,6 @@ function pick_up_toy() {
       return;
     }
   }
-  // if (robot_c.handsFree && is_thing_in_room("bear", robot_c.room)) {
-  //   pick_up_thing("bear");
-  // } else if (robot_c.handsFree && is_thing_in_room("duck", robot_c.room)) {
-  //   pick_up_thing("duck");
-  // } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
-  //   pick_up_thing("car");
-  // } else if (robot_c.handsFree && is_thing_in_room("car", robot_c.room)) {
-  // }
 }
 
 function drop_toy() {
@@ -28,13 +20,6 @@ function drop_toy() {
       return;
     }
   }
-  // if (robot_c.holding.id == "bear") {
-  //   drop_thing("bear");
-  // } else if (robot_c.holding.id == "duck") {
-  //   drop_thing("duck");
-  // } else if (robot_c.holding.id == "car") {
-  //   drop_thing("car");
-  // }
 }
 
 // HELPER id - robot, bear, car, duck, person
