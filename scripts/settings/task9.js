@@ -31,15 +31,21 @@ const rooms = {
   porch: PORCH,
 };
 
+let toys_in_room = {
+  kitchen: [],
+  playroom: [],
+  bedroom: [coffee],
+  porch: [],
+};
+
 function resetLocs() {
   end_states = `
   robot ended in ${robot_c.room}
-  person ended in ${person.room}
   coffee ended in ${coffee.room}`;
 
   start_states = `
   robot started in ${ROBOT_ROOM}
-  person started in ${PERSON_ROOM}`;
+  coffee started in ${coffee.room}`;
 
   clearInterval(interval);
   document.getElementById("start").innerHTML = start_states;
@@ -63,6 +69,12 @@ function resetLocs() {
   coffee_elt.style.left = "280px";
   coffee_elt.style.bottom = "320px";
   coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
+  toys_in_room = {
+    kitchen: [],
+    playroom: [],
+    bedroom: [coffee],
+    porch: [],
+  };
 
   return "";
 }
