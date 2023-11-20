@@ -104,6 +104,9 @@ function moveThing(id, coor) {
 function handsFull() {
   // console.log("handsPrev", robot_c.handsPrev);
   // console.log("handsFree", robot_c.handsFree);
+  if (robot_c.start) {
+    return false;
+  }
 
   if (robot_c.handsFree == robot_c.handsPrev) {
     return false;
