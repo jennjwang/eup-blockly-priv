@@ -67,9 +67,12 @@ function get_current_state(state_ids, taskNum) {
 
   if (taskNum == 6) {
     all_objs = [[], null, null];
-    for (var m in toy_whereabouts){
-        if (toy_whereabouts[m] == null){all_objs[0].push(null)}
-        else{all_objs[0].push(toy_whereabouts[m]["room"])}
+    for (var m in toy_whereabouts) {
+      if (toy_whereabouts[m] == null) {
+        all_objs[0].push(null);
+      } else {
+        all_objs[0].push(toy_whereabouts[m]["room"]);
+      }
     }
   }
 
