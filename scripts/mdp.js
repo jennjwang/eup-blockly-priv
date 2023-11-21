@@ -758,16 +758,16 @@ function get_mdp_policy(code, taskNum) {
       [null, null, "playroom", "kitchen"],
       [null, null, "playroom", "playroom"],
       [null, null, "kitchen", "kitchen", "kitchen"],
-      [null, null, "kitchen", "kitchen", "playroom"],
-      [null, null, "kitchen", "playroom", "playroom"],
+      [null, null, "playroom", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "kitchen"],
       [null, null, "playroom", "playroom", "playroom"],
       [null, null, "kitchen", "kitchen", "kitchen", "kitchen"],
-      [null, null, "kitchen", "kitchen", "kitchen", "playroom"],
-      [null, null, "kitchen", "kitchen", "playroom", "playroom"],
-      [null, null, "kitchen", "playroom", "playroom", "playroom"],
+      [null, null, "playroom", "kitchen", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "playroom", "kitchen"],
       [null, null, "playroom", "playroom", "playroom", "playroom"],
     ];
-    // person_locs = [null];
+    person_locs = [null];
     triggers = [
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
