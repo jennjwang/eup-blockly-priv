@@ -821,6 +821,7 @@ function get_rl_policy(code, taskNum) {
     actions.push("moveRobotToRoom('kitchen');");
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
+    actions.push("moveRobotToRoom('porch');");
     triggers = triggers.concat([
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
