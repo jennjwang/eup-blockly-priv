@@ -37,7 +37,7 @@ function simulator(state, action) {
   }
   if (action == "moveRobotToRandomRoom();") {
     room = Math.floor(Math.random() * 5 + 1);
-    test = ["bedroom", "kitchen", "playroom"][room];
+    test = ["bedroom", "kitchen", "playroom", "porch"][room];
     copiedState.robot_position = test;
   }
   if (action == "moveRobotToRoom('porch');") {
@@ -745,6 +745,7 @@ function get_mdp_policy(code, taskNum) {
       "is_toy_in_room('bedroom');",
       "is_toy_in_room('kitchen');",
       "is_toy_in_room('playroom');",
+      "is_toy_in_room('porch');",
       "isRobotinRoomEvent('porch');",
     ];
   }

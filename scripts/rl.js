@@ -700,40 +700,14 @@ function get_rl_policy(code, taskNum) {
   if (taskNum == 0) {
     block_list = [[null, null, null]];
     // person_locs = [null];
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');"
-    ];
   }
 
   if (taskNum == 1) {
-    person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
     block_list = [[]];
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "isPersonNotInRoomEvent();",
-    ];
   }
   if (taskNum == 2 || taskNum == "_") {
     block_list = [[null, null, "playroom"], [null, null, null], [null, null, "bedroom"], [null, null, "kitchen"], [null, null, "porch"]];
     // person_locs = [null];
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "toy_in_room();",
-      "is_toy_in_room('bedroom');",
-      "is_toy_in_room('kitchen');",
-      "is_toy_in_room('playroom');",
-      "isRobotinRoomEvent('porch');",
-    ];
   }
   if (taskNum == 3) {
     block_list = [
@@ -745,28 +719,16 @@ function get_rl_policy(code, taskNum) {
       [null, null, "playroom", "kitchen"],
       [null, null, "playroom", "playroom"],
       [null, null, "kitchen", "kitchen", "kitchen"],
-      [null, null, "kitchen", "kitchen", "playroom"],
-      [null, null, "kitchen", "playroom", "playroom"],
+      [null, null, "playroom", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "kitchen"],
       [null, null, "playroom", "playroom", "playroom"],
       [null, null, "kitchen", "kitchen", "kitchen", "kitchen"],
-      [null, null, "kitchen", "kitchen", "kitchen", "playroom"],
-      [null, null, "kitchen", "kitchen", "playroom", "playroom"],
-      [null, null, "kitchen", "playroom", "playroom", "playroom"],
+      [null, null, "playroom", "kitchen", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "kitchen", "kitchen"],
+      [null, null, "playroom", "playroom", "playroom", "kitchen"],
       [null, null, "playroom", "playroom", "playroom", "playroom"],
     ];
     // person_locs = [null];
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "toy_in_room();",
-      "is_toy_in_room('bedroom');",
-      "is_toy_in_room('kitchen');",
-      "is_toy_in_room('playroom');",
-      "is_toy_in_room('porch');",
-    ];
   }
   if (taskNum == 4) {
     block_list = [
@@ -777,21 +739,7 @@ function get_rl_policy(code, taskNum) {
       [null, null, null],
 
     ];
-    person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "toy_in_room();",
-      "isPersonNotInRoomEvent();",
-      "is_coffee_in_room('bedroom');",
-      "is_coffee_in_room('kitchen');",
-      "is_coffee_in_room('playroom');",
-      "is_coffee_in_room('porch');",
-      "thing_in_room('coffee');",
-    ];
+    // person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
   }
   
   if (taskNum == 6) {
@@ -809,19 +757,6 @@ function get_rl_policy(code, taskNum) {
         }
       }
     }
-
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "is_mail_in_room('bedroom');",
-      "is_mail_in_room('kitchen');",
-      "is_mail_in_room('playroom');",
-      "is_mail_in_room('porch');",
-      "thing_in_room('mail');",
-    ];
   }
 
   if (taskNum == 5 || taskNum == 7 || taskNum == 8) {
@@ -833,29 +768,6 @@ function get_rl_policy(code, taskNum) {
         block_list.push([ROOMS[r1], ROOMS[r2], null]);
       }
     }
-
-    triggers = [
-      "toy_in_room();",
-      "is_toy_in_room('bedroom');",
-      "is_toy_in_room('kitchen');",
-      "is_toy_in_room('playroom');",
-      "is_toy_in_room('porch');",
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "is_mail_in_room('bedroom');",
-      "is_mail_in_room('kitchen');",
-      "is_mail_in_room('playroom');",
-      "is_mail_in_room('porch');",
-      "thing_in_room('mail');",
-      "is_coffee_in_room('bedroom');",
-      "is_coffee_in_room('kitchen');",
-      "is_coffee_in_room('playroom');",
-      "is_coffee_in_room('porch');",
-      "thing_in_room('coffee');",
-    ];
   }
 
   if (taskNum == 9) {
@@ -865,26 +777,57 @@ function get_rl_policy(code, taskNum) {
     for (var r1 in ROOMS) {
       block_list.push([null, ROOMS[r1], null]);
     }
-
-    triggers = [
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');",
-      "eHandsFree();",
-      "is_coffee_in_room('bedroom');",
-      "is_coffee_in_room('kitchen');",
-      "is_coffee_in_room('playroom');",
-      "is_coffee_in_room('porch');",
-      "thing_in_room('coffee');",
-    ];
   }
 
   id = 0;
   //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
-  holding = [null, "toy", "mail", "coffee"];
+  if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
+    holding = [null, "obj"];
+  }else{
+    holding = [null]
+  }
+
+  if (triggers.includes('toy_in_room();') || triggers.includes('toy_not_in_room();')){
+    holding.push("toy")
+  }
+  if (triggers.includes("thing_in_room('coffee');") || 
+      triggers.includes("thing_not_in_room('coffee');") || 
+      triggers.includes("is_coffee_in_room('kitchen');") || 
+      triggers.includes("is_coffee_in_room('bedroom');") || 
+      triggers.includes("is_coffee_in_room('porch');") || 
+      triggers.includes("is_coffee_in_room('playroom');") 
+      )
+  {
+    holding.push("coffee")
+  }
+  if (triggers.includes("thing_in_room('mail');") || 
+      triggers.includes("thing_not_in_room('mail');") || 
+      triggers.includes("is_mail_in_room('kitchen');") || 
+      triggers.includes("is_mail_in_room('bedroom');") || 
+      triggers.includes("is_mail_in_room('porch');") || 
+      triggers.includes("is_mail_in_room('playroom');") 
+      )
+  {
+    holding.push("mail")
+  }
+  if (triggers.includes('isPersonNotInRoomEvent();') || 
+      triggers.includes('isPersonInRoomEvent();')){
+    person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
+  }
+  
+  if (actions.includes("moveRobotToRandomRoom();")) {
+    actions.push("moveRobotToRoom('kitchen');");
+    actions.push("moveRobotToRoom('bedroom');");
+    actions.push("moveRobotToRoom('playroom');");
+    triggers = triggers.concat([
+      "isRobotinRoomEvent('kitchen');",
+      "isRobotinRoomEvent('bedroom');",
+      "isRobotinRoomEvent('playroom');",
+      "isRobotinRoomEvent('porch');"
+    ]);
+  }
 
   for (room in these_rooms) {
     for (obj in holding) {
@@ -895,7 +838,7 @@ function get_rl_policy(code, taskNum) {
             blocks: block_list[block],
             holding: holding[obj],
             person: person_locs[person_loc],
-          };
+          };            
           high_prior = goal[0];
           med_prior = goal[1];
           low_prior = goal[2];
