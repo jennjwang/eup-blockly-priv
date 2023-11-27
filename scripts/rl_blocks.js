@@ -450,7 +450,7 @@ Blockly.JavaScript["out_of"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "my hands became free",
+    message0: "I put down an item",
     output: "Boolean",
     colour: 260,
   },
@@ -463,7 +463,7 @@ Blockly.JavaScript["hands_free"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
-    message0: "my hands became full",
+    message0: "I picked up an item",
     output: "Boolean",
     colour: 260,
   },
@@ -1062,7 +1062,7 @@ Blockly.JavaScript["e_person_in_room"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_free",
-    message0: "my hands are free",
+    message0: "my hands are empty",
     // output: "Boolean",
     previousStatement: [
       "e_out_of",
@@ -1449,7 +1449,7 @@ Blockly.JavaScript["trigger_in_the"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "trigger_hands_free",
-    message0: "Are my hands free?",
+    message0: "Are my hands empty?",
     previousStatement: [
       "trigger_toy_in_room",
       "trigger_out_of",

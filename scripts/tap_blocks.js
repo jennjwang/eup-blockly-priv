@@ -586,7 +586,7 @@ Blockly.JavaScript["hands_full"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "I dropped off an item",
+    message0: "I put down an item",
     output: "hands_free",
     colour: 260,
   },
@@ -684,7 +684,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_hands_free",
-    message0: "my hands are free",
+    message0: "my hands are empty",
     output: "Boolean",
     colour: 160,
   },
