@@ -547,8 +547,8 @@ if (url.searchParams.get("format") == "FULL_MDP") {
     `
   <xml>
   <block type="actions" deletable="false" x="100" y="80"></block>
-  <block type="triggers" deletable="false" x="300" y="80"></block>
-  <block type="goals" deletable="false" x="100" y="200"></block>
+  <block type="triggers" deletable="false" x="320" y="80"></block>
+  <block type="goals" deletable="false" x="100" y="280"></block>
   </xml>`
   );
 
@@ -558,14 +558,6 @@ if (url.searchParams.get("format") == "FULL_MDP") {
   document.getElementById("blockly-2").style.display = "none";
   document.getElementById("blockly-3").style.display = "none";
   document.getElementById("blockly-7").style.display = "none";
-} else if (url.searchParams.get("format") == "SEQ") {
-  document.getElementById("blockly-0").style.display = "none";
-  document.getElementById("blockly-1").style.display = "";
-  document.getElementById("blockly-2").style.display = "none";
-  document.getElementById("blockly-3").style.display = "";
-  document.getElementById("blockly-4").style.display = "none";
-  document.getElementById("blockly-5").style.display = "none";
-  document.getElementById("blockly-6").style.display = "none";
 } else if (url.searchParams.get("format") == "TAP") {
   // adding if-do block for tap
   xml = Blockly.Xml.textToDom(
@@ -601,6 +593,13 @@ if (url.searchParams.get("format") == "FULL_MDP") {
   document.getElementById("blockly-6").style.display = "none";
   document.getElementById("blockly-7").style.display = "none";
 } else if (url.searchParams.get("format") == "SEQ") {
+  xml = Blockly.Xml.textToDom(
+    `
+  <xml>
+  <block type="start_block" deletable="false" x="100" y="50"></block>
+  </xml>`
+  );
+
   document.getElementById("blockly-0").style.display = "none";
   document.getElementById("blockly-1").style.display = "";
   document.getElementById("blockly-2").style.display = "none";

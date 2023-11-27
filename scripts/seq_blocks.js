@@ -3,6 +3,19 @@
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "start_block",
+    message0: "when the program starts",
+    nextStatement: null,
+    colour: 225,
+  },
+]);
+
+Blockly.JavaScript["start_block"] = function () {
+  return "";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "to_random_room",
     message0: "go to a random room",
     previousStatement: [

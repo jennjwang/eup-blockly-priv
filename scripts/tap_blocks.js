@@ -654,6 +654,19 @@ Blockly.JavaScript["inSameRoom"] = function () {
 
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "start_block",
+    message0: "when the program starts",
+    nextStatement: null,
+    colour: 225,
+  },
+]);
+
+Blockly.JavaScript["start_block"] = function () {
+  return "";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "forever",
     message0: "Rules %1",
     args0: [
