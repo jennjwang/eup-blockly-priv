@@ -625,9 +625,13 @@ window.onload = function () {
     console.log(testScript);
     testScript.remove();
     testScript.parentNode.removeChild(testScript);
-  } else {
+  } else if (url.searchParams.get("format") == "TAP") {
     var block_script = document.createElement("script");
     block_script.setAttribute("src", "scripts/tap_blocks.js");
+    document.body.appendChild(block_script);
+  } else {
+    var block_script = document.createElement("script");
+    block_script.setAttribute("src", "scripts/seq_blocks.js");
     document.body.appendChild(block_script);
   }
 };
