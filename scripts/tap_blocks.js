@@ -372,7 +372,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
       },
     ],
-    output: "Boolean",
+    output: "out_of",
     colour: 260,
   },
 ]);
