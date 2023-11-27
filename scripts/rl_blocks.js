@@ -373,37 +373,33 @@ Blockly.JavaScript["toy_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
-    message0: "I arrived at the %1",
+    message0: "I arrived at %1",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
+          ["the kitchen", "kitchen"],
+          ["the bedroom", "bedroom"],
+          ["the playroom", "playroom"],
+          ["the porch", "porch"],
+          ["any room", "any room"],
         ],
       },
     ],
-    output: "Boolean",
-    colour: 260,
-  },
-]);
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "in_any",
-    message0: "I arrived at a room",
-    output: "in_any",
+    output: "in_the",
     colour: 260,
   },
 ]);
 
 Blockly.JavaScript.PRECEDENCE = 0;
 
-Blockly.JavaScript["in_any"] = function (block) {
-  return ["isRobotinAnyRoom()", Blockly.JavaScript.PRECEDENCE];
+Blockly.JavaScript["in_the"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "any room") {
+    return "isRobotinAnyRoom()";
+  }
+  return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -444,13 +440,6 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["e_person_not_in_room"] = function () {
   return "isPersonNotInRoomEvent()";
-};
-
-// Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["in_the"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return ["isRobotinRoomEvent(" + value + ")", Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript["out_of"] = function (block) {

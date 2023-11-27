@@ -473,16 +473,17 @@ Blockly.JavaScript["e_mail_not_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "in_the",
-    message0: "I arrived at the %1",
+    message0: "I arrived at %1",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
+          ["the kitchen", "kitchen"],
+          ["the bedroom", "bedroom"],
+          ["the playroom", "playroom"],
+          ["the porch", "porch"],
+          ["any room", "any room"],
         ],
       },
     ],
@@ -495,23 +496,26 @@ Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "any room") {
+    return "isRobotinAnyRoom()";
+  }
   return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
 
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "in_any",
-    message0: "I arrived at a room",
-    output: "in_any",
-    colour: 260,
-  },
-]);
+// Blockly.defineBlocksWithJsonArray([
+//   {
+//     type: "in_any",
+//     message0: "I arrived at a room",
+//     output: "in_any",
+//     colour: 260,
+//   },
+// ]);
 
-Blockly.JavaScript.PRECEDENCE = 0;
+// Blockly.JavaScript.PRECEDENCE = 0;
 
-Blockly.JavaScript["in_any"] = function (block) {
-  return ["isRobotinAnyRoom()", Blockly.JavaScript.PRECEDENCE];
-};
+// Blockly.JavaScript["in_any"] = function (block) {
+//   return ["isRobotinAnyRoom()", Blockly.JavaScript.PRECEDENCE];
+// };
 
 Blockly.JavaScript["out_of"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
@@ -569,7 +573,7 @@ Blockly.JavaScript["e_person_not_in_room"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_full",
-    message0: "my hands became full",
+    message0: "I picked up an item",
     output: "hands_full",
     colour: 260,
   },
@@ -582,7 +586,7 @@ Blockly.JavaScript["hands_full"] = function () {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "hands_free",
-    message0: "my hands became free",
+    message0: "I dropped off an item",
     output: "hands_free",
     colour: 260,
   },
