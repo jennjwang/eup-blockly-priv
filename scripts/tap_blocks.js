@@ -16,16 +16,6 @@ Blockly.defineBlocksWithJsonArray([
       "drop_mail",
     ],
     colour: 330,
-    // nextStatement: [
-    //   "pick_up_toy",
-    //   "pick_up_coffee",
-    //   "drop_coffee",
-    //   "to_room",
-    //   "to_random_room",
-    //   "drop_toy",
-    //   "pick_up_mail",
-    //   "drop_mail",
-    // ],
   },
 ]);
 
@@ -47,16 +37,6 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
-    // nextStatement: [
-    //   "pick_up_toy",
-    //   "pick_up_coffee",
-    //   "drop_coffee",
-    //   "to_room",
-    //   "to_random_room",
-    //   "drop_toy",
-    //   "pick_up_mail",
-    //   "drop_mail",
-    // ],
     colour: 330,
   },
 ]);
@@ -79,16 +59,6 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
-    // nextStatement: [
-    //   "pick_up_toy",
-    //   "pick_up_coffee",
-    //   "drop_coffee",
-    //   "to_room",
-    //   "to_random_room",
-    //   "drop_toy",
-    //   "pick_up_mail",
-    //   "drop_mail",
-    // ],
     colour: 330,
   },
 ]);
@@ -138,6 +108,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
+          ["toy", "toy"],
           ["coffee", "coffee"],
           ["mail", "mail"],
         ],
@@ -153,22 +124,16 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
-    // nextStatement: [
-    //   "pick_up_toy",
-    //   "pick_up_coffee",
-    //   "drop_coffee",
-    //   "to_room",
-    //   "to_random_room",
-    //   "drop_toy",
-    //   "pick_up_mail",
-    //   "drop_mail",
-    // ],
+
     colour: 330,
   },
 ]);
 
 Blockly.JavaScript["pick_up_coffee_mail"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "toy") {
+    return "pick_up_toy(); \n\t";
+  }
   return "pick_up_thing(" + value + ");\n\t";
 };
 
@@ -181,6 +146,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
+          ["toy", "toy"],
           ["coffee", "coffee"],
           ["mail", "mail"],
         ],
@@ -196,22 +162,15 @@ Blockly.defineBlocksWithJsonArray([
       "pick_up_mail",
       "drop_mail",
     ],
-    // nextStatement: [
-    //   "pick_up_toy",
-    //   "pick_up_coffee",
-    //   "drop_coffee",
-    //   "to_room",
-    //   "to_random_room",
-    //   "drop_toy",
-    //   "pick_up_mail",
-    //   "drop_mail",
-    // ],
     colour: 330,
   },
 ]);
 
 Blockly.JavaScript["drop_coffee_mail"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "toy") {
+    return "drop_toy();\n\t";
+  }
   return "drop_thing(" + value + ");\n\t";
 };
 
