@@ -93,11 +93,14 @@ function movePersonHelper() {
   // }
   // shuffleArray(temp_rooms);
   // i = Math.floor(Math.random() * 3);
-  dst = rooms[all_rooms[Math.floor(Math.random() * all_rooms.length)]];
-  console.log(dst, 'here');
+  let rand_room = all_rooms[Math.floor(Math.random() * all_rooms.length)]
+  dst = rooms[rand_room];
+  person.setRoom(rand_room);
+
   let bool = Math.floor(Math.random() * 2);
   if (bool==1) {
     dst = rooms[robot_c.room];
+    person.setRoom(robot_c.room);
   }
   console.log(dst);
   console.log(bool);
@@ -114,7 +117,7 @@ function movePersonHelper() {
   //   x -= 70;
   // }
   moveThing("person", [x + 20, y]);
-  person.setRoom(robot_c.room);
+  
   // moveThing("person", [x + 70, y]);
   // person.setRoom(temp_rooms[i]);
 }
