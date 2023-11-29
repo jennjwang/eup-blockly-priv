@@ -374,7 +374,7 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
   if (value == "'any room'") {
-    return "isRobotinAnyRoom()";
+    return ["isRobotinAnyRoom()", Blockly.JavaScript.PRECEDENCE];
   }
   return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
 };
