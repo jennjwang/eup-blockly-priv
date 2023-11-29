@@ -86,20 +86,21 @@ function shuffleArray(array) {
 let interval;
 
 function movePersonHelper() {
-  // let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
+  let all_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   // const index = temp_rooms.indexOf(person.room);
   // if (index > -1) {
   //   temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
   // }
   // shuffleArray(temp_rooms);
   // i = Math.floor(Math.random() * 3);
-  // dst = rooms[temp_rooms[i]];
-
-  // let bool = Math.floor(Math.random() * 2);
-  // if (bool) {
-  dst = rooms[robot_c.room];
-  // }
-
+  dst = rooms[all_rooms[Math.floor(Math.random() * all_rooms.length)]];
+  console.log(dst, 'here');
+  let bool = Math.floor(Math.random() * 2);
+  if (bool==1) {
+    dst = rooms[robot_c.room];
+  }
+  console.log(dst);
+  console.log(bool);
   x = dst[0];
   y = dst[1];
 
