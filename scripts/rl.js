@@ -37,7 +37,7 @@ function simulator(state, action) {
   }
   if (action == "moveRobotToRandomRoom();") {
     room = Math.floor(Math.random() * 5 + 1);
-    test = ["bedroom", "kitchen", "playroom"][room];
+    test = ["bedroom", "kitchen", "playroom", "porch"][room];
     copiedState.robot_position = test;
   }
   if (action == "moveRobotToRoom('porch');") {
