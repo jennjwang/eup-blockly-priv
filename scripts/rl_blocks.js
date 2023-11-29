@@ -20,243 +20,6 @@ Blockly.JavaScript["drop_toy"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "to_random_room",
-    message0: "go to a random room",
-    previousStatement: [
-      "pick_up_toy",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "actions",
-    ],
-    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["to_random_room"] = function (block) {
-  this.setTooltip(function () {
-    return "Add a number to variable";
-  });
-  return "moveRobotToRandomRoom();\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "pick_up_coffee",
-    message0: "pick up the coffee",
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["pick_up_coffee"] = function (block) {
-  return "pick_up_thing('coffee');\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "pick_up_coffee_mail",
-    message0: "pick up the %1",
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "VALUE",
-        options: [
-          ["coffee", "coffee"],
-          ["mail", "mail"],
-        ],
-      },
-    ],
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["pick_up_coffee_mail"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "pick_up_thing(" + value + ");\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "drop_coffee_mail",
-    message0: "put down the %1",
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "VALUE",
-        options: [
-          ["coffee", "coffee"],
-          ["mail", "mail"],
-        ],
-      },
-    ],
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["drop_coffee_mail"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "drop_thing(" + value + ");\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "drop_coffee",
-    message0: "put down the coffee",
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["drop_coffee"] = function () {
-  return "drop_thing('coffee');\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "pick_up_mail",
-    message0: "pick up the mail",
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["pick_up_mail"] = function (block) {
-  return "pick_up_thing('mail');\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "drop_mail",
-    message0: "put down the mail",
-    previousStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    nextStatement: [
-      "pick_up_toy",
-      "pick_up_coffee",
-      "drop_coffee",
-      "to_room",
-      "to_random_room",
-      "drop_toy",
-      "pick_up_mail",
-      "drop_mail",
-    ],
-    colour: 330,
-  },
-]);
-
-Blockly.JavaScript["drop_mail"] = function () {
-  return "drop_thing('mail');\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
     type: "pick_up_toy",
     message0: "pick up the toy",
     previousStatement: [
@@ -273,6 +36,152 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["pick_up_toy"] = function (block) {
   return "pick_up_toy();\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "trigger_toy_in_room",
+    message0: "Is there a toy in the current room?",
+    previousStatement: [
+      "trigger_toy_in_room",
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_hands_free",
+      "trigger_person_in_room",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_any",
+      "trigger_hands_full",
+      "triggers",
+    ],
+    nextStatement: [
+      "trigger_toy_in_room",
+      "trigger_out_of",
+      "trigger_in_the",
+      "trigger_hands_free",
+      "trigger_person_in_room",
+      "trigger_coffee_in_room",
+      "trigger_mail_in_room",
+      "trigger_coffee_in_any",
+      "trigger_hands_full",
+    ],
+    colour: 210,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
+  return "toy_in_room();\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "drop_coffee_mail",
+    message0: "put down the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["toy", "toy"],
+          ["coffee", "coffee"],
+          ["mail", "mail"],
+        ],
+      },
+    ],
+    previousStatement: [
+      "drop_coffee_mail",
+      "pick_up_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      ,
+    ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee_mail",
+      "to_room",
+      "to_random_room",
+      "pick_up_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["drop_coffee_mail"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "'toy'") {
+    return "drop_toy();\n\t";
+  }
+  return "drop_thing(" + value + ");\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "pick_up_coffee_mail",
+    message0: "pick up the %1",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
+          ["toy", "toy"],
+          ["coffee", "coffee"],
+          ["mail", "mail"],
+        ],
+      },
+    ],
+    previousStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "pick_up_mail",
+      "drop_mail",
+    ],
+    nextStatement: [
+      "pick_up_toy",
+      "pick_up_coffee",
+      "drop_coffee_mail",
+      "to_room",
+      "to_random_room",
+      "pick_up_mail",
+    ],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["pick_up_coffee_mail"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "'toy'") {
+    return "pick_up_toy();\n\t";
+  }
+  return "pick_up_thing(" + value + ");\n\t";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "to_random_room",
+    message0: "go to a random room",
+    previousStatement: [
+      "pick_up_toy",
+      "to_room",
+      "to_random_room",
+      "drop_toy",
+      "actions",
+    ],
+    nextStatement: ["pick_up_toy", "to_room", "to_random_room", "drop_toy"],
+    colour: 330,
+  },
+]);
+
+Blockly.JavaScript["to_random_room"] = function (block) {
+  return "moveRobotToRandomRoom();\n\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -379,11 +288,11 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
+          ["any room", "any room"],
           ["the kitchen", "kitchen"],
           ["the bedroom", "bedroom"],
           ["the playroom", "playroom"],
           ["the porch", "porch"],
-          ["any room", "any room"],
         ],
       },
     ],
@@ -400,46 +309,6 @@ Blockly.JavaScript["in_the"] = function (block) {
     return "isRobotinAnyRoom()";
   }
   return ["isRobotinRoom(" + value + ")", Blockly.JavaScript.PRECEDENCE];
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_person_not_in_room",
-    message0: "a person is not in the room",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-      "e_mail_in_room",
-      "e_mail_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript["e_person_not_in_room"] = function () {
-  return "isPersonNotInRoomEvent()";
 };
 
 Blockly.JavaScript["out_of"] = function (block) {
@@ -615,8 +484,6 @@ Blockly.JavaScript["e_thing_not_in_room"] = function (block) {
     return "isPersonNotInRoomEvent()";
   }
 };
-
-
 
 Blockly.defineBlocksWithJsonArray([
   {
@@ -827,105 +694,20 @@ Blockly.JavaScript["e_toy_in_room"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "e_coffee_in_room",
-    message0: "there is coffee in the room",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-      "e_mail_in_room",
-      "e_mail_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["e_coffee_in_room"] = function (block) {
-  return "thing_in_room('coffee')\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_coffee_in_any",
-    message0: "there is coffee in the %1",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-      "e_mail_in_room",
-      "e_mail_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
+    type: "e_thing_in_room",
+    message0: "there is %1 is in the room",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
+          ["a toy", "toy"],
+          ["a coffee", "coffee"],
+          ["a person", "person"],
+          ["mail", "mail"],
         ],
       },
     ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["e_coffee_in_any"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "is_coffee_in_room(" + value + ")\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_mail_in_any",
-    message0: "there is mail in the %1",
     previousStatement: [
       "e_out_of",
       "e_in_the",
@@ -954,33 +736,41 @@ Blockly.defineBlocksWithJsonArray([
       "e_coffee_in_room",
       "e_coffee_not_in_room",
     ],
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_thing_in_room"] = function (block) {
+  let value = block.getFieldValue("VALUE");
+  if (value == "toy") {
+    return "toy_in_room()";
+  } else if (value == "coffee") {
+    return "thing_in_room('coffee')\t";
+  } else if (value == "mail") {
+    return "thing_in_room('mail')\t";
+  } else if (value == "person") {
+    return "isPersonInRoomEvent()\t";
+  }
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: "e_thing_not_in_room",
+    message0: "there is not %1 in the room",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
+          ["a toy", "toy"],
+          ["coffee", "coffee"],
+          ["a person", "person"],
+          ["mail", "mail"],
         ],
       },
     ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["e_mail_in_any"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "is_mail_in_room(" + value + ")\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_mail_in_room",
-    message0: "there is mail in the room",
     previousStatement: [
       "e_out_of",
       "e_in_the",
@@ -1015,89 +805,17 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript.PRECEDENCE = 0;
 
-Blockly.JavaScript["e_mail_in_room"] = function (block) {
-  return "thing_in_room('mail')\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_mail_not_in_room",
-    message0: "there is no mail in the room",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-      "e_mail_in_room",
-      "e_mail_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["e_mail_not_in_room"] = function (block) {
-  return "thing_not_in_room('mail')\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_coffee_not_in_room",
-    message0: "there is no coffee in the room",
-    // output: "Boolean",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript["e_coffee_not_in_room"] = function (block) {
-  return "thing_not_in_room('coffee')\t";
+Blockly.JavaScript["e_thing_not_in_room"] = function (block) {
+  let value = block.getFieldValue("VALUE");
+  if (value == "toy") {
+    return "toy_not_in_room\t";
+  } else if (value == "coffee") {
+    return "thing_not_in_room('coffee')\t";
+  } else if (value == "mail") {
+    return "thing_not_in_room('mail')\t";
+  } else if (value == "person") {
+    return "isPersonNotInRoomEvent()";
+  }
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -1150,45 +868,6 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript["e_in_the"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
   return "isRobotinRoomEvent(" + value + ")\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_person_in_room",
-    message0: "a person is in the room",
-    // output: "Boolean",
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript["e_person_in_room"] = function () {
-  return "isPersonInRoomEvent()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -1273,182 +952,20 @@ Blockly.JavaScript["e_hands_full"] = function (block) {
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: "trigger_toy_in_room",
-    message0: "Is there a toy in the current room?",
-    previousStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-      "triggers",
-    ],
-    nextStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-    ],
-    colour: 210,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
-  return "toy_in_room();\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "trigger_coffee_in_room",
-    message0: "Is there coffee in the current room?",
-    previousStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-      "triggers",
-    ],
-    nextStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-    ],
-    colour: 210,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["trigger_coffee_in_room"] = function (block) {
-  return "thing_in_room('coffee');\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "trigger_coffee_in_any",
-    message0: "Is there coffee in the %1?",
-    previousStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-      "triggers",
-    ],
-    nextStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-    ],
+    type: "trigger_thing_in_room",
+    message0: "Is there %1 in the current room?",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
+          ["a toy", "toy"],
+          ["a coffee", "coffee"],
+          ["a person", "person"],
+          ["mail", "mail"],
         ],
       },
     ],
-    colour: 210,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["trigger_coffee_in_any"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "is_coffee_in_room(" + value + ")\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "trigger_mail_in_any",
-    message0: "Is there mail in the %1?",
-    previousStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-      "triggers",
-    ],
-    nextStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-    ],
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "VALUE",
-        options: [
-          ["kitchen", "kitchen"],
-          ["bedroom", "bedroom"],
-          ["playroom", "playroom"],
-          ["porch", "porch"],
-        ],
-      },
-    ],
-    colour: 210,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["trigger_mail_in_any"] = function (block) {
-  let value = "'" + block.getFieldValue("VALUE") + "'";
-  return "is_mail_in_room(" + value + ")\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "trigger_mail_in_room",
-    message0: "Is there mail in the current room?",
     previousStatement: [
       "trigger_toy_in_room",
       "trigger_out_of",
@@ -1478,8 +995,17 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript.PRECEDENCE = 0;
 
-Blockly.JavaScript["trigger_mail_in_room"] = function (block) {
-  return "thing_in_room('mail');\n\t";
+Blockly.JavaScript["trigger_thing_in_room"] = function (block) {
+  let value = block.getFieldValue("VALUE");
+  if (value == "toy") {
+    return "toy_in_room();\n\t";
+  } else if (value == "coffee") {
+    return "thing_in_room('coffee')\n\t";
+  } else if (value == "mail") {
+    return "thing_in_room('mail')\n\t";
+  } else if (value == "person") {
+    return "isPersonInRoomEvent();\n\t";
+  }
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -1646,41 +1172,6 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["trigger_hands_full"] = function (block) {
   return "eHandsFull();\n\t";
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "trigger_person_in_room",
-    message0: "Is there a person in the current room?",
-    previousStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-      "triggers",
-    ],
-    nextStatement: [
-      "trigger_toy_in_room",
-      "trigger_out_of",
-      "trigger_in_the",
-      "trigger_hands_free",
-      "trigger_person_in_room",
-      "trigger_coffee_in_room",
-      "trigger_mail_in_room",
-      "trigger_coffee_in_any",
-      "trigger_hands_full",
-    ],
-    colour: 210,
-  },
-]);
-
-Blockly.JavaScript["trigger_person_in_room"] = function (block) {
-  return "isPersonInRoomEvent();\n\t";
 };
 
 // workspace blocks
