@@ -507,11 +507,11 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
+          ["any room", "any room"],
           ["the kitchen", "kitchen"],
           ["the bedroom", "bedroom"],
           ["the playroom", "playroom"],
           ["the porch", "porch"],
-          ["any room", "any room"],
         ],
       },
     ],
