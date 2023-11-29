@@ -1,5 +1,48 @@
 Blockly.defineBlocksWithJsonArray([
   {
+    type: "e_toy_not_in_room",
+    message0: "a toy is not in the room",
+    // output: "Boolean",
+    previousStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+      "e_mail_in_room",
+      "e_mail_not_in_room",
+    ],
+    nextStatement: [
+      "e_out_of",
+      "e_in_the",
+      "e_person_in_room",
+      "e_hands_free",
+      "e_hands_full",
+      "e_toy_in_room",
+      "is_toy_in_room",
+      "e_person_not_in_room",
+      "e_toy_not_in_room",
+      "e_coffee_in_room",
+      "e_coffee_not_in_room",
+    ],
+    colour: 160,
+  },
+]);
+
+Blockly.JavaScript.PRECEDENCE = 0;
+
+Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
+  return "toy_not_in_room()\t\n";
+};
+
+Blockly.defineBlocksWithJsonArray([
+  {
     type: "drop_toy",
     message0: "put down the toy",
     previousStatement: [
@@ -475,13 +518,13 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["e_thing_not_in_room"] = function (block) {
   let value = block.getFieldValue("VALUE");
   if (value == "toy") {
-    return "toy_not_in_room()";
+    return "toy_not_in_room()\t\n";
   } else if (value == "coffee") {
-    return "thing_not_in_room('coffee')";
+    return "thing_not_in_room('coffee')\t";
   } else if (value == "mail") {
-    return "thing_not_in_room('mail')";
+    return "thing_not_in_room('mail')\t";
   } else if (value == "person") {
-    return "isPersonNotInRoomEvent()";
+    return "isPersonNotInRoomEvent()\t";
   }
 };
 
@@ -752,69 +795,6 @@ Blockly.JavaScript["e_thing_in_room"] = function (block) {
     return "thing_in_room('mail')\t";
   } else if (value == "person") {
     return "isPersonInRoomEvent()\t";
-  }
-};
-
-Blockly.defineBlocksWithJsonArray([
-  {
-    type: "e_thing_not_in_room",
-    message0: "there is not %1 in the room",
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "VALUE",
-        options: [
-          ["a toy", "toy"],
-          ["coffee", "coffee"],
-          ["a person", "person"],
-          ["mail", "mail"],
-        ],
-      },
-    ],
-    previousStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-      "e_mail_in_room",
-      "e_mail_not_in_room",
-    ],
-    nextStatement: [
-      "e_out_of",
-      "e_in_the",
-      "e_person_in_room",
-      "e_hands_free",
-      "e_hands_full",
-      "e_toy_in_room",
-      "is_toy_in_room",
-      "e_person_not_in_room",
-      "e_toy_not_in_room",
-      "e_coffee_in_room",
-      "e_coffee_not_in_room",
-    ],
-    colour: 160,
-  },
-]);
-
-Blockly.JavaScript.PRECEDENCE = 0;
-
-Blockly.JavaScript["e_thing_not_in_room"] = function (block) {
-  let value = block.getFieldValue("VALUE");
-  if (value == "toy") {
-    return "toy_not_in_room\t";
-  } else if (value == "coffee") {
-    return "thing_not_in_room('coffee')\t";
-  } else if (value == "mail") {
-    return "thing_not_in_room('mail')\t";
-  } else if (value == "person") {
-    return "isPersonNotInRoomEvent()";
   }
 };
 
