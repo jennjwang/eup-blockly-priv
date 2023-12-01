@@ -80,6 +80,12 @@ h1 {
   background: #d4f8d3;
 }
 
+#porch-img {
+  object-fit: cover;
+  width: 100px;
+  height: 250px;
+}
+
 #bedroom {
   width: 360px;
   height: 250px;
@@ -88,6 +94,12 @@ h1 {
   margin-left: 120px;
   z-index: 1;
   background: lightcyan;
+}
+
+#bedroom-img {
+  object-fit: cover;
+  width: 360px;
+  height: 250px;
 }
 
 #kitchen {
@@ -100,6 +112,12 @@ h1 {
   background: lightgoldenrodyellow;
 }
 
+#kitchen-img {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
+}
+
 #playroom {
   width: 230px;
   height: 230px;
@@ -108,6 +126,12 @@ h1 {
   z-index: 1;
   background: lightpink;
   margin-right: 10px;
+}
+
+#playroom-img {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
 }
 
 #robot {
@@ -128,6 +152,8 @@ h1 {
   position: absolute;
   margin: 3px 10px;
   z-index: 2;
+  padding: 0px 5px;
+  background-color: white;
 }
 
 #runButton {
@@ -177,7 +203,7 @@ h1 {
 
 #person-img {
   width: auto;
-  height: 90px;
+  height: 160px;
 }
 
 #person {
