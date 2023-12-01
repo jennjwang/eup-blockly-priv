@@ -10,7 +10,7 @@ function randomRoomWithoutKitchen() {
   return rooms[i];
 }
 
-let ROBOT_ROOM = randomRoom();
+let ROBOT_ROOM = "playroom";
 let COFFEE_ROOM = "bedroom";
 let coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
 
@@ -57,7 +57,7 @@ function resetLocs() {
   prev_room = null;
   counter = 0;
   const robot = document.getElementById("robot");
-  ROBOT_ROOM = randomRoom();
+  ROBOT_ROOM = "playroom";
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";
