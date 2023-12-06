@@ -1,6 +1,10 @@
 // const toys = ["bear", "duck", "car", "toy4"];
 
 function pick_up_toy() {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
+  console.log("picking up toy");
   const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     console.log(toy);
@@ -12,6 +16,9 @@ function pick_up_toy() {
 }
 
 function drop_toy() {
+  if (robot_c.start) {
+    robot_c.start = false;
+  }
   if (robot_c.handsFree) {
     return;
   }
@@ -135,10 +142,12 @@ function handsFree() {
 }
 
 function eHandsFree() {
+  console.log("hands are ", robot_c.handsFree);
   return robot_c.handsFree;
 }
 
 function start() {
+  console.log("started?", robot_c.start);
   return robot_c.start;
 }
 
@@ -174,6 +183,7 @@ function is_toy_in_room(room) {
   const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
     if (is_thing_in_room(toy, room)) {
+      console.log("toy is in room");
       return true;
     }
   }
@@ -291,7 +301,11 @@ function isRobotinAnyRoom() {
   if (robot_c.start) {
     return false;
   }
-  return robot_c.prev != robot_c.room;
+  if (robot_c.prev === robot_c.room) {
+    return false;
+  }
+  console.log("arrived in any room");
+  return true;
 }
 
 function isRobotinRoomEvent(room) {
@@ -420,6 +434,11 @@ function thing_not_in_room(id) {
 }
 
 function pick_up_thing(id) {
+  if (id in ["bear", "duck", "car", "toy4"]) {
+    pick_up_toy();
+    return;
+  }
+  console.log("pick up thing");
   if (robot_c.start) {
     robot_c.start = false;
   }
