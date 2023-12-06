@@ -27,13 +27,6 @@ h1 {
   margin-top: 10px;
 }
 
-#robot_toy {
-  position: absolute;
-  /* left: 120px;
-    bottom: 200px; */
-  z-index: 2;
-}
-
 .wrapper {
   display: flex;
   margin: 0;
@@ -56,59 +49,6 @@ h1 {
   position: relative;
   background: lightgray;
   margin-right: 40px;
-}
-
-#porch {
-  width: 100px;
-  height: 250px;
-  position: absolute;
-  margin: 10px;
-  z-index: 2;
-  background: #d4f8d3;
-}
-
-#bedroom {
-  width: 360px;
-  height: 250px;
-  position: absolute;
-  margin: 10px;
-  margin-left: 120px;
-  z-index: 1;
-  background: lightcyan;
-}
-
-#kitchen {
-  width: 230px;
-  height: 230px;
-  position: absolute;
-  margin-top: 270px;
-  margin-left: 10px;
-  z-index: 1;
-  background: lightgoldenrodyellow;
-}
-
-#playroom {
-  width: 230px;
-  height: 230px;
-  margin-top: 270px;
-  margin-left: 250px;
-  z-index: 1;
-  background: lightpink;
-  margin-right: 10px;
-}
-
-#robot {
-  width: 80px;
-  height: auto;
-  left: 200px;
-  bottom: 320px;
-  z-index: 2;
-  position: absolute;
-}
-
-#robot-img {
-  width: 100%;
-  height: auto;
 }
 
 #bear {
@@ -204,6 +144,131 @@ h1 {
   left: 500px;
   bottom: 600px;
   width: 70px;
+  height: auto;
+  position: absolute;
+}
+
+#code {
+  display: none;
+}
+
+#porch {
+  width: 100px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  z-index: 2;
+  background: lightgoldenrodyellow;
+  /* background: #d4f8d3; */
+}
+
+#porch-img {
+  object-fit: cover;
+  width: 100px;
+  height: 250px;
+  opacity: 0.8;
+}
+
+#bedroom {
+  width: 360px;
+  height: 250px;
+  position: absolute;
+  margin: 10px;
+  margin-left: 120px;
+  z-index: 1;
+  background: lightcyan;
+}
+
+#bedroom-img {
+  object-fit: cover;
+  width: 360px;
+  height: 250px;
+  opacity: 0.5;
+}
+
+#kitchen {
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  margin-top: 270px;
+  margin-left: 10px;
+  z-index: 1;
+  /* background: lightgoldenrodyellow; */
+}
+
+#kitchen-img {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
+  opacity: 0.5;
+}
+
+#playroom {
+  width: 230px;
+  height: 230px;
+  margin-top: 270px;
+  margin-left: 250px;
+  z-index: 1;
+  background: lightpink;
+  margin-right: 10px;
+}
+
+#playroom-img {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
+  opacity: 0.5;
+}
+
+#robot {
+  width: 100px;
+  height: auto;
+  left: 280px;
+  bottom: 320px;
+  z-index: 3;
+  position: absolute;
+}
+
+#robot-img {
+  width: 100%;
+  height: auto;
+}
+
+#room-txt {
+  position: absolute;
+  margin: 3px 10px;
+  z-index: 2;
+  padding: 0px 5px;
+  background-color: white;
+}
+
+#controls {
+  margin-top: -45px;
+  margin-left: 120%;
+  position: absolute;
+  /* margin-top: -40px;
+  margin-left: 660px;
+  position: absolute; */
+}
+
+#stopButton:hover {
+  opacity: 1;
+}
+
+#runButton:hover {
+  opacity: 1;
+}
+
+#person-img {
+  width: auto;
+  height: 160px;
+}
+
+#person {
+  z-index: 2;
+  left: 200px;
+  bottom: 310px;
+  width: 40px;
   height: auto;
   position: absolute;
 }

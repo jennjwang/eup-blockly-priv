@@ -188,18 +188,6 @@ function is_toy_in_room(room) {
     }
   }
   return false;
-  // return (
-  //   is_thing_in_room("bear", room) ||
-  //   is_thing_in_room("duck", room) ||
-  //   is_thing_in_room("car", room)
-  // );
-  // let toy_in_room_check = toys_in_room[room].length != 0;
-  // if (!robot_c.handsFree) {
-  //   return toy_in_room_check || robot_c.holding.room == room;
-  // } else {
-  //   return toy_in_room_check;
-  // }
-  // return toy_in_room_check = toys_in_room[room].length != 0
 }
 
 function is_coffee_in_room(room) {
