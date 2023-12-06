@@ -151,6 +151,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
+          ["toy", "toy"],
           ["coffee", "coffee"],
           ["mail", "mail"],
         ],
@@ -182,6 +183,9 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.JavaScript["pick_up_coffee_mail"] = function (block) {
   let value = "'" + block.getFieldValue("VALUE") + "'";
+  if (value == "'toy'") {
+    return "pick_up_toy(); \n\t";
+  }
   return "pick_up_thing(" + value + ");\n\t";
 };
 
