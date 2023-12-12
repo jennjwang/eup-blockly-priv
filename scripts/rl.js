@@ -818,6 +818,9 @@ function get_rl_policy(code, taskNum) {
   }
   
   if (actions.includes("moveRobotToRandomRoom();")) {
+    const randroom_ind = array.indexOf("moveRobotToRandomRoom();");
+    array.splice(randroom_ind, 1);
+
     actions.push("moveRobotToRoom('kitchen');");
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
