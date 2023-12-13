@@ -816,10 +816,18 @@ function get_rl_policy(code, taskNum) {
       triggers.includes('isPersonInRoomEvent();')){
     person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
   }
+
+  if (actions.includes("drop_any();")){
+    const drop_any_ind = actions.indexOf("drop_any();");
+    actions.splice(drop_any_ind, 1);
+    actions.push("drop_thing('mail');");
+    actions.push("drop_thing('coffee');");
+    actions.push("drop_toy();");
+  }
   
   if (actions.includes("moveRobotToRandomRoom();")) {
-    const randroom_ind = array.indexOf("moveRobotToRandomRoom();");
-    array.splice(randroom_ind, 1);
+    const randroom_ind = actions.indexOf("moveRobotToRandomRoom();");
+    actions.splice(randroom_ind, 1);
 
     actions.push("moveRobotToRoom('kitchen');");
     actions.push("moveRobotToRoom('bedroom');");
