@@ -913,7 +913,7 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.9;
+  gamma = 0.98;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];

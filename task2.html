@@ -35,7 +35,7 @@
           <div class="modal-body">
             <p>
               Please return to Qualtrics and enter the following code:
-              <mark>T29082325</mark>
+              <mark><span id="submit_code"></mark>
             </p>
             <!-- <p>Note that once you click exit, this window will close, and you will not be able to access the code again</p> -->
           </div>
@@ -190,6 +190,12 @@
       const prolific_pid = url.searchParams.get("PROLIFIC_PID");
       const session_id = url.searchParams.get("SESSION_ID");
       const format = url.searchParams.get("format");
+      const cur_task = url.searchParams.get("task");
+     
+      console.log(cur_task);
+      if (cur_task == 1){document.getElementById("submit_code").textContent = "T16954743";}
+      else if (cur_task == 2){document.getElementById("submit_code").textContent = "T29082325";}
+      else if (cur_task == 3){document.getElementById("submit_code").textContent = "T37435907";}
 
       let round = 1;
       let operationOrder = 1;
