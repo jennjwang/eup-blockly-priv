@@ -29,18 +29,17 @@ const rooms = {
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [thing] };
 
 function resetLocs() {
-  //   start_states = `
-  //     robot started in ${ROBOT_ROOM}
-  //     toys in porch include [${SAVE_TOYS}]`;
+  start_states = `
+      robot started in ${ROBOT_ROOM}
+      item on the porch is ${id}`;
 
-  //   console.log(toys_in_room["kitchen"]);
+  console.log(toys_in_room["kitchen"]);
 
-  //   end_states = `
-  //     robot ended in ${robot_c.room}
-  //     toys in kitchen include [${toys_in_room["kitchen"].toString()}]
-  //     toys in bedroom include [${toys_in_room["bedroom"].toString()}]
-  //     toys in playroom include [${toys_in_room["playroom"].toString()}]
-  //     `;
+  end_states = `
+      robot ended in ${robot_c.room}
+      items in kitchen include [${toys_in_room["kitchen"].toString()}]
+      items in bedroom include [${toys_in_room["bedroom"].toString()}]
+      `;
 
   document.getElementById("start").innerHTML = start_states;
   document.getElementById("end").innerHTML = end_states;

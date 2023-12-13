@@ -34,18 +34,13 @@ let toys_in_room = {
 };
 
 function resetLocs() {
-  // start_states = `
-  //     robot started in ${ROBOT_ROOM}
-  //     toys in porch include [${SAVE_TOYS}]`;
+  start_states = `
+      robot started in ${ROBOT_ROOM}`;
 
-  // console.log(toys_in_room["kitchen"]);
-
-  // end_states = `
-  //     robot ended in ${robot_c.room}
-  //     toys in kitchen include [${toys_in_room["kitchen"].toString()}]
-  //     toys in bedroom include [${toys_in_room["bedroom"].toString()}]
-  //     toys in playroom include [${toys_in_room["playroom"].toString()}]
-  //     `;
+  end_states = `
+      robot ended in ${robot_c.room}
+      items on the porch include [${toys_in_room["kitchen"].toString()}]
+      `;
 
   document.getElementById("start").innerHTML = start_states;
   document.getElementById("end").innerHTML = end_states;

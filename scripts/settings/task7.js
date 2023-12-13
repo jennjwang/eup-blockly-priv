@@ -28,12 +28,12 @@ let toys_in_room = {
 
 function resetLocs() {
   end_states = `
-    robot ended in ${robot_c.room}
-    coffee ended in ${coffee.room}
-    mail ended in ${mail.room}`;
+  robot ended in ${robot_c.room}
+  person ended in ${person.room}`;
 
   start_states = `
-    robot started in ${ROBOT_ROOM}`;
+  robot started in ${ROBOT_ROOM}
+  person started in ${PERSON_ROOM}`;
 
   clearInterval(interval);
   document.getElementById("start").innerHTML = start_states;
