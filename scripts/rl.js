@@ -824,6 +824,14 @@ function get_rl_policy(code, taskNum) {
     actions.push("drop_thing('coffee');");
     actions.push("drop_toy();");
   }
+
+  if (actions.includes("pick_up_any();")){
+    const pick_any_ind = actions.indexOf("pick_up_any();");
+    actions.splice(pick_any_ind, 1);
+    actions.push("pick_up_toy();");
+    actions.push("pick_up_thing('mail');");
+    actions.push("pick_up_thing('coffee');");
+  }
   
   if (actions.includes("moveRobotToRandomRoom();")) {
     const randroom_ind = actions.indexOf("moveRobotToRandomRoom();");
