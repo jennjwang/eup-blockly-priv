@@ -429,11 +429,13 @@ function pick_up_any() {
     console.log("hands already full");
     return;
   }
+  console.log("picking up any!");
   let room = robot_c.room;
   robot_c.prev = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
     toys_in_room[room] = toys_in_room[room].sort(() => Math.random() - 0.5);
     holding = toys_in_room[room].pop();
+    console.log("toys", toys_in_room);
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
@@ -513,7 +515,7 @@ function drop_any() {
   const dst = rooms[room];
   // console.log("dropping off at", dst);
   moveThing(id, dst);
-  // toys_in_room[room].push(robot_c.holding);
+  toys_in_room[room].push(robot_c.holding);
 
   robot_c.holding.room = room;
   robot_c.holding = null;
@@ -538,7 +540,7 @@ function drop_thing(id) {
     const dst = rooms[room];
     // console.log("dropping off at", dst);
     moveThing(id, dst);
-    // toys_in_room[room].push(robot_c.holding);
+    toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;

@@ -266,6 +266,26 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function () {
+    pick_up_any();
+  };
+
+  interpreter.setProperty(
+    globalObject,
+    "pick_up_any",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    drop_any();
+  };
+
+  interpreter.setProperty(
+    globalObject,
+    "drop_any",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function (thing) {
     pick_up_thing(thing);
   };
