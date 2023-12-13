@@ -208,8 +208,17 @@
       });
 
       document.querySelector("#doneButton").addEventListener("click", () => {
-        record("final");
-        document.getElementById("modal").style.display = "block";
+        var userResponse = window.confirm("Please confirm that you're ready to submit your solution. Choosing to proceed means that you will not be able to return to the prior interface.");
+        
+        // Check the user's response
+        if (userResponse) {
+            alert("Your solution is submitted!");
+            record("final");
+            document.getElementById("modal").style.display = "block";
+        } else {
+            alert("You chose to cancel.");
+        }
+
       });
 
       async function onChange(event) {
