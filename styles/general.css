@@ -366,7 +366,7 @@ h1 {
   margin-top: 270px;
   margin-left: 10px;
   z-index: 1;
-  background: darkolivegreen;
+  /* background: darkolivegreen; */
 }
 
 #kitchen-img {
