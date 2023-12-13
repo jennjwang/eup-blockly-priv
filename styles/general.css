@@ -331,7 +331,7 @@ h1 {
   margin: 10px;
   z-index: 2;
   background: none;
-  /* background: lightgoldenrodyellow; */
+  background: lightgoldenrodyellow;
   /* background: #d4f8d3; */
 }
 
@@ -366,15 +366,14 @@ h1 {
   margin-top: 270px;
   margin-left: 10px;
   z-index: 1;
-  background: white;
-  /* background: lightgoldenrodyellow; */
+  background: darkolivegreen;
 }
 
 #kitchen-img {
   object-fit: cover;
   width: 230px;
   height: 230px;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 #playroom {
