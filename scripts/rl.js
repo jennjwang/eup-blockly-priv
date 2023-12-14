@@ -987,38 +987,38 @@ function run_rl(code, taskNum) {
   if (transition_table == false) {
     return "";
   }
-  debugger;
-
-  if (taskNum != 1) {
-    return [transition_table, state_ids];
-  }
-
-  out = "";
-  var count = 0;
-  for (key in transition_table) {
-    if (count == 0) {
-      out += "\tif(";
-    } else {
-      out += "\telse if(";
-    }
-    cur_trigger = generate_triggers(triggers, state_ids[key]);
-    for (ind in cur_trigger) {
-      if (cur_trigger[ind] == 1) {
-        out += "(" + triggers[ind].slice(0, -1) + ") && ";
+  
+  if (taskNum == 1 || taskNum == 7){
+    out = "";
+    var count = 0;
+    for (key in transition_table) {
+      if (count == 0) {
+        out += "\tif(";
       } else {
-        out += "!(" + triggers[ind].slice(0, -1) + ") && ";
+        out += "\telse if(";
       }
+      cur_trigger = generate_triggers(triggers, state_ids[key]);
+      for (ind in cur_trigger) {
+        if (cur_trigger[ind] == 1) {
+          out += "(" + triggers[ind].slice(0, -1) + ") && ";
+        } else {
+          out += "!(" + triggers[ind].slice(0, -1) + ") && ";
+        }
+      }
+      out = out.slice(0, -4);
+      out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
+      count += 1;
     }
-    out = out.slice(0, -4);
-    out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
-    count += 1;
-  }
 
-  // out += "}\n";
-  // end = Date.now();
-  // timer = (end - start) / 100;
-  // debugger;
-  return out;
+    // out += "}\n";
+    // end = Date.now();
+    // timer = (end - start) / 100;
+    // debugger;
+    return out;
+  }
+  else {
+    return [transition_table, state_ids];
+  }  
 }
 
 function get_seq_action(transition_table, state_id, action = "") {
