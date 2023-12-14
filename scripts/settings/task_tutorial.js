@@ -7,13 +7,14 @@ function brandomRoom(rooms) {
 
 var ROBOT_ROOM = "";
 let BEAR_ROOM = "kitchen";
+let COFFEE_ROOM = "porch";
 
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Thing(BEAR_ROOM, 450, 200, "bear");
-let mail = new Thing("porch", 40, 320, "mail");
-let coffee = new Thing("porch", 280, 320, "coffee");
+let mail = new Thing(, 40, 320, "mail");
+let coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
 
 const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
