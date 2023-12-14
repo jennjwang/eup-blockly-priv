@@ -5,15 +5,15 @@ function brandomRoom(rooms) {
   return rooms[i];
 }
 
-var ROBOT_ROOM = "";
+var ROBOT_ROOM = "bedroom";
 let BEAR_ROOM = "kitchen";
 let COFFEE_ROOM = "porch";
-
+let MAIL_ROOM = "porch";
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Thing(BEAR_ROOM, 450, 200, "bear");
-let mail = new Thing(, 40, 320, "mail");
+let mail = new Thing(MAIL_ROOM, 40, 320, "mail");
 let coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
 
 const KITCHEN = [80, 90];
@@ -28,7 +28,7 @@ const rooms = {
 };
 
 let toys_in_room = {
-  kitchen: [],
+  kitchen: [bear],
   playroom: [],
   bedroom: [],
   porch: [mail, coffee],
@@ -48,31 +48,36 @@ function resetLocs() {
   counter = 0;
 
   const bear_elt = document.getElementById("bear");
+  const mail_elt = document.getElementById("mail");
+  const coffee_elt = document.getElementById("coffee");
+  const robot = document.getElementById("robot");
+
   let BEAR_ROOM = "kitchen";
   let toy_dst = rooms[BEAR_ROOM];
 
   bear_elt.style.left = toy_dst[0] + 50 + "px";
   bear_elt.style.bottom = toy_dst[1] + "px";
-  bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
-  toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
-  toys_in_room[BEAR_ROOM] = [bear];
 
-  const mail_elt = document.getElementById("mail");
-  mail = new Thing("porch", 40, 320, "mail");
-  
+  bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
+  mail = new Thing(MAIL_ROOM, 40, 320, "mail");
+  coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
+
+  toys_in_room = {
+    kitchen: [bear],
+    playroom: [],
+    bedroom: [],
+    porch: [mail, coffee],
+  };
+
   mail_elt.style.display = "block";
   mail_elt.style.left = "40px";
   mail_elt.style.bottom = "320px";
-
-  const coffee_elt = document.getElementById("coffee");
 
   coffee_elt.style.display = "block";
   coffee_elt.style.left = "280px";
   coffee_elt.style.bottom = "320px";
   coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
-
-  ROBOT_ROOM = "bedroom";
-  const robot = document.getElementById("robot");
+  
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";
