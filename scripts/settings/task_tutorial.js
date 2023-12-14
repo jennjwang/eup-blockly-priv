@@ -6,23 +6,32 @@ function brandomRoom(rooms) {
 }
 
 var ROBOT_ROOM = "";
-let BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
-if (BEAR_ROOM == "kitchen") {
-  ROBOT_ROOM = "bedroom";
-} else {
-  ROBOT_ROOM = "kitchen";
-}
+let BEAR_ROOM = "kitchen";
+
 
 let pidList = [];
 let robot_c = new Robot(ROBOT_ROOM);
 let bear = new Thing(BEAR_ROOM, 450, 200, "bear");
+let mail = new Thing("porch", 40, 320, "mail");
+let coffee = new Thing("porch", 280, 320, "coffee");
 
-const KITCHEN = [90, 90];
+const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [150, 320];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+const BEDROOM = [280, 320];
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
 
-var toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+let toys_in_room = {
+  kitchen: [],
+  playroom: [],
+  bedroom: [],
+  porch: [mail, coffee],
+};
 
 function resetLocs() {
   const end_states = `
@@ -38,20 +47,29 @@ function resetLocs() {
   counter = 0;
 
   const bear_elt = document.getElementById("bear");
-  let BEAR_ROOM = "playroom";
+  let BEAR_ROOM = "kitchen";
   let toy_dst = rooms[BEAR_ROOM];
+
   bear_elt.style.left = toy_dst[0] + 50 + "px";
   bear_elt.style.bottom = toy_dst[1] + "px";
   bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
   toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
   toys_in_room[BEAR_ROOM] = [bear];
-  console.log(toys_in_room);
 
-  // if (BEAR_ROOM == "kitchen") {
-  //   ROBOT_ROOM = brandomRoom(["playroom", "bedroom"]);
-  // } else {
-  //   ROBOT_ROOM = brandomRoom(["kitchen", "playroom"]);
-  // }
+  const mail_elt = document.getElementById("mail");
+  mail = new Thing("porch", 40, 320, "mail");
+  
+  mail_elt.style.display = "block";
+  mail_elt.style.left = "40px";
+  mail_elt.style.bottom = "320px";
+
+  const coffee_elt = document.getElementById("coffee");
+
+  coffee_elt.style.display = "block";
+  coffee_elt.style.left = "280px";
+  coffee_elt.style.bottom = "320px";
+  coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
+
   ROBOT_ROOM = "bedroom";
   const robot = document.getElementById("robot");
   dst = rooms[ROBOT_ROOM];
