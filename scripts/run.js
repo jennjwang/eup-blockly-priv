@@ -149,7 +149,7 @@ function update(event) {
   // }
 
   if (url.searchParams.get("format") == "GOAL_MDP") {
-    if (taskNum == 1) {
+    if (taskNum == 1 || taskNum == 7) {
       out = run_mdp(code, taskNum);
       code = "while(true){" + out + "}";
       // return;
