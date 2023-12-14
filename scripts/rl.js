@@ -702,7 +702,7 @@ function get_rl_policy(code, taskNum) {
     // person_locs = [null];
   }
 
-  if (taskNum == 1) {
+  if (taskNum == 1 || taskNum == 7) {
     block_list = [[]];
   }
   if (taskNum == 2 || taskNum == "_") {
@@ -759,7 +759,7 @@ function get_rl_policy(code, taskNum) {
     }
   }
 
-  if (taskNum == 5 || taskNum == 7 || taskNum == 8) {
+  if (taskNum == 5 || taskNum == 8) {
     person_locs = [null];
     block_list = []; // // index 0 mail, index 1 coffee
 

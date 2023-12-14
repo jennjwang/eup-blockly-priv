@@ -1039,7 +1039,7 @@ function run_mdp(code, taskNum) {
     return "";
   }
 
-  if (taskNum != 1) {
+  if (taskNum != 1 || task != 7) {
     return [transition_table, state_ids];
   }
 
