@@ -61,6 +61,7 @@ function resetLocs() {
   bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
   mail = new Thing(MAIL_ROOM, 40, 320, "mail");
   coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
+  robot_c = new Robot(ROBOT_ROOM);
 
   toys_in_room = {
     kitchen: [bear],
@@ -76,12 +77,11 @@ function resetLocs() {
   coffee_elt.style.display = "block";
   coffee_elt.style.left = "280px";
   coffee_elt.style.bottom = "320px";
-  coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
   
   dst = rooms[ROBOT_ROOM];
   robot.style.left = dst[0] + "px";
   robot.style.bottom = dst[1] + "px";
-  robot_c = new Robot(ROBOT_ROOM);
+  
   // toys_in_room = { kitchen: [], playroom: [bear], bedroom: [] };
 
   let starter_code = `
