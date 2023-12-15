@@ -426,7 +426,7 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "GOAL_MDP") {
-          if (next_ctr <= 4){
+          if (next_ctr <= 5){
             document.getElementById("bear").style.visibility = "visible";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
@@ -451,7 +451,7 @@
             img_added = true;
           } else if (next_ctr == 6) {
             document.getElementById("img_div").innerHTML = "";
-          } else if (next_ctr == 11) {
+          } else if (next_ctr == 10) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_08.png";
             document.getElementById("img_div").appendChild(elem);
