@@ -337,10 +337,7 @@
           next_ctr += 1;
         }
 
-        
-
-
-
+    
         if (img_added) {
           document.getElementById("img_div").innerHTML = "";
           img_added = false;
@@ -385,6 +382,17 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "FULL_MDP") {
+          if (next_ctr <= 8){
+            document.getElementById("bear").style.visibility = "visible";
+            document.getElementById("coffee").style.visibility = "hidden";
+            document.getElementById("mail").style.visibility = "hidden";
+          }
+          else{
+            document.getElementById("bear").style.visibility = "hidden";
+            document.getElementById("coffee").style.visibility = "visible";
+            document.getElementById("mail").style.visibility = "visible";
+          }
+
           if (next_ctr < 2) {
             document.getElementById("tutorial_text").innerHTML =
               tutorial_texts[next_ctr];
@@ -400,8 +408,7 @@
             img_added = true;
           } else if (next_ctr == 9) {
             document.getElementById("img_div").innerHTML = "";
-            document.getElementById("bear").style.visibility = "visible";
-          } else if (next_ctr == 14) {
+          } else if (next_ctr == 16) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_06.png";
             document.getElementById("img_div").appendChild(elem);
