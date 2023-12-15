@@ -93,14 +93,21 @@
       <p id="code"></p>
 
       <div class="simulation">
+        <div id="porch">
+          <p id="room-txt">porch</p>
+          <img id="porch-img" src="assets/porch-img.webp" />
+        </div>
         <div id="bedroom">
           <p id="room-txt">bedroom</p>
+          <img id="bedroom-img" src="assets/carp2.jpeg" />
         </div>
         <div id="kitchen">
           <p id="room-txt">kitchen</p>
+          <img id="kitchen-img" src="assets/tiles.webp" />
         </div>
         <div id="playroom">
           <p id="room-txt">playroom</p>
+          <img id="playroom-img" src="assets/wood.jpeg" />
         </div>
 
         <div id="robot">
@@ -267,33 +274,33 @@
         <br><br> Click <b>Next</b> to proceed.</div>",
         "Now, you will construct a program to make the robot take a toy from the kitchen to the bedroom. At the start the robot might be in one of the four rooms. <br><br> Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>First, you need to specify the goal. The robot can only know it has achieved the goal by sensing the environment. For the current task, the goal can be stated as the robot seeing the toy in the kitchen. Drag the "and" piece from the Goal tab and attach it to the "Goal" piece. Then drag "I am in the kitchen" piece from the Goal tab and attach it to one of the empty spaces in "and". Finally, drag "a toy is in the room" piece and attach it to the remaining space of the "and" piece.<br><br> Click <b>Next</b> to proceed.</div>',
-        '<div style=\'width:180%\'>To successfully perform the task, the robot needs to have a set of actions: going to the kitchen, going to the playroom, picking up the toy, and putting down the toy. These are the set of actions the robot needs to perform to pick up the toy from the playroom and put it down in the kitchen. Drag the "Go to kitchen" from the "Actions" tab and attach it to the "Actions" block. In addition, also add the pieces "go to playroom", "pick up the toy", and "put down the toy" to the "Actions" block. <br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece (click on the caret to change the room name).<br><br> Click <b>Next</b> to proceed.</div>' ,
+        '<div style=\'width:180%\'>To successfully perform the task, the robot needs to have a set of actions: going to the kitchen, going to the playroom, picking up the toy, and putting down the toy. These are the set of actions the robot needs to perform to pick up the toy from the playroom and put it down in the kitchen. Drag the "Go to kitchen" from the "Actions" tab and attach it to the "Actions" block. In addition, also add the pieces "go to playroom", "pick up the toy", and "put down the toy" to the "Actions" block. <br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece (click on the caret to change the room name).<br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Now the robot needs to know what states it will need to check when deciding which of these actions to take to reach the goal. To correctly choose its actions, the robot needs to check the states of being in the kitchen, being in the playroom, seeing a toy in a room, and holding the toy. These are the relevant set of states the robot needs for choosing actions for reaching the goal. Drag the pieces that represent each state ("Am I in the kitchen?", "Am I in the playroom?", "Are my hands free?", and "Is there a toy in the current room") from the "States" tab and attach them to the "States" block. <br><br>Again, you may need to use the caret to change the room name. <br><br> Click <b>Next</b> to proceed.</div>',
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br> Note that the order of the pieces in the "States" and "Actions" blocks do not matter. <br><br> Click <b>Next</b> to proceed.',
-        "<div style=\'width:180%\'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br>Click <b>Next</b> to proceed.</div>",
-        "<div style=\'width:180%\'>First, remove all of the pieces added to the programming interface by dragging each one to the trash bin.  <br><br> Click <b>Next</b> to proceed.</div>",
-        "<div style=\'width:180%\'>To have the robot perform the task,  You need to specify two goals — the first is moving the coffee from the porch to the kitchen, and the second is moving the mail from the porch. To make sure the first goal is satisfied before the second, we will attach the first goal to the high priority slot in the “Goals” piece, and the second goal to the medium priority slot. <br><br> Again, because the goal is sensed from the robot’s perspective, we need the robot to be in the room when the goal is satisfied. <br><br>Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br>Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>First, remove all of the pieces added to the programming interface by dragging each one to the trash bin.  <br><br> Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>To have the robot perform the task,  You need to specify two goals — the first is moving the coffee from the porch to the kitchen, and the second is moving the mail from the porch. To make sure the first goal is satisfied before the second, we will attach the first goal to the high priority slot in the “Goals” piece, and the second goal to the medium priority slot. <br><br> Again, because the goal is sensed from the robot’s perspective, we need the robot to be in the room when the goal is satisfied. <br><br>Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>For the first goal, drag the "and" piece from the Goal tab and attach it to the slot for high priority in the "Goals" piece. Then, click on the Goal tab again, locate the "I am in the kitchen" piece, and drag it to connect it to one of the empty spaces in the "and" piece. Finally, add the piece "there is a toy in the room" and attach it to the remaining space of the "and" piece.  Then change <b>toy</b> to <b>coffee</b> by clicking on the caret (downward pointing triangle) of the piece you just added. <br><br>Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>For the second goal, drag the "and" piece from the Goal tab and attach it to the slot for medium priority in the "Goals" piece. Then, click on the Goal tab again, locate the "I am in the kitchen" piece, and drag it to connect it to one of the empty spaces in the "and" piece. Finally, add the piece "there is a toy in the room" and attach it to the remaining space of the "and" piece.  Then change <b>toy</b> to <b>mail</b> by clicking on the caret (downward pointing triangle) of the piece you just added. <br><br> Note that the "there is a coffee in the room" piece is the same as the "there is mail in the room" (click on the caret to change the room name). <br><br>Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>To successfully perform the task, the robot needs to have a set of actions: going to the kitchen, going to the porch, picking up the coffee, picking up the mail, putting down the coffee, and putting down the mail. These are the set of actions the robot needs to perform to pick up the coffee or mail from the porch and put it down in the kitchen. Drag the "go to kitchen" from the "Actions" tab and attach it to the "Actions" block. In addition, also add the pieces "go to porch", "pick up the coffee", “pick up the mail”, and "put down the coffee", and “put down the mail” to the "Actions" block. <br><br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece, and “pick up the mail” is the same as the “pick up the coffee,” as well as “put down the coffee” to “put down the mail” (click on the caret to change the room name). <br><br>Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Now the robot needs to know what states it will need to check when deciding which of these actions to take to reach the goal. To correctly choose its actions, the robot needs to check the states of being in the kitchen, being on the porch, seeing a coffee, holding the coffee, seeing the mail, and holding the mail. These are the relevant set of states the robot needs for choosing actions for reaching the goal. Drag the pieces that represent each state ("Am I in the kitchen?", "Am I in the porch?", "Are my hands free?", "Is there coffee in the current room?", and “is there mail in the current room?”) from the "States" tab and attach them to the "States" block. <br><br>Again, you may need to use the caret to change the rooms and items.<br><br>Click <b>Next</b> to proceed.</div>',
-        'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>Note that the order of the pieces in the "States" and "Actions" blocks do not matter. <br><br>Click <b>Next</b> to proceed.'
+        'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>Note that the order of the pieces in the "States" and "Actions" blocks do not matter. <br><br>Click <b>Next</b> to proceed.',
       ];
 
       var tutorial_texts_MDP = [
-        "<div style=\'width:180%\'>The robot is designed to act based on a GOAL that you specify. Goals are certain states or combinations of states that we desire the robot to reach or achieve to complete its mission (for example, a toy is in the playroom, the robot is in the kitchen). <br><br> The robot will try to find the most effective way to accomplish the goal you specify and then executes that course of action. <br><br> Click <b>Next</b> to proceed. </div>",
-        '<div style=\'width:180%\'> Now, you will construct a program to make the robot take a toy from the kitchen to the bedroom. At the start the robot might be in one of the four rooms. <br><br> Click <b>Next</b> to proceed. </div>',
+        "<div style='width:180%'>The robot is designed to act based on a GOAL that you specify. Goals are certain states or combinations of states that we desire the robot to reach or achieve to complete its mission (for example, a toy is in the playroom, the robot is in the kitchen). <br><br> The robot will try to find the most effective way to accomplish the goal you specify and then executes that course of action. <br><br> Click <b>Next</b> to proceed. </div>",
+        "<div style='width:180%'> Now, you will construct a program to make the robot take a toy from the kitchen to the bedroom. At the start the robot might be in one of the four rooms. <br><br> Click <b>Next</b> to proceed. </div>",
         '<div style=\'width:180%\'>To successfully perform this task, the robot needs a specification of the goal. The robot can only know it has achieved the goal by sensing the environment. For the current task, the goal can be stated as the robot seeing the toy in the kitchen. Drag the "and" piece from the "Goal" tab and attach it to the "Goal" piece. Then drag "I am in the kitchen" piece from the Goal tab and attach it to one of the empty spaces in "and". Finally, drag "a toy is in the room" piece and attach it to the remaining space of the "and" piece.  <br><br> Click <b>Next</b> to proceed. </div>',
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. <br><br>Otherwise, move the blocks around to make them match the image and then run the program. <br><br> Click <b>Next</b> to proceed. ',
-        '<div style=\'width:180%\'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch. Your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br> Click <b>Next</b> to proceed. </div>',
-        "<div style=\'width:180%\'>To have the robot perform the task,  You need to specify two goals — the first is moving the coffee from the porch to the kitchen, and the second is moving the mail from the porch. To make sure the first goal is satisfied before the second, we will attach the first goal to the high priority slot in the “Goals” piece, and the second goal to the medium priority slot. <br><br> Again, because the goal is sensed from the robot’s perspective, we need the robot to be in the room when the goal is satisfied. <br><br>Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch. Your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br> Click <b>Next</b> to proceed. </div>",
+        "<div style='width:180%'>To have the robot perform the task,  You need to specify two goals — the first is moving the coffee from the porch to the kitchen, and the second is moving the mail from the porch. To make sure the first goal is satisfied before the second, we will attach the first goal to the high priority slot in the “Goals” piece, and the second goal to the medium priority slot. <br><br> Again, because the goal is sensed from the robot’s perspective, we need the robot to be in the room when the goal is satisfied. <br><br>Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>For the first goal, drag the "and" piece from the Goal tab and attach it to the slot for high priority in the "Goals" piece. Then, click on the Goal tab again, locate the "I am in the kitchen" piece, and drag it to connect it to one of the empty spaces in the "and" piece. Finally, add the piece "there is a toy in the room" and attach it to the remaining space of the "and" piece.  Then change <b>toy</b> to <b>coffee</b> by clicking on the caret (downward pointing triangle) of the piece you just added. <br><br>Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>For the second goal, drag the "and" piece from the Goal tab and attach it to the slot for medium priority in the "Goals" piece. Then, click on the Goal tab again, locate the "I am in the kitchen" piece, and drag it to connect it to one of the empty spaces in the "and" piece. Finally, add the piece "there is a toy in the room" and attach it to the remaining space of the "and" piece.  Then change <b>toy</b> to <b>mail</b> by clicking on the caret (downward pointing triangle) of the piece you just added. <br><br> Note that the "there is a coffee in the room" piece is the same as the "there is mail in the room" (click on the caret to change the room name). <br><br>Click <b>Next</b> to proceed.</div>',
-        'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>Click <b>Next</b> to proceed.'
+        'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>Click <b>Next</b> to proceed.',
       ];
 
       var tutorial_texts_SEQ = [
-        "<div style=\'width:180%\'>The robot requires you to specify the sequence of <b>ACTIONS</b> it needs to complete the task (for example, pick up a toy, move to the kitchen). The robot executes these sequences of actions one after the other towards completing its mission. <br><br>Optionally, you may specify <b>STATES</b> or conditions that a robot may need to evaluate before executing an action. For example, before trying to pick up a toy (action), the robot could first assess whether it is already holding a toy (state). <br><br> Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>The robot requires you to specify the sequence of <b>ACTIONS</b> it needs to complete the task (for example, pick up a toy, move to the kitchen). The robot executes these sequences of actions one after the other towards completing its mission. <br><br>Optionally, you may specify <b>STATES</b> or conditions that a robot may need to evaluate before executing an action. For example, before trying to pick up a toy (action), the robot could first assess whether it is already holding a toy (state). <br><br> Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>Now, you will construct a program to make the robot take a toy from the kitchen to the bedroom. First since the robot might be in one of the four rooms, we first start by adding an action to move the robot to the kitchen. To achieve this, Click on the "Actions" tab and drag "Go to kitchen" piece and attach it to the “when the program starts” block on the programming interface. This action will make the robot move from the bedroom to the kitchen.<br> <br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Once the robot arrives in the kitchen, it needs to pick up the toy. Before trying to pick up the toy, you will program the robot to check if there is a toy. While this check may seem unnecessary, since we know that the toy will be in the kitchen, in other cases, the robot may not know where the toy is ahead of time, which makes performing this check to see if the toy is in the room helpful. To check if a toy is present in the room, click on the "Controls" tab and drag the "If do" block and attach it under the "Go to kitchen" piece. <br> Then, drag "a toy is in the room" piece from the "States" tab and attach it to the if.<br> <br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Click on the "Actions" tab and drag the "Pick up the toy" piece and attach it next to do. This block instructs the robot to pick up the toy only if it detects there is a toy in the room. <br><br> Once the robot picks up the toy, its next step is to take the toy to the kitchen. Drag the "Go to playroom" piece and attach it below the "if do" block. <br><br>Click <b>Next</b> to proceed</div>',
@@ -301,12 +308,12 @@
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. <br><br> Otherwise, move the blocks around to make them match the image and then run the program. <br><br>If the robot remains inactive after you click "Run Program," double check that your program is correct. Click "Stop Program" to make any needed changes and then rerun the program.<br> <br> Click <b>Next</b> to proceed.',
         "Now you will work on a second task. Your task is to program the robot to go back and forth between the kitchen and the playroom forever. If you create a program like the one on the right, the robot will initially go to the playroom, then to the kitchen, then back to the playroom. After this third action, the robot will come to a stop in the kitchen and remain there. <br><br> Click <b>Next</b> to proceed.",
         '<div style=\'width:180%\'>However, this task requires you to program the robot to move forever. While it is possible to include additional "Go to kitchen" and "Go to playroom" pieces, they will only contribute to one additional loop through the movements. <br><br> Note that the "go to playroom" piece is the same as the "go to kitchen" piece (click on the caret to change the room name). <br><br> Click <b>Next</b> to proceed.</div>',
-        "<div style=\'width:180%\'>To program the robot to move iteratively, first remove all the pieces you added to the programming interface by dragging each of them to the trash bin found on the bottom right corner. <br><br>  Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>To program the robot to move iteratively, first remove all the pieces you added to the programming interface by dragging each of them to the trash bin found on the bottom right corner. <br><br>  Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>Then click on the "Control" tab and drag the piece labeled "repeat while do" and drop it on the programming interface. Next from the "Control" tab drag the piece labeled "True" and attach it right next to <b>while</b>. The "repeat while do" block runs all the pieces inside it as long as the condition you attach next to while is true. Attaching <b>True</b> next to while means the block will be executed forever.<br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Next you need to put the actions that the robot needs to repeat inside the "repeat while do" block. For this task, the robot needs to move to the kitchen. Click on "Actions" tab and drag the "Go to kitchen" piece and attach it inside the "repeat while do" block. <br><br> Again, go to the "Actions" tab and drag "Go to kitchen" piece inside the "repeat while do" block right below the previous piece. Now, change <b>kitchen</b> to <b>playroom</b> by clicking on the caret (downward pointing triangle) of the piece. This block makes sure the robot goes to the kitchen, then to the playroom, repeating forever. <br><br>Click <b>Next</b> to proceed.</div>',
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. <br><br> Otherwise, move the blocks around to make them match the image and then run the program.<br><br> Click <b>Next</b> to proceed',
-        "<div style=\'width:180%\'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br>Click <b>Next</b> to proceed.</div>",
-        "<div style=\'width:180%\'>First, remove all of the pieces added to the programming interface by dragging each one to the trash bin.  <br><br> Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>Now you will work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the bedroom in this order. <br><br>Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>First, remove all of the pieces added to the programming interface by dragging each one to the trash bin.  <br><br> Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>To have the robot perform the task, you’ll first need the robot to go to the porch. Click on the "Actions" tab and attach the "Go to kitchen" piece to “when the program starts” block. Then change <b>kitchen</b> to <b>porch</b>. <br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Once the robot arrives on the porch, it needs to pick up the coffee. Click on the "Actions" tab and drag the "Pick up any item" piece and attach it right below the previous piece. Then change the object to be picked up to <b>coffee</b> by clicking on the caret (downward pointing triangle) of the piece you just attached. This block instructs the robot to pick up the coffee. <br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Once the robot picks up the coffee, its next step is to take the coffee to the kitchen. Drag the "Go to kitchen" piece and attach it below the "Pick up the coffee” piece <br><br> Click <b>Next</b> to proceed.</div>',
@@ -322,7 +329,6 @@
         document.querySelector("#doneButton").addEventListener("click", () => {
           document.getElementById("modal").style.display = "block";
         });
-        
 
         if (value == "TAP") {
           final_cnt = tutorial_texts.length;
@@ -340,19 +346,17 @@
           next_ctr += 1;
         }
 
-    
         if (img_added) {
           document.getElementById("img_div").innerHTML = "";
           img_added = false;
         }
 
         if (value == "TAP") {
-          if (next_ctr <= 13){
+          if (next_ctr <= 13) {
             document.getElementById("bear").style.visibility = "visible";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
-          }
-          else{
+          } else {
             document.getElementById("bear").style.visibility = "hidden";
             document.getElementById("coffee").style.visibility = "visible";
             document.getElementById("mail").style.visibility = "visible";
@@ -368,8 +372,12 @@
             img_added = true;
           } else if (next_ctr == 9) {
             document.getElementById("img_div").innerHTML = "";
+<<<<<<< HEAD
             
           } else if (next_ctr == 26) {
+=======
+          } else if (next_ctr == 25) {
+>>>>>>> 2639fc8fb7a9f66e4168b6067850e8995445921e
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_02.png";
             document.getElementById("img_div").appendChild(elem);
@@ -385,12 +393,11 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "FULL_MDP") {
-          if (next_ctr <= 8){
+          if (next_ctr <= 8) {
             document.getElementById("bear").style.visibility = "visible";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
-          }
-          else{
+          } else {
             document.getElementById("bear").style.visibility = "hidden";
             document.getElementById("coffee").style.visibility = "visible";
             document.getElementById("mail").style.visibility = "visible";
@@ -427,12 +434,11 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "GOAL_MDP") {
-          if (next_ctr <= 5){
+          if (next_ctr <= 5) {
             document.getElementById("bear").style.visibility = "visible";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
-          }
-          else{
+          } else {
             document.getElementById("bear").style.visibility = "hidden";
             document.getElementById("coffee").style.visibility = "visible";
             document.getElementById("mail").style.visibility = "visible";
@@ -468,16 +474,15 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "SEQ") {
-          if (next_ctr <= 8){
+          if (next_ctr <= 8) {
             document.getElementById("bear").style.visibility = "visible";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
-          }else if (8 < next_ctr & next_ctr <= 13){
+          } else if ((8 < next_ctr) & (next_ctr <= 13)) {
             document.getElementById("bear").style.visibility = "hidden";
             document.getElementById("coffee").style.visibility = "hidden";
             document.getElementById("mail").style.visibility = "hidden";
-          }
-          else{
+          } else {
             document.getElementById("bear").style.visibility = "hidden";
             document.getElementById("coffee").style.visibility = "visible";
             document.getElementById("mail").style.visibility = "visible";
