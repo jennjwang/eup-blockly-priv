@@ -426,22 +426,33 @@
             document.getElementById("doneButton").style.visibility = "hidden";
           }
         } else if (value == "GOAL_MDP") {
-          if (next_ctr < 2) {
+          if (next_ctr <= 4){
+            document.getElementById("bear").style.visibility = "visible";
+            document.getElementById("coffee").style.visibility = "hidden";
+            document.getElementById("mail").style.visibility = "hidden";
+          }
+          else{
+            document.getElementById("bear").style.visibility = "hidden";
+            document.getElementById("coffee").style.visibility = "visible";
+            document.getElementById("mail").style.visibility = "visible";
+          }
+
+          if (next_ctr < 4) {
             document.getElementById("tutorial_text").innerHTML =
               tutorial_texts[next_ctr];
           } else {
             document.getElementById("tutorial_text").innerHTML =
               tutorial_texts_MDP[next_ctr - 2];
           }
-          if (next_ctr == 4) {
+          if (next_ctr == 5) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_07.png";
             document.getElementById("img_div").appendChild(elem);
             img_added = true;
-          } else if (next_ctr == 5) {
+          } else if (next_ctr == 6) {
             document.getElementById("img_div").innerHTML = "";
             document.getElementById("bear").style.visibility = "visible";
-          } else if (next_ctr == 8) {
+          } else if (next_ctr == 9) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_08.png";
             document.getElementById("img_div").appendChild(elem);
