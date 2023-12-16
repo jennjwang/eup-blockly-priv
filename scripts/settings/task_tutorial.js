@@ -75,7 +75,7 @@ function resetLocs() {
   mail_elt.style.bottom = "320px";
 
   coffee_elt.style.display = "block";
-  coffee_elt.style.left = "280px";
+  coffee_elt.style.left = "40px";
   coffee_elt.style.bottom = "320px";
   
   dst = rooms[ROBOT_ROOM];
