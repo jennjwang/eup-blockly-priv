@@ -710,6 +710,40 @@ function get_mdp_policy(code, taskNum) {
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null]
 
+  if (taskNum == '_'){
+    rooms = ["porch", "kitchen", "bedroom", "playroom", null]
+    block_list = []
+    for (var m in rooms){
+      for (var c in rooms){
+        for (var t in rooms){
+          block_list.push([rooms[m], rooms[c], rooms[t]]);
+        }
+      }
+    }
+    triggers = [
+      "isRobotinRoomEvent('kitchen');",
+      "isRobotinRoomEvent('bedroom');",
+      "isRobotinRoomEvent('playroom');",
+      "isRobotinRoomEvent('porch');",
+      "eHandsFree();",
+      "toy_in_room();",
+      "is_toy_in_room('bedroom');",
+      "is_toy_in_room('kitchen');",
+      "is_toy_in_room('playroom');",
+      "is_toy_in_room('porch');",
+      "is_coffee_in_room('bedroom');",
+      "is_coffee_in_room('kitchen');",
+      "is_coffee_in_room('playroom');",
+      "is_coffee_in_room('porch');",
+      "thing_in_room('coffee');",
+      "is_mail_in_room('bedroom');",
+      "is_mail_in_room('kitchen');",
+      "is_mail_in_room('playroom');",
+      "is_mail_in_room('porch');",
+      "thing_in_room('mail');",
+    ]
+  }
+
   if (taskNum == 0) {
     block_list = [[null, null, null]];
     // person_locs = [null];
@@ -732,7 +766,7 @@ function get_mdp_policy(code, taskNum) {
       "isPersonNotInRoomEvent();",
     ];
   }
-  if (taskNum == 2 || taskNum == "_") {
+  if (taskNum == 2) {
     block_list = [[null, null, "playroom"], [null, null, null], [null, null, "bedroom"], [null, null, "kitchen"], [null, null, "porch"]];
     // person_locs = [null];
     triggers = [
