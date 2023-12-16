@@ -707,16 +707,16 @@ function get_mdp_policy(code, taskNum) {
   values_table = {};
   rewards_table = {};
   state_ids = {};
-  ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
+  const ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null]
 
   if (taskNum == '_'){
-    rooms = ["porch", "kitchen", "bedroom", "playroom", null]
+    
     block_list = []
-    for (var m in rooms){
-      for (var c in rooms){
-        for (var t in rooms){
-          block_list.push([rooms[m], rooms[c], rooms[t]]);
+    for (var m in ROOMS){
+      for (var c in ROOMS){
+        for (var t in ROOMS){
+          block_list.push([ROOMS[m], ROOMS[c], ROOMS[t]]);
         }
       }
     }
