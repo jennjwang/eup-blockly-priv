@@ -707,19 +707,32 @@ function get_mdp_policy(code, taskNum) {
   values_table = {};
   rewards_table = {};
   state_ids = {};
-  const ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
+  const ROOMS = ["porch", "kitchen", "bedroom", "playroom"];
   person_locs = [null]
 
   if (taskNum == '_'){
     
-    block_list = []
-    for (var m in ROOMS){
-      for (var c in ROOMS){
-        for (var t in ROOMS){
-          block_list.push([ROOMS[m], ROOMS[c], ROOMS[t]]);
-        }
-      }
-    }
+    block_list = [
+      ["porch", "porch", "kitchen"],
+      ["porch", "porch", "playroom"],
+      ["porch", "porch", "bedroom"],
+      ["porch", "porch", "porch"],
+      ["porch", "porch", null],
+      ["porch", null, "kitchen"],
+      [null, "porch", "kitchen"],
+      ["porch", "kitchen", "kitchen"],
+      ["kitchen", "porch", "kitchen"],
+      ["kitchen", null, "kitchen"],
+      [null, "kitchen", "kitchen"],
+      ["kitchen", "kitchen", "kitchen"],
+    ]
+    // for (var m in ROOMS){
+    //   for (var c in ROOMS){
+    //     for (var t in ROOMS){
+    //       block_list.push([ROOMS[m], ROOMS[c], ROOMS[t]]);
+    //     }
+    //   }
+    // }
     triggers = [
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
