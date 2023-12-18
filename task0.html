@@ -263,7 +263,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/deleted/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task0/round${round}/deleted/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -292,7 +292,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/created/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task0/round${round}/created/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -330,7 +330,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/moved/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/task0/round${round}/moved/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -365,7 +365,7 @@
           const docRef = await addDoc(
             collection(
               db,
-              `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/${runStatus}/`
+              `${format}/${study_id}_${prolific_pid}_${session_id}/task0/round${round}/${runStatus}/`
             ),
             {
               timestamp: today.toISOString(),
