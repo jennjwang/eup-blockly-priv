@@ -57,7 +57,9 @@
         float: left;
       "
     >
-    The goal of this part of the tutorial is to familiarize you with the robot programming interface so you can start creating custom behaviors for robotic tasks. Let's get started!
+      The goal of this part of the tutorial is to familiarize you with the robot
+      programming interface so you can start creating custom behaviors for
+      robotic tasks. Let's get started!
       <br /><br /><b>
         Once you have completed each step, click on the <i>"Next"</i> button
         located at the top right to proceed with the tutorial.</b
@@ -251,9 +253,9 @@
         '<div style=\'width:180%\'>Click on the "Actions" tab and drag the "go to the kitchen" piece inside the newly added "if then" block. Change the room from kitchen to <b>playroom</b> by clicking on the caret (downward pointing triangle) of the piece you just attached. This will allow the robot to move to the playroom once it has picked up the toy. <br> <br>Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Next you will need to program the robot to put down the toy as soon as it gets to the playroom. To do that, drag the "if and then" block and attach it below the last block. Then you should add a way to detect if the robot arrives at the playroom: "I have arrived at the playroom." Add the piece "put down the item" as the action.<br> <br>Click <b>Next</b> to proceed. </div>',
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>If the robot remains inactive after you click "Run Program," double check that your program is correct. Click "Stop Program" to make any needed changes and then rerun the program.<br> <br>Click <b>Next</b> to proceed.',
-        '<div style=\'width:180%\'>Note that, in this first example program, each rule triggered based off of another rule’s action completing (or the start of the program). This does not always need to be the case. Sometimes, rules should trigger based off of changes to the environment that the robot observes. For each task, you will need to consider what triggers make the most sense. However, this strategy of having other rules trigger based on another rule’s action completion is the most straightforward way to have the robot complete a sequence of actions since each rule can only contain one action.</div>',
-        '<div style=\'width:180%\'>Now let\'s work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the kitchen in this order. <br><br> Click <b>Next</b> to proceed.</div>',
-        '<div style=\'width:180%\'>First remove all the pieces added to the "Rules" block by dragging them to the trash bin found on the bottom right corner.<br><br> Click <b>Next</b> to proceed.</div>',
+        "<div style='width:180%'>Note that, in this first example program, each rule triggered based off of another rule’s action completing (or the start of the program). This does not always need to be the case. Sometimes, rules should trigger based off of changes to the environment that the robot observes. For each task, you will need to consider what triggers make the most sense. However, this strategy of having other rules trigger based on another rule’s action completion is the most straightforward way to have the robot complete a sequence of actions since each rule can only contain one action.</div>",
+        "<div style='width:180%'>Now let's work on the final task. In this task, both a cup of coffee and a piece of mail will start on the porch, and your objective is to program a robot to move the coffee and mail from the porch to the kitchen. However, because the coffee is likely to get cold if outside too long, the robot should first move the coffee to the kitchen and then come back to move the mail to the kitchen. The robot should take the coffee to the kitchen and then the mail to the kitchen in this order. <br><br> Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>First remove all the pieces added to the \"Rules\" block by dragging them to the trash bin found on the bottom right corner.<br><br> Click <b>Next</b> to proceed.</div>",
         '<div style=\'width:180%\'>To have the robot perform the task, you’ll first need the robot to go to the porch. From the "Actions" tab, drag the "Go to kitchen" piece and attach it to the piece "If program started." Change the room from kitchen to porch by clicking on the caret (downward pointing triangle) of the piece you just attached. This will ensure that the robot will go to the porch once the program begins. <br><br>Note that the "go to porch" piece is the same as the "go to kitchen" piece (click on the caret to change the room name). <br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Next, you need to program the robot to pick up the coffee once it gets to the playroom. <br>For this second rule, you will need to have the robot detect the arriving to the porch event before it tries to pick up the coffee. To ensure that the robot executes each action appropriately, it is necessary to incorporate rules like these for every desired action. This is because the robot is designed to carry out actions only when it detects events being triggered. Click on the "Controls" tab and drag the "<b>if and then</b>" piece and attach it to the "Rules" below the "If program started" block.<br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Now drag the "I arrived at the porch" piece from the "Events" tab and attach it next to if. Then, click on the "States" tab and drag "there is coffee in the room" and attach it next to <b>and</b>. This block would help the robot check if there is a coffee in the playroom as soon as it arrives in the room. This check is necessary, since we want the robot to take the coffee to the kitchen before taking the mail. Once the robot arrives at the porch and there is coffee in the room, the robot will now need to pick up the coffee. For that, drag the "pick up any item" piece from actions and attach it next to <b>then</b>. Then change the object to be picked up to <b>coffee</b> by clicking on the caret (downward pointing triangle) of the piece you just attached.<br><br> Click <b>Next</b> to proceed.</div>',
@@ -262,7 +264,7 @@
         '<div style=\'width:180%\'>Next you will need to program the robot to put down the coffee as soon as it gets to the kitchen. To do that, drag the "if and then" block and attach it below the last block. Then you should add a way to detect if the robot arrives at the kitchen: "I have arrived at the kitchen." Add the piece "put down the item" as an action. <br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Once the coffee is brought to the kitchen, the next part of the task is bringing the mail to the kitchen. To do this, click on the "Controls" tab and drag the "if then" piece and attach it to the "Rules" below the previous blocks. Then the event that was just triggered is associated with dropping the coffee specifically “I put down the coffee”. Drag this block from the events tab and attach it to the new rule. Then attach the “go to porch block” action. <br><br> Click <b>Next</b> to proceed.</div>',
         '<div style=\'width:180%\'>Once the robot is on the porch, it needs to pick up the mail. For that, drag a new <b>"if and then"</b> block and attach it below the last rule block. Then drag the "I arrived at the porch" piece from the "Events" tab and attach it next to if. Then, click on the "States" tab and drag "there is <b>no coffee</b> in the room" and attach it next to <b>and</b>. The check “there is <b>no coffee</b> in the room” is important because the first item the robot needs to move is the coffee. The robot should move the mail only when there is no coffee on the porch. From the action tab drag the “pick up the <b>mail</b>” action and attach it to the newly added rule. Note that this rule is very similar to one you created earlier, differing only in the “and” section. <br><br> Click <b>Next</b> to proceed.</div>',
-        "<div style=\'width:180%\'>You've already set a rule for the robot to go to the kitchen when it picks up something, so there's no need for a second rule. Similarly, you have set a rule for the robot's to drop what it is holding as soon as it arrives in the kitchen. Hence, there is no need to introduce another rule for the robot's behavior upon arrival in the kitchen. <br><br> Click <b>Next</b> to proceed.</div>",
+        "<div style='width:180%'>You've already set a rule for the robot to go to the kitchen when it picks up something, so there's no need for a second rule. Similarly, you have set a rule for the robot's to drop what it is holding as soon as it arrives in the kitchen. Hence, there is no need to introduce another rule for the robot's behavior upon arrival in the kitchen. <br><br> Click <b>Next</b> to proceed.</div>",
         'If your program looks like the image on the right, then press the "Run Program" button to see your program running. Otherwise, move the blocks around to make them match the image and then run the program. <br><br>If the robot remains inactive after you click "Run Program," double check that your program is correct. Click "Stop Program" to make any needed changes and then rerun the program.<br> <br>Click <b>Next</b> to proceed.',
       ];
 
@@ -370,7 +372,7 @@
             document.getElementById("img_div").appendChild(elem);
             img_added = true;
           } else if (next_ctr == 9) {
-            document.getElementById("img_div").innerHTML = "";  
+            document.getElementById("img_div").innerHTML = "";
           } else if (next_ctr == 26) {
             var elem = document.createElement("img");
             elem.src = "tutorial/sol_02.png";
@@ -549,7 +551,7 @@
         storageBucket: "eup-pilot.appspot.com",
         messagingSenderId: "868602423378",
         appId: "1:868602423378:web:3e715c6d2d6630fcdc178b",
-        measurementId: "G-GXYRH5YNES"
+        measurementId: "G-GXYRH5YNES",
       };
 
       // Initialize Firebase
@@ -595,7 +597,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/changed/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/tutorial/round${round}/changed/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -627,7 +629,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/deleted/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/tutorial/round${round}/deleted/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -656,7 +658,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/created/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/tutorial/round${round}/created/`
               ),
               {
                 timestamp: today.toISOString(),
@@ -694,7 +696,7 @@
             const docRef = await addDoc(
               collection(
                 db,
-                `${format}/${study_id}_${prolific_pid}_${session_id}/task1/round${round}/moved/`
+                `${format}/${study_id}_${prolific_pid}_${session_id}/tutorial/round${round}/moved/`
               ),
               {
                 timestamp: today.toISOString(),
