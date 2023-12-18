@@ -727,15 +727,15 @@ Blockly.JavaScript["e_thing_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_thing_not_in_room",
-    message0: "there is not %1 in the room",
+    message0: "there is no %1 in the room",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["a toy", "toy"],
-          ["a coffee", "coffee"],
-          ["a person", "person"],
+          ["toy", "toy"],
+          ["coffee", "coffee"],
+          ["person", "person"],
           ["mail", "mail"],
         ],
       },
