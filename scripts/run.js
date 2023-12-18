@@ -116,7 +116,7 @@ function update(event) {
     // debugger;
     // code = run_rl(code, taskNum);
     // console.log("rl code", code);
-    if (taskNum == 1) {
+    if (taskNum == 1 || taskNum == 7) {
       out = run_rl(code, taskNum);
       code = "while(true){" + out + "}";
       // return;

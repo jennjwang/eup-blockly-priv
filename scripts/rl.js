@@ -696,86 +696,79 @@ function get_rl_policy(code, taskNum) {
   state_ids = {};
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null]
+  block_list = [[null, null, null]];
 
-  if (taskNum == 0) {
-    block_list = [[null, null, null]];
-    // person_locs = [null];
-  }
-
-  if (taskNum == 1 || taskNum == 7) {
-    block_list = [[]];
-  }
-  if (taskNum == 2 || taskNum == "_") {
-    block_list = [[null, null, "playroom"], [null, null, null], [null, null, "bedroom"], [null, null, "kitchen"], [null, null, "porch"]];
-    // person_locs = [null];
-  }
-  if (taskNum == 3) {
-    block_list = [
-      [null, null, null],
-      [null, null, "kitchen"],
-      [null, null, "playroom"],
-      [null, null, "kitchen", "kitchen"],
-      [null, null, "kitchen", "playroom"],
-      [null, null, "playroom", "kitchen"],
-      [null, null, "playroom", "playroom"],
-      [null, null, "kitchen", "kitchen", "kitchen"],
-      [null, null, "playroom", "kitchen", "kitchen"],
-      [null, null, "playroom", "playroom", "kitchen"],
-      [null, null, "playroom", "playroom", "playroom"],
-      [null, null, "kitchen", "kitchen", "kitchen", "kitchen"],
-      [null, null, "playroom", "kitchen", "kitchen", "kitchen"],
-      [null, null, "playroom", "playroom", "kitchen", "kitchen"],
-      [null, null, "playroom", "playroom", "playroom", "kitchen"],
-      [null, null, "playroom", "playroom", "playroom", "playroom"],
-    ];
-    // person_locs = [null];
-  }
-  if (taskNum == 4) {
-    block_list = [
-      [null, 'kitchen', null],
-      [null, 'playroom', null],
-      [null, 'bedroom', null],
-      [null, 'porch', null],
-      [null, null, null],
-
-    ];
-    // person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
+  state_rooms = []
+  state_objs = []
+  for (var s_i in triggers){
+    var temp_room = triggers[s_i].match(/'([^']+)'/)
+    if (temp_room != null){if (!(state_rooms.includes(temp_room[1]) && (ROOMS.includes(temp_room[1])))){state_rooms.push(temp_room[1])}}
+    if (triggers[s_i].includes('toy')){if (!state_objs.includes('toy')){state_objs.push('toy')}}
+    if (triggers[s_i].includes('coffee')){if (!state_objs.includes('coffee')){state_objs.push('coffee')}}
+    if (triggers[s_i].includes('mail')){if (!state_objs.includes('mail')){state_objs.push('mail')}}
   }
   
-  if (taskNum == 6) {
-    
-    // person_locs = [null];
-    
-    block_list = [
-      [[null, null, null], null, null]
-    ];
-    rooms_wot_null = ["porch", "kitchen", null]
-    for (var r1 in rooms_wot_null) {
-      for (var r2 in rooms_wot_null) {
-        for (var r3 in rooms_wot_null){
-          block_list.push([[rooms_wot_null[r1], rooms_wot_null[r2], rooms_wot_null[r3]], null, null]);
+  if (taskNum == 0) {
+    block_list = [[null, null, null]];
+  }
+  if (taskNum == 1 || taskNum == 7) {block_list = [[]]}
+  if (taskNum == 2) {
+    for (var r in state_rooms){
+      block_list.push([null, null, state_rooms[r]]);
+    }
+  }
+  if (taskNum == 3){
+    for (var r in state_rooms){
+      block_list.push([null, null, state_rooms[r]]);
+      block_list.push([null, null, state_rooms[r], state_rooms[r]]);
+      block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r]]);
+      block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r], state_rooms[r]]);
+
+      for (var r_2 in state_rooms){
+        if (state_rooms[r] != state_rooms[r_2]){
+          block_list.push([null, null, state_rooms[r], state_rooms[r_2]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r]]);
+          block_list.push([null, null, state_rooms[r], state_rooms[r_2], state_rooms[r_2]]);
+          block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r_2]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r], state_rooms[r]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r], state_rooms[r], state_rooms[r]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r], state_rooms[r]]);
+          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r_2], state_rooms[r]]);
         }
       }
     }
   }
-
+  if (taskNum == 4){
+    for (var r in state_rooms){
+      block_list.push([null, state_rooms[r], null]);
+    }
+  }
+  if (taskNum == 6){
+    block_list = [
+      [[null, null, null], null, null]
+    ];
+    state_rooms.push(null)
+    for (var r1 in state_rooms) {
+      for (var r2 in state_rooms) {
+        for (var r3 in state_rooms){
+          block_list.push([[state_rooms[r1], state_rooms[r2], state_rooms[r3]], null, null]);
+        }
+      }
+    }
+  }
   if (taskNum == 5 || taskNum == 8) {
-    person_locs = [null];
-    block_list = []; // // index 0 mail, index 1 coffee
-
-    for (var r1 in ROOMS) {
-      for (var r2 in ROOMS) {
-        block_list.push([ROOMS[r1], ROOMS[r2], null]);
+    state_rooms.push(null);
+    for (var r1 in state_rooms) {
+      for (var r2 in state_rooms) {
+        block_list.push([state_rooms[r1], state_rooms[r2], null]);
       }
     }
   }
 
   if (taskNum == 9) {
-    person_locs = [null];
-    block_list = []; // // index 0 mail, index 1 coffee
-
-    for (var r1 in ROOMS) {
-      block_list.push([null, ROOMS[r1], null]);
+    for (var r1 in state_rooms) {
+      block_list.push([null, state_rooms[r1], null]);
     }
   }
 
@@ -800,7 +793,9 @@ function get_rl_policy(code, taskNum) {
       triggers.includes("is_coffee_in_room('playroom');") 
       )
   {
-    holding.push("coffee")
+    holding.push("coffee");
+    coffee_locs = ["is_coffee_in_room('bedroom');", "is_coffee_in_room('kitchen');", "is_coffee_in_room('playroom');","is_coffee_in_room('porch');"]
+    triggers.push(...coffee_locs);
   }
   if (triggers.includes("thing_in_room('mail');") || 
       triggers.includes("thing_not_in_room('mail');") || 
@@ -810,7 +805,9 @@ function get_rl_policy(code, taskNum) {
       triggers.includes("is_mail_in_room('playroom');") 
       )
   {
-    holding.push("mail")
+    holding.push("mail");
+    mail_locs = ["is_mail_in_room('bedroom');", "is_mail_in_room('kitchen');", "is_mail_in_room('playroom');", "is_mail_in_room('porch');"]
+    triggers.push(...mail_locs);
   }
   if (triggers.includes('isPersonNotInRoomEvent();') || 
       triggers.includes('isPersonInRoomEvent();')){
@@ -841,12 +838,12 @@ function get_rl_policy(code, taskNum) {
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
     actions.push("moveRobotToRoom('porch');");
-    triggers = triggers.concat([
-      "isRobotinRoomEvent('kitchen');",
-      "isRobotinRoomEvent('bedroom');",
-      "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');"
-    ]);
+    // triggers = triggers.concat([
+    //   "isRobotinRoomEvent('kitchen');",
+    //   "isRobotinRoomEvent('bedroom');",
+    //   "isRobotinRoomEvent('playroom');",
+    //   "isRobotinRoomEvent('porch');"
+    // ]);
   }
 
   for (room in these_rooms) {

@@ -707,8 +707,55 @@ function get_mdp_policy(code, taskNum) {
   values_table = {};
   rewards_table = {};
   state_ids = {};
-  ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
+  const ROOMS = ["porch", "kitchen", "bedroom", "playroom"];
   person_locs = [null]
+
+  if (taskNum == '_'){
+    
+    block_list = [
+      ["porch", "porch", "kitchen"],
+      ["porch", "porch", "playroom"],
+      ["porch", "porch", "bedroom"],
+      ["porch", "porch", "porch"],
+      ["porch", "porch", null],
+      ["porch", null, "kitchen"],
+      [null, "porch", "kitchen"],
+      ["porch", "kitchen", "kitchen"],
+      ["kitchen", "porch", "kitchen"],
+      ["kitchen", null, "kitchen"],
+      [null, "kitchen", "kitchen"],
+      ["kitchen", "kitchen", "kitchen"],
+    ]
+    // for (var m in ROOMS){
+    //   for (var c in ROOMS){
+    //     for (var t in ROOMS){
+    //       block_list.push([ROOMS[m], ROOMS[c], ROOMS[t]]);
+    //     }
+    //   }
+    // }
+    triggers = [
+      "isRobotinRoomEvent('kitchen');",
+      "isRobotinRoomEvent('bedroom');",
+      "isRobotinRoomEvent('playroom');",
+      "isRobotinRoomEvent('porch');",
+      "eHandsFree();",
+      "toy_in_room();",
+      "is_toy_in_room('bedroom');",
+      "is_toy_in_room('kitchen');",
+      "is_toy_in_room('playroom');",
+      "is_toy_in_room('porch');",
+      "is_coffee_in_room('bedroom');",
+      "is_coffee_in_room('kitchen');",
+      "is_coffee_in_room('playroom');",
+      "is_coffee_in_room('porch');",
+      "thing_in_room('coffee');",
+      "is_mail_in_room('bedroom');",
+      "is_mail_in_room('kitchen');",
+      "is_mail_in_room('playroom');",
+      "is_mail_in_room('porch');",
+      "thing_in_room('mail');",
+    ]
+  }
 
   if (taskNum == 0) {
     block_list = [[null, null, null]];
@@ -732,7 +779,7 @@ function get_mdp_policy(code, taskNum) {
       "isPersonNotInRoomEvent();",
     ];
   }
-  if (taskNum == 2 || taskNum == "_") {
+  if (taskNum == 2) {
     block_list = [[null, null, "playroom"], [null, null, null], [null, null, "bedroom"], [null, null, "kitchen"], [null, null, "porch"]];
     // person_locs = [null];
     triggers = [
