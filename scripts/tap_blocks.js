@@ -150,7 +150,7 @@ Blockly.defineBlocksWithJsonArray([
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["any item", "any"],
+          ["the item", "any"],
           ["the toy", "toy"],
           ["the coffee", "coffee"],
           ["the mail", "mail"],
