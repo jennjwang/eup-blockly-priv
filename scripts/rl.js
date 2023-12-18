@@ -838,12 +838,14 @@ function get_rl_policy(code, taskNum) {
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
     actions.push("moveRobotToRoom('porch');");
-    // triggers = triggers.concat([
-    //   "isRobotinRoomEvent('kitchen');",
-    //   "isRobotinRoomEvent('bedroom');",
-    //   "isRobotinRoomEvent('playroom');",
-    //   "isRobotinRoomEvent('porch');"
-    // ]);
+    if (taskNum == 1 || taskNum == 7){
+      triggers = triggers.concat([
+        "isRobotinRoomEvent('kitchen');",
+        "isRobotinRoomEvent('bedroom');",
+        "isRobotinRoomEvent('playroom');",
+        "isRobotinRoomEvent('porch');"
+      ]);
+    }
   }
 
   for (room in these_rooms) {
