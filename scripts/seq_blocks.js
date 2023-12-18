@@ -691,7 +691,7 @@ Blockly.JavaScript["forever"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_thing_in_room",
-    message0: "there is %1 is in the room",
+    message0: "there is %1 in the room",
     args0: [
       {
         type: "field_dropdown",
