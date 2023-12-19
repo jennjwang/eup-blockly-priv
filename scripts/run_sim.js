@@ -462,22 +462,171 @@ let code_dict = {
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
 };
 
-function parse_key(key) {
-  if (key.includes("MDP")) {
-    const parts = key.split("_");
-    // console.log(parts[(0, -3)]);
-    const key_id = parts.slice(0, parts.length - 3).join("_");
-    const key_format = parts.slice(3, parts.length - 1).join("_");
-    const key_task = parts[parts.length - 1];
-    return [key_id, key_format, key_task];
+function find_state(
+  state_map,
+  robot_position,
+  obj_positions,
+  robot_holding,
+  person_pos
+) {
+  for (s in state_map) {
+    cur_state = state_map[s];
+    if (
+      cur_state["robot_position"] == robot_position &&
+      cur_state["blocks"].toString() == obj_positions.toString() &&
+      cur_state["holding"] == robot_holding &&
+      cur_state["person"] == person_pos
+    ) {
+      return s;
+    }
   }
-  arr = key.split("_");
-  //   console.log(arr[(0, arr.length - 1)]);
-  const key_id = arr.slice(0, arr.length - 2).join("_");
-  const key_format = arr.slice(-2)[0];
-  const key_task = arr.slice(-1)[0];
-  //   url.searchParams.append("format", key_format);
-  return [key_id, key_format, key_task];
+  console.log("can't find s");
+}
+
+function get_current_state(state_ids, taskNum) {
+  person_location = null;
+  if (taskNum == 1 || taskNum == 4) {
+    person_location = person.room;
+  }
+
+  toy_whereabouts = [];
+  for (let toy in toys_in_room) {
+    toy_whereabouts = toy_whereabouts.concat(toys_in_room[toy]);
+  }
+
+  all_objs = [null, null, null];
+  for (let toy in toy_whereabouts) {
+    if (toy_whereabouts[toy]["id"] == "mail") {
+      all_objs[0] = toy_whereabouts[toy]["room"];
+    } else if (toy_whereabouts[toy]["id"] == "coffee") {
+      all_objs[1] = toy_whereabouts[toy]["room"];
+    } else if (all_objs[2] == null) {
+      all_objs[2] = toy_whereabouts[toy]["room"];
+    } else {
+      all_objs.push(toy_whereabouts[toy]["room"]);
+    }
+  }
+  if (all_objs.length < 3) {
+    all_objs.push(null);
+  }
+
+  if (taskNum == 6) {
+    all_objs = [[], null, null];
+    for (var m in toy_whereabouts) {
+      if (toy_whereabouts[m] == null) {
+        all_objs[0].push(null);
+      } else {
+        all_objs[0].push(toy_whereabouts[m]["room"]);
+      }
+    }
+  }
+
+  held_obj = null;
+  if (robot_c.holding != null) {
+    if (robot_c.holding.id != "mail" && robot_c.holding.id != "coffee") {
+      held_obj = "toy";
+    } else {
+      held_obj = robot_c.holding.id;
+    }
+  }
+  return find_state(
+    state_ids,
+    robot_c.room,
+    all_objs,
+    held_obj,
+    person_location
+  );
+}
+
+function update(event) {
+  reset();
+
+  taskNum = url.toString().split("task")[1][0];
+
+  code += Blockly.JavaScript.workspaceToCode(workspace);
+  // code =
+  //   "goals(\n (toy_not_in_room() && ((!isRobotinRoomEvent('kitchen') && !isRobotinRoomEvent('bedroom'))))\n)\n";
+
+  let check = document.getElementById("code").innerHTML;
+
+  console.log(code);
+
+  //Takes in javascript. Need to return javascript executable code, that will be executed line by line.
+  //Can debug by running with url params == RL
+
+  if (url.searchParams.get("format") == "FULL_MDP") {
+    check = taskNum + "\n" + code;
+    console.log(check);
+    // console.log("hi", code);
+    // debugger;
+    // code = run_rl(code, taskNum);
+    // console.log("rl code", code);
+    if (taskNum == 1 || taskNum == 7) {
+      out = run_rl(code, taskNum);
+      code = "while(true){" + out + "}";
+      // return;
+    } else {
+      [transition_table, state_ids] = run_rl(code, taskNum);
+      // console.log("mdp", code);
+      let current_state = get_current_state(state_ids, taskNum);
+      let prv_action = null;
+      let [cur_action, next_state, cur_val] = transition_table[current_state];
+
+      code = "";
+
+      while (cur_action != prv_action) {
+        code += cur_action;
+        prv_action = cur_action;
+        current_state = get_current_state(state_ids, taskNum);
+        [cur_action, next_state, cur_val] = transition_table[next_state];
+      }
+    }
+  }
+
+  if (url.searchParams.get("format") == "TAP") {
+    if (check == "") {
+      return;
+    }
+  }
+
+  // if (url.searchParams.get("format") == "SEQ") {
+  //   runButton();
+  // }
+
+  if (url.searchParams.get("format") == "GOAL_MDP") {
+    if (taskNum == 1 || taskNum == 7) {
+      out = run_mdp(code, taskNum);
+      code = "while(true){" + out + "}";
+      // return;
+    } else {
+      [transition_table, state_ids] = run_mdp(code, taskNum);
+      // console.log("mdp", code);
+      let current_state = get_current_state(state_ids, taskNum);
+      let prv_action = null;
+      let [cur_action, next_state, cur_val] = transition_table[current_state];
+
+      code = "";
+
+      while (cur_action != prv_action) {
+        code += cur_action;
+        prv_action = cur_action;
+        current_state = get_current_state(state_ids, taskNum);
+        [cur_action, next_state, cur_val] = transition_table[next_state];
+      }
+    }
+  }
+
+  console.log("code", code);
+
+  myInterpreter = new Interpreter(code, initApi);
+
+  function nextStep() {
+    if (myInterpreter.step()) {
+      const pid = setTimeout(nextStep, 0);
+      pids.push(pid);
+    }
+  }
+  nextStep();
 }
 
 function initApi(interpreter, globalObject) {
@@ -506,10 +655,10 @@ function initApi(interpreter, globalObject) {
   }
 
   wrapper = function (room, callback) {
-    // resolveAfter3Seconds().then(() => {
-    moveRobotToRoom(room);
-    callback();
-    // });
+    resolveAfter3Seconds().then(() => {
+      moveRobotToRoom(room);
+      callback();
+    });
   };
   interpreter.setProperty(
     globalObject,
@@ -535,6 +684,24 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (room) {
+    return is_mail_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_mail_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (room) {
+    return is_coffee_in_room(room);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "is_coffee_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     pick_up_toy();
   };
@@ -543,6 +710,62 @@ function initApi(interpreter, globalObject) {
     "pick_up_toy",
     interpreter.createNativeFunction(wrapper)
   );
+
+  wrapper = function () {
+    pick_up_any();
+  };
+
+  interpreter.setProperty(
+    globalObject,
+    "pick_up_any",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    drop_any();
+  };
+
+  interpreter.setProperty(
+    globalObject,
+    "drop_any",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (thing) {
+    pick_up_thing(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "pick_up_thing",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function () {
+    return isRobotinAnyRoom();
+  };
+  interpreter.setProperty(
+    globalObject,
+    "isRobotinAnyRoom",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (thing) {
+    drop_thing(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "drop_thing",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  // wrapper = function (thing) {
+  //   drop_thing_disappears(thing);
+  // };
+  // interpreter.setProperty(
+  //   globalObject,
+  //   "drop_thing_disappears",
+  //   interpreter.createNativeFunction(wrapper)
+  // );
 
   wrapper = function () {
     return start();
@@ -570,6 +793,7 @@ function initApi(interpreter, globalObject) {
     "isRobotOutOfEvent",
     interpreter.createNativeFunction(wrapper)
   );
+
   wrapper = function (room) {
     return is_toy_in_room(room);
   };
@@ -651,6 +875,24 @@ function initApi(interpreter, globalObject) {
     interpreter.createNativeFunction(wrapper)
   );
 
+  wrapper = function (thing) {
+    return thing_in_room(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "thing_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
+  wrapper = function (thing) {
+    return thing_not_in_room(thing);
+  };
+  interpreter.setProperty(
+    globalObject,
+    "thing_not_in_room",
+    interpreter.createNativeFunction(wrapper)
+  );
+
   wrapper = function () {
     return toy_not_in_room();
   };
@@ -679,10 +921,10 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function (callback) {
-    // resolveAfter3Seconds().then(() => {
-    moveRobotToRandomRoom();
-    callback();
-    // });
+    resolveAfter3Seconds().then(() => {
+      moveRobotToRandomRoom();
+      callback();
+    });
   };
   interpreter.setProperty(
     globalObject,
@@ -691,15 +933,33 @@ function initApi(interpreter, globalObject) {
   );
 }
 
+function parse_key(key) {
+  if (key.includes("MDP")) {
+    const parts = key.split("_");
+    // console.log(parts[(0, -3)]);
+    const key_id = parts.slice(0, parts.length - 3).join("_");
+    const key_format = parts.slice(3, parts.length - 1).join("_");
+    const key_task = parts[parts.length - 1];
+    return [key_id, key_format, key_task];
+  }
+  arr = key.split("_");
+  //   console.log(arr[(0, arr.length - 1)]);
+  const key_id = arr.slice(0, arr.length - 2).join("_");
+  const key_format = arr.slice(-2)[0];
+  const key_task = arr.slice(-1)[0];
+  //   url.searchParams.append("format", key_format);
+  return [key_id, key_format, key_task];
+}
+
 function randomRoom() {
-  let rooms = ["kitchen", "bedroom", "playroom"];
-  i = Math.floor(Math.random() * 3);
+  let rooms = ["kitchen", "bedroom", "playroom", "porch"];
+  i = Math.floor(Math.random() * rooms.length);
   return rooms[i];
 }
 
 function randomRoomWithoutKitchen() {
-  let rooms = ["bedroom", "playroom"];
-  i = Math.floor(Math.random() * 2);
+  let rooms = ["bedroom", "playroom", "porch"];
+  i = Math.floor(Math.random() * rooms.length);
   return rooms[i];
 }
 
@@ -791,10 +1051,17 @@ function removeScript(script_id) {
   });
 }
 
-const KITCHEN = [90, 90];
+const KITCHEN = [80, 90];
 const PLAYROOM = [320, 90];
-const BEDROOM = [150, 320];
-const rooms = { kitchen: KITCHEN, bedroom: BEDROOM, playroom: PLAYROOM };
+const BEDROOM = [280, 320];
+const PORCH = [20, 320];
+const rooms = {
+  kitchen: KITCHEN,
+  bedroom: BEDROOM,
+  playroom: PLAYROOM,
+  porch: PORCH,
+};
+
 let pidList = [];
 
 function customSort(a, b) {
