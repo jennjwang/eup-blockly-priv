@@ -47,6 +47,10 @@ function moveThing(id, coor) {
     robot_c.start = false;
   }
 
+  if (!display) {
+    return;
+  }
+
   let goal_x = coor[0];
   let goal_y = coor[1];
 
@@ -161,20 +165,6 @@ function eHandsFull() {
 
 function toy_in_room() {
   return is_toy_in_room(robot_c.room);
-  // console.log("robot is in", robot_c.room);
-  // console.log(toys_in_room);
-  // console.log("toy in room", toys_in_room[robot_c.room].length != 0);
-  // let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
-  // if (!robot_c.handsFree) {
-  //   // console.log(
-  //   //   "toy is in room: ",
-  //   //   toy_in_room_check || robot_c.holding.room == robot_c.room
-  //   // );
-  //   return toy_in_room_check || robot_c.holding.room == robot_c.room;
-  // } else {
-  //   // console.log("toy is in room: ", toy_in_room_check);
-  //   return toy_in_room_check;
-  // }
 }
 
 function toy_not_in_room() {
@@ -325,10 +315,6 @@ function resolveAfter3Seconds() {
   // }
   if (!display) {
     return;
-    // console.log("running");
-    // return new Promise((resolve) => {
-    //   resolve(1 + 4);
-    // });
   }
   let delay = 10;
   let condition = url.searchParams.get("format");
@@ -352,6 +338,9 @@ function moveRobotToRoom(room) {
   if (robot_c.room == room) {
     x = dst[0];
     y = dst[1];
+    if (!display) {
+      return;
+    }
     moveThing("robot", [x, y + 20]);
     setTimeout(() => {
       moveThing("robot", dst);
@@ -459,11 +448,13 @@ function pick_up_any() {
     // console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
     console.log(dst);
-    setTimeout(() => {
-      if (robot_c.holding) {
-        moveThing(robot_c.holding.id, dst);
-      }
-    }, 1500);
+    if (display) {
+      setTimeout(() => {
+        if (robot_c.holding) {
+          moveThing(robot_c.holding.id, dst);
+        }
+      }, 1500);
+    }
   }
 }
 
@@ -503,11 +494,13 @@ function pick_up_thing(id) {
     // console.log("hands are free?", robot_c.handsFree);
     const dst = [rooms[room][0], rooms[room][1] + 10];
     console.log(dst);
-    setTimeout(() => {
-      if (robot_c.holding) {
-        moveThing(robot_c.holding.id, dst);
-      }
-    }, 1500);
+    if (display) {
+      setTimeout(() => {
+        if (robot_c.holding) {
+          moveThing(robot_c.holding.id, dst);
+        }
+      }, 1500);
+    }
   }
 }
 
