@@ -1,29 +1,25 @@
 function brandomRoom(rooms) {
   // let rooms = ["kitchen", "bedroom"];
   i = Math.floor(Math.random() * rooms.length);
-  // console.log(rooms[i]);
+  console.log(rooms[i]);
   return rooms[i];
 }
 
-BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
-console.log("in task 2");
-
-if (BEAR_ROOM == "kitchen") {
-  ROBOT_ROOM = brandomRoom(["bedroom", "playroom"]);
-} else {
-  ROBOT_ROOM = brandomRoom(["kitchen", "playroom"]);
+var ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
+let BEAR_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
+while (BEAR_ROOM == ROBOT_ROOM) {
+  ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
 }
-console.log("bear is in", BEAR_ROOM);
-// console.log("robot is in", ROBOT_ROOM);
 
 robot_c = new Robot(ROBOT_ROOM);
 toy_dst = rooms[BEAR_ROOM];
 
 end_states = "";
 start_states = "";
+let bear_coors = rooms[BEAR_ROOM];
+let bear = new Thing(BEAR_ROOM, bear_coors[0], bear_coors[1], "bear");
 
-bear = new Toy(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
-toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 toys_in_room[BEAR_ROOM] = [bear];
 
 function resetLocs(key_id, key_task, key_format, iteration) {
@@ -53,15 +49,13 @@ function resetLocs(key_id, key_task, key_format, iteration) {
 
   BEAR_ROOM = brandomRoom(["kitchen", "bedroom"]);
   let toy_dst = rooms[BEAR_ROOM];
-  bear = new Toy(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
-  toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+  bear = new Thing(BEAR_ROOM, toy_dst[0], toy_dst[1], "bear");
+  toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
   toys_in_room[BEAR_ROOM] = [bear];
   // console.log(toys_in_room);
 
-  if (BEAR_ROOM == "kitchen") {
-    ROBOT_ROOM = brandomRoom(["bedroom", "playroom"]);
-  } else {
-    ROBOT_ROOM = brandomRoom(["kitchen", "playroom"]);
+  while (BEAR_ROOM === ROBOT_ROOM) {
+    ROBOT_ROOM = brandomRoom(["kitchen", "bedroom", "porch"]);
   }
 
   robot_c = new Robot(ROBOT_ROOM);

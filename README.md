@@ -25,3 +25,9 @@ Double click to open the html files in the folder. You should see a webpage pop 
 - `scripts/settings/rl_blocks.js` defines the Blockly blocks using JSON and matches them with a function or the gaming logic. These blocks are customized to the RL interface.
 - `scripts/settings/tap_blocks.js` defines the Blockly blocks using JSON and matches them with a function or the gaming logic. These blocks are customized to the TAP interface.
 - `scripts/settings/run.js` connects the Blockly definitions with the gaming logic such that the code inputted through the interface workplace is executed correction. This file also contains functions to start and stop the execution.
+
+**To run the simulation**
+
+1. Open your terminal and type `npm install -g http-server`
+
+2. Go to the root folder that you want to serve you files and type: `http-server ./`
