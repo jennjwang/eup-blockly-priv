@@ -1,4 +1,8 @@
-// const toys = ["bear", "duck", "car", "toy4"];
+const display = false;
+
+function start() {
+  return robot_c.start;
+}
 
 function pick_up_toy() {
   if (robot_c.start) {
@@ -314,11 +318,23 @@ function isRobotOutOfEvent(room) {
 
 // HELPER
 function resolveAfter3Seconds() {
-  let delay = 2000;
+  // let delay = 2000;
   // let condition = url.searchParams.get("format");
   // if (condition == "SEQ" || condition == "TAP") {
   //   delay = 2500;
   // }
+  if (!display) {
+    return;
+    // console.log("running");
+    // return new Promise((resolve) => {
+    //   resolve(1 + 4);
+    // });
+  }
+  let delay = 10;
+  let condition = url.searchParams.get("format");
+  if (condition == "SEQ" || condition == "TAP") {
+    delay = 1500;
+  }
 
   return new Promise((resolve) => {
     const id = setTimeout(() => {
@@ -343,8 +359,6 @@ function moveRobotToRoom(room) {
   }
 
   robot_c.setRoom(room);
-
-  // console.log("holding", robot_c.holding);
 
   if (!robot_c.handsFree) {
     const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(

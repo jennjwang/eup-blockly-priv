@@ -79,9 +79,26 @@
     <script id='script2' src="scripts/settings/task2.js"></script>
     <script id='script1' src="scripts/settings/task1.js"></script> -->
     <script id="tap" src="scripts/tap_blocks.js"></script>
-    <script id="rl" src="scripts/rl_blocks.js"></script>
-    <script src="scripts/game.js"></script>
-    <script src="scripts/rl.js"></script>
-    <script src="scripts/mdp.js"></script>
+    <!-- <script id="rl" src="scripts/rl_blocks.js"></script> -->
+    <script>
+      const worker = new Worker("scripts/run_sim.js");
+
+      worker.onmessage = function(event) {
+      if (event.data.type === 'download') {
+        const blob = new Blob([JSON.stringify(event.data.data)], { type: 'application/json' });
+        const blobUrl = URL.createObjectURL(blob);
+        
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobUrl;
+        downloadLink.download = 'data.json';
+        
+        downloadLink.click();
+        
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+    </script>
+    <!-- <script src="scripts/rl.js"></script>
+    <script src="scripts/mdp.js"></script> -->
   </body>
 </html>
