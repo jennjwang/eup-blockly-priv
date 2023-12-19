@@ -8,11 +8,9 @@ let start_states = "";
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs(key_id, key_task, key_format, iteration) {
-  end_states = `
-  robot ended in ${robot_c.room}`;
+  end_states = `robot ended in ${robot_c.room}`;
 
-  start_states = `
-  robot started in ${ROBOT_ROOM}`;
+  start_states = `robot started in ${ROBOT_ROOM}`;
 
   const data = {
     id: key_id,

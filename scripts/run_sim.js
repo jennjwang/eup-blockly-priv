@@ -127,19 +127,19 @@ function initApi(interpreter, globalObject) {
   // Each step will run the interpreter until the highlightPause is true.
   // let highlightPause = false;
 
-  function highlightBlock(id) {
-    resolveAfter3Seconds().then(() => {
-      workspace.highlightBlock(id);
-      // highlightPause = true;
-      console.log("highlight");
-    });
-  }
+  // function highlightBlock(id) {
+  //   resolveAfter3Seconds().then(() => {
+  //     workspace.highlightBlock(id);
+  //     // highlightPause = true;
+  //     console.log("highlight");
+  //   });
+  // }
 
   wrapper = function (room, callback) {
-    resolveAfter3Seconds().then(() => {
-      moveRobotToRoom(room);
-      callback();
-    });
+    // resolveAfter3Seconds().then(() => {
+    moveRobotToRoom(room);
+    callback();
+    // });
   };
   interpreter.setProperty(
     globalObject,
@@ -402,10 +402,10 @@ function initApi(interpreter, globalObject) {
   );
 
   wrapper = function (callback) {
-    resolveAfter3Seconds().then(() => {
-      moveRobotToRandomRoom();
-      callback();
-    });
+    // resolveAfter3Seconds().then(() => {
+    moveRobotToRandomRoom();
+    callback();
+    // });
   };
   interpreter.setProperty(
     globalObject,
