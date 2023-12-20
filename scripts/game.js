@@ -517,7 +517,7 @@ function drop_any() {
   const dst = rooms[room];
   // console.log("dropping off at", dst);
   moveThing(id, dst);
-  toys_in_room[room].push(robot_c.holding);
+  // toys_in_room[room].push(robot_c.holding);
 
   robot_c.holding.room = room;
   robot_c.holding = null;
@@ -542,7 +542,7 @@ function drop_thing(id) {
     const dst = rooms[room];
     // console.log("dropping off at", dst);
     moveThing(id, dst);
-    toys_in_room[room].push(robot_c.holding);
+    // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;
