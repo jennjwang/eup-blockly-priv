@@ -6,9 +6,10 @@ DUCK_ROOM = "kichen";
 CAR_ROOM = "kichen";
 
 robot_c = new Robot(ROBOT_ROOM);
-bear = new Toy(BEAR_ROOM, 80, 90, "bear");
-car = new Toy(CAR_ROOM, 100, 90, "car");
-duck = new Toy(DUCK_ROOM, 120, 90, "duck");
+bear = new Thing(BEAR_ROOM, 80, 90, "bear");
+car = new Thing(CAR_ROOM, 100, 90, "car");
+toy4 = new Thing(CAR_ROOM, 100, 90, "toy4");
+duck = new Thing(DUCK_ROOM, 120, 90, "duck");
 
 toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
@@ -16,8 +17,8 @@ end_states = "";
 start_states = "";
 
 function randomizeToys() {
-  let toys = [bear, car, duck];
-  i = Math.floor(Math.random() * 2) + 2;
+  let toys = [bear, car, duck, toy4];
+  i = Math.floor(Math.random() * 3) + 2;
   console.log(i);
   return toys.slice(0, i);
 }
@@ -26,7 +27,7 @@ let toys = randomizeToys();
 
 let SAVE_TOYS = toys.toString();
 
-toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
+toys_in_room = { kitchen: toys, playroom: [], bedroom: [], porch: [] };
 
 // console.log("toys", toys);
 

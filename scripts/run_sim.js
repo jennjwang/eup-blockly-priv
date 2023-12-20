@@ -726,16 +726,18 @@ function customSort(a, b) {
 
 const keys = Object.keys(code_dict).sort(customSort);
 // let task0_keys = keys.filter((key) => key.includes("task0"));
-let task1_keys = keys.filter((key) => key.includes("task1"));
+// let task1_keys = keys.filter((key) => key.includes("task1"));
 // let task2_keys = keys.filter((key) => key.includes("task2"));
-// let task3_keys = keys.filter((key) => key.includes("task3"));
-// let task4_keys = keys.filter((key) => key.includes("task4"));
+let task3_keys = keys.filter((key) => key.includes("task3"));
+let task4_keys = keys.filter((key) => key.includes("task4"));
+let task5_keys = keys.filter((key) => key.includes("task5"));
 
 // importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
-importScripts("settings/task1_nodisp.js");
+// importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
+importScripts("settings/task5_nodisp.js");
 
 // Worker A's loop
 
@@ -764,4 +766,4 @@ async function test(keys) {
 
 // Create a Blob with the JSON data
 
-test(task1_keys);
+test(task5_keys);

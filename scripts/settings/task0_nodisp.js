@@ -22,7 +22,6 @@ function resetLocs(key_id, key_task, key_format, iteration) {
   };
 
   console.log(data);
-
   jsonData.push(data);
 
   robot_c.start = true;

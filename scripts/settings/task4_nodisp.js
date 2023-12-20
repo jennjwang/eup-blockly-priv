@@ -45,6 +45,9 @@ function resetLocs(key_id, key_task, key_format, iteration) {
     end_state: end_states,
   };
 
+  console.log(data);
+  jsonData.push(data);
+
   robot_c.start = true;
   prev_room = null;
   counter = 0;
