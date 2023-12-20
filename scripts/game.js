@@ -495,6 +495,7 @@ function pick_up_thing(id) {
     y = holding.height;
     robot_c.holding = holding;
     console.log("picked up", robot_c.holding.id);
+    console.log("ROOM", toys_in_room);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
     // console.log("hands are free?", robot_c.handsFree);
@@ -528,7 +529,7 @@ function drop_any() {
   const dst = rooms[room];
   // console.log("dropping off at", dst);
   moveThing(id, dst);
-  toys_in_room[room].push(robot_c.holding);
+  // toys_in_room[room].push(robot_c.holding);
 
   robot_c.holding.room = room;
   robot_c.holding = null;
@@ -553,7 +554,7 @@ function drop_thing(id) {
     const dst = rooms[room];
     // console.log("dropping off at", dst);
     moveThing(id, dst);
-    toys_in_room[room].push(robot_c.holding);
+    // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;

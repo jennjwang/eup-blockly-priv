@@ -566,9 +566,11 @@ function run_key(k, i) {
     console.log("format", key_format);
     console.log("key", key_id);
 
-    let code = code_dict[k];
+    // let code = code_dict[k];
+    let code =
+      "moveRobotToRoom('porch');if (thing_in_room('mail')) {pick_up_thing('mail');moveRobotToRoom('kitchen');drop_any();}";
 
-    console.log(code);
+    // console.log(code);
 
     if ((key_task != "task1" || key_task != "task7") && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
@@ -583,9 +585,9 @@ function run_key(k, i) {
         code = "while(true){" + out + "}";
         // return;
       } else {
-        code = "";
         let [transition_table, state_ids] = run_rl(code, taskNum);
         // console.log("mdp", code);
+        code = "";
         console.log(state_ids);
         let current_state = get_current_state(state_ids, taskNum);
         let prv_action = null;
@@ -610,8 +612,9 @@ function run_key(k, i) {
         code = "while(true){" + out + "}";
         // return;
       } else {
-        code = "";
         [transition_table, state_ids] = run_mdp(code, taskNum);
+        code = "";
+        // console.log(transition_table);
         // console.log("mdp", code);
         let current_state = get_current_state(state_ids, taskNum);
         let prv_action = null;
@@ -755,7 +758,7 @@ const keys = Object.keys(code_dict).sort(customSort);
 // let task4_keys = keys.filter((key) => key.includes("task4"));
 let task5_keys = keys.filter((key) => key.includes("task5"));
 task5_keys = [
-  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task5",
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
 ];
 // let task6_keys = keys.filter((key) => key.includes("task6"));
 // let task7_keys = keys.filter((key) => key.includes("task7"));
