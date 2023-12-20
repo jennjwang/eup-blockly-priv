@@ -7,8 +7,9 @@ function pick_up_toy() {
   console.log("picking up toy");
   const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
-    console.log(toy);
+    // console.log(toy);
     if (robot_c.handsFree && is_thing_in_room(toy, robot_c.room)) {
+      console.log(toy);
       pick_up_thing(toy);
       return;
     }
@@ -435,6 +436,7 @@ function pick_up_any() {
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
     toys_in_room[room] = toys_in_room[room].sort(() => Math.random() - 0.5);
     holding = toys_in_room[room].pop();
+    toys_in_room[room].push(holding);
     console.log("toys", toys_in_room);
     x = holding.width;
     y = holding.height;
@@ -515,7 +517,7 @@ function drop_any() {
   const dst = rooms[room];
   // console.log("dropping off at", dst);
   moveThing(id, dst);
-  toys_in_room[room].push(robot_c.holding);
+  // toys_in_room[room].push(robot_c.holding);
 
   robot_c.holding.room = room;
   robot_c.holding = null;
@@ -540,7 +542,7 @@ function drop_thing(id) {
     const dst = rooms[room];
     // console.log("dropping off at", dst);
     moveThing(id, dst);
-    toys_in_room[room].push(robot_c.holding);
+    // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
     robot_c.holding = null;
