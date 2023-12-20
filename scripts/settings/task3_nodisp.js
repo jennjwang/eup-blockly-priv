@@ -10,7 +10,7 @@ bear = new Toy(BEAR_ROOM, 80, 90, "bear");
 car = new Toy(CAR_ROOM, 100, 90, "car");
 duck = new Toy(DUCK_ROOM, 120, 90, "duck");
 
-toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 end_states = "";
 start_states = "";
@@ -37,13 +37,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
 
   end_states = `robot ended in ${
     robot_c.room
-  },toys in kitchen include [${toys_in_room[
-    "kitchen"
-  ].toString()}],toys in bedroom include [${toys_in_room[
-    "bedroom"
-  ].toString()}],toys in playroom include [${toys_in_room[
-    "playroom"
-  ].toString()}]`;
+  },toys in kitchen include [${toys_in_room["kitchen"].toString()}]`;
 
   console.log(end_states);
   console.log(start_states);
@@ -77,7 +71,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
 
   SAVE_TOYS = toys.toString();
 
-  toys_in_room = { kitchen: toys, playroom: [], bedroom: [] };
+  toys_in_room = { kitchen: toys, playroom: [], bedroom: [], porch: [] };
 
   return "";
 }

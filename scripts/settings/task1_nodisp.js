@@ -10,7 +10,7 @@ let person = new Person(PERSON_ROOM);
 let end_states = "";
 let start_states = "";
 
-let toys_in_room = { kitchen: [], playroom: [], bedroom: [] };
+let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
   end_states = `robot ended in ${robot_c.room},person ended in ${person.room},the times that robot and person were in the same room is ${same_room},the number of timesteps is ${count}`;
@@ -64,7 +64,7 @@ function shuffleArray(array) {
 let interval;
 
 function movePersonHelper() {
-  let temp_rooms = ["kitchen", "bedroom", "playroom"];
+  let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   const index = temp_rooms.indexOf(person.room);
   if (index > -1) {
     temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
@@ -72,15 +72,7 @@ function movePersonHelper() {
   shuffleArray(temp_rooms);
   i = Math.floor(Math.random() * 2);
   dst = rooms[temp_rooms[i]];
-  // x = dst[0];
-  // y = dst[1];
-  // if (person.room == "playroom" && temp_rooms[i] == "bedroom") {
-  //   x += 100;
-  // }
-  // if (person.room == "kitchen" && temp_rooms[i] == "bedroom") {
-  //   x -= 170;
-  // }
-  // moveRobotTo("person", [x + 70, y]);
+
   console.log("person is now in", temp_rooms[i]);
   console.log("person room", person.room);
   console.log("robot room", robot_c.room);
@@ -88,27 +80,7 @@ function movePersonHelper() {
 }
 
 function movePerson() {
-  // clearInterval(interval);
-  // console.log("moving person");
-  // interval = setInterval(function () {
   if (person.room != robot_c.room) {
     movePersonHelper();
   }
-  // }, 5000);
 }
-
-// function toggleTask1() {
-//   var button = document.getElementById("runButton");
-
-//   if (button.innerHTML != "Run Program") {
-//     movePerson();
-//   }
-// }
-
-// if (document.getElementById("runButton")) {
-//   document.querySelector("#runButton").addEventListener("click", toggleTask1);
-// }
-
-// document.querySelector("#stopButton").addEventListener("click", () => {
-//   clearInterval(interval);
-// });
