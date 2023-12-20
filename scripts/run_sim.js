@@ -570,7 +570,7 @@ function run_key(k, i) {
 
     console.log(code);
 
-    if (key_task != "task1" && key_format == "TAP") {
+    if ((key_task != "task1" || key_task != "task7") && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
       code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
     }
@@ -635,8 +635,9 @@ function run_key(k, i) {
     let time = 8000;
     let count = 0;
     let same_room = 0;
+    let kitchen_room = 0;
 
-    if (key_format == "SEQ" && key_task != "task1") {
+    if (key_format == "SEQ" && (key_task != "task1" || key_task != "task7")) {
       time = 500;
     }
 
@@ -647,7 +648,15 @@ function run_key(k, i) {
     try {
       var myInterpreter = new Interpreter(code, initApi);
     } catch (e) {
-      resetLocs(key_id, key_task, key_format, i, same_room, count);
+      resetLocs(
+        key_id,
+        key_task,
+        key_format,
+        i,
+        same_room,
+        kitchen_room,
+        count
+      );
       resolve();
     }
 
@@ -661,9 +670,11 @@ function run_key(k, i) {
         // nextStep();
         setTimeout(nextStep, 0);
         // if (key_task == "task1" || key_format == "SEQ" || key_task == "task2") {
-        if (time % 80 == 0 && key_task == "task1") {
+        if (time % 80 == 0 && (key_task == "task1" || key_task == "task7")) {
           if (robot_c.room == person.room) {
             same_room += 1;
+          } else if (robot_c.room == "kitchen") {
+            kitchen_room += 1;
           }
           count += 1;
           movePerson();
@@ -677,7 +688,15 @@ function run_key(k, i) {
         // pidList = [];
         console.log(count);
         console.log(same_room);
-        resetLocs(key_id, key_task, key_format, i, same_room, count);
+        resetLocs(
+          key_id,
+          key_task,
+          key_format,
+          i,
+          same_room,
+          kitchen_room,
+          count
+        );
         resolve();
       }
     }
@@ -728,16 +747,22 @@ const keys = Object.keys(code_dict).sort(customSort);
 // let task0_keys = keys.filter((key) => key.includes("task0"));
 // let task1_keys = keys.filter((key) => key.includes("task1"));
 // let task2_keys = keys.filter((key) => key.includes("task2"));
-let task3_keys = keys.filter((key) => key.includes("task3"));
-let task4_keys = keys.filter((key) => key.includes("task4"));
-let task5_keys = keys.filter((key) => key.includes("task5"));
+// let task3_keys = keys.filter((key) => key.includes("task3"));
+// let task4_keys = keys.filter((key) => key.includes("task4"));
+// let task5_keys = keys.filter((key) => key.includes("task5"));
+// let task6_keys = keys.filter((key) => key.includes("task6"));
+let task7_keys = keys.filter((key) => key.includes("task7"));
+// let task8_keys = keys.filter((key) => key.includes("task8"));
+// let task9_keys = keys.filter((key) => key.includes("task9"));
 
 // importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
-importScripts("settings/task5_nodisp.js");
+// importScripts("settings/task5_nodisp.js");
+importScripts("settings/task7_nodisp.js");
+// importScripts("settings/task9_nodisp.js");
 
 // Worker A's loop
 
@@ -766,4 +791,4 @@ async function test(keys) {
 
 // Create a Blob with the JSON data
 
-test(task5_keys);
+test(task7_keys);
