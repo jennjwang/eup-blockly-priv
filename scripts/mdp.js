@@ -635,7 +635,21 @@ function parser(code) {
           ) {
             cur_priority_goals = priority_goals[i].trim().split("\t");
             if (cur_priority_goals != "") {
-              goals.push(cur_priority_goals);
+              // console.log(cur_priority_goals);
+              cur_priority_goals_with_or = [];
+              for (var g_i in cur_priority_goals) {
+                if (cur_priority_goals[g_i].includes("||")) {
+                  var temp = cur_priority_goals[g_i].split("||");
+                  for (var g_j in temp) {
+                    cur_priority_goals_with_or.push(temp[g_j].trim());
+                  }
+                } else {
+                  cur_priority_goals_with_or.push(cur_priority_goals[g_i]);
+                }
+              }
+              // console.log(cur_priority_goals_with_or);
+              // debugger;
+              goals.push(cur_priority_goals_with_or);
             }
           } else {
             goals.push([]);
