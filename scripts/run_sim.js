@@ -694,7 +694,7 @@ function run_key(k, i) {
           key_format,
           i,
           same_room,
-          kitchen_room,
+          // kitchen_room,
           count
         );
         resolve();
@@ -747,20 +747,27 @@ const keys = Object.keys(code_dict).sort(customSort);
 // let task0_keys = keys.filter((key) => key.includes("task0"));
 // let task1_keys = keys.filter((key) => key.includes("task1"));
 // let task2_keys = keys.filter((key) => key.includes("task2"));
-let task3_keys = keys.filter((key) => key.includes("task3"));
+// let task3_keys = keys.filter((key) => key.includes("task3"));
+// console.log(task3_keys);
+// task3_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task3",
+// ];
 // let task4_keys = keys.filter((key) => key.includes("task4"));
-// let task5_keys = keys.filter((key) => key.includes("task5"));
+let task5_keys = keys.filter((key) => key.includes("task5"));
+task5_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task5",
+];
 // let task6_keys = keys.filter((key) => key.includes("task6"));
 // let task7_keys = keys.filter((key) => key.includes("task7"));
 // let task8_keys = keys.filter((key) => key.includes("task8"));
 // let task9_keys = keys.filter((key) => key.includes("task9"));
 
-importScripts("settings/task3_nodisp.js");
+// importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
-// importScripts("settings/task5_nodisp.js");
+importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
 
@@ -779,6 +786,7 @@ async function run_one_loop(key, j) {
 }
 
 async function test(keys) {
+  console.log(keys.length);
   for (let j = 0; j < keys.length; j++) {
     console.log(keys[j]);
     await run_one_loop(keys[j], j);
@@ -791,4 +799,4 @@ async function test(keys) {
 
 // Create a Blob with the JSON data
 
-test(task3_keys);
+test(task5_keys);
