@@ -889,9 +889,10 @@ function get_mdp_policy(code, taskNum) {
     person_locs = [null];
     block_list = []; // // index 0 mail, index 1 coffee
 
-    for (var r1 in ROOMS) {
-      for (var r2 in ROOMS) {
-        block_list.push([ROOMS[r1], ROOMS[r2], null]);
+    state_rooms = ["kitchen", "bedroom", "playroom", "porch", null];
+    for (var r1 in state_rooms) {
+      for (var r2 in state_rooms) {
+        block_list.push([state_rooms[r1], state_rooms[r2], null]);
       }
     }
 
