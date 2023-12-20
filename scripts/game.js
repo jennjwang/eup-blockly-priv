@@ -353,13 +353,17 @@ function moveRobotToRoom(room) {
     const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
       (toy) => toy.id === robot_c.holding.id
     );
+
     if (indexToRemove !== -1) {
       // Use splice to remove the object from the array
       const toy = toys_in_room[robot_c.holding.room].splice(
         indexToRemove,
         1
       )[0];
+      // toys_in_room[robot_c.holding.room].splice(0, 1);
+      console.log("TOYS", toys_in_room);
       console.log("popped toy", toy);
+      console.log("TOYS AFTER POPPING", toys_in_room);
       robot_c.holding.room = room;
       toys_in_room[room].push(toy);
       console.log("moved with toy", toys_in_room);
@@ -459,10 +463,10 @@ function pick_up_any() {
 }
 
 function pick_up_thing(id) {
-  if (id in ["bear", "duck", "car", "toy4"]) {
-    pick_up_toy();
-    return;
-  }
+  // if (id in ["bear", "duck", "car", "toy4"]) {
+  //   pick_up_toy();
+  //   return;
+  // }
   console.log("pick up thing");
   if (robot_c.start) {
     robot_c.start = false;

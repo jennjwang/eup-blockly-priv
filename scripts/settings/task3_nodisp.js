@@ -29,7 +29,7 @@ let SAVE_TOYS = toys.toString();
 
 toys_in_room = { kitchen: toys, playroom: [], bedroom: [], porch: [] };
 
-// console.log("toys", toys);
+console.log("toys START", toys);
 
 function resetLocs(key_id, key_task, key_format, iteration) {
   start_states = `robot started in ${ROBOT_ROOM},toys in kitchen include [${SAVE_TOYS}]`;

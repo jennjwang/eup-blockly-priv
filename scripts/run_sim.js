@@ -747,21 +747,21 @@ const keys = Object.keys(code_dict).sort(customSort);
 // let task0_keys = keys.filter((key) => key.includes("task0"));
 // let task1_keys = keys.filter((key) => key.includes("task1"));
 // let task2_keys = keys.filter((key) => key.includes("task2"));
-// let task3_keys = keys.filter((key) => key.includes("task3"));
+let task3_keys = keys.filter((key) => key.includes("task3"));
 // let task4_keys = keys.filter((key) => key.includes("task4"));
 // let task5_keys = keys.filter((key) => key.includes("task5"));
 // let task6_keys = keys.filter((key) => key.includes("task6"));
-let task7_keys = keys.filter((key) => key.includes("task7"));
+// let task7_keys = keys.filter((key) => key.includes("task7"));
 // let task8_keys = keys.filter((key) => key.includes("task8"));
 // let task9_keys = keys.filter((key) => key.includes("task9"));
 
-// importScripts("settings/task3_nodisp.js");
+importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
 // importScripts("settings/task5_nodisp.js");
-importScripts("settings/task7_nodisp.js");
+// importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
 
 // Worker A's loop
@@ -769,7 +769,7 @@ importScripts("settings/task7_nodisp.js");
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 5;
+  n = 1;
   for (let i = 0; i < n; i++) {
     // if (key_format == "TAP" || key_format == "SEQ") {
     await run_key(key, i);
@@ -785,10 +785,10 @@ async function test(keys) {
   }
   // let i = 0;
   // postMessage(`Worker A - Iteration ${i}`);
-  console.log(jsonData);
-  self.postMessage({ type: "download", data: jsonData });
+  // console.log(jsonData);
+  // self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 
-test(task7_keys);
+test(task3_keys);

@@ -31,3 +31,6 @@ Double click to open the html files in the folder. You should see a webpage pop 
 1. Open your terminal and type `npm install -g http-server`
 
 2. Go to the root folder that you want to serve you files and type: `http-server ./`
+
+To run task 5 or 8, remove 2 pieces of the mail in the environment such that there is only one
+To run task 7, add in the variable of kitchen

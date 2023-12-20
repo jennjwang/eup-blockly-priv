@@ -21,7 +21,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
   start_states = `robot started in ${ROBOT_ROOM}
   item on the porch is ${id}`;
 
-  console.log(toys_in_room["kitchen"]);
+  // console.log(toys_in_room["kitchen"]);
 
   end_states = `robot ended in ${robot_c.room}
       items in kitchen include [${toys_in_room["kitchen"].toString()}]
