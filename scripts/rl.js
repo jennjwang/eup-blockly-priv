@@ -31,8 +31,11 @@ function simulator(state, action) {
         .slice(2, copiedState.blocks.length)
         .indexOf(copiedState.robot_position);
       copiedState.holding = "toy";
-      if(copiedState.blocks.length == 3 ){copiedState.blocks[2] = null;}
-      else{copiedState.blocks.splice(ind + 2, 1);}
+      if (copiedState.blocks.length == 3) {
+        copiedState.blocks[2] = null;
+      } else {
+        copiedState.blocks.splice(ind + 2, 1);
+      }
     }
   }
   if (action == "moveRobotToRandomRoom();") {
@@ -44,20 +47,22 @@ function simulator(state, action) {
     copiedState.robot_position = "porch";
   }
   if (action == "pick_up_thing('mail');") {
-    if (copiedState.holding != null){return false;}  
-    if(Array.isArray(copiedState.blocks[0])){
+    if (copiedState.holding != null) {
+      return false;
+    }
+    if (Array.isArray(copiedState.blocks[0])) {
       ind = copiedState.blocks[0].indexOf(copiedState.robot_position);
-      if (ind == -1){return false;}
-      else{
+      if (ind == -1) {
+        return false;
+      } else {
         copiedState.holding = "mail";
         copiedState.blocks[0][ind] = null;
       }
-    }   
-    else if (copiedState.blocks[0] != copiedState.robot_position){return false;} 
-    else {
+    } else if (copiedState.blocks[0] != copiedState.robot_position) {
+      return false;
+    } else {
       copiedState.holding = "mail";
       copiedState.blocks[0] = null;
-      
     }
   }
 
@@ -66,13 +71,12 @@ function simulator(state, action) {
       return false;
     } else {
       copiedState.holding = null;
-      if(!Array.isArray(copiedState.blocks[0])){
+      if (!Array.isArray(copiedState.blocks[0])) {
         copiedState.blocks[0] = copiedState.robot_position;
-      }else{
+      } else {
         ind = copiedState.blocks[0].indexOf(null);
-        copiedState.blocks[0][ind] = copiedState.robot_position
+        copiedState.blocks[0][ind] = copiedState.robot_position;
       }
-        
     }
   }
   if (action == "pick_up_thing('coffee');") {
@@ -169,17 +173,29 @@ function generate_goal_func(goal, state) {
   }
 
   if (goal.includes("thing_in_room('mail')")) {
-    if (!Array.isArray(state.blocks[0])){
-      val = val && (state.blocks[0] == state.robot_position || state.holding == "mail");
-    }else{
-      val = val && (state.blocks.includes(state.robot_position) || state.holding == "mail");
+    if (!Array.isArray(state.blocks[0])) {
+      val =
+        val &&
+        (state.blocks[0] == state.robot_position || state.holding == "mail");
+    } else {
+      val =
+        val &&
+        (state.blocks.includes(state.robot_position) ||
+          state.holding == "mail");
     }
   }
   if (goal.includes("thing_not_in_room('mail')")) {
-    if (!Array.isArray(state.blocks[0])){
-      val = val && !(state.blocks[0] == state.robot_position || state.holding == "mail");
-    }else{
-      val = val && !(state.blocks[0].includes(state.robot_position) || state.holding == "mail");
+    if (!Array.isArray(state.blocks[0])) {
+      val =
+        val &&
+        !(state.blocks[0] == state.robot_position || state.holding == "mail");
+    } else {
+      val =
+        val &&
+        !(
+          state.blocks[0].includes(state.robot_position) ||
+          state.holding == "mail"
+        );
     }
   }
 
@@ -196,82 +212,79 @@ function generate_goal_func(goal, state) {
   if (goal.includes("is_coffee_in_room('kitchen')")) {
     val =
       val &&
-      ((state.robot_position =="kitchen" && state.holding == "coffee") || 
-      (state.blocks[1]=="kitchen")) ;
+      ((state.robot_position == "kitchen" && state.holding == "coffee") ||
+        state.blocks[1] == "kitchen");
   }
   if (goal.includes("is_coffee_in_room('bedroom')")) {
     val =
       val &&
-      ((state.robot_position =="bedroom" && state.holding == "coffee") || 
-      (state.blocks[1]=="bedroom")) ;
+      ((state.robot_position == "bedroom" && state.holding == "coffee") ||
+        state.blocks[1] == "bedroom");
   }
   if (goal.includes("is_coffee_in_room('porch')")) {
     val =
       val &&
-      ((state.robot_position =="porch" && state.holding == "coffee") || 
-      (state.blocks[1]=="porch")) ;
+      ((state.robot_position == "porch" && state.holding == "coffee") ||
+        state.blocks[1] == "porch");
   }
   if (goal.includes("is_coffee_in_room('playroom')")) {
     val =
       val &&
-      ((state.robot_position =="playroom" && state.holding == "coffee") || 
-      (state.blocks[1]=="playroom")) ;
+      ((state.robot_position == "playroom" && state.holding == "coffee") ||
+        state.blocks[1] == "playroom");
   }
 
   if (goal.includes("is_mail_in_room('kitchen')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
-      val &&
-      ((state.robot_position =="kitchen" && state.holding == "mail") || 
-      (state.blocks[0]=="kitchen")) ;
-    }else{
+        val &&
+        ((state.robot_position == "kitchen" && state.holding == "mail") ||
+          state.blocks[0] == "kitchen");
+    } else {
       val =
-      val &&
-      ((state.robot_position =="kitchen" && state.holding == "mail") || 
-      (state.blocks[0].includes("kitchen")));
+        val &&
+        ((state.robot_position == "kitchen" && state.holding == "mail") ||
+          state.blocks[0].includes("kitchen"));
     }
   }
   if (goal.includes("is_mail_in_room('bedroom')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
-      val &&
-      ((state.robot_position =="bedroom" && state.holding == "mail") || 
-      (state.blocks[0]=="bedroom")) ;
-    }else{
+        val &&
+        ((state.robot_position == "bedroom" && state.holding == "mail") ||
+          state.blocks[0] == "bedroom");
+    } else {
       val =
-      val &&
-      ((state.robot_position =="bedroom" && state.holding == "mail") || 
-      (state.blocks[0].includes("bedroom"))) ;
+        val &&
+        ((state.robot_position == "bedroom" && state.holding == "mail") ||
+          state.blocks[0].includes("bedroom"));
     }
-    
   }
   if (goal.includes("is_mail_in_room('porch')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
         val &&
-        ((state.robot_position =="porch" && state.holding == "mail") || 
-        (state.blocks[0]=="porch")) ;
-    }
-    else{
+        ((state.robot_position == "porch" && state.holding == "mail") ||
+          state.blocks[0] == "porch");
+    } else {
       val =
         val &&
-        ((state.robot_position =="porch" && state.holding == "mail") || 
-        (state.blocks[0].includes("porch")));
+        ((state.robot_position == "porch" && state.holding == "mail") ||
+          state.blocks[0].includes("porch"));
     }
   }
   if (goal.includes("is_mail_in_room('playroom')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
         val &&
-        ((state.robot_position =="playroom" && state.holding == "mail") || 
-        (state.blocks[0]=="playroom")) ;
-    }else{
+        ((state.robot_position == "playroom" && state.holding == "mail") ||
+          state.blocks[0] == "playroom");
+    } else {
       val =
         val &&
-        ((state.robot_position =="playroom" && state.holding == "mail") || 
-        (state.blocks[0].includes("playroom"))) ;
+        ((state.robot_position == "playroom" && state.holding == "mail") ||
+          state.blocks[0].includes("playroom"));
     }
-    
   }
 
   return val;
@@ -439,7 +452,7 @@ function generate_triggers(triggers, state) {
       }
     }
     if (trigger == "is_mail_in_room('porch');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("porch") ||
           (state.holding == "mail" && state.robot_position == "porch")
@@ -448,7 +461,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "porch" ||
           (state.holding == "mail" && state.robot_position == "porch")
@@ -457,10 +470,10 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }    
+      }
     }
     if (trigger == "is_mail_in_room('bedroom');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("bedroom") ||
           (state.holding == "mail" && state.robot_position == "bedroom")
@@ -469,9 +482,9 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
-          state.blocks[0]== "bedroom" ||
+          state.blocks[0] == "bedroom" ||
           (state.holding == "mail" && state.robot_position == "bedroom")
         ) {
           output.push(1);
@@ -479,10 +492,9 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "is_mail_in_room('kitchen');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("kitchen") ||
           (state.holding == "mail" && state.robot_position == "kitchen")
@@ -491,7 +503,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "kitchen" ||
           (state.holding == "mail" && state.robot_position == "kitchen")
@@ -501,10 +513,9 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "is_mail_in_room('playroom');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("playroom") ||
           (state.holding == "mail" && state.robot_position == "playroom")
@@ -513,7 +524,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "playroom" ||
           (state.holding == "mail" && state.robot_position == "playroom")
@@ -523,23 +534,27 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "thing_in_room('mail');") {
-      if(Array.isArray(copiedState.blocks[0])){
-        if (state.blocks[0].includes(state.robot_position) || state.holding == "mail") {
+      if (Array.isArray(copiedState.blocks[0])) {
+        if (
+          state.blocks[0].includes(state.robot_position) ||
+          state.holding == "mail"
+        ) {
           output.push(1);
         } else {
           output.push(0);
         }
-      }else{
-        if (state.blocks[0] == state.robot_position || state.holding == "mail") {
+      } else {
+        if (
+          state.blocks[0] == state.robot_position ||
+          state.holding == "mail"
+        ) {
           output.push(1);
         } else {
           output.push(0);
         }
       }
-      
     }
 
     if (trigger == "is_coffee_in_room('porch');") {
@@ -695,64 +710,144 @@ function get_rl_policy(code, taskNum) {
   rewards_table = {};
   state_ids = {};
   ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
-  person_locs = [null]
+  person_locs = [null];
   block_list = [[null, null, null]];
 
-  state_rooms = []
-  state_objs = []
-  for (var s_i in triggers){
-    var temp_room = triggers[s_i].match(/'([^']+)'/)
-    if (temp_room != null){if (!(state_rooms.includes(temp_room[1]) && (ROOMS.includes(temp_room[1])))){state_rooms.push(temp_room[1])}}
-    if (triggers[s_i].includes('toy')){if (!state_objs.includes('toy')){state_objs.push('toy')}}
-    if (triggers[s_i].includes('coffee')){if (!state_objs.includes('coffee')){state_objs.push('coffee')}}
-    if (triggers[s_i].includes('mail')){if (!state_objs.includes('mail')){state_objs.push('mail')}}
+  state_rooms = [];
+  state_objs = [];
+  for (var s_i in triggers) {
+    var temp_room = triggers[s_i].match(/'([^']+)'/);
+    if (temp_room != null) {
+      if (
+        !(state_rooms.includes(temp_room[1]) && ROOMS.includes(temp_room[1]))
+      ) {
+        state_rooms.push(temp_room[1]);
+      }
+    }
+    if (triggers[s_i].includes("toy")) {
+      if (!state_objs.includes("toy")) {
+        state_objs.push("toy");
+      }
+    }
+    if (triggers[s_i].includes("coffee")) {
+      if (!state_objs.includes("coffee")) {
+        state_objs.push("coffee");
+      }
+    }
+    if (triggers[s_i].includes("mail")) {
+      if (!state_objs.includes("mail")) {
+        state_objs.push("mail");
+      }
+    }
   }
-  
+
   if (taskNum == 0) {
     block_list = [[null, null, null]];
   }
-  if (taskNum == 1 || taskNum == 7) {block_list = [[]]}
+  if (taskNum == 1 || taskNum == 7) {
+    block_list = [[]];
+  }
   if (taskNum == 2) {
-    for (var r in state_rooms){
+    for (var r in state_rooms) {
       block_list.push([null, null, state_rooms[r]]);
     }
   }
-  if (taskNum == 3){
-    for (var r in state_rooms){
+  if (taskNum == 3) {
+    for (var r in state_rooms) {
       block_list.push([null, null, state_rooms[r]]);
       block_list.push([null, null, state_rooms[r], state_rooms[r]]);
-      block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r]]);
-      block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r], state_rooms[r]]);
+      block_list.push([
+        null,
+        null,
+        state_rooms[r],
+        state_rooms[r],
+        state_rooms[r],
+      ]);
+      block_list.push([
+        null,
+        null,
+        state_rooms[r],
+        state_rooms[r],
+        state_rooms[r],
+        state_rooms[r],
+      ]);
 
-      for (var r_2 in state_rooms){
-        if (state_rooms[r] != state_rooms[r_2]){
+      for (var r_2 in state_rooms) {
+        if (state_rooms[r] != state_rooms[r_2]) {
           block_list.push([null, null, state_rooms[r], state_rooms[r_2]]);
           block_list.push([null, null, state_rooms[r_2], state_rooms[r]]);
-          block_list.push([null, null, state_rooms[r], state_rooms[r_2], state_rooms[r_2]]);
-          block_list.push([null, null, state_rooms[r], state_rooms[r], state_rooms[r_2]]);
-          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r]]);
-          block_list.push([null, null, state_rooms[r_2], state_rooms[r], state_rooms[r]]);
-          block_list.push([null, null, state_rooms[r_2], state_rooms[r], state_rooms[r], state_rooms[r]]);
-          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r], state_rooms[r]]);
-          block_list.push([null, null, state_rooms[r_2], state_rooms[r_2], state_rooms[r_2], state_rooms[r]]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r],
+            state_rooms[r_2],
+            state_rooms[r_2],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r],
+            state_rooms[r],
+            state_rooms[r_2],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r_2],
+            state_rooms[r_2],
+            state_rooms[r],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r_2],
+            state_rooms[r],
+            state_rooms[r],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r_2],
+            state_rooms[r],
+            state_rooms[r],
+            state_rooms[r],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r_2],
+            state_rooms[r_2],
+            state_rooms[r],
+            state_rooms[r],
+          ]);
+          block_list.push([
+            null,
+            null,
+            state_rooms[r_2],
+            state_rooms[r_2],
+            state_rooms[r_2],
+            state_rooms[r],
+          ]);
         }
       }
     }
   }
-  if (taskNum == 4){
-    for (var r in state_rooms){
+  if (taskNum == 4) {
+    for (var r in state_rooms) {
       block_list.push([null, state_rooms[r], null]);
     }
   }
-  if (taskNum == 6){
-    block_list = [
-      [[null, null, null], null, null]
-    ];
-    state_rooms.push(null)
+  if (taskNum == 6) {
+    block_list = [[[null, null, null], null, null]];
+    state_rooms.push(null);
     for (var r1 in state_rooms) {
       for (var r2 in state_rooms) {
-        for (var r3 in state_rooms){
-          block_list.push([[state_rooms[r1], state_rooms[r2], state_rooms[r3]], null, null]);
+        for (var r3 in state_rooms) {
+          block_list.push([
+            [state_rooms[r1], state_rooms[r2], state_rooms[r3]],
+            null,
+            null,
+          ]);
         }
       }
     }
@@ -776,45 +871,63 @@ function get_rl_policy(code, taskNum) {
   //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
-  if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
+  if (
+    triggers.includes("eHandsFree();") ||
+    triggers.includes("eHandsFull();")
+  ) {
     holding = [null, "obj"];
-  }else{
-    holding = [null]
+  } else {
+    holding = [null];
   }
 
-  if (triggers.includes('toy_in_room();') || triggers.includes('toy_not_in_room();')){
-    holding.push("toy")
+  if (
+    triggers.includes("toy_in_room();") ||
+    triggers.includes("toy_not_in_room();")
+  ) {
+    holding.push("toy");
   }
-  if (triggers.includes("thing_in_room('coffee');") || 
-      triggers.includes("thing_not_in_room('coffee');") || 
-      triggers.includes("is_coffee_in_room('kitchen');") || 
-      triggers.includes("is_coffee_in_room('bedroom');") || 
-      triggers.includes("is_coffee_in_room('porch');") || 
-      triggers.includes("is_coffee_in_room('playroom');") 
-      )
-  {
+  if (
+    triggers.includes("thing_in_room('coffee');") ||
+    triggers.includes("thing_not_in_room('coffee');") ||
+    triggers.includes("is_coffee_in_room('kitchen');") ||
+    triggers.includes("is_coffee_in_room('bedroom');") ||
+    triggers.includes("is_coffee_in_room('porch');") ||
+    triggers.includes("is_coffee_in_room('playroom');")
+  ) {
     holding.push("coffee");
-    coffee_locs = ["is_coffee_in_room('bedroom');", "is_coffee_in_room('kitchen');", "is_coffee_in_room('playroom');","is_coffee_in_room('porch');"]
+    coffee_locs = [
+      "is_coffee_in_room('bedroom');",
+      "is_coffee_in_room('kitchen');",
+      "is_coffee_in_room('playroom');",
+      "is_coffee_in_room('porch');",
+    ];
     triggers.push(...coffee_locs);
   }
-  if (triggers.includes("thing_in_room('mail');") || 
-      triggers.includes("thing_not_in_room('mail');") || 
-      triggers.includes("is_mail_in_room('kitchen');") || 
-      triggers.includes("is_mail_in_room('bedroom');") || 
-      triggers.includes("is_mail_in_room('porch');") || 
-      triggers.includes("is_mail_in_room('playroom');") 
-      )
-  {
+  if (
+    triggers.includes("thing_in_room('mail');") ||
+    triggers.includes("thing_not_in_room('mail');") ||
+    triggers.includes("is_mail_in_room('kitchen');") ||
+    triggers.includes("is_mail_in_room('bedroom');") ||
+    triggers.includes("is_mail_in_room('porch');") ||
+    triggers.includes("is_mail_in_room('playroom');")
+  ) {
     holding.push("mail");
-    mail_locs = ["is_mail_in_room('bedroom');", "is_mail_in_room('kitchen');", "is_mail_in_room('playroom');", "is_mail_in_room('porch');"]
+    mail_locs = [
+      "is_mail_in_room('bedroom');",
+      "is_mail_in_room('kitchen');",
+      "is_mail_in_room('playroom');",
+      "is_mail_in_room('porch');",
+    ];
     triggers.push(...mail_locs);
   }
-  if (triggers.includes('isPersonNotInRoomEvent();') || 
-      triggers.includes('isPersonInRoomEvent();')){
+  if (
+    triggers.includes("isPersonNotInRoomEvent();") ||
+    triggers.includes("isPersonInRoomEvent();")
+  ) {
     person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
   }
 
-  if (actions.includes("drop_any();")){
+  if (actions.includes("drop_any();")) {
     const drop_any_ind = actions.indexOf("drop_any();");
     actions.splice(drop_any_ind, 1);
     actions.push("drop_thing('mail');");
@@ -822,14 +935,14 @@ function get_rl_policy(code, taskNum) {
     actions.push("drop_toy();");
   }
 
-  if (actions.includes("pick_up_any();")){
+  if (actions.includes("pick_up_any();")) {
     const pick_any_ind = actions.indexOf("pick_up_any();");
     actions.splice(pick_any_ind, 1);
     actions.push("pick_up_toy();");
     actions.push("pick_up_thing('mail');");
     actions.push("pick_up_thing('coffee');");
   }
-  
+
   if (actions.includes("moveRobotToRandomRoom();")) {
     const randroom_ind = actions.indexOf("moveRobotToRandomRoom();");
     actions.splice(randroom_ind, 1);
@@ -838,12 +951,12 @@ function get_rl_policy(code, taskNum) {
     actions.push("moveRobotToRoom('bedroom');");
     actions.push("moveRobotToRoom('playroom');");
     actions.push("moveRobotToRoom('porch');");
-    if (taskNum == 1 || taskNum == 7){
+    if (taskNum == 1 || taskNum == 7) {
       triggers = triggers.concat([
         "isRobotinRoomEvent('kitchen');",
         "isRobotinRoomEvent('bedroom');",
         "isRobotinRoomEvent('playroom');",
-        "isRobotinRoomEvent('porch');"
+        "isRobotinRoomEvent('porch');",
       ]);
     }
   }
@@ -857,7 +970,7 @@ function get_rl_policy(code, taskNum) {
             blocks: block_list[block],
             holding: holding[obj],
             person: person_locs[person_loc],
-          };            
+          };
           high_prior = goal[0];
           med_prior = goal[1];
           low_prior = goal[2];
@@ -986,8 +1099,8 @@ function run_rl(code, taskNum) {
   if (transition_table == false) {
     return "";
   }
-  
-  if (taskNum == 1 || taskNum == 7){
+
+  if (taskNum == 1 || taskNum == 7) {
     out = "";
     var count = 0;
     for (key in transition_table) {
@@ -1014,10 +1127,9 @@ function run_rl(code, taskNum) {
     // timer = (end - start) / 100;
     // debugger;
     return out;
-  }
-  else {
+  } else {
     return [transition_table, state_ids];
-  }  
+  }
 }
 
 function get_seq_action(transition_table, state_id, action = "") {
