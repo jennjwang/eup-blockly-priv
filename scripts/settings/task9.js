@@ -45,7 +45,7 @@ function resetLocs() {
 
   start_states = `
   robot started in ${ROBOT_ROOM}
-  coffee started in ${coffee.room}`;
+  coffee started in ${COFFEE_ROOM}`;
 
   clearInterval(interval);
   document.getElementById("start").innerHTML = start_states;
