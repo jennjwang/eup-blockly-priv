@@ -1147,8 +1147,10 @@ function run_mdp(code, taskNum) {
     // end = Date.now();
     // timer = (end - start) / 100;
     // debugger;
+    console.log(rewards_table);
     return out;
   } else {
+    console.log(rewards_table);
     return [transition_table, state_ids];
   }
 }

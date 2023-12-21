@@ -13,10 +13,13 @@ let thing = new Thing("porch", 40, 320, thing_id);
 let robot_c = new Robot(ROBOT_ROOM);
 
 let end_states = "";
-let start_states = "";
+let start_states = `robot started in ${ROBOT_ROOM}
+  item on the porch is ${thing_id}`;
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [thing] };
+
 console.log("START", toys_in_room);
+console.log(start_states);
 
 function resetLocs(key_id, key_task, key_format, iteration) {
   // thing_id = ["coffee", "mail"][Math.floor(Math.random() * 2)];

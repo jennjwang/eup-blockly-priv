@@ -180,9 +180,9 @@ function get_current_state(state_ids, taskNum) {
 
   all_objs = [null, null, null];
   for (let toy in toy_whereabouts) {
-    if (toy_whereabouts[toy]["id"] == "mail") {
+    if (toy_whereabouts[toy]["thing_id"] == "mail") {
       all_objs[0] = toy_whereabouts[toy]["room"];
-    } else if (toy_whereabouts[toy]["id"] == "coffee") {
+    } else if (toy_whereabouts[toy]["thing_id"] == "coffee") {
       all_objs[1] = toy_whereabouts[toy]["room"];
     } else if (all_objs[2] == null) {
       all_objs[2] = toy_whereabouts[toy]["room"];
@@ -207,10 +207,13 @@ function get_current_state(state_ids, taskNum) {
 
   held_obj = null;
   if (robot_c.holding != null) {
-    if (robot_c.holding.id != "mail" && robot_c.holding.id != "coffee") {
+    if (
+      robot_c.holding.thing_id != "mail" &&
+      robot_c.holding.thing_id != "coffee"
+    ) {
       held_obj = "toy";
     } else {
-      held_obj = robot_c.holding.id;
+      held_obj = robot_c.holding.thing_id;
     }
   }
   return find_state(
@@ -224,28 +227,6 @@ function get_current_state(state_ids, taskNum) {
 
 function initApi(interpreter, globalObject) {
   var wrapper;
-
-  // const wrapperHighlight = function (id) {
-  //   id = String(id || "");
-  //   // console.log(id);
-  //   return highlightBlock(id);
-  // };
-  // interpreter.setProperty(
-  //   globalObject,
-  //   "highlightBlock",
-  //   interpreter.createNativeFunction(wrapperHighlight)
-  // );
-
-  // Each step will run the interpreter until the highlightPause is true.
-  // let highlightPause = false;
-
-  // function highlightBlock(id) {
-  //   resolveAfter3Seconds().then(() => {
-  //     workspace.highlightBlock(id);
-  //     // highlightPause = true;
-  //     console.log("highlight");
-  //   });
-  // }
 
   wrapper = function (room, callback) {
     // resolveAfter3Seconds().then(() => {
@@ -568,6 +549,10 @@ function run_key(k, i) {
 
     let code = code_dict[k];
     // let code =
+    //   "goals(\n    (isRobotinRoomEvent('kitchen') && toy_not_in_room())\t##);\n";
+    // "goals(\n    ((isRobotinRoomEvent('kitchen') && thing_in_room('mail')) || (isRobotinRoomEvent('bedroom') && thing_in_room('coffee')))\t##);\n"
+    // let code = "goals(\n    isRobotinRoomEvent('kitchen')\t##);\n";
+    // let code =
     //   "moveRobotToRoom('porch');if (thing_in_room('mail')) {pick_up_thing('mail');moveRobotToRoom('kitchen');drop_any();}";
 
     console.log(code);
@@ -576,6 +561,8 @@ function run_key(k, i) {
       var closingBraceIndex = code.lastIndexOf("}");
       code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
     }
+
+    // console.log(code);
 
     const taskNum = key_task.slice(-1);
     console.log(taskNum);
@@ -603,7 +590,7 @@ function run_key(k, i) {
           }
         }
       }
-      console.log(code);
+      // console.log(code);
     }
 
     if (key_format == "GOAL_MDP") {
@@ -614,10 +601,12 @@ function run_key(k, i) {
       } else {
         [transition_table, state_ids] = run_mdp(code, taskNum);
         code = "";
+        console.log(state_ids);
         // console.log(transition_table);
         // console.log("mdp", code);
         let current_state = get_current_state(state_ids, taskNum);
         let prv_action = null;
+        console.log(current_state);
         if (current_state) {
           let [cur_action, next_state, cur_val] =
             transition_table[current_state];
@@ -632,7 +621,7 @@ function run_key(k, i) {
       }
     }
 
-    console.log(code);
+    // console.log(code);
     // resetLocs();
 
     let time = 8000;
@@ -747,33 +736,33 @@ function customSort(a, b) {
 }
 
 const keys = Object.keys(code_dict).sort(customSort);
-// let task0_keys = keys.filter((key) => key.includes("task0"));
-// let task1_keys = keys.filter((key) => key.includes("task1"));
-// let task2_keys = keys.filter((key) => key.includes("task2"));
-// let task3_keys = keys.filter((key) => key.includes("task3"));
+let task0_keys = keys.filter((key) => key.includes("task0"));
+let task1_keys = keys.filter((key) => key.includes("task1"));
+let task2_keys = keys.filter((key) => key.includes("task2"));
+let task3_keys = keys.filter((key) => key.includes("task3"));
 // console.log(task3_keys);
 // task3_keys = [
 //   "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task3",
 // ];
-// let task4_keys = keys.filter((key) => key.includes("task4"));
+let task4_keys = keys.filter((key) => key.includes("task4"));
 let task5_keys = keys.filter((key) => key.includes("task5"));
 // task5_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
+//   "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task5",
 // ];
-// let task6_keys = keys.filter((key) => key.includes("task6"));
-// let task7_keys = keys.filter((key) => key.includes("task7"));
+let task6_keys = keys.filter((key) => key.includes("task6"));
+let task7_keys = keys.filter((key) => key.includes("task7"));
 // let task7_keys = [
 //   "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
 // ];
-// let task8_keys = keys.filter((key) => key.includes("task8"));
-// let task9_keys = keys.filter((key) => key.includes("task9"));
+let task8_keys = keys.filter((key) => key.includes("task8"));
+let task9_keys = keys.filter((key) => key.includes("task9"));
 
-// importScripts("settings/task3_nodisp.js");
+importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
-importScripts("settings/task5_nodisp.js");
+// importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
 
@@ -797,13 +786,13 @@ async function test(keys) {
     console.log(keys[j]);
     await run_one_loop(keys[j], j);
   }
-  // let i = 0;
-  // postMessage(`Worker A - Iteration ${i}`);
-  // console.log(jsonData);
-  // self.postMessage({ type: "download", data: jsonData });
+  let i = 0;
+  postMessage(`Worker A - Iteration ${i}`);
+  console.log(jsonData);
+  self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 
-// test(task7_keys);
-test(task5_keys);
+// test(task6_keys);
+test(task3_keys);
