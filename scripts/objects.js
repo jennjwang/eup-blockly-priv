@@ -45,17 +45,17 @@ class Person {
 }
 
 class Thing {
-  constructor(room, width, height, id) {
+  constructor(room, width, height, thing_id) {
     this.room = room;
     this.width = width;
     this.height = height;
-    this.id = id;
+    this.thing_id = thing_id;
   }
   setRoom(room) {
     this.room = room;
   }
 
   toString() {
-    return this.id;
+    return this.thing_id;
   }
 }

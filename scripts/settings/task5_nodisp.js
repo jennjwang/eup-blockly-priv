@@ -51,7 +51,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
 
   thing_id = ["coffee", "mail"][Math.floor(Math.random() * 2)];
 
-  thing = new Thing("porch", 40, 320, id);
+  thing = new Thing("porch", 40, 320, thing_id);
   toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [thing] };
 
   return "";

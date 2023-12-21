@@ -566,11 +566,11 @@ function run_key(k, i) {
     console.log("format", key_format);
     console.log("key", key_id);
 
-    // let code = code_dict[k];
-    let code =
-      "moveRobotToRoom('porch');if (thing_in_room('mail')) {pick_up_thing('mail');moveRobotToRoom('kitchen');drop_any();}";
+    let code = code_dict[k];
+    // let code =
+    //   "moveRobotToRoom('porch');if (thing_in_room('mail')) {pick_up_thing('mail');moveRobotToRoom('kitchen');drop_any();}";
 
-    // console.log(code);
+    console.log(code);
 
     if ((key_task != "task1" || key_task != "task7") && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
@@ -757,11 +757,14 @@ const keys = Object.keys(code_dict).sort(customSort);
 // ];
 // let task4_keys = keys.filter((key) => key.includes("task4"));
 let task5_keys = keys.filter((key) => key.includes("task5"));
-task5_keys = [
-  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
-];
+// task5_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
+// ];
 // let task6_keys = keys.filter((key) => key.includes("task6"));
 // let task7_keys = keys.filter((key) => key.includes("task7"));
+// let task7_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
+// ];
 // let task8_keys = keys.filter((key) => key.includes("task8"));
 // let task9_keys = keys.filter((key) => key.includes("task9"));
 
@@ -779,7 +782,7 @@ importScripts("settings/task5_nodisp.js");
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 1;
+  n = 5;
   for (let i = 0; i < n; i++) {
     // if (key_format == "TAP" || key_format == "SEQ") {
     await run_key(key, i);
@@ -802,4 +805,5 @@ async function test(keys) {
 
 // Create a Blob with the JSON data
 
+// test(task7_keys);
 test(task5_keys);

@@ -29,21 +29,21 @@ function drop_toy() {
   }
   const toys = ["bear", "duck", "car", "toy4"];
   for (var toy of toys) {
-    if (robot_c.holding.id == toy) {
+    if (robot_c.holding.thing_id == toy) {
       drop_thing(toy);
-      console.log("dropped", toy.id);
+      console.log("dropped", toy.thing_id);
       return;
     }
   }
 }
 
-// HELPER id - robot, bear, car, duck, person
+// HELPER thing_id - robot, bear, car, duck, person
 /**
  * move any object to a goal coordinate
- * @param {*} id - possible id (robot, bear, car, duck, person)
+ * @param {*} thing_id - possible thing_id (robot, bear, car, duck, person)
  * @param {*} coor
  */
-function moveThing(id, coor) {
+function moveThing(thing_id, coor) {
   if (robot_c.start) {
     robot_c.start = false;
   }
@@ -57,11 +57,11 @@ function moveThing(id, coor) {
 
   // console.log("moving");
 
-  let robot = document.getElementById(id);
+  let robot = document.getElementById(thing_id);
 
-  let robot_x = robot.style.width;
+  let robot_x = robot.style.wthing_idth;
 
-  if (robot.style.width == "") {
+  if (robot.style.wthing_idth == "") {
     robot_x = 0;
   }
 
@@ -81,18 +81,18 @@ function moveThing(id, coor) {
     robot_y += parseInt(robot.style.bottom);
   }
 
-  var id = null;
+  var thing_id = null;
 
-  clearInterval(id);
-  id = setInterval(moveX, 0);
-  pidList.push(id);
+  clearInterval(thing_id);
+  thing_id = setInterval(moveX, 0);
+  pthing_idList.push(thing_id);
 
   function moveX() {
     if (robot_x == goal_x) {
       // console.log("y");
-      clearInterval(id);
-      id = setInterval(moveY, 0);
-      pidList.push(id);
+      clearInterval(thing_id);
+      thing_id = setInterval(moveY, 0);
+      pthing_idList.push(thing_id);
     } else if (goal_x > robot_x) {
       robot_x++;
       robot.style.left = robot_x + "px";
@@ -104,7 +104,7 @@ function moveThing(id, coor) {
 
   function moveY() {
     if (robot_y == goal_y) {
-      clearInterval(id);
+      clearInterval(thing_id);
     } else if (goal_y > robot_y) {
       //   console.log("up");
       robot_y++;
@@ -186,20 +186,20 @@ function is_toy_in_room(room) {
 }
 
 function is_coffee_in_room(room) {
-  let id = "coffee";
-  // console.log(is_thing_in_room(id, room));
-  return is_thing_in_room(id, room);
+  let thing_id = "coffee";
+  // console.log(is_thing_in_room(thing_id, room));
+  return is_thing_in_room(thing_id, room);
 }
 
 function is_mail_in_room(room) {
-  // let id = "mail";
+  // let thing_id = "mail";
   if (is_thing_in_room("mail", room)) {
     console.log("returning true");
     return true;
   }
   return false;
-  // console.log(is_thing_in_room(id, room));
-  // return is_thing_in_room(id, room);
+  // console.log(is_thing_in_room(thing_id, room));
+  // return is_thing_in_room(thing_id, room);
 }
 
 function coffee_in_room() {
@@ -210,16 +210,18 @@ function mail_in_room() {
   return is_mail_in_room(robot_c.room);
 }
 
-function is_thing_in_room(id, room) {
+function is_thing_in_room(thing_id, room) {
   let toy_in_room_check = toys_in_room[room].length != 0;
+  console.log(toys_in_room);
   if (robot_c.handsFull) {
     // console.log("hands full");
-    return robot_c.holding.id.includes(id);
+    return robot_c.holding.thing_id.includes(thing_id);
   } else if (toy_in_room_check) {
     // console.log("things in room");
     let objs = toys_in_room[room];
+    console.log("objects", objs);
     // we know there's only one coffee and once piece of mail
-    let containsObj = objs.some((obj) => obj.id.includes(id));
+    let containsObj = objs.some((obj) => obj.thing_id.includes(thing_id));
     // console.log(containsObj);
     return containsObj;
   }
@@ -334,6 +336,7 @@ function resolveAfter3Seconds() {
 // room - kitchen, bedroom, playroom
 function moveRobotToRoom(room) {
   dst = rooms[room];
+  console.log(toys_in_room);
   robot_c.handsPrev = robot_c.handsFree;
 
   if (robot_c.room == room) {
@@ -352,7 +355,7 @@ function moveRobotToRoom(room) {
 
   if (!robot_c.handsFree) {
     const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
-      (toy) => toy.id === robot_c.holding.id
+      (toy) => toy.thing_id === robot_c.holding.thing_id
     );
 
     if (indexToRemove !== -1) {
@@ -379,8 +382,8 @@ function moveRobotToRoom(room) {
 
   if (!robot_c.handsFree) {
     const toy_dst = [dst[0], dst[1] + 10];
-    console.log("moving", robot_c.holding.id);
-    moveThing(robot_c.holding.id, toy_dst);
+    console.log("moving", robot_c.holding.thing_id);
+    moveThing(robot_c.holding.thing_id, toy_dst);
   }
 }
 
@@ -409,24 +412,25 @@ function as_many_toys() {
   return max_toys == numb_toys_in_room;
 }
 
-function thing_in_room(id) {
-  let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
+function thing_in_room(thing_id) {
+  return is_thing_in_room(thing_id, robot_c.room);
+  // let toy_in_room_check = toys_in_room[robot_c.room].length != 0;
 
-  if (robot_c.handsFull) {
-    return robot_c.holding.id.includes(id);
-  } else if (toy_in_room_check) {
-    let objs = toys_in_room[robot_c.room];
-    // we know there's only one coffee and once piece of mail
-    let containsObj = objs.some((obj) => obj.id.includes(id));
-    return containsObj;
-  }
-  return false;
+  // if (robot_c.handsFull) {
+  //   return robot_c.holding.thing_id.includes(thing_id);
+  // } else if (toy_in_room_check) {
+  //   let objs = toys_in_room[robot_c.room];
+  //   // we know there's only one coffee and once piece of mail
+  //   let containsObj = objs.some((obj) => obj.thing_id.includes(thing_id));
+  //   return containsObj;
+  // }
+  // return false;
 }
 
-function thing_not_in_room(id) {
+function thing_not_in_room(thing_id) {
   console.log("toys", toys_in_room);
   console.log("# of toys in room", toys_in_room[robot_c.room].length);
-  return !thing_in_room(id); //toys_in_room[robot_c.room].length == 0;
+  return !thing_in_room(thing_id); //toys_in_room[robot_c.room].length == 0;
 }
 
 function pick_up_any() {
@@ -448,7 +452,7 @@ function pick_up_any() {
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
-    console.log("picked up", robot_c.holding.id);
+    console.log("picked up", robot_c.holding.thing_id);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
     // console.log("hands are free?", robot_c.handsFree);
@@ -457,15 +461,15 @@ function pick_up_any() {
     if (display) {
       setTimeout(() => {
         if (robot_c.holding) {
-          moveThing(robot_c.holding.id, dst);
+          moveThing(robot_c.holding.thing_id, dst);
         }
       }, 1500);
     }
   }
 }
 
-function pick_up_thing(id) {
-  // if (id in ["bear", "duck", "car", "toy4"]) {
+function pick_up_thing(thing_id) {
+  // if (thing_id in ["bear", "duck", "car", "toy4"]) {
   //   pick_up_toy();
   //   return;
   // }
@@ -481,12 +485,12 @@ function pick_up_thing(id) {
   robot_c.prev = robot_c.room;
   if (toys_in_room[room].length != 0 && robot_c.handsFree) {
     let objs = toys_in_room[room];
-    let containsObj = objs.some((obj) => obj.id.includes(id));
+    let containsObj = objs.some((obj) => obj.thing_id.includes(thing_id));
     if (!containsObj) {
-      console.log("couldn't find", id);
+      console.log("couldn't find", thing_id);
       return;
     }
-    let obj = objs.find((obj) => obj.id.includes(id));
+    let obj = objs.find((obj) => obj.thing_id.includes(thing_id));
     // holding = toys.pop();
     // console.log(room, "this room");
     obj.room = room;
@@ -494,7 +498,7 @@ function pick_up_thing(id) {
     x = holding.width;
     y = holding.height;
     robot_c.holding = holding;
-    console.log("picked up", robot_c.holding.id);
+    console.log("picked up", robot_c.holding.thing_id);
     console.log("ROOM", toys_in_room);
     robot_c.handsPrev = true;
     robot_c.handsFree = false;
@@ -504,7 +508,7 @@ function pick_up_thing(id) {
     if (display) {
       setTimeout(() => {
         if (robot_c.holding) {
-          moveThing(robot_c.holding.id, dst);
+          moveThing(robot_c.holding.thing_id, dst);
         }
       }, 1500);
     }
@@ -524,18 +528,18 @@ function drop_any() {
 
   robot_c.handsPrev = false;
   robot_c.handsFree = true;
-  const id = robot_c.holding.id;
+  const thing_id = robot_c.holding.thing_id;
 
   const dst = rooms[room];
   // console.log("dropping off at", dst);
-  moveThing(id, dst);
+  moveThing(thing_id, dst);
   // toys_in_room[room].push(robot_c.holding);
 
   robot_c.holding.room = room;
   robot_c.holding = null;
 }
 
-function drop_thing(id) {
+function drop_thing(thing_id) {
   if (robot_c.start) {
     robot_c.start = false;
   }
@@ -543,17 +547,17 @@ function drop_thing(id) {
     return;
   }
   robot_c.prev = robot_c.room;
-  if (!robot_c.handsFree && robot_c.holding.id.includes(id)) {
+  if (!robot_c.handsFree && robot_c.holding.thing_id.includes(thing_id)) {
     let room = robot_c.room;
     console.log("dropped thing");
 
     robot_c.handsPrev = false;
     robot_c.handsFree = true;
-    const id = robot_c.holding.id;
+    const thing_id = robot_c.holding.thing_id;
 
     const dst = rooms[room];
     // console.log("dropping off at", dst);
-    moveThing(id, dst);
+    moveThing(thing_id, dst);
     // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
@@ -561,7 +565,7 @@ function drop_thing(id) {
   }
 }
 
-function drop_thing_disappears(id) {
+function drop_thing_disappears(thing_id) {
   if (robot_c.start) {
     robot_c.start = false;
   }
@@ -569,7 +573,7 @@ function drop_thing_disappears(id) {
     return;
   }
   robot_c.prev = robot_c.room;
-  if (!robot_c.handsFree && robot_c.holding.id.includes(id)) {
+  if (!robot_c.handsFree && robot_c.holding.thing_id.includes(thing_id)) {
     let room = robot_c.room;
     console.log("dropped thing");
 
@@ -577,7 +581,7 @@ function drop_thing_disappears(id) {
     robot_c.handsFree = true;
 
     const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
-      (toy) => toy.id === robot_c.holding.id
+      (toy) => toy.thing_id === robot_c.holding.thing_id
     );
 
     if (indexToRemove !== -1) {
@@ -587,7 +591,7 @@ function drop_thing_disappears(id) {
 
     console.log(toys_in_room);
     // const dst = rooms[room];
-    // moveRobotTo(robot_c.holding.id, dst);
+    // moveRobotTo(robot_c.holding.thing_id, dst);
     // toys_in_room[room].push(robot_c.holding);
 
     robot_c.holding.room = room;
