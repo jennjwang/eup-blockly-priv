@@ -32,7 +32,7 @@ function resetLocs(key_id, key_task, key_format, iteration) {
   coffee ended in ${coffee.room}`;
 
   start_states = `robot started in ${ROBOT_ROOM}
-  coffee started in ${coffee.room}`;
+  coffee started in ${COFFEE_ROOM}`;
 
   const data = {
     id: key_id,
