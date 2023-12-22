@@ -84,6 +84,8 @@ function get_current_state(state_ids, taskNum) {
       held_obj = robot_c.holding.id;
     }
   }
+
+  console.log('here: ', robot_c, all_objs, held_obj, person_location)
   return find_state(
     state_ids,
     robot_c.room,
