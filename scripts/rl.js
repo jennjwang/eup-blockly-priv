@@ -114,7 +114,10 @@ function generate_goal_func(goal, state) {
     val = val && !(state.person == state.robot_position);
   }
 
-  if (goal.includes("isRobotinRoomEvent('kitchen')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('kitchen')") &&
+    !goal.includes("!isRobotinRoomEvent('kitchen')")
+  ) {
     val = val && state.robot_position == "kitchen";
   }
 
@@ -122,7 +125,10 @@ function generate_goal_func(goal, state) {
     val = val && state.robot_position != "kitchen";
   }
 
-  if (goal.includes("isRobotinRoomEvent('bedroom')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('bedroom')") &&
+    !goal.includes("!isRobotinRoomEvent('bedroom')")
+  ) {
     val = val && state.robot_position == "bedroom";
   }
 
@@ -130,7 +136,10 @@ function generate_goal_func(goal, state) {
     val = val && state.robot_position != "bedroom";
   }
 
-  if (goal.includes("isRobotinRoomEvent('playroom')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('playroom')") &&
+    !goal.includes("!isRobotinRoomEvent('playroom')")
+  ) {
     val = val && state.robot_position == "playroom";
   }
 
@@ -165,7 +174,10 @@ function generate_goal_func(goal, state) {
       );
   }
 
-  if (goal.includes("isRobotinRoomEvent('porch')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('porch')") &&
+    !goal.includes("!isRobotinRoomEvent('porch')")
+  ) {
     val = val && state.robot_position == "porch";
   }
   if (goal.includes("!isRobotinRoomEvent('porch')")) {
@@ -1140,10 +1152,8 @@ function run_rl(code, taskNum) {
     // end = Date.now();
     // timer = (end - start) / 100;
     // debugger;
-    console.log(rewards_table);
     return out;
   } else {
-    console.log(rewards_table);
     return [transition_table, state_ids];
   }
 }
