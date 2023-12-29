@@ -1,7 +1,7 @@
 # EUP-Blockly
 
 A visual programming editor with Blockly to support
-non-technical users in interacting with RL systems and systems based on the trigger-action programming paradigm. You can access the interface [here.](https://eup-blockly.herokuapp.com/task1.html)
+non-technical users in interacting with RL systems and systems under different programming paradigms. You can access the interface [here.](https://eup-blockly.herokuapp.com/task1.html)
 
 Task 1: https://eup-blockly.herokuapp.com/task1.html
 
