@@ -70,7 +70,7 @@ function movePersonHelper() {
     temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
   }
   shuffleArray(temp_rooms);
-  i = Math.floor(Math.random() * 2);
+  i = Math.floor(Math.random() * 3);
   dst = rooms[temp_rooms[i]];
 
   console.log("person is now in", temp_rooms[i]);
@@ -80,7 +80,5 @@ function movePersonHelper() {
 }
 
 function movePerson() {
-  if (person.room != robot_c.room) {
-    movePersonHelper();
-  }
+  movePersonHelper();
 }
