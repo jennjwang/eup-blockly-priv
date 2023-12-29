@@ -13,7 +13,9 @@ let start_states = "";
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
-  end_states = `robot ended in ${robot_c.room},person ended in ${person.room},the times that robot and person were in the same room is ${same_room},the number of timesteps is ${count}`;
+  end_states = `robot ended in ${robot_c.room},person ended in ${person.room},
+  the times that robot and person were in the same room is ${same_room},
+  the number of timesteps is ${count}`;
 
   start_states = `robot started in ${ROBOT_ROOM},person started in ${PERSON_ROOM}`;
 
@@ -65,18 +67,19 @@ let interval;
 
 function movePersonHelper() {
   let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
-  const index = temp_rooms.indexOf(person.room);
-  if (index > -1) {
-    temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
-  }
-  shuffleArray(temp_rooms);
-  i = Math.floor(Math.random() * 3);
-  dst = rooms[temp_rooms[i]];
+  let rand_room = temp_rooms[Math.floor(Math.random() * temp_rooms.length)];
+  dst = rooms[rand_room];
+  person.setRoom(rand_room);
 
-  console.log("person is now in", temp_rooms[i]);
+  let bool = Math.floor(Math.random() * 2);
+  if (bool == 1) {
+    dst = rooms[robot_c.room];
+    person.setRoom(robot_c.room);
+  }
+
+  // console.log("person is now in", temp_rooms[i]);
   console.log("person room", person.room);
   console.log("robot room", robot_c.room);
-  person.setRoom(temp_rooms[i]);
 }
 
 function movePerson() {

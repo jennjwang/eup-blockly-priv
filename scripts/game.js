@@ -336,7 +336,9 @@ function resolveAfter3Seconds() {
 // room - kitchen, bedroom, playroom
 function moveRobotToRoom(room) {
   dst = rooms[room];
-  console.log(toys_in_room);
+  // console.log(toys_in_room);
+  console.log("robot moving to ", room);
+  robot_c.setRoom(room);
   robot_c.handsPrev = robot_c.handsFree;
 
   if (robot_c.room == room) {
@@ -346,12 +348,7 @@ function moveRobotToRoom(room) {
       return;
     }
     moveThing("robot", [x, y + 20]);
-    setTimeout(() => {
-      moveThing("robot", dst);
-    }, 100);
   }
-
-  robot_c.setRoom(room);
 
   if (!robot_c.handsFree) {
     const indexToRemove = toys_in_room[robot_c.holding.room].findIndex(
