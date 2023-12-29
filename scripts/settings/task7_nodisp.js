@@ -78,9 +78,7 @@ function movePersonHelper() {
 }
 
 function movePerson() {
-  if (person.room != robot_c.room) {
-    movePersonHelper();
-  }
+  movePersonHelper();
 }
 
 // document.querySelector("#stopButton").addEventListener("click", () => {
