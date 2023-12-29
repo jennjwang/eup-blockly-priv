@@ -624,7 +624,7 @@ function run_key(k, i) {
     // console.log(code);
     // resetLocs();
 
-    let time = 8000;
+    let time = 1000;
     let count = 0;
     let same_room = 0;
     let kitchen_room = 0;
@@ -662,7 +662,8 @@ function run_key(k, i) {
         // nextStep();
         setTimeout(nextStep, 0);
         // if (key_task == "task1" || key_format == "SEQ" || key_task == "task2") {
-        if (time % 80 == 0 && (key_task == "task1" || key_task == "task7")) {
+        //time % 80 == 0 &&
+        if (key_task == "task1" || key_task == "task7") {
           if (robot_c.room == person.room) {
             same_room += 1;
           } else if (robot_c.room == "kitchen") {
@@ -738,30 +739,37 @@ function customSort(a, b) {
 const keys = Object.keys(code_dict).sort(customSort);
 let task0_keys = keys.filter((key) => key.includes("task0"));
 let task1_keys = keys.filter((key) => key.includes("task1"));
+task1_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task1",
+];
 let task2_keys = keys.filter((key) => key.includes("task2"));
 let task3_keys = keys.filter((key) => key.includes("task3"));
 // console.log(task3_keys);
-// task3_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task3",
-// ];
+task3_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task3",
+];
 let task4_keys = keys.filter((key) => key.includes("task4"));
-let task5_keys = keys.filter((key) => key.includes("task5"));
-// task5_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task5",
-// ];
+// let task5_keys = keys.filter((key) => key.includes("task5"));
+task5_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
+];
 let task6_keys = keys.filter((key) => key.includes("task6"));
-let task7_keys = keys.filter((key) => key.includes("task7"));
-// let task7_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
-// ];
+task6_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6",
+];
+// let task7_keys = keys.filter((key) => key.includes("task7"));
+let task7_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
+];
 let task8_keys = keys.filter((key) => key.includes("task8"));
 let task9_keys = keys.filter((key) => key.includes("task9"));
 
-importScripts("settings/task3_nodisp.js");
+// importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
-// importScripts("settings/task1_nodisp.js");
+importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
+// importScripts("settings/task6_nodisp.js");
 // importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
@@ -771,7 +779,7 @@ importScripts("settings/task3_nodisp.js");
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 5;
+  n = 1;
   for (let i = 0; i < n; i++) {
     // if (key_format == "TAP" || key_format == "SEQ") {
     await run_key(key, i);
@@ -787,12 +795,12 @@ async function test(keys) {
     await run_one_loop(keys[j], j);
   }
   let i = 0;
-  postMessage(`Worker A - Iteration ${i}`);
-  console.log(jsonData);
-  self.postMessage({ type: "download", data: jsonData });
+  // postMessage(`Worker A - Iteration ${i}`);
+  // console.log(jsonData);
+  // self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 
 // test(task6_keys);
-test(task3_keys);
+test(task1_keys);
