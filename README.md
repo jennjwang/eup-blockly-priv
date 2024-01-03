@@ -34,3 +34,5 @@ Double click to open the html files in the folder. You should see a webpage pop 
 
 To run task 5 or 8, remove 2 pieces of the mail in the environment such that there is only one
 To run task 7, add in the variable of kitchen
+
+download data from firebase using: https://stackoverflow.com/questions/46617960/export-json-from-firestore

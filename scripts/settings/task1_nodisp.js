@@ -69,12 +69,14 @@ function movePersonHelper() {
   let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   let rand_room = temp_rooms[Math.floor(Math.random() * temp_rooms.length)];
   dst = rooms[rand_room];
-  person.setRoom(rand_room);
+  // person.setRoom(rand_room);
 
   let bool = Math.floor(Math.random() * 2);
   if (bool == 1) {
     dst = rooms[robot_c.room];
     person.setRoom(robot_c.room);
+  } else {
+    person.setRoom(rand_room);
   }
 
   // console.log("person is now in", temp_rooms[i]);
