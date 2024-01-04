@@ -16,6 +16,10 @@ let jsonData = [];
 
 // second pilot
 let code_dict = {
+  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_SEQ_task1":
+    "while (true) { moveRobotToRandomRoom()};",
+  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (true) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n\n        });\n      };\n\n   if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_task2":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n  \tmoveRobotToRoom('bedroom');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    toy_in_room();\n  \teHandsFree();\n  \tisRobotinRoomEvent('playroom');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('playroom') && toy_in_room())\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_task4":
@@ -24,6 +28,8 @@ let code_dict = {
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('bedroom');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisPersonInRoomEvent();\n\n)\n\n(isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\n\ngoals(\n    isPersonNotInRoomEvent()\tisRobotinRoomEvent('kitchen')\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_tutorial":
     "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('porch');\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n  \teHandsFree();\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  thing_in_room('mail')\t#  isRobotinRoomEvent('kitchen')\t);\n",
+  "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_GOAL_MDP_task1":
+    "goals(\n    isPersonNotInRoomEvent()\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1":
     "actions(\n    moveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isPersonInRoomEvent();\n\n)\n\n\ngoals(\n    isPersonNotInRoomEvent()\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task7":
@@ -521,14 +527,11 @@ function run_key(k, i) {
     // let code =
     //   "moveRobotToRoom('porch');if (thing_in_room('mail')) {pick_up_thing('mail');moveRobotToRoom('kitchen');drop_any();}";
 
-    console.log(code);
-
-    if ((key_task != "task1" || key_task != "task7") && key_format == "TAP") {
+    if (key_task != "task1" && key_task != "task7" && key_format == "TAP") {
       var closingBraceIndex = code.lastIndexOf("}");
       code = code.slice(0, closingBraceIndex) + "    else { break; }\n  }";
     }
-
-    // console.log(code);
+    console.log(code);
 
     const taskNum = key_task.slice(-1);
     console.log(taskNum);
@@ -587,15 +590,18 @@ function run_key(k, i) {
       }
     }
 
-    // console.log(code);
+    console.log(code);
     // resetLocs();
 
     let time = 2000;
+    if (key_task == "task1") {
+      time = 1000;
+    }
     let count = 0;
     let same_room = 0;
     let kitchen_room = 0;
 
-    if (key_format == "SEQ" && (key_task != "task1" || key_task != "task7")) {
+    if (key_format == "SEQ" && key_task != "task1" && key_task != "task7") {
       time = 500;
     }
 
@@ -707,10 +713,11 @@ function customSort(a, b) {
 const keys = Object.keys(code_dict).sort(customSort);
 let task0_keys = keys.filter((key) => key.includes("task0"));
 let task1_keys = keys.filter((key) => key.includes("task1"));
-// task1_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task1",
-//   // "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task1",
-// ];
+task1_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1",
+  // "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task1",
+  // "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task1",
+];
 let task2_keys = keys.filter((key) => key.includes("task2"));
 let task3_keys = keys.filter((key) => key.includes("task3"));
 // console.log(task3_keys);
@@ -739,10 +746,10 @@ let task9_keys = keys.filter((key) => key.includes("task9"));
 
 // importScripts("settings/task3_nodisp.js");
 // importScripts("settings/task2_nodisp.js");
-// importScripts("settings/task1_nodisp.js");
+importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
-importScripts("settings/task6_nodisp.js");
+// importScripts("settings/task6_nodisp.js");
 // importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
@@ -776,4 +783,4 @@ async function test(keys) {
 // Create a Blob with the JSON data
 
 // test(task6_keys);
-test(task6_keys);
+test(task1_keys);

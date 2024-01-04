@@ -260,10 +260,11 @@ function moveRobotToRoom(room) {
   // console.log("are my hands free", robot_c.handsFree);
 
   if (robot_c.room == room) {
+    console.log("robot room same room");
     return;
   }
 
-  console.log("robot moving to ", room);
+  console.log("robot moving to", room);
   robot_c.setRoom(room);
 
   console.log("are my hands free", robot_c.handsFree);
