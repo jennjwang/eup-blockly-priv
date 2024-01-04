@@ -11,7 +11,7 @@ function randomRoomWithoutKitchen() {
 }
 
 let ROBOT_ROOM = randomRoomWithoutKitchen();
-let PERSON_ROOM = randomRoom();
+let PERSON_ROOM = randomRoomWithoutKitchen();
 let COFFEE_ROOM = "kitchen";
 let coffee = new Thing(COFFEE_ROOM, 100, 90, "coffee");
 

@@ -750,7 +750,7 @@ importScripts("settings/task4_nodisp.js");
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 5;
+  n = 1;
   for (let i = 0; i < n; i++) {
     // if (key_format == "TAP" || key_format == "SEQ") {
     await run_key(key, i);
@@ -766,12 +766,12 @@ async function test(keys) {
     await run_one_loop(keys[j], j);
   }
   let i = 0;
-  postMessage(`Worker A - Iteration ${i}`);
-  console.log(jsonData);
-  self.postMessage({ type: "download", data: jsonData });
+  // postMessage(`Worker A - Iteration ${i}`);
+  // console.log(jsonData);
+  // self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 
 // test(task6_keys);
-test(task3_keys);
+test(task4_keys);
