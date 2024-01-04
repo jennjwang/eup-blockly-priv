@@ -22,11 +22,13 @@ let toys_in_room = {
   porch: [mail, mail2, mail3],
 };
 
+console.log(toys_in_room);
+
 function resetLocs(key_id, key_task, key_format, iteration) {
   start_states = `robot started in ${ROBOT_ROOM}`;
 
   end_states = `robot ended in ${robot_c.room}
-      items on the porch include [${toys_in_room["kitchen"].toString()}]`;
+      items on the porch include [${toys_in_room["porch"].toString()}]`;
 
   const data = {
     id: key_id,

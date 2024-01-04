@@ -37,7 +37,7 @@ let code_dict = {
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task4":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    eHandsFree();\n  \tthing_in_room('coffee');\n  \tisPersonInRoomEvent();\n  \tisRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('kitchen');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('bedroom') && isPersonInRoomEvent())\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task5":
-    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#  (isRobotinRoomEvent('porch') && thing_in_room('mail'))\t#);\n",
+    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('playroom');\n  isRobotinRoomEvent('porch');\n \teHandsFree();\n  \tthing_in_room('mail');\n  \tthing_in_room('coffee');\n\n)\n\n\ngoals(\n    (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#  (isRobotinRoomEvent('bedroom') && thing_in_room('coffee'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_tutorial":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tisRobotinRoomEvent('porch');\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_mbc4gbugklh_658e310ac55fed0a22d7f2c4_FULL_MDP_task3":
@@ -721,12 +721,14 @@ let task3_keys = keys.filter((key) => key.includes("task3"));
 // ];
 let task4_keys = keys.filter((key) => key.includes("task4"));
 let task5_keys = keys.filter((key) => key.includes("task5"));
-// task5_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
-// ];
+task5_keys = [
+  "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task5",
+  // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
+];
 let task6_keys = keys.filter((key) => key.includes("task6"));
 // task6_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6",
+//   "657dfd2f13ec3b61c3fa9f0c_jfbjgs6t87_658dc5ed7198d7eb419ec3bf_SEQ_task6",
+//   // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6",
 // ];
 // let task7_keys = keys.filter((key) => key.includes("task7"));
 let task7_keys = [
@@ -739,8 +741,8 @@ let task9_keys = keys.filter((key) => key.includes("task9"));
 // importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
-importScripts("settings/task4_nodisp.js");
-// importScripts("settings/task6_nodisp.js");
+// importScripts("settings/task4_nodisp.js");
+importScripts("settings/task6_nodisp.js");
 // importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
 // importScripts("settings/task9_nodisp.js");
@@ -774,4 +776,4 @@ async function test(keys) {
 // Create a Blob with the JSON data
 
 // test(task6_keys);
-test(task4_keys);
+test(task6_keys);
