@@ -859,6 +859,12 @@ function get_rl_policy(code, taskNum) {
         "isRobotinRoomEvent('playroom');",
         "isRobotinRoomEvent('porch');"
       ]);
+    }else if (taskNum == 2 && triggers.includes("isRobotinRoomEvent('playroom');")){
+      triggers = triggers.concat([
+        "isRobotinRoomEvent('kitchen');",
+        "isRobotinRoomEvent('bedroom');",
+        "isRobotinRoomEvent('porch');"
+      ]);
     }
   }
 
