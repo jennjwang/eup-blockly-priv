@@ -1055,7 +1055,7 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["e_thing_in_room"] = function (block) {
   let value = block.getFieldValue("VALUE");
   if (value == "toy") {
-    return "toy_in_room()";
+    return "toy_in_room()\t";
   } else if (value == "coffee") {
     return "thing_in_room('coffee')\t";
   } else if (value == "mail") {
@@ -1694,8 +1694,8 @@ Blockly.JavaScript["and"] = function (block) {
     connector_val = " || ";
   }
   // TODO: Assemble JavaScript into code variable.
-  var code = "(" + s1.trim() + connector_val + s2.trim() + ")\t";
-  console.log("hi", code);
+  var code = "<(" + s1.trim() + connector_val + s2.trim() + ")>\t";
+  // console.log("hi", code);
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };

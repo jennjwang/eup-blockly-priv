@@ -618,7 +618,21 @@ function parser(code) {
             priority_goals[i].trim() != ");" &&
             priority_goals[i].trim() != ""
           ) {
-            cur_priority_goals = priority_goals[i].trim().split("\t");
+            var a = priority_goals[i]
+            const matches = a.matchAll(/<(.*?)>/g);
+            const regex_matched = Array.from(matches, x => x[1])
+            var outside_and = a.replace(/<(.*?)>/g, '')
+
+            var in_and = "";
+            for (var rm in regex_matched){
+              [f, s] = regex_matched[rm].split('&&');
+              and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v));
+              in_and += and_distributed_list.join('\t')
+            }
+
+            var cur_priority_goals = (in_and.trim() + '\t' + outside_and).trim().split("\t");
+            
+            debugger;
             if (cur_priority_goals != "") {
               // console.log(cur_priority_goals);
               cur_priority_goals_with_or = []
@@ -721,7 +735,7 @@ function get_mdp_policy(code, taskNum) {
   values_table = {};
   rewards_table = {};
   state_ids = {};
-  const ROOMS = ["porch", "kitchen", "bedroom", "playroom"];
+  const ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
   person_locs = [null]
 
   if (taskNum == '_'){
@@ -1026,7 +1040,7 @@ function get_mdp_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.9;
+  gamma = 0.95;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
