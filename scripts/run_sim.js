@@ -594,9 +594,6 @@ function run_key(k, i) {
     // resetLocs();
 
     let time = 2000;
-    if (key_task == "task1") {
-      time = 1000;
-    }
     let count = 0;
     let same_room = 0;
     let kitchen_room = 0;
@@ -659,10 +656,10 @@ function run_key(k, i) {
           key_id,
           key_task,
           key_format,
-          i,
-          same_room,
+          i
+          // same_room,
           // kitchen_room,
-          count
+          // count
         );
         resolve();
       }
@@ -714,9 +711,9 @@ const keys = Object.keys(code_dict).sort(customSort);
 let task0_keys = keys.filter((key) => key.includes("task0"));
 let task1_keys = keys.filter((key) => key.includes("task1"));
 task1_keys = [
-  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1",
-  // "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task1",
-  // "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task1",
+  // "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1",
+  // "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_GOAL_MDP_task1",
+  "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
 ];
 let task2_keys = keys.filter((key) => key.includes("task2"));
 let task3_keys = keys.filter((key) => key.includes("task3"));

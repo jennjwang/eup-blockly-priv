@@ -1,4 +1,5 @@
 const display = false;
+let steps = [];
 
 function start() {
   return robot_c.start;
@@ -253,6 +254,8 @@ function resolveAfter3Seconds() {
 
 // room - kitchen, bedroom, playroom
 function moveRobotToRoom(room) {
+  // console.log("STEPS", steps);
+  // steps.push("robot moving to " + room + " from " + robot_c.room);
   dst = rooms[room];
   // console.log(toys_in_room);
 

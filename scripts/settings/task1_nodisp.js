@@ -13,19 +13,22 @@ let start_states = "";
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
-  end_states = `robot ended in ${robot_c.room},person ended in ${person.room},
-  the times that robot and person were in the same room is ${same_room},
-  the number of timesteps is ${count}`;
+  steps = [...new Set(steps)];
+  console.log(steps);
 
-  start_states = `robot started in ${ROBOT_ROOM},person started in ${PERSON_ROOM}`;
+  // end_states = `robot ended in ${robot_c.room},person ended in ${person.room},
+  // the times that robot and person were in the same room is ${same_room},
+  // the number of timesteps is ${count}`;
+
+  // start_states = `robot started in ${ROBOT_ROOM},person started in ${PERSON_ROOM}`;
 
   const data = {
     id: key_id,
     format: key_format,
     task: key_task,
     iteration: iteration,
-    start_state: start_states,
-    end_state: end_states,
+    // start_state: start_states,
+    end_state: steps,
   };
 
   console.log(data);
@@ -69,19 +72,21 @@ function movePersonHelper() {
   let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   let rand_room = temp_rooms[Math.floor(Math.random() * temp_rooms.length)];
   dst = rooms[rand_room];
+  steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
+  person.setRoom(robot_c.room);
   // person.setRoom(rand_room);
 
-  let bool = Math.floor(Math.random() * 2);
-  if (bool == 1) {
-    dst = rooms[robot_c.room];
-    person.setRoom(robot_c.room);
-  } else {
-    person.setRoom(rand_room);
-  }
+  // let bool = Math.floor(Math.random() * 2);
+  // if (bool == 1) {
+  //   dst = rooms[robot_c.room];
+  //   person.setRoom(robot_c.room);
+  // } else {
+  //   person.setRoom(rand_room);
+  // }
 
   // console.log("person is now in", temp_rooms[i]);
-  console.log("person room", person.room);
-  console.log("robot room", robot_c.room);
+  // console.log("person room", person.room);
+  // console.log("robot room", robot_c.room);
 }
 
 function movePerson() {
