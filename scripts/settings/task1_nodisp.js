@@ -13,8 +13,8 @@ let start_states = "";
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
 function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
-  steps = [...new Set(steps)];
-  console.log(steps);
+  // steps = [...new Set(steps)];
+  // console.log(steps);
 
   // end_states = `robot ended in ${robot_c.room},person ended in ${person.room},
   // the times that robot and person were in the same room is ${same_room},
@@ -39,6 +39,7 @@ function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
 
   start_states = "";
   end_states = "";
+  steps = [];
 
   robot_c.start = true;
   prev_room = null;
@@ -72,8 +73,12 @@ function movePersonHelper() {
   let temp_rooms = ["kitchen", "bedroom", "playroom", "porch"];
   let rand_room = temp_rooms[Math.floor(Math.random() * temp_rooms.length)];
   dst = rooms[rand_room];
-  steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
-  person.setRoom(robot_c.room);
+  if (person.room != robot_c.room) {
+    console.log(`robot in: ${robot_c.room}, person in: ${person.room}`);
+    steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
+    person.setRoom(robot_c.room);
+    steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
+  }
   // person.setRoom(rand_room);
 
   // let bool = Math.floor(Math.random() * 2);
