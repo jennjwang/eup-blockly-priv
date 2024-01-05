@@ -599,59 +599,73 @@ function generate_triggers(triggers, state) {
 
 function parser_rl(code) {
   lines = code.split("\n");
-  state = 0;
+  var cur_state = 0;
   triggers = [];
   goals = [];
   actions = [];
   for (let line in lines) {
     if (lines[line] != "" && !lines[line].includes("highlightBlock")) {
+      debugger;
       if (lines[line] == ")") {
-        state = 0;
+        cur_state = 0;
       }
-      if (state == 1) {
+      if (cur_state == 1) {
         actions.push(lines[line].trim());
       }
-      if (state == 2) {
+      if (cur_state == 2) {
         priority_goals = lines[line].split("#");
         for (var i = 0; i < priority_goals.length; i++) {
           if (
             priority_goals[i].trim() != ");" &&
             priority_goals[i].trim() != ""
           ) {
-            cur_priority_goals = priority_goals[i].trim().split("\t");
+            var a = priority_goals[i]
+            const matches = a.matchAll(/<(.*?)>/g);
+            const regex_matched = Array.from(matches, x => x[1])
+            var outside_and = a.replace(/<(.*?)>/g, '')
+
+            var in_and = "";
+            for (var rm in regex_matched){
+              [f, s] = regex_matched[rm].split('&&');
+              and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v));
+              in_and += and_distributed_list.join('\t')
+            }
+
+            var cur_priority_goals = (in_and.trim() + '\t' + outside_and).trim().split("\t");
+            
             if (cur_priority_goals != "") {
-                // console.log(cur_priority_goals);
-                cur_priority_goals_with_or = []
-                for (var g_i in cur_priority_goals){
-                  if (cur_priority_goals[g_i].includes('||')){
-                    var temp = cur_priority_goals[g_i].split('||');
-                    for (var g_j in temp){
-                      cur_priority_goals_with_or.push(temp[g_j].trim())
-                    }
-                  }else{
-                    cur_priority_goals_with_or.push(cur_priority_goals[g_i])
+              // console.log(cur_priority_goals);
+              cur_priority_goals_with_or = []
+              for (var g_i in cur_priority_goals){
+                if (cur_priority_goals[g_i].includes('||')){
+                  var temp = cur_priority_goals[g_i].split('||');
+                  for (var g_j in temp){
+                    cur_priority_goals_with_or.push(temp[g_j].trim())
                   }
+                }else{
+                  cur_priority_goals_with_or.push(cur_priority_goals[g_i])
                 }
-                // console.log(cur_priority_goals_with_or);
-                // debugger;
-                goals.push(cur_priority_goals_with_or);
+              }
+              // console.log(cur_priority_goals_with_or);
+              // debugger;
+              goals.push(cur_priority_goals_with_or);
             }
           } else {
             goals.push([]);
           }
         }
       }
-      if (state == 3) {
+      if (cur_state == 3) {
         triggers.push(lines[line].trim());
       }
       if (lines[line] == "actions(") {
-        state = 1;
+        cur_state = 1;
       }
       if (lines[line] == "goals(") {
-        state = 2;
+        cur_state = 2;
       }
       if (lines[line] == "triggers(") {
-        state = 3;
+        cur_state = 3;
       }
     }
   }
@@ -781,6 +795,7 @@ function get_rl_policy(code, taskNum) {
   }
 
   if (taskNum == 9) {
+    state_rooms.push(null);
     for (var r1 in state_rooms) {
       block_list.push([null, state_rooms[r1], null]);
     }
@@ -932,7 +947,7 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.98;
+  gamma = 0.95;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
