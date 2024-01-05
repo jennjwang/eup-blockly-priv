@@ -627,7 +627,7 @@ function parser(code) {
             for (var rm in regex_matched){
               [f, s] = regex_matched[rm].split('&&');
               and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v));
-              in_and += and_distributed_list.join('\t')
+              in_and += ('\t' + and_distributed_list)
             }
 
             var cur_priority_goals = (in_and.trim() + '\t' + outside_and).trim().split("\t");
