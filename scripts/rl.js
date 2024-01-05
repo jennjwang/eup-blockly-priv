@@ -605,7 +605,7 @@ function parser_rl(code) {
   actions = [];
   for (let line in lines) {
     if (lines[line] != "" && !lines[line].includes("highlightBlock")) {
-      debugger;
+      // debugger;
       if (lines[line] == ")") {
         cur_state = 0;
       }
@@ -741,8 +741,9 @@ function get_rl_policy(code, taskNum) {
   }
   if (taskNum == 1 || taskNum == 7) {block_list = [[]]}
   if (taskNum == 2) {
-    for (var r in state_rooms){
-      block_list.push([null, null, state_rooms[r]]);
+    for (var r in ROOMS){
+      // state_rooms.push(null)
+      block_list.push([null, null, ROOMS[r]]);
     }
   }
   if (taskNum == 3){
@@ -802,7 +803,7 @@ function get_rl_policy(code, taskNum) {
   }
 
   id = 0;
-  //Populate values table
+  // //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
   if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
@@ -880,8 +881,13 @@ function get_rl_policy(code, taskNum) {
         "isRobotinRoomEvent('bedroom');",
         "isRobotinRoomEvent('porch');"
       ]);
+      state_rooms.push('kitchen');
+      state_rooms.push('bedroom');
+      state_rooms.push('porch');
     }
   }
+
+  // these_rooms = state_rooms;
 
   for (room in these_rooms) {
     for (obj in holding) {
@@ -947,7 +953,7 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.95;
+  gamma = 0.91;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
