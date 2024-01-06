@@ -16,10 +16,46 @@ let jsonData = [];
 
 // second pilot
 let code_dict = {
-  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_SEQ_task1":
-    "while (true) { moveRobotToRandomRoom()};",
-  "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1":
-    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (true) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n\n        });\n      };\n\n   if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_44lbrpxklwk_6581f02b3df82ddf93477f59_FULL_MDP_task1":
+    "actions(\n    moveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n    !isRobotinRoomEvent('bedroom')\tisRobotinRoomEvent('kitchen')\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_44lbrpxklwk_6581f02b3df82ddf93477f59_FULL_MDP_task7":
+    "actions(\n    moveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n    isRobotinRoomEvent('playroom')\t!isRobotinRoomEvent('playroom')\tisRobotinRoomEvent('kitchen')\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_44lbrpxklwk_6581f02b3df82ddf93477f59_FULL_MDP_task8":
+    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n    isRobotinRoomEvent('bedroom')\t!isRobotinRoomEvent('bedroom')\tisRobotinRoomEvent('porch')\teHandsFree()\tthing_in_room('mail')\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_44lbrpxklwk_6581f02b3df82ddf93477f59_FULL_MDP_tutorial":
+    "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (thing_in_room('coffee') && isRobotinRoomEvent('kitchen'))\t#  (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_atij25ljwb_6581d2bb3be35c1e384a7eff_FULL_MDP_task0":
+    "actions(\n    moveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n\n)\n\n\ngoals(\n    (!isRobotinRoomEvent('bedroom') && isRobotinRoomEvent('kitchen'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_atij25ljwb_6581d2bb3be35c1e384a7eff_FULL_MDP_task4":
+    "actions(\n    moveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('bedroom');\n  \tpick_up_thing('coffee');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_atij25ljwb_6581d2bb3be35c1e384a7eff_FULL_MDP_task9":
+    "actions(\n    pick_up_thing('coffee');\n  \tdrop_any();\n  \tmoveRobotToRoom('bedroom');\n  \tmoveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('bedroom') && thing_in_room('coffee'))\teHandsFull()\t#  eHandsFree()\t(isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_atij25ljwb_6581d2bb3be35c1e384a7eff_FULL_MDP_tutorial":
+    "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('porch');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task0":
+    "actions(\n    moveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n\n)\n\n\ngoals(\n    isRobotinRoomEvent('bedroom')\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7":
+    "actions(\n    moveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisPersonInRoomEvent();\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\t#  (!isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task9":
+    "actions(\n    moveRobotToRoom('bedroom');\n  \tmoveRobotToRoom('kitchen');\n  \tpick_up_thing('coffee');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    thing_in_room('coffee');\n  \tisRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('kitchen');\n  \teHandsFree();\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_tutorial":
+    "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_bn9kl6lk6u_6581ef89534331dda248d18d_FULL_MDP_task1":
+    "actions(\n    moveRobotToRoom('playroom');\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n  ##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_bn9kl6lk6u_6581ef89534331dda248d18d_FULL_MDP_task5":
+    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n  ##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_bn9kl6lk6u_6581ef89534331dda248d18d_FULL_MDP_task8":
+    "actions(\n    pick_up_thing('coffee');\n\n)\n\n\ntriggers(\n\n)\n\n\ngoals(\n    isRobotinRoomEvent('kitchen')\t#  thing_in_room('coffee')\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_bn9kl6lk6u_6581ef89534331dda248d18d_FULL_MDP_tutorial":
+    "triggers(\n\n)\n\n\nactions(\n\n)\n\n\ngoals(\n    isRobotinRoomEvent('kitchen')\t#  thing_in_room('mail')\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_task4":
+    "actions(\n    pick_up_thing('coffee');\n  \tdrop_any();\n  \tmoveRobotToRoom('kitchen');\n  \tmoveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tisPersonInRoomEvent();\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (eHandsFull() && isPersonInRoomEvent())\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_task6":
+    "triggers(\n    eHandsFree();\n  \tthing_in_room('mail');\n  \tisRobotinRoomEvent('porch');\n\n)\n\n\nactions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n\n)\n\n\ngoals(\n    eHandsFree()\t#  (!isRobotinRoomEvent('porch') && eHandsFull())\t(isRobotinRoomEvent('porch') && thing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_task7":
+    "actions(\n    moveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isPersonInRoomEvent();\n  \tisRobotinRoomEvent('kitchen');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\t(!isRobotinRoomEvent('kitchen') && isPersonInRoomEvent())\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_tutorial":
+    "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (thing_in_room('coffee') && isRobotinRoomEvent('kitchen'))\t#  (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_task2":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n  \tmoveRobotToRoom('bedroom');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_toy();\n  \tmoveRobotToRoom('playroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    toy_in_room();\n  \teHandsFree();\n  \tisRobotinRoomEvent('playroom');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('playroom') && toy_in_room())\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_task4":
@@ -28,8 +64,6 @@ let code_dict = {
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('bedroom');\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisPersonInRoomEvent();\n\n)\n\n(isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\n\ngoals(\n    isPersonNotInRoomEvent()\tisRobotinRoomEvent('kitchen')\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_feopz3h09w_658e3ef014c53a6d2a77bc91_FULL_MDP_tutorial":
     "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('porch');\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n  \teHandsFree();\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  thing_in_room('mail')\t#  isRobotinRoomEvent('kitchen')\t);\n",
-  "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_GOAL_MDP_task1":
-    "goals(\n    isPersonNotInRoomEvent()\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1":
     "actions(\n    moveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isPersonInRoomEvent();\n\n)\n\n\ngoals(\n    isPersonNotInRoomEvent()\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task7":
@@ -43,7 +77,7 @@ let code_dict = {
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task4":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    eHandsFree();\n  \tthing_in_room('coffee');\n  \tisPersonInRoomEvent();\n  \tisRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('kitchen');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('bedroom') && isPersonInRoomEvent())\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task5":
-    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('bedroom');\n  \tisRobotinRoomEvent('playroom');\n  isRobotinRoomEvent('porch');\n \teHandsFree();\n  \tthing_in_room('mail');\n  \tthing_in_room('coffee');\n\n)\n\n\ngoals(\n    (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#  (isRobotinRoomEvent('bedroom') && thing_in_room('coffee'))\t#);\n",
+    "actions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('bedroom');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#  (isRobotinRoomEvent('porch') && thing_in_room('mail'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_tutorial":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \teHandsFree();\n  \tisRobotinRoomEvent('porch');\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_mbc4gbugklh_658e310ac55fed0a22d7f2c4_FULL_MDP_task3":
@@ -54,6 +88,14 @@ let code_dict = {
     "actions(\n    moveRobotToRoom('porch');\n  \tmoveRobotToRandomRoom();\n  \tpick_up_thing('mail');\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    eHandsFree();\n  \tisRobotinRoomEvent('porch');\n  \tisRobotinRoomEvent('bedroom');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('porch')\tthing_in_room('mail') && isRobotinRoomEvent('bedroom')\teHandsFree())\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_mbc4gbugklh_658e310ac55fed0a22d7f2c4_FULL_MDP_tutorial":
     "actions(\n    moveRobotToRoom('kitchen');\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tpick_up_thing('mail');\n  \tdrop_any();\n  \tdrop_any();\n\n)\n\n\ntriggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('porch');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\ngoals(\n    (isRobotinRoomEvent('kitchen')\tthing_in_room('coffee') && isRobotinRoomEvent('kitchen')\tthing_in_room('mail'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task1":
+    "triggers(\n    isPersonInRoomEvent();\n\n)\n\n\nactions(\n    moveRobotToRandomRoom();\n\n)\n\n\ngoals(\n    isPersonNotInRoomEvent()\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task4":
+    "triggers(\n    isPersonInRoomEvent();\n\n)\n\n\nactions(\n    moveRobotToRoom('kitchen');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRandomRoom();\n  \tdrop_any();\n\n)\n\n\ngoals(\n    (eHandsFree() && thing_in_room('coffee'))\t#  isPersonInRoomEvent()\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_task8":
+    "triggers(\n    isRobotinRoomEvent('porch');\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n  \teHandsFree();\n  \tisRobotinRoomEvent('kitchen');\n\n)\n\n\nactions(\n    moveRobotToRoom('porch');\n  \tpick_up_any();\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n\n)\n\n\ngoals(\n    (!isRobotinRoomEvent('porch')\tisRobotinRoomEvent('kitchen') && (thing_in_room('mail') || thing_in_room('coffee')))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_pr4951k1dt_6581f12085d70310ffb1fe53_FULL_MDP_tutorial":
+    "triggers(\n    isRobotinRoomEvent('kitchen');\n  \tisRobotinRoomEvent('porch');\n  \teHandsFree();\n  \tthing_in_room('coffee');\n  \tthing_in_room('mail');\n\n)\n\n\nactions(\n    moveRobotToRoom('porch');\n  \tpick_up_thing('coffee');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n  \tmoveRobotToRoom('porch');\n  \tpick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');\n  \tdrop_any();\n\n)\n\n\ngoals(\n    (thing_in_room('coffee') && isRobotinRoomEvent('kitchen'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
   "657dfd2f13ec3b61c3fa9f0c_0z3ksmw5fj_658e287f4a0278231e7774d9_GOAL_MDP_task3":
     "goals(\n    (toy_in_room()isRobotinRoomEvent('bedroom')\ttoy_in_room()isRobotinRoomEvent('bedroom') && )\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_0z3ksmw5fj_658e287f4a0278231e7774d9_GOAL_MDP_task6":
@@ -70,6 +112,38 @@ let code_dict = {
     "goals(\n    eHandsFree()\tthing_in_room('coffee')\t(eHandsFull() && isRobotinRoomEvent('kitchen'))\t##);\n",
   "657dfd2f13ec3b61c3fa9f0c_ahz1r2mifd_658dc58293b8c23b59a5667b_GOAL_MDP_tutorial":
     "goals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (!isRobotinRoomEvent('kitchen') && thing_in_room('coffee')\tthing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task0":
+    "goals(\n    !isRobotinRoomEvent('bedroom')\t#  isRobotinRoomEvent('kitchen')\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task1":
+    "goals(\n    (isRobotinRoomEvent('kitchen')\tisRobotinRoomEvent('bedroom')\tisRobotinRoomEvent('playroom')\tisRobotinRoomEvent('porch') && isPersonNotInRoomEvent())\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task6":
+    "goals(\n    (thing_in_room('mail') && !isRobotinRoomEvent('kitchen'))\t(isRobotinRoomEvent('porch') && thing_not_in_room('mail'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_tutorial":
+    "goals(\n    (thing_in_room('coffee') && isRobotinRoomEvent('kitchen'))\t#  (thing_in_room('mail') && isRobotinRoomEvent('kitchen'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task1":
+    "goals(\n    (!isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\t#  (isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task3":
+    "goals(\n    (isRobotinRoomEvent('kitchen') && toy_not_in_room())\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task9":
+    "goals(\n    isRobotinRoomEvent('bedroom')\t#  eHandsFull()\t#  isRobotinRoomEvent('kitchen')\t);\n",
+  "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_tutorial":
+    "goals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task4":
+    "goals(\n    (isPersonInRoomEvent() && (thing_in_room('coffee') && eHandsFree()))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task5":
+    "goals(\n    ((isRobotinRoomEvent('kitchen') && thing_in_room('mail')) || (isRobotinRoomEvent('bedroom') && thing_in_room('coffee')))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_task7":
+    "goals(\n    (isPersonNotInRoomEvent() && isRobotinRoomEvent('kitchen'))\t##);\n",
+  "657dfd2f13ec3b61c3fa9f0c_mlztwjrtslg_65820b64283d62e119521a58_GOAL_MDP_tutorial":
+    "goals(\n    (isRobotinRoomEvent('kitchen') && thing_in_room('coffee'))\t#  (isRobotinRoomEvent('kitchen') && thing_in_room('mail'))\t#);\n",
+  "657dfd2f13ec3b61c3fa9f0c_aasvn4bc52_6581cff51bfa1e822668527b_SEQ_task0":
+    "moveRobotToRoom('kitchen');",
+  "657dfd2f13ec3b61c3fa9f0c_aasvn4bc52_6581cff51bfa1e822668527b_SEQ_task4":
+    "moveRobotToRoom('kitchen');pick_up_thing('coffee');\n\tmoveRobotToRoom('playroom');drop_any();\n",
+  "657dfd2f13ec3b61c3fa9f0c_aasvn4bc52_6581cff51bfa1e822668527b_SEQ_task9":
+    "moveRobotToRoom('bedroom');pick_up_thing('coffee');\n\tmoveRobotToRoom('kitchen');drop_any();\n",
+  "657dfd2f13ec3b61c3fa9f0c_aasvn4bc52_6581cff51bfa1e822668527b_SEQ_tutorial":
+    "moveRobotToRoom('porch');if (thing_in_room('coffee')) {\n  pick_up_thing('coffee');\n  \tmoveRobotToRoom('kitchen');drop_any();\n  \t}\nmoveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('kitchen');drop_any();\n",
   "657dfd2f13ec3b61c3fa9f0c_jfbjgs6t87_658dc5ed7198d7eb419ec3bf_SEQ_task2":
     "if (eHandsFree()) {\n  if (toy_not_in_room\t) {\n    pick_up_any();\n    \t} else {\n    while (false) {\n    }\n  }\n} else {\n}\nif (false) {\n} else {\n}\npick_up_any();\n",
   "657dfd2f13ec3b61c3fa9f0c_jfbjgs6t87_658dc5ed7198d7eb419ec3bf_SEQ_task4":
@@ -94,6 +168,22 @@ let code_dict = {
     "while (true) {\n  while (isRobotinRoomEvent('kitchen')) {\n    if (isPersonInRoomEvent()) {\n      moveRobotToRandomRoom();}\n  }\n  while (!isRobotinRoomEvent('kitchen')) {\n    moveRobotToRoom('kitchen');}\n}\n",
   "657dfd2f13ec3b61c3fa9f0c_skc6x7zukwl_658e2887fd1db21c14adb8fe_SEQ_tutorial":
     "moveRobotToRoom('porch');pick_up_thing('coffee');\n\tmoveRobotToRoom('kitchen');drop_any();\n\tmoveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('kitchen');drop_any();\n",
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task2":
+    "while (!toy_in_room()) {\n  if (toy_not_in_room\t) {\n    moveRobotToRandomRoom();} else {\n  }\n  pick_up_toy();\n  \tmoveRobotToRoom('playroom');drop_any();\n  \t}\n",
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5":
+    "moveRobotToRoom('porch');if (thing_in_room('mail')) {\n  pick_up_thing('mail');\n  \tmoveRobotToRoom('kitchen');drop_any();\n  \t} else {\n  if (thing_in_room('coffee')) {\n    pick_up_thing('coffee');\n    \tmoveRobotToRoom('bedroom');drop_any();\n    \t}\n}\n",
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6":
+    "moveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('playroom');drop_any();\n\tmoveRobotToRoom('porch');pick_up_thing('mail');\n\tdrop_any();\n\tmoveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('bedroom');drop_any();\n\tmoveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('bedroom');drop_any();\n",
+  "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_tutorial":
+    "moveRobotToRoom('porch');pick_up_thing('coffee');\n\tmoveRobotToRoom('kitchen');drop_any();\n\tmoveRobotToRoom('porch');pick_up_thing('mail');\n\tmoveRobotToRoom('kitchen');drop_any();\n",
+  "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task0":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start() && isRobotinRoomEvent('bedroom')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task3":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task5":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('mail')) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_tutorial":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_task3":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_task6":
@@ -101,6 +191,22 @@ let code_dict = {
   "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_task8":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('mail')) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_tutorial":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_3sn87jiclt_6581ef67bead30381d692a4e_TAP_task3":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && ((toy_in_room() && eHandsFree()))) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_3sn87jiclt_6581ef67bead30381d692a4e_TAP_task6":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && ((thing_in_room('mail') && eHandsFree()))) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_3sn87jiclt_6581ef67bead30381d692a4e_TAP_task8":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && eHandsFree()) {\n      trigs.push(\n        function(){\n            pick_up_any();\n\n        });\n      };\n\n    if (handsFull() && isRobotinRoomEvent('porch')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_3sn87jiclt_6581ef67bead30381d692a4e_TAP_tutorial":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && eHandsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_aemx9g96bw_6581d0e4c087c31ac38a4060_TAP_task4":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start() && !isRobotinRoomEvent('kitchen')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && isRobotinRoomEvent('kitchen')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isRobotinAnyRoom() && isPersonNotInRoomEvent()\t) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isRobotinAnyRoom() && isPersonInRoomEvent()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_aemx9g96bw_6581d0e4c087c31ac38a4060_TAP_task8":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('mail')) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_aemx9g96bw_6581d0e4c087c31ac38a4060_TAP_task9":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start() && isRobotinRoomEvent('playroom')) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('bedroom');\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_aemx9g96bw_6581d0e4c087c31ac38a4060_TAP_tutorial":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_cpqyh7kzcd_658dc58f58ab02636c14703e_TAP_task5":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('mail')) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
@@ -115,6 +221,22 @@ let code_dict = {
   "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task7":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && isPersonInRoomEvent()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isPersonInRoom()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isRobotinAnyRoom()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_tutorial":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_muiccd1kmf_6581cfe1736a46bfb51eb1ab_TAP_task0":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_muiccd1kmf_6581cfe1736a46bfb51eb1ab_TAP_task2":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_muiccd1kmf_6581cfe1736a46bfb51eb1ab_TAP_task9":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('bedroom');\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_muiccd1kmf_6581cfe1736a46bfb51eb1ab_TAP_tutorial":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_y4tpr9lwyy_6581cb2e5ccfc55c71c57363_TAP_task0":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_y4tpr9lwyy_6581cb2e5ccfc55c71c57363_TAP_task2":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && ((toy_in_room() && eHandsFree()))) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_y4tpr9lwyy_6581cb2e5ccfc55c71c57363_TAP_task8":
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('mail')) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+  "657dfd2f13ec3b61c3fa9f0c_y4tpr9lwyy_6581cb2e5ccfc55c71c57363_TAP_tutorial":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (handsFree()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            pick_up_thing('mail');\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
 };
 
@@ -593,12 +715,18 @@ function run_key(k, i) {
     console.log(code);
     // resetLocs();
 
-    let time = 2000;
+    let time = 3000;
+    // if (key_task == "task1" || key_task == "task7") {
+    //   time = 3000;
+    // }
+    // if (key_task == "task7" && key_format == "GOAL_MDP") {
+    //   time = 4000;
+    // }
     let count = 0;
     let same_room = 0;
     let kitchen_room = 0;
 
-    if (key_format == "SEQ" && key_task != "task1" && key_task != "task7") {
+    if (key_format == "SEQ" && key_task != "task1") {
       time = 500;
     }
 
@@ -633,16 +761,18 @@ function run_key(k, i) {
         // nextStep();
         setTimeout(nextStep, 0);
         // if (key_task == "task1" || key_format == "SEQ" || key_task == "task2") {
-        //time % 80 == 0 &&
-        if ((time % 10 == 0 && key_task == "task1") || key_task == "task7") {
-          if (robot_c.room == person.room) {
-            same_room += 1;
-          } else if (robot_c.room == "kitchen") {
-            kitchen_room += 1;
-          }
-          count += 1;
+
+        // if (time % 80 == 0 && (key_task == "task1" || key_task == "task7")) {
+        //   if (robot_c.room == person.room) {
+        //     same_room += 1;
+        //   } else if (robot_c.room == "kitchen") {
+        //     kitchen_room += 1;
+        //   }
+        //   count += 1;
+        if (key_task == "task1" || key_task == "task7") {
           movePerson();
         }
+        // }
         time -= 1;
         // }
         // console.log(time);
@@ -710,53 +840,48 @@ function customSort(a, b) {
 const keys = Object.keys(code_dict).sort(customSort);
 let task0_keys = keys.filter((key) => key.includes("task0"));
 let task1_keys = keys.filter((key) => key.includes("task1"));
-task1_keys = [
-  // "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1",
-  // "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_GOAL_MDP_task1",
-  "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
-];
+// task1_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task1",
+//   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
+//   // "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task1",
+//   // "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task1",
+//   // "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_GOAL_MDP_task1",
+//   // "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
+// ];
 let task2_keys = keys.filter((key) => key.includes("task2"));
 let task3_keys = keys.filter((key) => key.includes("task3"));
 // console.log(task3_keys);
 // task3_keys = [
-//   "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_task3",
-//   // "657dfd2f13ec3b61c3fa9f0c_ahz1r2mifd_658dc58293b8c23b59a5667b_GOAL_MDP_task3",
-//   // "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task3",
+//   "657dfd2f13ec3b61c3fa9f0c_10yz4utiej_6581eb036c1dd060aa9bf39e_TAP_task3",
+// "657dfd2f13ec3b61c3fa9f0c_34znmd7rp3_658e2ad6499b3eb22c6f49df_TAP_task3",
+// "657dfd2f13ec3b61c3fa9f0c_ahz1r2mifd_658dc58293b8c23b59a5667b_GOAL_MDP_task3",
+// "657dfd2f13ec3b61c3fa9f0c_k9fmc1zx0gg_6581ec16ff0d86cb8d485828_GOAL_MDP_task3",
 // ];
 let task4_keys = keys.filter((key) => key.includes("task4"));
 let task5_keys = keys.filter((key) => key.includes("task5"));
-task5_keys = [
-  "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task5",
-  // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
-];
+// task5_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_gths71fbm9_658e2884e780d4b7e3da87aa_FULL_MDP_task5",
+//   // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task5",
+// ];
 let task6_keys = keys.filter((key) => key.includes("task6"));
 // task6_keys = [
 //   "657dfd2f13ec3b61c3fa9f0c_jfbjgs6t87_658dc5ed7198d7eb419ec3bf_SEQ_task6",
 //   // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6",
 // ];
-// let task7_keys = keys.filter((key) => key.includes("task7"));
-let task7_keys = [
-  "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
+let task7_keys = keys.filter((key) => key.includes("task7"));
+task7_keys = [
+  // "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task7",
+  // "657dfd2f13ec3b61c3fa9f0c_cpqyh7kzcd_658dc58f58ab02636c14703e_TAP_task7",
+  "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_task7",
+  // "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
 ];
 let task8_keys = keys.filter((key) => key.includes("task8"));
 let task9_keys = keys.filter((key) => key.includes("task9"));
 
-// importScripts("settings/task3_nodisp.js");
-// importScripts("settings/task2_nodisp.js");
-importScripts("settings/task1_nodisp.js");
-// importScripts("settings/task0_nodisp.js");
-// importScripts("settings/task4_nodisp.js");
-// importScripts("settings/task6_nodisp.js");
-// importScripts("settings/task5_nodisp.js");
-// importScripts("settings/task7_nodisp.js");
-// importScripts("settings/task9_nodisp.js");
-
-// Worker A's loop
-
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 1;
+  n = 5;
   for (let i = 0; i < n; i++) {
     // if (key_format == "TAP" || key_format == "SEQ") {
     await run_key(key, i);
@@ -772,12 +897,21 @@ async function test(keys) {
     await run_one_loop(keys[j], j);
   }
   let i = 0;
-  // postMessage(`Worker A - Iteration ${i}`);
-  // console.log(jsonData);
-  // self.postMessage({ type: "download", data: jsonData });
+  postMessage(`Worker A - Iteration ${i}`);
+  console.log(jsonData);
+  self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data
 
-// test(task6_keys);
-test(task1_keys);
+importScripts("settings/task3_nodisp.js");
+// importScripts("settings/task2_nodisp.js");
+// importScripts("settings/task1_nodisp.js");
+// importScripts("settings/task0_nodisp.js");
+// importScripts("settings/task4_nodisp.js");
+// importScripts("settings/task6_nodisp.js");
+// importScripts("settings/task5_nodisp.js");
+// importScripts("settings/task7_nodisp.js");
+// importScripts("settings/task9_nodisp.js");
+
+test(task3_keys);
