@@ -626,26 +626,44 @@ function generate_triggers(triggers, state) {
 
 function parser_rl(code) {
   lines = code.split("\n");
-  state = 0;
+  var cur_state = 0;
   triggers = [];
   goals = [];
   actions = [];
   for (let line in lines) {
     if (lines[line] != "" && !lines[line].includes("highlightBlock")) {
+      // debugger;
       if (lines[line] == ")") {
-        state = 0;
+        cur_state = 0;
       }
-      if (state == 1) {
+      if (cur_state == 1) {
         actions.push(lines[line].trim());
       }
-      if (state == 2) {
+      if (cur_state == 2) {
         priority_goals = lines[line].split("#");
         for (var i = 0; i < priority_goals.length; i++) {
           if (
             priority_goals[i].trim() != ");" &&
             priority_goals[i].trim() != ""
           ) {
-            cur_priority_goals = priority_goals[i].trim().split("\t");
+            var a = priority_goals[i];
+            const matches = a.matchAll(/<(.*?)>/g);
+            const regex_matched = Array.from(matches, (x) => x[1]);
+            var outside_and = a.replace(/<(.*?)>/g, "");
+
+            var in_and = "";
+            for (var rm in regex_matched) {
+              [f, s] = regex_matched[rm].split("&&");
+              and_distributed_list = f
+                .split("\t")
+                .flatMap((d) => s.split("\t").map((v) => d + "&&" + v));
+              in_and += "\t" + and_distributed_list;
+            }
+
+            var cur_priority_goals = (in_and.trim() + "\t" + outside_and)
+              .trim()
+              .split("\t");
+
             if (cur_priority_goals != "") {
               // console.log(cur_priority_goals);
               cur_priority_goals_with_or = [];
@@ -668,17 +686,17 @@ function parser_rl(code) {
           }
         }
       }
-      if (state == 3) {
+      if (cur_state == 3) {
         triggers.push(lines[line].trim());
       }
       if (lines[line] == "actions(") {
-        state = 1;
+        cur_state = 1;
       }
       if (lines[line] == "goals(") {
-        state = 2;
+        cur_state = 2;
       }
       if (lines[line] == "triggers(") {
-        state = 3;
+        cur_state = 3;
       }
     }
   }
@@ -774,8 +792,9 @@ function get_rl_policy(code, taskNum) {
     block_list = [[]];
   }
   if (taskNum == 2) {
-    for (var r in state_rooms) {
-      block_list.push([null, null, state_rooms[r]]);
+    for (var r in ROOMS) {
+      // state_rooms.push(null)
+      block_list.push([null, null, ROOMS[r]]);
     }
   }
   if (taskNum == 3) {
@@ -888,13 +907,14 @@ function get_rl_policy(code, taskNum) {
   }
 
   if (taskNum == 9) {
+    state_rooms.push(null);
     for (var r1 in state_rooms) {
       block_list.push([null, state_rooms[r1], null]);
     }
   }
 
   id = 0;
-  //Populate values table
+  // //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
   if (
@@ -984,8 +1004,22 @@ function get_rl_policy(code, taskNum) {
         "isRobotinRoomEvent('playroom');",
         "isRobotinRoomEvent('porch');",
       ]);
+    } else if (
+      taskNum == 2 &&
+      triggers.includes("isRobotinRoomEvent('playroom');")
+    ) {
+      triggers = triggers.concat([
+        "isRobotinRoomEvent('kitchen');",
+        "isRobotinRoomEvent('bedroom');",
+        "isRobotinRoomEvent('porch');",
+      ]);
+      state_rooms.push("kitchen");
+      state_rooms.push("bedroom");
+      state_rooms.push("porch");
     }
   }
+
+  // these_rooms = state_rooms;
 
   for (room in these_rooms) {
     for (obj in holding) {
@@ -1051,7 +1085,7 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.98;
+  gamma = 0.91;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
