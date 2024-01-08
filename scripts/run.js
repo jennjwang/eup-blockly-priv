@@ -85,7 +85,7 @@ function get_current_state(state_ids, taskNum) {
     }
   }
 
-  console.log('here: ', robot_c, all_objs, held_obj, person_location)
+  // #console.log('here: ', robot_c, all_objs, held_obj, person_location)
   return find_state(
     state_ids,
     robot_c.room,
