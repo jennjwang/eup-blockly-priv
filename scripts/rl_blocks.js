@@ -292,7 +292,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
-  return "toy_not_in_room()\t\n";
+  return "toy_not_in_room()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
