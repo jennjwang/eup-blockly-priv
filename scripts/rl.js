@@ -627,7 +627,7 @@ function parser_rl(code) {
             var in_and = "";
             for (var rm in regex_matched){
               [f, s] = regex_matched[rm].split('&&');
-              and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v));
+              and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v + '\t'));
               in_and += ('\t' + and_distributed_list)
             }
 
