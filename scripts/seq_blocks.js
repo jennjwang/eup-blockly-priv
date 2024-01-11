@@ -877,7 +877,7 @@ Blockly.JavaScript["if_then"] = function (block) {
   );
 
   if (value_condition == "") {
-    value_condition = true;
+    value_condition = false;
   }
 
   var statements_execute = Blockly.JavaScript.statementToCode(block, "execute");

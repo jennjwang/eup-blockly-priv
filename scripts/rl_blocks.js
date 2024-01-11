@@ -1688,6 +1688,14 @@ Blockly.JavaScript["and"] = function (block) {
   var connector = block.getFieldValue("connector");
   var s2 = Blockly.JavaScript.statementToCode(block, "s2");
 
+  if (s1 == "") {
+    s1 = "false";
+  }
+
+  if (s2 == "") {
+    s2 = "false";
+  }
+
   var connector_val = " && ";
 
   if (connector == "or") {
