@@ -626,13 +626,13 @@ function parser(code) {
             var in_and = "";
             for (var rm in regex_matched){
               [f, s] = regex_matched[rm].split('&&');
-              if (f != null && s != null){
+              if (!f.includes('false') && !s.includes('false')){
                 f = f.replace("||",'\t')
                 s = s.replace("||",'\t')
                 and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v + '\t'));
                 in_and += ('\t' + and_distributed_list)
               }else{
-                in_and += f; 
+                return [false, false, false, false]
               }
             }
 
@@ -645,7 +645,10 @@ function parser(code) {
                 if (cur_priority_goals[g_i].includes('||')){
                   var temp = cur_priority_goals[g_i].split('||');
                   for (var g_j in temp){
-                    cur_priority_goals_with_or.push(temp[g_j].trim())
+                    cur_priority_goals_with_or.push(temp[g_j].trim());
+                    if (temp[g_j].includes('false')){
+                      return [false, false, false, false]
+                    }
                   }
                 }else{
                   cur_priority_goals_with_or.push(cur_priority_goals[g_i])
@@ -723,6 +726,7 @@ function find_state(
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
+  if (goal == false){return false}
 
   actions = [
     "moveRobotToRoom('playroom');",
