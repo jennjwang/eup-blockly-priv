@@ -653,17 +653,24 @@ function parser(code) {
             var in_and = "";
             for (var rm in regex_matched) {
               [f, s] = regex_matched[rm].split("&&");
-              and_distributed_list = f
-                .split("\t")
-                .flatMap((d) => s.split("\t").map((v) => d + "&&" + v));
-              in_and += "\t" + and_distributed_list;
+              if (!f.includes("false") && !s.includes("false")) {
+                f = f.replace("||", "\t");
+                s = s.replace("||", "\t");
+                and_distributed_list = f
+                  .split("\t")
+                  .flatMap((d) =>
+                    s.split("\t").map((v) => d + "&&" + v + "\t")
+                  );
+                in_and += "\t" + and_distributed_list;
+              } else {
+                return [false, false, false, false];
+              }
             }
 
             var cur_priority_goals = (in_and.trim() + "\t" + outside_and)
               .trim()
               .split("\t");
 
-            debugger;
             if (cur_priority_goals != "") {
               // console.log(cur_priority_goals);
               cur_priority_goals_with_or = [];
@@ -672,6 +679,9 @@ function parser(code) {
                   var temp = cur_priority_goals[g_i].split("||");
                   for (var g_j in temp) {
                     cur_priority_goals_with_or.push(temp[g_j].trim());
+                    if (temp[g_j].includes("false")) {
+                      return [false, false, false, false];
+                    }
                   }
                 } else {
                   cur_priority_goals_with_or.push(cur_priority_goals[g_i]);
@@ -749,6 +759,9 @@ function find_state(
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
+  if (goal == false) {
+    return false;
+  }
 
   actions = [
     "moveRobotToRoom('playroom');",
@@ -1152,9 +1165,47 @@ function run_mdp(code, taskNum) {
   }
 
   if (taskNum == 1 || taskNum == 7) {
+    js_transition_table = {};
+    var mapping_array = [];
+    var corresponding_values = [];
+    var corresponding_keys = [];
+    var chk_room = null;
+
+    for (var key in transition_table) {
+      if (state_ids[key].holding != null) {
+        continue;
+      }
+
+      if (state_ids[key].robot_position != state_ids[key].person) {
+        if (chk_room == null || chk_room != state_ids[key].robot_position) {
+          if (corresponding_values.length == 3) {
+            var max_act_ind = corresponding_values.indexOf(
+              Math.max(...corresponding_values)
+            );
+            js_transition_table[corresponding_keys[0]] =
+              mapping_array[max_act_ind];
+          }
+
+          chk_room = state_ids[key].robot_position;
+          corresponding_values.length = 0;
+          mapping_array.length = 0;
+
+          mapping_array.push(transition_table[key]);
+          corresponding_values.push(transition_table[key][2]);
+          corresponding_keys.push(key);
+        } else if (chk_room == state_ids[key].robot_position) {
+          mapping_array.push(transition_table[key]);
+          corresponding_values.push(transition_table[key][2]);
+          corresponding_keys.push(key);
+        }
+      } else {
+        js_transition_table[key] = transition_table[key];
+      }
+    }
+
     out = "";
     var count = 0;
-    for (key in transition_table) {
+    for (key in js_transition_table) {
       if (count == 0) {
         out += "\tif(";
       } else {
@@ -1169,7 +1220,7 @@ function run_mdp(code, taskNum) {
         }
       }
       out = out.slice(0, -4);
-      out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
+      out += "){\n\t\t" + js_transition_table[key][0] + "\n\t}\n";
       count += 1;
     }
 
