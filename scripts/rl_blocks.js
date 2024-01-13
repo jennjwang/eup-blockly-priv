@@ -292,7 +292,7 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.JavaScript.PRECEDENCE = 0;
 
 Blockly.JavaScript["e_toy_not_in_room"] = function (block) {
-  return "toy_not_in_room()\t\n";
+  return "toy_not_in_room()\t";
 };
 
 Blockly.defineBlocksWithJsonArray([
@@ -1055,7 +1055,7 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["e_thing_in_room"] = function (block) {
   let value = block.getFieldValue("VALUE");
   if (value == "toy") {
-    return "toy_in_room()";
+    return "toy_in_room()\t";
   } else if (value == "coffee") {
     return "thing_in_room('coffee')\t";
   } else if (value == "mail") {
@@ -1688,14 +1688,22 @@ Blockly.JavaScript["and"] = function (block) {
   var connector = block.getFieldValue("connector");
   var s2 = Blockly.JavaScript.statementToCode(block, "s2");
 
+  if (s1 == "") {
+    s1 = "false";
+  }
+
+  if (s2 == "") {
+    s2 = "false";
+  }
+
   var connector_val = " && ";
 
   if (connector == "or") {
     connector_val = " || ";
   }
   // TODO: Assemble JavaScript into code variable.
-  var code = "(" + s1.trim() + connector_val + s2.trim() + ")\t";
-  console.log("hi", code);
+  var code = "<(" + s1.trim() + connector_val + s2.trim() + ")>\t";
+  // console.log("hi", code);
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };
