@@ -745,6 +745,22 @@ function get_rl_policy(code, taskNum) {
     if (triggers[s_i].includes('coffee')){if (!state_objs.includes('coffee')){state_objs.push('coffee')}}
     if (triggers[s_i].includes('mail')){if (!state_objs.includes('mail')){state_objs.push('mail')}}
   }
+  if (taskNum == '_'){
+    block_list = [
+      ["porch", "porch", "kitchen"],
+      ["porch", "porch", "playroom"],
+      ["porch", "porch", "bedroom"],
+      ["porch", "porch", "porch"],
+      ["porch", "porch", null],
+      ["porch", null, "kitchen"],
+      [null, "porch", "kitchen"],
+      ["porch", "kitchen", "kitchen"],
+      ["kitchen", "porch", "kitchen"],
+      ["kitchen", null, "kitchen"],
+      [null, "kitchen", "kitchen"],
+      ["kitchen", "kitchen", "kitchen"],
+    ]
+  }
   
   if (taskNum == 0) {
     block_list = [[null, null, null]];
