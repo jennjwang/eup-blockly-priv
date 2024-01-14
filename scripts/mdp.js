@@ -760,7 +760,7 @@ function find_state(
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
   if (goal == false) {
-    return false;
+    return [false, false, false];
   }
 
   actions = [
