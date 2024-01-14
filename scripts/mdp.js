@@ -31,8 +31,11 @@ function simulator(state, action) {
         .slice(2, copiedState.blocks.length)
         .indexOf(copiedState.robot_position);
       copiedState.holding = "toy";
-      if(copiedState.blocks.length == 3 ){copiedState.blocks[2] = null;}
-      else{copiedState.blocks.splice(ind + 2, 1);}
+      if (copiedState.blocks.length == 3) {
+        copiedState.blocks[2] = null;
+      } else {
+        copiedState.blocks.splice(ind + 2, 1);
+      }
     }
   }
   if (action == "moveRobotToRandomRoom();") {
@@ -44,20 +47,22 @@ function simulator(state, action) {
     copiedState.robot_position = "porch";
   }
   if (action == "pick_up_thing('mail');") {
-    if (copiedState.holding != null){return false;}  
-    if(Array.isArray(copiedState.blocks[0])){
+    if (copiedState.holding != null) {
+      return false;
+    }
+    if (Array.isArray(copiedState.blocks[0])) {
       ind = copiedState.blocks[0].indexOf(copiedState.robot_position);
-      if (ind == -1){return false;}
-      else{
+      if (ind == -1) {
+        return false;
+      } else {
         copiedState.holding = "mail";
         copiedState.blocks[0][ind] = null;
       }
-    }   
-    else if (copiedState.blocks[0] != copiedState.robot_position){return false;} 
-    else {
+    } else if (copiedState.blocks[0] != copiedState.robot_position) {
+      return false;
+    } else {
       copiedState.holding = "mail";
       copiedState.blocks[0] = null;
-      
     }
   }
 
@@ -66,13 +71,12 @@ function simulator(state, action) {
       return false;
     } else {
       copiedState.holding = null;
-      if(!Array.isArray(copiedState.blocks[0])){
+      if (!Array.isArray(copiedState.blocks[0])) {
         copiedState.blocks[0] = copiedState.robot_position;
-      }else{
+      } else {
         ind = copiedState.blocks[0].indexOf(null);
-        copiedState.blocks[0][ind] = copiedState.robot_position
+        copiedState.blocks[0][ind] = copiedState.robot_position;
       }
-        
     }
   }
   if (action == "pick_up_thing('coffee');") {
@@ -110,7 +114,10 @@ function generate_goal_func(goal, state) {
     val = val && !(state.person == state.robot_position);
   }
 
-  if (goal.includes("isRobotinRoomEvent('kitchen')") && !goal.includes("!isRobotinRoomEvent('kitchen')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('kitchen')") &&
+    !goal.includes("!isRobotinRoomEvent('kitchen')")
+  ) {
     val = val && state.robot_position == "kitchen";
   }
 
@@ -118,7 +125,10 @@ function generate_goal_func(goal, state) {
     val = val && state.robot_position != "kitchen";
   }
 
-  if (goal.includes("isRobotinRoomEvent('bedroom')")  && !goal.includes("!isRobotinRoomEvent('bedroom')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('bedroom')") &&
+    !goal.includes("!isRobotinRoomEvent('bedroom')")
+  ) {
     val = val && state.robot_position == "bedroom";
   }
 
@@ -126,7 +136,10 @@ function generate_goal_func(goal, state) {
     val = val && state.robot_position != "bedroom";
   }
 
-  if (goal.includes("isRobotinRoomEvent('playroom')") && !goal.includes("!isRobotinRoomEvent('playroom')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('playroom')") &&
+    !goal.includes("!isRobotinRoomEvent('playroom')")
+  ) {
     val = val && state.robot_position == "playroom";
   }
 
@@ -161,7 +174,10 @@ function generate_goal_func(goal, state) {
       );
   }
 
-  if (goal.includes("isRobotinRoomEvent('porch')") && !goal.includes("!isRobotinRoomEvent('porch')")) {
+  if (
+    goal.includes("isRobotinRoomEvent('porch')") &&
+    !goal.includes("!isRobotinRoomEvent('porch')")
+  ) {
     val = val && state.robot_position == "porch";
   }
   if (goal.includes("!isRobotinRoomEvent('porch')")) {
@@ -169,17 +185,29 @@ function generate_goal_func(goal, state) {
   }
 
   if (goal.includes("thing_in_room('mail')")) {
-    if (!Array.isArray(state.blocks[0])){
-      val = val && (state.blocks[0] == state.robot_position || state.holding == "mail");
-    }else{
-      val = val && (state.blocks.includes(state.robot_position) || state.holding == "mail");
+    if (!Array.isArray(state.blocks[0])) {
+      val =
+        val &&
+        (state.blocks[0] == state.robot_position || state.holding == "mail");
+    } else {
+      val =
+        val &&
+        (state.blocks.includes(state.robot_position) ||
+          state.holding == "mail");
     }
   }
   if (goal.includes("thing_not_in_room('mail')")) {
-    if (!Array.isArray(state.blocks[0])){
-      val = val && !(state.blocks[0] == state.robot_position || state.holding == "mail");
-    }else{
-      val = val && !(state.blocks[0].includes(state.robot_position) || state.holding == "mail");
+    if (!Array.isArray(state.blocks[0])) {
+      val =
+        val &&
+        !(state.blocks[0] == state.robot_position || state.holding == "mail");
+    } else {
+      val =
+        val &&
+        !(
+          state.blocks[0].includes(state.robot_position) ||
+          state.holding == "mail"
+        );
     }
   }
 
@@ -196,82 +224,79 @@ function generate_goal_func(goal, state) {
   if (goal.includes("is_coffee_in_room('kitchen')")) {
     val =
       val &&
-      ((state.robot_position =="kitchen" && state.holding == "coffee") || 
-      (state.blocks[1]=="kitchen")) ;
+      ((state.robot_position == "kitchen" && state.holding == "coffee") ||
+        state.blocks[1] == "kitchen");
   }
   if (goal.includes("is_coffee_in_room('bedroom')")) {
     val =
       val &&
-      ((state.robot_position =="bedroom" && state.holding == "coffee") || 
-      (state.blocks[1]=="bedroom")) ;
+      ((state.robot_position == "bedroom" && state.holding == "coffee") ||
+        state.blocks[1] == "bedroom");
   }
   if (goal.includes("is_coffee_in_room('porch')")) {
     val =
       val &&
-      ((state.robot_position =="porch" && state.holding == "coffee") || 
-      (state.blocks[1]=="porch")) ;
+      ((state.robot_position == "porch" && state.holding == "coffee") ||
+        state.blocks[1] == "porch");
   }
   if (goal.includes("is_coffee_in_room('playroom')")) {
     val =
       val &&
-      ((state.robot_position =="playroom" && state.holding == "coffee") || 
-      (state.blocks[1]=="playroom")) ;
+      ((state.robot_position == "playroom" && state.holding == "coffee") ||
+        state.blocks[1] == "playroom");
   }
 
   if (goal.includes("is_mail_in_room('kitchen')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
-      val &&
-      ((state.robot_position =="kitchen" && state.holding == "mail") || 
-      (state.blocks[0]=="kitchen")) ;
-    }else{
+        val &&
+        ((state.robot_position == "kitchen" && state.holding == "mail") ||
+          state.blocks[0] == "kitchen");
+    } else {
       val =
-      val &&
-      ((state.robot_position =="kitchen" && state.holding == "mail") || 
-      (state.blocks[0].includes("kitchen")));
+        val &&
+        ((state.robot_position == "kitchen" && state.holding == "mail") ||
+          state.blocks[0].includes("kitchen"));
     }
   }
   if (goal.includes("is_mail_in_room('bedroom')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
-      val &&
-      ((state.robot_position =="bedroom" && state.holding == "mail") || 
-      (state.blocks[0]=="bedroom")) ;
-    }else{
+        val &&
+        ((state.robot_position == "bedroom" && state.holding == "mail") ||
+          state.blocks[0] == "bedroom");
+    } else {
       val =
-      val &&
-      ((state.robot_position =="bedroom" && state.holding == "mail") || 
-      (state.blocks[0].includes("bedroom"))) ;
+        val &&
+        ((state.robot_position == "bedroom" && state.holding == "mail") ||
+          state.blocks[0].includes("bedroom"));
     }
-    
   }
   if (goal.includes("is_mail_in_room('porch')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
         val &&
-        ((state.robot_position =="porch" && state.holding == "mail") || 
-        (state.blocks[0]=="porch")) ;
-    }
-    else{
+        ((state.robot_position == "porch" && state.holding == "mail") ||
+          state.blocks[0] == "porch");
+    } else {
       val =
         val &&
-        ((state.robot_position =="porch" && state.holding == "mail") || 
-        (state.blocks[0].includes("porch")));
+        ((state.robot_position == "porch" && state.holding == "mail") ||
+          state.blocks[0].includes("porch"));
     }
   }
   if (goal.includes("is_mail_in_room('playroom')")) {
-    if (!Array.isArray(state.block[0])){
+    if (!Array.isArray(state.block[0])) {
       val =
         val &&
-        ((state.robot_position =="playroom" && state.holding == "mail") || 
-        (state.blocks[0]=="playroom")) ;
-    }else{
+        ((state.robot_position == "playroom" && state.holding == "mail") ||
+          state.blocks[0] == "playroom");
+    } else {
       val =
         val &&
-        ((state.robot_position =="playroom" && state.holding == "mail") || 
-        (state.blocks[0].includes("playroom"))) ;
+        ((state.robot_position == "playroom" && state.holding == "mail") ||
+          state.blocks[0].includes("playroom"));
     }
-    
   }
 
   return val;
@@ -439,7 +464,7 @@ function generate_triggers(triggers, state) {
       }
     }
     if (trigger == "is_mail_in_room('porch');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("porch") ||
           (state.holding == "mail" && state.robot_position == "porch")
@@ -448,7 +473,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "porch" ||
           (state.holding == "mail" && state.robot_position == "porch")
@@ -457,10 +482,10 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }    
+      }
     }
     if (trigger == "is_mail_in_room('bedroom');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("bedroom") ||
           (state.holding == "mail" && state.robot_position == "bedroom")
@@ -469,9 +494,9 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
-          state.blocks[0]== "bedroom" ||
+          state.blocks[0] == "bedroom" ||
           (state.holding == "mail" && state.robot_position == "bedroom")
         ) {
           output.push(1);
@@ -479,10 +504,9 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "is_mail_in_room('kitchen');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("kitchen") ||
           (state.holding == "mail" && state.robot_position == "kitchen")
@@ -491,7 +515,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "kitchen" ||
           (state.holding == "mail" && state.robot_position == "kitchen")
@@ -501,10 +525,9 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "is_mail_in_room('playroom');") {
-      if(Array.isArray(copiedState.blocks[0])){
+      if (Array.isArray(copiedState.blocks[0])) {
         if (
           state.blocks[0].includes("playroom") ||
           (state.holding == "mail" && state.robot_position == "playroom")
@@ -513,7 +536,7 @@ function generate_triggers(triggers, state) {
         } else {
           output.push(0);
         }
-      }else{
+      } else {
         if (
           state.blocks[0] == "playroom" ||
           (state.holding == "mail" && state.robot_position == "playroom")
@@ -523,23 +546,27 @@ function generate_triggers(triggers, state) {
           output.push(0);
         }
       }
-      
     }
     if (trigger == "thing_in_room('mail');") {
-      if(Array.isArray(copiedState.blocks[0])){
-        if (state.blocks[0].includes(state.robot_position) || state.holding == "mail") {
+      if (Array.isArray(copiedState.blocks[0])) {
+        if (
+          state.blocks[0].includes(state.robot_position) ||
+          state.holding == "mail"
+        ) {
           output.push(1);
         } else {
           output.push(0);
         }
-      }else{
-        if (state.blocks[0] == state.robot_position || state.holding == "mail") {
+      } else {
+        if (
+          state.blocks[0] == state.robot_position ||
+          state.holding == "mail"
+        ) {
           output.push(1);
         } else {
           output.push(0);
         }
       }
-      
     }
 
     if (trigger == "is_coffee_in_room('porch');") {
@@ -618,40 +645,46 @@ function parser(code) {
             priority_goals[i].trim() != ");" &&
             priority_goals[i].trim() != ""
           ) {
-            var a = priority_goals[i]
+            var a = priority_goals[i];
             const matches = a.matchAll(/<(.*?)>/g);
-            const regex_matched = Array.from(matches, x => x[1])
-            var outside_and = a.replace(/<(.*?)>/g, '')
+            const regex_matched = Array.from(matches, (x) => x[1]);
+            var outside_and = a.replace(/<(.*?)>/g, "");
 
             var in_and = "";
-            for (var rm in regex_matched){
-              [f, s] = regex_matched[rm].split('&&');
-              if (!f.includes('false') && !s.includes('false')){
-                f = f.replace("||",'\t')
-                s = s.replace("||",'\t')
-                and_distributed_list = f.split('\t').flatMap(d => s.split('\t').map(v => d + '&&' + v + '\t'));
-                in_and += ('\t' + and_distributed_list)
-              }else{
-                return [false, false, false, false]
+            for (var rm in regex_matched) {
+              [f, s] = regex_matched[rm].split("&&");
+              if (!f.includes("false") && !s.includes("false")) {
+                f = f.replace("||", "\t");
+                s = s.replace("||", "\t");
+                and_distributed_list = f
+                  .split("\t")
+                  .flatMap((d) =>
+                    s.split("\t").map((v) => d + "&&" + v + "\t")
+                  );
+                in_and += "\t" + and_distributed_list;
+              } else {
+                return [false, false, false, false];
               }
             }
 
-            var cur_priority_goals = (in_and.trim() + '\t' + outside_and).trim().split("\t");
-            
+            var cur_priority_goals = (in_and.trim() + "\t" + outside_and)
+              .trim()
+              .split("\t");
+
             if (cur_priority_goals != "") {
               // console.log(cur_priority_goals);
-              cur_priority_goals_with_or = []
-              for (var g_i in cur_priority_goals){
-                if (cur_priority_goals[g_i].includes('||')){
-                  var temp = cur_priority_goals[g_i].split('||');
-                  for (var g_j in temp){
+              cur_priority_goals_with_or = [];
+              for (var g_i in cur_priority_goals) {
+                if (cur_priority_goals[g_i].includes("||")) {
+                  var temp = cur_priority_goals[g_i].split("||");
+                  for (var g_j in temp) {
                     cur_priority_goals_with_or.push(temp[g_j].trim());
-                    if (temp[g_j].includes('false')){
-                      return [false, false, false, false]
+                    if (temp[g_j].includes("false")) {
+                      return [false, false, false, false];
                     }
                   }
-                }else{
-                  cur_priority_goals_with_or.push(cur_priority_goals[g_i])
+                } else {
+                  cur_priority_goals_with_or.push(cur_priority_goals[g_i]);
                 }
               }
               // console.log(cur_priority_goals_with_or);
@@ -726,7 +759,9 @@ function find_state(
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
-  if (goal == false){return false}
+  if (goal == false) {
+    return [false, false, false];
+  }
 
   actions = [
     "moveRobotToRoom('playroom');",
@@ -745,10 +780,9 @@ function get_mdp_policy(code, taskNum) {
   rewards_table = {};
   state_ids = {};
   const ROOMS = ["porch", "kitchen", "bedroom", "playroom", null];
-  person_locs = [null]
+  person_locs = [null];
 
-  if (taskNum == '_'){
-    
+  if (taskNum == "_") {
     block_list = [
       ["porch", "porch", "kitchen"],
       ["porch", "porch", "playroom"],
@@ -762,7 +796,7 @@ function get_mdp_policy(code, taskNum) {
       ["kitchen", null, "kitchen"],
       [null, "kitchen", "kitchen"],
       ["kitchen", "kitchen", "kitchen"],
-    ]
+    ];
     // for (var m in ROOMS){
     //   for (var c in ROOMS){
     //     for (var t in ROOMS){
@@ -791,7 +825,7 @@ function get_mdp_policy(code, taskNum) {
       "is_mail_in_room('playroom');",
       "is_mail_in_room('porch');",
       "thing_in_room('mail');",
-    ]
+    ];
   }
 
   if (taskNum == 0) {
@@ -801,7 +835,7 @@ function get_mdp_policy(code, taskNum) {
       "isRobotinRoomEvent('kitchen');",
       "isRobotinRoomEvent('bedroom');",
       "isRobotinRoomEvent('playroom');",
-      "isRobotinRoomEvent('porch');"
+      "isRobotinRoomEvent('porch');",
     ];
   }
 
@@ -817,7 +851,13 @@ function get_mdp_policy(code, taskNum) {
     ];
   }
   if (taskNum == 2) {
-    block_list = [[null, null, "playroom"], [null, null, null], [null, null, "bedroom"], [null, null, "kitchen"], [null, null, "porch"]];
+    block_list = [
+      [null, null, "playroom"],
+      [null, null, null],
+      [null, null, "bedroom"],
+      [null, null, "kitchen"],
+      [null, null, "porch"],
+    ];
     // person_locs = [null];
     triggers = [
       "isRobotinRoomEvent('kitchen');",
@@ -868,12 +908,11 @@ function get_mdp_policy(code, taskNum) {
   }
   if (taskNum == 4) {
     block_list = [
-      [null, 'kitchen', null],
-      [null, 'playroom', null],
-      [null, 'bedroom', null],
-      [null, 'porch', null],
+      [null, "kitchen", null],
+      [null, "playroom", null],
+      [null, "bedroom", null],
+      [null, "porch", null],
       [null, null, null],
-
     ];
     person_locs = ["porch", "kitchen", "bedroom", "playroom", null];
     triggers = [
@@ -891,19 +930,20 @@ function get_mdp_policy(code, taskNum) {
       "thing_in_room('coffee');",
     ];
   }
-  
+
   if (taskNum == 6) {
-    
     // person_locs = [null];
-    
-    block_list = [
-      [[null, null, null], null, null]
-    ];
-    rooms_wot_null = ["porch", "kitchen", null]
+
+    block_list = [[[null, null, null], null, null]];
+    rooms_wot_null = ["porch", "kitchen", null];
     for (var r1 in rooms_wot_null) {
       for (var r2 in rooms_wot_null) {
-        for (var r3 in rooms_wot_null){
-          block_list.push([[rooms_wot_null[r1], rooms_wot_null[r2], rooms_wot_null[r3]], null, null]);
+        for (var r3 in rooms_wot_null) {
+          block_list.push([
+            [rooms_wot_null[r1], rooms_wot_null[r2], rooms_wot_null[r3]],
+            null,
+            null,
+          ]);
         }
       }
     }
@@ -1124,43 +1164,48 @@ function run_mdp(code, taskNum) {
     return "";
   }
 
-  if (taskNum == 1 || taskNum == 7){
-    js_transition_table = {}; 
+  if (taskNum == 1 || taskNum == 7) {
+    js_transition_table = {};
     var mapping_array = [];
     var corresponding_values = [];
-    var corresponding_keys = []
+    var corresponding_keys = [];
     var chk_room = null;
 
-    for (var key in transition_table){
-      if (state_ids[key].holding != null){continue}
-      
-      if (state_ids[key].robot_position != state_ids[key].person){
-        if(chk_room == null || chk_room != state_ids[key].robot_position){
-          if(corresponding_values.length == 3){
-            var max_act_ind = corresponding_values.indexOf(Math.max(...corresponding_values));
-            js_transition_table[corresponding_keys[0]] = mapping_array[max_act_ind];
+    for (var key in transition_table) {
+      if (state_ids[key].holding != null) {
+        continue;
+      }
+
+      if (state_ids[key].robot_position != state_ids[key].person) {
+        if (chk_room == null || chk_room != state_ids[key].robot_position) {
+          if (corresponding_values.length == 3) {
+            var max_act_ind = corresponding_values.indexOf(
+              Math.max(...corresponding_values)
+            );
+            js_transition_table[corresponding_keys[0]] =
+              mapping_array[max_act_ind];
           }
 
           chk_room = state_ids[key].robot_position;
-          corresponding_values.length = 0
-          mapping_array.length = 0
+          corresponding_values.length = 0;
+          mapping_array.length = 0;
 
           mapping_array.push(transition_table[key]);
           corresponding_values.push(transition_table[key][2]);
           corresponding_keys.push(key);
-        }else if (chk_room == state_ids[key].robot_position){
+        } else if (chk_room == state_ids[key].robot_position) {
           mapping_array.push(transition_table[key]);
           corresponding_values.push(transition_table[key][2]);
           corresponding_keys.push(key);
         }
-      }else{
+      } else {
         js_transition_table[key] = transition_table[key];
       }
     }
 
     out = "";
     var count = 0;
-    for (key in js_transition_table) {      
+    for (key in js_transition_table) {
       if (count == 0) {
         out += "\tif(";
       } else {
@@ -1184,10 +1229,9 @@ function run_mdp(code, taskNum) {
     // timer = (end - start) / 100;
     // debugger;
     return out;
-  }
-  else {
+  } else {
     return [transition_table, state_ids];
-  }  
+  }
 }
 
 function get_seq_action(transition_table, state_id, action = "") {

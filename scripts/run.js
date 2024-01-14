@@ -126,6 +126,9 @@ function update(event) {
       [transition_table, state_ids] = run_rl(code, taskNum);
       // console.log("mdp", code);
       let current_state = get_current_state(state_ids, taskNum);
+      // if (!current_state) {
+      //   return;
+      // }
       let prv_action = null;
       let [cur_action, next_state, cur_val] = transition_table[current_state];
 
@@ -159,6 +162,9 @@ function update(event) {
       [transition_table, state_ids] = run_mdp(code, taskNum);
       // console.log("mdp", code);
       let current_state = get_current_state(state_ids, taskNum);
+      if (!current_state) {
+        return;
+      }
       let prv_action = null;
       let [cur_action, next_state, cur_val] = transition_table[current_state];
 
