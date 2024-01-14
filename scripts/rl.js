@@ -761,7 +761,7 @@ function find_state(
 function get_rl_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser_rl(code);
   if (goal == false) {
-    return false;
+    return [false, false, false];
   }
 
   values_table = {};
