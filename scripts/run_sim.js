@@ -266,7 +266,7 @@ let code_dict = {
   "65a16844ec0758896540ed02_xr8zxzmrzlf_65a1a275c4bdba3a0500c3ec_SEQ_task8":
     "moveRobotToRoom('porch');if ((thing_in_room('mail') || thing_in_room('coffee'))) {\n  pick_up_any();\n  \tmoveRobotToRoom('kitchen');drop_any();\n  \t}\n",
   "65a16844ec0758896540ed02_0q646o679a_65a1dadf133ddfc5d19c51f1_TAP_task2":
-    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_not_in_room\t) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('bedroom');\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && toy_not_in_room\t) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (false && false) {\n      trigs.push(\n        function(){\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
+    "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('kitchen');\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (isRobotinRoom('kitchen') && toy_not_in_room()\t) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('bedroom');\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('playroom');\n        });\n      };\n\n    if (isRobotinRoom('playroom')) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (isRobotinRoom('bedroom') && toy_not_in_room()\t) {\n      trigs.push(\n        function(){\n            moveRobotToRoom('porch');\n        });\n      };\n\n    if (isRobotinRoom('porch') && toy_in_room()) {\n      trigs.push(\n        function(){\n            pick_up_toy();\n\n        });\n      };\n\n    if (false && false) {\n      trigs.push(\n        function(){\n\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "65a16844ec0758896540ed02_0q646o679a_65a1dadf133ddfc5d19c51f1_TAP_task4":
     "  while (true) {\n    var randNum = Math.floor(Math.random() * 20);\n    var trigs = [];\n\n    if (start()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isRobotinAnyRoom() && thing_in_room('coffee')) {\n      trigs.push(\n        function(){\n            pick_up_thing('coffee');\n\n        });\n      };\n\n    if (handsFull()) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isPersonInRoom()) {\n      trigs.push(\n        function(){\n            drop_any();\n\n        });\n      };\n\n    if (isRobotinAnyRoom() && thing_not_in_room('coffee')\t) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (isRobotinAnyRoom() && isPersonNotInRoomEvent()\t) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (handsFull() && isPersonNotInRoomEvent()\t) {\n      trigs.push(\n        function(){\n            moveRobotToRandomRoom();\n        });\n      };\n\n    if (trigs.length != 0) {\n      trigs[randNum % trigs.length]();\n    }\n  }\n",
   "65a16844ec0758896540ed02_0q646o679a_65a1dadf133ddfc5d19c51f1_TAP_task5":
@@ -705,6 +705,8 @@ function run_key(k, i) {
     console.log("key", key_id);
 
     let code = code_dict[k];
+    // code =
+    //   "actions(\n    moveRobotToRandomRoom();\n\n)\n\n\ntriggers(\n    isPersonInRoomEvent();\n  \tisRobotinRoomEvent('kitchen');\n\n)\n\n\ngoals(\n   <(isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())>	#  <(!isRobotinRoomEvent('kitchen') && isPersonNotInRoomEvent())>	#);\n";
     // let code =
     //   "goals(\n    (isRobotinRoomEvent('kitchen') && toy_not_in_room())\t##);\n";
     // "goals(\n    ((isRobotinRoomEvent('kitchen') && thing_in_room('mail')) || (isRobotinRoomEvent('bedroom') && thing_in_room('coffee')))\t##);\n"
@@ -776,6 +778,7 @@ function run_key(k, i) {
     }
 
     console.log(code);
+
     // resetLocs();
 
     let time = 3000;
@@ -789,7 +792,7 @@ function run_key(k, i) {
     let same_room = 0;
     let kitchen_room = 0;
 
-    if (key_format == "SEQ" && key_task != "task1") {
+    if (key_format == "SEQ") {
       time = 500;
     }
 
@@ -821,25 +824,11 @@ function run_key(k, i) {
         console.log("times up!");
       }
       if (myInterpreter.step() && time != 0) {
-        // nextStep();
         setTimeout(nextStep, 0);
-        // if (key_task == "task1" || key_format == "SEQ" || key_task == "task2") {
-
-        // if (time % 80 == 0 && (key_task == "task1" || key_task == "task7")) {
-        //   if (robot_c.room == person.room) {
-        //     same_room += 1;
-        //   } else if (robot_c.room == "kitchen") {
-        //     kitchen_room += 1;
-        //   }
-        //   count += 1;
         if (key_task == "task1" || key_task == "task7") {
           movePerson();
         }
-        // }
         time -= 1;
-        // }
-        // console.log(time);
-        // pids.push(pid);
       } else {
         // console.log("DONE");
         // pidList = [];
@@ -849,7 +838,8 @@ function run_key(k, i) {
           key_id,
           key_task,
           key_format,
-          i
+          i,
+          time
           // same_room,
           // kitchen_room,
           // count
@@ -904,6 +894,9 @@ const keys = Object.keys(code_dict).sort(customSort);
 let task0_keys = keys.filter((key) => key.includes("task0"));
 let task1_keys = keys.filter((key) => key.includes("task1"));
 // task1_keys = [
+//   "65a16844ec0758896540ed02_hktr8tcatk_65a190fa3c1821d69d0c2565_SEQ_task7",
+// ];
+// task1_keys = [
 //   "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task1",
 //   "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
 //   // "657dfd2f13ec3b61c3fa9f0c_exviy7b3gr_6581fb6ca0e561efd3491ae7_GOAL_MDP_task1",
@@ -912,9 +905,9 @@ let task1_keys = keys.filter((key) => key.includes("task1"));
 //   // "657dfd2f13ec3b61c3fa9f0c_fs6cfzq0q3_658e2affa510094e82c95a2a_FULL_MDP_task1",
 // ];
 let task2_keys = keys.filter((key) => key.includes("task2"));
-task2_keys = [
-  "65a16844ec0758896540ed02_0q646o679a_65a1dadf133ddfc5d19c51f1_TAP_task2",
-];
+// task2_keys = [
+//   "65a16844ec0758896540ed02_0q646o679a_65a1dadf133ddfc5d19c51f1_TAP_task2",
+// ];
 let task3_keys = keys.filter((key) => key.includes("task3"));
 // console.log(task3_keys);
 // task3_keys = [
@@ -935,6 +928,9 @@ let task6_keys = keys.filter((key) => key.includes("task6"));
 //   // "657dfd2f13ec3b61c3fa9f0c_zyppr92k8w_65820d984518b9c5df7076a0_SEQ_task6",
 // ];
 let task7_keys = keys.filter((key) => key.includes("task7"));
+// task7_keys = [
+//   "657dfd2f13ec3b61c3fa9f0c_ezy59w3764_6581d20144e11bc83e5b5ee9_FULL_MDP_task7",
+// ];
 // task7_keys = [
 //   // "657dfd2f13ec3b61c3fa9f0c_houc5xeph5_658dcf600ced05035a778e74_TAP_task7",
 //   // "657dfd2f13ec3b61c3fa9f0c_cpqyh7kzcd_658dc58f58ab02636c14703e_TAP_task7",
@@ -966,9 +962,9 @@ async function test(keys) {
     await run_one_loop(keys[j], j);
   }
   let i = 0;
-  // postMessage(`Worker A - Iteration ${i}`);
-  // console.log(jsonData);
-  // self.postMessage({ type: "download", data: jsonData });
+  postMessage(`Worker A - Iteration ${i}`);
+  console.log(jsonData);
+  self.postMessage({ type: "download", data: jsonData });
 }
 
 // Create a Blob with the JSON data

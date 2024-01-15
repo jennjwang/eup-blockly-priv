@@ -10,7 +10,7 @@ let start_states = "";
 
 let toys_in_room = { kitchen: [], playroom: [], bedroom: [], porch: [] };
 
-function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
+function resetLocs(key_id, key_task, key_format, iteration, time_remaining) {
   // steps = [...new Set(steps)];
   // console.log(steps);
 
@@ -27,6 +27,7 @@ function resetLocs(key_id, key_task, key_format, iteration, same_room, count) {
     iteration: iteration,
     // start_state: start_states,
     end_state: steps,
+    time_left: time_remaining,
   };
 
   console.log(data);
@@ -73,9 +74,9 @@ function movePersonHelper() {
   let rand_room = temp_rooms[Math.floor(Math.random() * temp_rooms.length)];
   dst = rooms[rand_room];
   if (person.room != robot_c.room) {
-    // console.log(`robot in: ${robot_c.room}, person in: ${person.room}`);
     steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
     person.setRoom(robot_c.room);
+    console.log(`robot in: ${robot_c.room}, person in: ${person.room}`);
     steps.push(`robot in: ${robot_c.room}, person in: ${person.room}`);
   }
   // person.setRoom(rand_room);

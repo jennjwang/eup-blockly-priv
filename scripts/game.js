@@ -258,6 +258,7 @@ function moveRobotToRoom(room) {
   // steps.push("robot moving to " + room + " from " + robot_c.room);
   dst = rooms[room];
   // console.log(toys_in_room);
+  // console.log(`robot in: ${robot_c.room}, person in: ${person.room}`);
 
   robot_c.handsPrev = robot_c.handsFree;
   // console.log("are my hands free", robot_c.handsFree);
