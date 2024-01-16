@@ -216,7 +216,7 @@ Blockly.JavaScript["e_coffee_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_coffee_not_in_room",
-    message0: "there is no coffee in the room",
+    message0: "there is NO coffee in the room",
     // output: "Boolean",
     previousStatement: [
       "e_out_of",
@@ -733,7 +733,7 @@ Blockly.JavaScript["e_thing_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "e_thing_not_in_room",
-    message0: "there is no %1 in the room",
+    message0: "there is NO %1 in the room",
     previousStatement: [
       "e_out_of",
       "e_in_the",
