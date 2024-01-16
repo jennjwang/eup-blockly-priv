@@ -87,21 +87,28 @@ let interval;
 
 function movePersonHelper() {
   let all_rooms = ["kitchen", "bedroom", "playroom", "porch"];
-  // const index = temp_rooms.indexOf(person.room);
-  // if (index > -1) {
-  //   temp_rooms.splice(index, 1); // 2nd parameter means remove one item only
-  // }
+  const index = all_rooms.indexOf(person.room);
+  if (index > -1) {
+    all_rooms.splice(index, 1); // 2nd parameter means remove one item only
+  }
   // shuffleArray(temp_rooms);
   // i = Math.floor(Math.random() * 3);
-  let rand_room = all_rooms[Math.floor(Math.random() * all_rooms.length)]
-  dst = rooms[rand_room];
-  person.setRoom(rand_room);
+  let rand_room = all_rooms[Math.floor(Math.random() * all_rooms.length)];
+  // dst = rooms[rand_room];
+  // person.setRoom(rand_room);
 
   let bool = Math.floor(Math.random() * 2);
-  if (bool==1) {
+  if (bool == 1) {
     dst = rooms[robot_c.room];
     person.setRoom(robot_c.room);
+  } else {
+    dst = rooms[rand_room];
+    person.setRoom(rand_room);
   }
+
+  console.log("person is in the same room: ", person.prev == person.room);
+  console.log("prev ", person.prev);
+  console.log("current ", person.room);
   console.log(dst);
   console.log(bool);
   x = dst[0];
@@ -117,7 +124,7 @@ function movePersonHelper() {
   //   x -= 70;
   // }
   moveThing("person", [x + 20, y]);
-  
+
   // moveThing("person", [x + 70, y]);
   // person.setRoom(temp_rooms[i]);
 }
