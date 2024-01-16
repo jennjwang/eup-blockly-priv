@@ -1650,7 +1650,7 @@ Blockly.defineBlocksWithJsonArray([
         name: "connector",
         options: [
           ["and", "and"],
-          ["or", "or"],
+          // ["or", "or"],
         ],
       },
       {
