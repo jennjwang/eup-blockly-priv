@@ -750,7 +750,7 @@ Blockly.JavaScript.PRECEDENCE = 0;
 Blockly.JavaScript["e_thing_not_in_room"] = function (block) {
   let value = block.getFieldValue("VALUE");
   if (value == "toy") {
-    return ["toy_not_in_room\t", Blockly.JavaScript.PRECEDENCE];
+    return ["toy_not_in_room()\t", Blockly.JavaScript.PRECEDENCE];
   } else if (value == "coffee") {
     return ["thing_not_in_room('coffee')\t", Blockly.JavaScript.PRECEDENCE];
   } else if (value == "mail") {
