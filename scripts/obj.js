@@ -11,10 +11,8 @@ class Robot {
   setRoom(room) {
     console.log("moving to ", room);
     console.log("last room was ", this.room);
-    if (this.room != room) {
-      let old_room = this.room;
-      this.prev = old_room;
-    }
+    let old_room = this.room;
+    this.prev = old_room;
     this.room = room;
   }
 
@@ -30,7 +28,10 @@ class Person {
   }
 
   setRoom(room) {
-    this.prev = this.room;
+    if (this.room != room) {
+      let old_room = this.room;
+      this.prev = old_room;
+    }
     this.room = room;
   }
 
