@@ -64,7 +64,7 @@ function resetLocs() {
   // PERSON_ROOM = "kitchen";
   dst = rooms[PERSON_ROOM];
   person = new Person(PERSON_ROOM);
-  person.setRoom(PERSON_ROOM);
+  // person.setRoom(PERSON_ROOM);
 
   let x = dst[0];
   if (PERSON_ROOM != "porch") {
@@ -102,6 +102,12 @@ function movePersonHelper() {
     dst = rooms[robot_c.room];
     person.setRoom(robot_c.room);
   } else {
+    dst = rooms[rand_room];
+    person.setRoom(rand_room);
+  }
+
+  if (person.prev == person.room) {
+    rand_room = all_rooms[Math.floor(Math.random() * all_rooms.length)];
     dst = rooms[rand_room];
     person.setRoom(rand_room);
   }
