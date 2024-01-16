@@ -943,7 +943,7 @@ let task9_keys = keys.filter((key) => key.includes("task9"));
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 1;
+  n = 5;
   if (key_task == "task1" || key_task == "task7") {
     n = 1;
   }
