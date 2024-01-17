@@ -832,11 +832,13 @@ function get_rl_policy(code, taskNum) {
   // //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
-  if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
-    holding = [null, "obj"];
-  }else{
-    holding = [null]
-  }
+  // if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
+  //   holding = [null, "obj"];
+  // }else{
+  //   holding = [null]
+  // }
+ 
+  holding = [null]
 
   if (triggers.includes('toy_in_room();') || triggers.includes('toy_not_in_room();')){
     holding.push("toy")
