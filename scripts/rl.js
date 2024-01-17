@@ -760,8 +760,11 @@ function find_state(
 
 function get_rl_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser_rl(code);
-  if (goal == false) {
-    return [false, false, false];
+  if (
+    goal == false ||
+    goals[0].length + goals[1].length + goals[2].length == 0
+  ) {
+    return false;
   }
 
   values_table = {};
@@ -914,7 +917,20 @@ function get_rl_policy(code, taskNum) {
   }
   if (taskNum == 6) {
     block_list = [[[null, null, null], null, null]];
+
+    var temp_these_rooms = [];
+    for (var r in state_rooms) {
+      if (
+        triggers.filter((element) => element.includes(state_rooms[r])).length >
+        0
+      ) {
+        temp_these_rooms.push(state_rooms[r]);
+      }
+    }
+    state_rooms = temp_these_rooms;
+
     state_rooms.push(null);
+
     for (var r1 in state_rooms) {
       for (var r2 in state_rooms) {
         for (var r3 in state_rooms) {
@@ -947,14 +963,13 @@ function get_rl_policy(code, taskNum) {
   // //Populate values table
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
-  if (
-    triggers.includes("eHandsFree();") ||
-    triggers.includes("eHandsFull();")
-  ) {
-    holding = [null, "obj"];
-  } else {
-    holding = [null];
-  }
+  // if (triggers.includes('eHandsFree();') || triggers.includes('eHandsFull();')){
+  //   holding = [null, "obj"];
+  // }else{
+  //   holding = [null]
+  // }
+
+  holding = [null];
 
   if (
     triggers.includes("toy_in_room();") ||
@@ -1006,17 +1021,25 @@ function get_rl_policy(code, taskNum) {
   if (actions.includes("drop_any();")) {
     const drop_any_ind = actions.indexOf("drop_any();");
     actions.splice(drop_any_ind, 1);
-    actions.push("drop_thing('mail');");
-    actions.push("drop_thing('coffee');");
-    actions.push("drop_toy();");
+    if (taskNum == 6) {
+      actions.push("drop_thing('mail');");
+    } else {
+      actions.push("drop_thing('mail');");
+      actions.push("drop_thing('coffee');");
+      actions.push("drop_toy();");
+    }
   }
 
   if (actions.includes("pick_up_any();")) {
     const pick_any_ind = actions.indexOf("pick_up_any();");
     actions.splice(pick_any_ind, 1);
-    actions.push("pick_up_toy();");
-    actions.push("pick_up_thing('mail');");
-    actions.push("pick_up_thing('coffee');");
+    if (taskNum == 6) {
+      actions.push("pick_up_thing('mail');");
+    } else {
+      actions.push("pick_up_toy();");
+      actions.push("pick_up_thing('mail');");
+      actions.push("pick_up_thing('coffee');");
+    }
   }
 
   if (actions.includes("moveRobotToRandomRoom();")) {
@@ -1029,10 +1052,10 @@ function get_rl_policy(code, taskNum) {
     actions.push("moveRobotToRoom('porch');");
     if (taskNum == 1 || taskNum == 7) {
       triggers = triggers.concat([
-        "isRobotinRoomEvent('kitchen');",
-        "isRobotinRoomEvent('bedroom');",
         "isRobotinRoomEvent('playroom');",
         "isRobotinRoomEvent('porch');",
+        "isRobotinRoomEvent('kitchen');",
+        "isRobotinRoomEvent('bedroom');",
       ]);
     } else if (
       taskNum == 2 &&
@@ -1047,6 +1070,23 @@ function get_rl_policy(code, taskNum) {
       state_rooms.push("bedroom");
       state_rooms.push("porch");
     }
+    triggers = [...new Set(triggers)];
+  }
+
+  if (taskNum == 6) {
+    if (holding.includes("mail")) {
+      holding = [null, "mail"];
+    }
+    var temp_these_rooms = [];
+    for (var r in these_rooms) {
+      if (
+        triggers.filter((element) => element.includes(these_rooms[r])).length >
+        0
+      ) {
+        temp_these_rooms.push(these_rooms[r]);
+      }
+    }
+    these_rooms = temp_these_rooms;
   }
 
   // these_rooms = state_rooms;
@@ -1115,7 +1155,10 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.91;
+  if (taskNum == 6) {
+    num_epochs = 10;
+  }
+  gamma = 0.92;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
@@ -1153,8 +1196,8 @@ function get_rl_policy(code, taskNum) {
     state = state_ids[v];
 
     max_val = -Infinity;
-    optimal_action = null;
-    next_state = null;
+    optimal_actions = [];
+    next_states = [];
 
     for (action_ind in actions) {
       action = actions[action_ind];
@@ -1167,14 +1210,28 @@ function get_rl_policy(code, taskNum) {
         if (!(next_id == null)) {
           val = values_table[next_id];
           if (val > max_val) {
+            optimal_actions = [];
+            next_states = [];
             max_val = val;
-            optimal_action = action;
-            next_state = next_id;
+            optimal_actions.push(action);
+            next_states.push(next_id);
+          } else if (val == max_val) {
+            optimal_actions.push(action);
+            next_states.push(next_id);
           }
         }
       }
     }
-    transition_table[v] = [optimal_action, next_state, max_val];
+
+    let selected_action_ind = Math.floor(
+      Math.random() * optimal_actions.length
+    );
+
+    transition_table[v] = [
+      optimal_actions[selected_action_ind],
+      next_states[selected_action_ind],
+      max_val,
+    ];
   }
 
   return [transition_table, values_table, triggers];
@@ -1186,14 +1243,48 @@ function run_rl(code, taskNum) {
   // [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
 
   [transition_table, values_table, triggers] = get_rl_policy(code, taskNum);
-  if (transition_table == false) {
-    return "";
-  }
-
   if (taskNum == 1 || taskNum == 7) {
+    js_transition_table = {};
+    var mapping_array = [];
+    var corresponding_values = [];
+    var corresponding_keys = [];
+    var chk_room = null;
+
+    for (var key in transition_table) {
+      if (state_ids[key].holding != null) {
+        continue;
+      }
+
+      if (state_ids[key].robot_position != state_ids[key].person) {
+        if (chk_room == null || chk_room != state_ids[key].robot_position) {
+          if (corresponding_values.length == 3) {
+            var max_act_ind = corresponding_values.indexOf(
+              Math.max(...corresponding_values)
+            );
+            js_transition_table[corresponding_keys[0]] =
+              mapping_array[max_act_ind];
+          }
+
+          chk_room = state_ids[key].robot_position;
+          corresponding_values.length = 0;
+          mapping_array.length = 0;
+
+          mapping_array.push(transition_table[key]);
+          corresponding_values.push(transition_table[key][2]);
+          corresponding_keys.push(key);
+        } else if (chk_room == state_ids[key].robot_position) {
+          mapping_array.push(transition_table[key]);
+          corresponding_values.push(transition_table[key][2]);
+          corresponding_keys.push(key);
+        }
+      } else {
+        js_transition_table[key] = transition_table[key];
+      }
+    }
+
     out = "";
     var count = 0;
-    for (key in transition_table) {
+    for (key in js_transition_table) {
       if (count == 0) {
         out += "\tif(";
       } else {
@@ -1208,7 +1299,7 @@ function run_rl(code, taskNum) {
         }
       }
       out = out.slice(0, -4);
-      out += "){\n\t\t" + transition_table[key][0] + "\n\t}\n";
+      out += "){\n\t\t" + js_transition_table[key][0] + "\n\t}\n";
       count += 1;
     }
 
