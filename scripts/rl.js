@@ -764,7 +764,7 @@ function get_rl_policy(code, taskNum) {
     goal == false ||
     goals[0].length + goals[1].length + goals[2].length == 0
   ) {
-    return false;
+    return [false, false, false];
   }
 
   values_table = {};
@@ -1241,6 +1241,10 @@ function run_rl(code, taskNum) {
   // debugger;
   start = Date.now();
   // [policy, triggers, goal, goalfinal] = get_mdp_policy(code, taskNum);
+  // policy = get_rl_policy(code, taskNum);
+  // if (policy == false) {
+  //   return;
+  // }
 
   [transition_table, values_table, triggers] = get_rl_policy(code, taskNum);
   if (taskNum == 1 || taskNum == 7) {

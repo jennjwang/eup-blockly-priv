@@ -734,12 +734,17 @@ function run_key(k, i) {
         // console.log(state_ids);
         let current_state = get_current_state(state_ids, taskNum);
         let prv_action = null;
-        if (current_state) {
+        if (current_state && transition_table) {
           let [cur_action, next_state, cur_val] =
             transition_table[current_state];
 
           while (cur_action != prv_action) {
+            // console.log(cur_action);
             code += cur_action;
+            console.log(code.length);
+            if (code.length > 500 && taskNum == 8) {
+              break;
+            }
             prv_action = cur_action;
             current_state = get_current_state(state_ids, taskNum);
             [cur_action, next_state, cur_val] = transition_table[next_state];
@@ -762,12 +767,14 @@ function run_key(k, i) {
         // console.log("mdp", code);
         let current_state = get_current_state(state_ids, taskNum);
         let prv_action = null;
-        // console.log(current_state);
-        if (current_state) {
+        if (current_state && transition_table) {
           let [cur_action, next_state, cur_val] =
             transition_table[current_state];
 
           while (cur_action != prv_action) {
+            if (code.length > 500 && taskNum == 8) {
+              break;
+            }
             code += cur_action;
             prv_action = cur_action;
             current_state = get_current_state(state_ids, taskNum);
@@ -782,9 +789,12 @@ function run_key(k, i) {
     // resetLocs();
 
     let time = 3000;
-    // if (key_task == "task1" || key_task == "task7") {
-    //   time = 3000;
-    // }
+    if (key_task == "task7") {
+      time = 2000;
+    }
+    if (key_task == "task8") {
+      time = 1500;
+    }
     // if (key_task == "task7" && key_format == "GOAL_MDP") {
     //   time = 4000;
     // }
@@ -938,13 +948,19 @@ let task7_keys = keys.filter((key) => key.includes("task7"));
 //   // "657dfd2f13ec3b61c3fa9f0c_ax8yfo9hbj_6581d3e1c200a7c1f0acb0bf_FULL_MDP_task7",
 // ];
 let task8_keys = keys.filter((key) => key.includes("task8"));
+// task8_keys = [
+//   "65a16844ec0758896540ed02_ykt6wq86oij_65a1dae193e28f68a8c0be00_FULL_MDP_task8",
+// ];
 let task9_keys = keys.filter((key) => key.includes("task9"));
+task9_keys = [
+  "65a16844ec0758896540ed02_xog59id0vbj_65a192cb0652b97162512e9c_SEQ_task9",
+];
 
 async function run_one_loop(key, j) {
   let [key_id, key_format, key_task] = parse_key(key);
   console.log(key_id);
-  n = 5;
-  if (key_task == "task1" || key_task == "task7") {
+  n = 6;
+  if (key_task == "task1") {
     n = 1;
   }
   for (let i = 0; i < n; i++) {
@@ -970,13 +986,13 @@ async function test(keys) {
 // Create a Blob with the JSON data
 
 // importScripts("settings/task3_nodisp.js");
-importScripts("settings/task2_nodisp.js");
+// importScripts("settings/task2_nodisp.js");
 // importScripts("settings/task1_nodisp.js");
 // importScripts("settings/task0_nodisp.js");
 // importScripts("settings/task4_nodisp.js");
 // importScripts("settings/task6_nodisp.js");
 // importScripts("settings/task5_nodisp.js");
 // importScripts("settings/task7_nodisp.js");
-// importScripts("settings/task9_nodisp.js");
+importScripts("settings/task9_nodisp.js");
 
-test(task2_keys);
+test(task9_keys);

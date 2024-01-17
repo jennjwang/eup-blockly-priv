@@ -10,8 +10,11 @@ function randomRoomWithoutKitchen() {
   return rooms[i];
 }
 
-let ROBOT_ROOM = "playroom";
-let COFFEE_ROOM = "bedroom";
+let ROBOT_ROOM = randomRoom();
+let COFFEE_ROOM = randomRoomWithoutKitchen();
+while (ROBOT_ROOM == COFFEE_ROOM) {
+  COFFEE_ROOM = randomRoomWithoutKitchen();
+}
 let coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
 
 // let pidList = [];
@@ -50,8 +53,12 @@ function resetLocs(key_id, key_task, key_format, iteration) {
   prev_room = null;
   counter = 0;
 
-  ROBOT_ROOM = "playroom";
+  ROBOT_ROOM = randomRoom();
   robot_c = new Robot(ROBOT_ROOM);
+  COFFEE_ROOM = randomRoomWithoutKitchen();
+  while (ROBOT_ROOM == COFFEE_ROOM) {
+    COFFEE_ROOM = randomRoomWithoutKitchen();
+  }
 
   coffee = new Thing(COFFEE_ROOM, 280, 320, "coffee");
   toys_in_room = {
