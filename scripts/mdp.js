@@ -1031,6 +1031,7 @@ function get_mdp_policy(code, taskNum) {
 
   holding = [null, "toy", "mail", "coffee"];
   if (taskNum == 1 || taskNum == 7) {holding = [null]}
+  if (taskNum == 6){holding = [null, 'mail']}
 
   for (room in these_rooms) {
     for (obj in holding) {

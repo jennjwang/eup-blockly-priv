@@ -803,7 +803,17 @@ function get_rl_policy(code, taskNum) {
     block_list = [
       [[null, null, null], null, null]
     ];
+
+    var temp_these_rooms = []
+    for (var r in state_rooms){
+      if((triggers.filter(element => element.includes(state_rooms[r]))).length > 0){
+        temp_these_rooms.push(state_rooms[r]);
+      }
+    }
+    state_rooms = temp_these_rooms;
+
     state_rooms.push(null)
+    
     for (var r1 in state_rooms) {
       for (var r2 in state_rooms) {
         for (var r3 in state_rooms){
@@ -875,17 +885,24 @@ function get_rl_policy(code, taskNum) {
   if (actions.includes("drop_any();")){
     const drop_any_ind = actions.indexOf("drop_any();");
     actions.splice(drop_any_ind, 1);
-    actions.push("drop_thing('mail');");
-    actions.push("drop_thing('coffee');");
-    actions.push("drop_toy();");
+    if(taskNum == 6){actions.push("drop_thing('mail');");}
+    else{
+      actions.push("drop_thing('mail');");
+      actions.push("drop_thing('coffee');");
+      actions.push("drop_toy();");
+    }
   }
 
   if (actions.includes("pick_up_any();")){
     const pick_any_ind = actions.indexOf("pick_up_any();");
     actions.splice(pick_any_ind, 1);
-    actions.push("pick_up_toy();");
-    actions.push("pick_up_thing('mail');");
-    actions.push("pick_up_thing('coffee');");
+    if (taskNum == 6){actions.push("pick_up_thing('mail');");}
+    else{
+      actions.push("pick_up_toy();");
+      actions.push("pick_up_thing('mail');");
+      actions.push("pick_up_thing('coffee');");
+    }
+    
   }
   
   if (actions.includes("moveRobotToRandomRoom();")) {
@@ -916,7 +933,21 @@ function get_rl_policy(code, taskNum) {
     triggers = [...new Set(triggers)];
   }
 
+  if (taskNum == 6){
+    if (holding.includes('mail')){
+      holding = [null, 'mail']
+    }
+    var temp_these_rooms = []
+    for (var r in these_rooms){
+      if((triggers.filter(element => element.includes(these_rooms[r]))).length > 0){
+        temp_these_rooms.push(these_rooms[r]);
+      }
+    }
+    these_rooms = temp_these_rooms;
+  }
+
   // these_rooms = state_rooms;
+
 
   for (room in these_rooms) {
     for (obj in holding) {
@@ -982,6 +1013,7 @@ function get_rl_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
+  if(taskNum == 6){num_epochs = 10}
   gamma = 0.92;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
