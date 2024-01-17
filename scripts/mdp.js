@@ -759,7 +759,10 @@ function find_state(
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
-  if (goal == false) {
+  if (
+    goal == false ||
+    goals[0].length + goals[1].length + goals[2].length == 0
+  ) {
     return [false, false, false];
   }
 
@@ -847,7 +850,13 @@ function get_mdp_policy(code, taskNum) {
       "isRobotinRoomEvent('bedroom');",
       "isRobotinRoomEvent('playroom');",
       "isRobotinRoomEvent('porch');",
-      "isPersonNotInRoomEvent();",
+      "isPersonInRoomEvent();",
+    ];
+    actions = [
+      "moveRobotToRoom('playroom');",
+      "moveRobotToRoom('porch');",
+      "moveRobotToRoom('kitchen');",
+      "moveRobotToRoom('bedroom');",
     ];
   }
   if (taskNum == 2) {
@@ -1024,6 +1033,12 @@ function get_mdp_policy(code, taskNum) {
   these_rooms = ["kitchen", "bedroom", "playroom", "porch"];
 
   holding = [null, "toy", "mail", "coffee"];
+  if (taskNum == 1 || taskNum == 7) {
+    holding = [null];
+  }
+  if (taskNum == 6) {
+    holding = [null, "mail"];
+  }
 
   for (room in these_rooms) {
     for (obj in holding) {
@@ -1089,7 +1104,7 @@ function get_mdp_policy(code, taskNum) {
   transition_table = {};
   //Train
   num_epochs = 20;
-  gamma = 0.95;
+  gamma = 0.92;
   for (i = 0; i < num_epochs; i++) {
     for (key in values_table) {
       state = state_ids[key];
@@ -1127,8 +1142,8 @@ function get_mdp_policy(code, taskNum) {
     state = state_ids[v];
 
     max_val = -Infinity;
-    optimal_action = null;
-    next_state = null;
+    optimal_actions = [];
+    next_states = [];
 
     for (action_ind in actions) {
       action = actions[action_ind];
@@ -1141,14 +1156,28 @@ function get_mdp_policy(code, taskNum) {
         if (!(next_id == null)) {
           val = values_table[next_id];
           if (val > max_val) {
+            optimal_actions = [];
+            next_states = [];
             max_val = val;
-            optimal_action = action;
-            next_state = next_id;
+            optimal_actions.push(action);
+            next_states.push(next_id);
+          } else if (val == max_val) {
+            optimal_actions.push(action);
+            next_states.push(next_id);
           }
         }
       }
     }
-    transition_table[v] = [optimal_action, next_state, max_val];
+
+    let selected_action_ind = Math.floor(
+      Math.random() * optimal_actions.length
+    );
+
+    transition_table[v] = [
+      optimal_actions[selected_action_ind],
+      next_states[selected_action_ind],
+      max_val,
+    ];
   }
 
   return [transition_table, values_table, triggers];
