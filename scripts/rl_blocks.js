@@ -375,16 +375,16 @@ Blockly.JavaScript["trigger_toy_in_room"] = function (block) {
 Blockly.defineBlocksWithJsonArray([
   {
     type: "drop_coffee_mail",
-    message0: "put down %1",
+    message0: "put down the %1",
     args0: [
       {
         type: "field_dropdown",
         name: "VALUE",
         options: [
-          ["the item", "any"],
-          ["the toy", "toy"],
-          ["the coffee", "coffee"],
-          ["the mail", "mail"],
+          ["item", "any"],
+          ["toy", "toy"],
+          ["coffee", "coffee"],
+          ["mail", "mail"],
         ],
       },
     ],
