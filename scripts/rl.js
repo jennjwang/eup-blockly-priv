@@ -1247,6 +1247,9 @@ function run_rl(code, taskNum) {
   // }
 
   [transition_table, values_table, triggers] = get_rl_policy(code, taskNum);
+  if (!transition_table) {
+    return [false];
+  }
   if (taskNum == 1 || taskNum == 7) {
     js_transition_table = {};
     var mapping_array = [];
