@@ -759,6 +759,9 @@ function find_state(
 
 function get_mdp_policy(code, taskNum) {
   [triggers, actions, goal, goalfinal] = parser(code);
+  if (!(goals[0] && goals[1] && goals[2])) {
+    return [false, false, false];
+  }
   if (
     goal == false ||
     goals[0].length + goals[1].length + goals[2].length == 0
