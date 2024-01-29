@@ -36,5 +36,6 @@ To run task 5 or 8, remove 2 pieces of the mail in the environment such that the
 To run task 7, add in the variable of kitchen
 
 download data from firebase using: https://stackoverflow.com/questions/46617960/export-json-from-firestore
+npx -p node-firestore-import-export firestore-export -a credentials.json -b backup.json
 
 https://stackoverflow.com/questions/40799258/where-can-i-get-serviceaccountcredentials-json-for-firebase-admin
