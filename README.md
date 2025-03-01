@@ -32,9 +32,7 @@ You can experiment with different tasks and formats by modifying the URL:
 
 If you use this project in your research, please cite:
 ```
-Tewodros Ayalew*, Jennifer Wang*, Michael Littman, Blase Ur, Sarah Sebo. 
-Enabling End Users to Program Robots Using Reinforcement Learning. 
-HRI 2025. (* denotes equal contribution)
+Tewodros Ayalew*, Jennifer Wang*, Michael Littman, Blase Ur, Sarah Sebo. Enabling End Users to Program Robots Using Reinforcement Learning. HRI 2025. (* denotes equal contribution)
 ```
 
 ## Code Structure
