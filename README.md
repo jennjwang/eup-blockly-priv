@@ -1,39 +1,41 @@
 # EUP-Blockly
 
-We present an end-user programming interface we designed
-that allows users to author programs that instruct a simulated robot to complete tasks in an everyday environment—
-the home. In this simple home environment, the user can
-program a TIAGo mobile manipulator robot to complete tasks
-as a household assistant. The home we designed has four
-rooms: kitchen, bedroom, playroom, and porch (see Figure 1).
-Depending on the tasks, the environment includes a person and
-a range of everyday objects (e.g., toys, a cup of coffee, mail).
-We designed an end-user programming interface where
-users can author programs in four different end-user robot
-programming paradigms: Sequential Programming (Seq),
-Trigger-Action Programming (TAP), Full MDP Programming (Full-MDP), and Goal-Only MDP Programming (Goal-
-MDP).
-
-Our end-user programming interface uses Google's Blockly, where users can drag and drop blocks representing robot actions, aspects of the environment, and programming structure (e.g., conditionals, loops). Across all our experimental programming paradigms, there is a common set of high-level block categories, representing attributes of the robot's environment (i.e., state attributes) and general behaviors that the robot can execute (i.e., actions). **State attributes** represent the current condition of the robot and the environment as sensed by the robot (e.g., I am in the kitchen, there is NO toy in the room). In all our end-user programming paradigms, we assumed that the robot only perceives states within the local context (i.e., within the same room). Moreover, the robot does not retain the state of the environment from previous time-steps. **Actions** are specific skills or behaviors that the robot can perform (e.g., pick up the coffee, go to the bedroom). The visual appearance and shape of the programming blocks vary to match the paradigm. Figure [example-program-each-paradigm] displays examples of programs authored using each programming paradigm.
-
+We present an end-user programming interface designed to allow users to author programs that instruct a simulated robot to complete tasks in a home environment. The interface uses Google's Blockly for visual programming, where users can drag and drop blocks representing robot actions, environmental states, and programming structures.
 
 ## Demo
 
 Try the interface: [https://eup-blockly.netlify.app](https://eup-blockly.netlify.app)
 
 You can experiment with different tasks and formats by modifying the URL:
+
 - For specific tasks: `https://eup-blockly.netlify.app/task{number}`
 - For the Full MDP format: Add `?format=FULL_MDP` to the end of any URL
-- - For the Goal MDP format: Add `?format=GOAL_MDP` to the end of any URL
+- For the Goal MDP format: Add `?format=GOAL_MDP` to the end of any URL
 - For the TAP format: Add `?format=TAP` to the end of any URL
 - For the Sequential format: Add `?format=SEQ` to the end of any URL
 
-## Citation
+## Programming Paradigms
 
-If you use this project in your research, please cite:
-```
-Tewodros Ayalew*, Jennifer Wang*, Michael Littman, Blase Ur, Sarah Sebo. Enabling End Users to Program Robots Using Reinforcement Learning. HRI 2025. (* denotes equal contribution)
-```
+The interface supports four different end-user robot programming paradigms:
+
+1. **Sequential Programming (SEQ)** - Traditional sequential programming with actions executed in order
+2. **Trigger-Action Programming (TAP)** - Event-based programming where actions are triggered by specific conditions
+3. **Full MDP Programming (FULL_MDP)** - Complete Markov Decision Process programming with states, actions, and goals
+4. **Goal-Only MDP Programming (GOAL_MDP)** - Simplified MDP programming focusing only on goal states
+
+## Environment
+
+The simulated home environment consists of four rooms:
+- Kitchen
+- Bedroom
+- Playroom
+- Porch
+
+The robot can:
+- Move between rooms
+- Pick up and drop objects
+- Detect presence of people and objects in the same room
+- Interact with various objects (toys, coffee, mail)
 
 ## Code Structure
 
@@ -65,3 +67,35 @@ Tewodros Ayalew*, Jennifer Wang*, Michael Littman, Blase Ur, Sarah Sebo. Enablin
 
 ### Interpreter
 - `interpreter/acorn_interpreter.js` - JavaScript code interpreter for executing Blockly-generated code
+
+## Running Locally
+
+1. Clone the repository
+2. Open any of the HTML files in your browser
+3. Make changes to the code and refresh the page to see updates
+
+## Block Categories
+
+The interface provides different block categories depending on the programming paradigm:
+
+- **Actions**: Robot movement and object manipulation
+- **States**: Current conditions of the robot and environment
+- **Events**: Trigger conditions for TAP
+- **Goals**: Desired end states for MDP
+- **Controls**: Programming structure blocks (conditionals, loops)
+
+## Important Notes
+
+- The robot only perceives states within the local context (same room)
+- The robot does not retain state information from previous time-steps
+- We encourage running programs multiple times to ensure they work under different conditions
+- Initial positions of objects and the robot may vary between runs
+- The number of objects may change between runs in some tasks
+
+## Citation
+
+If you use this project in your research, please cite:
+
+```
+Tewodros Ayalew*, Jennifer Wang*, Michael Littman, Blase Ur, Sarah Sebo. Enabling End Users to Program Robots Using Reinforcement Learning. HRI 2025. (* denotes equal contribution)
+```
