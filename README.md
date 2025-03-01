@@ -2,7 +2,22 @@ Here's a rewritten README for your EUP-Blockly project:
 
 # EUP-Blockly
 
-A visual programming editor built with Blockly that enables non-technical users to interact with reinforcement learning systems through different programming paradigms.
+We present an end-user programming interface we designed
+that allows users to author programs that instruct a simu-
+lated robot to complete tasks in an everyday environment—
+the home. In this simple home environment, the user can
+program a TIAGo mobile manipulator robot to complete tasks
+as a household assistant. The home we designed has four
+rooms: kitchen, bedroom, playroom, and porch (see Figure 1).
+Depending on the tasks, the environment includes a person and
+a range of everyday objects (e.g., toys, a cup of coffee, mail).
+We designed an end-user programming interface where
+users can author programs in four different end-user robot
+programming paradigms: Sequential Programming (Seq),
+Trigger-Action Programming (TAP), Full MDP Program-
+ming (Full-MDP), and Goal-Only MDP Programming (Goal-
+MDP).
+
 
 ## Demo
 
