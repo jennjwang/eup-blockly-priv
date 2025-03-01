@@ -1,5 +1,3 @@
-Here's a rewritten README for your EUP-Blockly project:
-
 # EUP-Blockly
 
 We present an end-user programming interface we designed
